@@ -11,51 +11,30 @@
   "sections": {
     "hero": {
       "type": "hero-minimal",
+      "settings": {
+        "show_section": true,
+        "container_width": "full",
+        "show_stats_bar": true,
+        "full_height": true,
+        "min_height": 700,
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 100,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 80,
+        "image": "shopify:\/\/shop_images\/bolt-hero-bg.jpg"
+      },
       "blocks": {
         "heading": {
           "type": "hero_heading",
           "settings": {
-            "heading": "Future Tech [Latest Gadgets]",
-            "heading_tag": "h1",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 24,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 16,
-            "font_size": "large",
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "highlight_color": "",
-            "highlight_gradient": ""
+            "heading": "Future Tech [Latest Gadgets]"
           }
         },
         "subheading": {
           "type": "hero_subheading",
           "settings": {
-            "subheading": "Premium electronics from world-class innovators. High-performance gear for your next-gen lifestyle.",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "max_width": 600,
-            "margin_top": 0,
-            "margin_bottom": 24,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 16,
-            "font_size": 1.2,
-            "font_weight": "normal",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": ""
+            "subheading": "Premium electronics from world-class innovators. High-performance gear for your next-gen lifestyle."
           }
         },
         "button-1": {
@@ -63,22 +42,7 @@
           "settings": {
             "label": "Shop Collections",
             "link": "/collections/all",
-            "open_in_new_tab": false,
-            "style": "primary",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": ""
+            "style": "primary"
           }
         },
         "button-2": {
@@ -86,110 +50,35 @@
           "settings": {
             "label": "New Arrivals",
             "link": "/collections/all",
-            "open_in_new_tab": false,
-            "style": "outline",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": ""
+            "style": "outline"
           }
         },
         "stat-0": {
           "type": "stat",
           "settings": {
             "value": "12K+",
-            "label": "Happy Customers",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 24,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 16,
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "value_color": "",
-            "label_color": "",
-            "bg_color": "",
-            "bg_gradient": ""
+            "label": "Happy Customers"
           }
         },
         "stat-1": {
           "type": "stat",
           "settings": {
             "value": "500+",
-            "label": "Premium Products",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 24,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 16,
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "value_color": "",
-            "label_color": "",
-            "bg_color": "",
-            "bg_gradient": ""
+            "label": "Premium Products"
           }
         },
         "stat-2": {
           "type": "stat",
           "settings": {
             "value": "50+",
-            "label": "Global Brands",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 24,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 16,
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "value_color": "",
-            "label_color": "",
-            "bg_color": "",
-            "bg_gradient": ""
+            "label": "Global Brands"
           }
         },
         "stat-3": {
           "type": "stat",
           "settings": {
             "value": "4.9★",
-            "label": "Average Rating",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 24,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 16,
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "value_color": "",
-            "label_color": "",
-            "bg_color": "",
-            "bg_gradient": ""
+            "label": "Average Rating"
           }
         }
       },
@@ -202,235 +91,78 @@
         "stat-1",
         "stat-2",
         "stat-3"
-      ],
-      "settings": {
-        "show_section": true,
-        "show_stats_bar": true,
-        "show_on_desktop": true,
-        "show_on_mobile": true,
-        "container_width": "full",
-        "max_width": 1200,
-        "full_height": true,
-        "min_height": 700,
-        "padding_top": 0,
-        "padding_bottom": 100,
-        "padding_top_mobile": 0,
-        "padding_bottom_mobile": 80,
-        "color_scheme": "background-1"
-      }
+      ]
     },
     "categories": {
       "type": "category-strip",
+      "settings": {
+        "show_section": true,
+        "container_width": "full",
+        "color_scheme": "background-1",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
       "blocks": {
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Shop by [Category]",
-            "heading_tag": "h2",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 16,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 16,
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "highlight_color": "",
-            "highlight_gradient": ""
+            "heading": "Shop by [Category]"
           }
         },
         "subheading": {
           "type": "subheading",
           "settings": {
-            "subheading": "Find exactly what you're looking for.",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 32,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 24,
-            "font_weight": "normal",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": ""
+            "subheading": "Find exactly what you're looking for."
           }
         },
         "category-0": {
           "type": "category",
           "settings": {
-            "icon": "laptop",
-            "custom_icon": "",
-            "name": "Laptops",
-            "link": "",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "font_weight": "normal",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "icon_color": "",
-            "border_color": "",
-            "hover_border_color": "",
-            "hover_bg_color": "",
-            "hover_shadow_color": ""
+            "icon": "tv",
+            "name": "Gaming Monitors",
+            "link": "\/collections\/gaming-monitors"
           }
         },
         "category-1": {
           "type": "category",
           "settings": {
-            "icon": "smartphone",
-            "custom_icon": "",
-            "name": "Smartphones",
-            "link": "",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "font_weight": "normal",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "icon_color": "",
-            "border_color": "",
-            "hover_border_color": "",
-            "hover_bg_color": "",
-            "hover_shadow_color": ""
+            "icon": "home",
+            "name": "Smart Robotics",
+            "link": "\/collections\/smart-robotics"
           }
         },
         "category-2": {
           "type": "category",
           "settings": {
-            "icon": "audio",
-            "custom_icon": "",
-            "name": "Audio",
-            "link": "",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "font_weight": "normal",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "icon_color": "",
-            "border_color": "",
-            "hover_border_color": "",
-            "hover_bg_color": "",
-            "hover_shadow_color": ""
+            "icon": "gaming",
+            "name": "Retro Gaming",
+            "link": "\/collections\/retro-gaming"
           }
         },
         "category-3": {
           "type": "category",
           "settings": {
-            "icon": "camera",
-            "custom_icon": "",
-            "name": "Cameras",
-            "link": "",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "font_weight": "normal",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "icon_color": "",
-            "border_color": "",
-            "hover_border_color": "",
-            "hover_bg_color": "",
-            "hover_shadow_color": ""
+            "icon": "wearable",
+            "name": "VR & AR Computing",
+            "link": "\/collections\/vr-ar-computing"
           }
         },
         "category-4": {
           "type": "category",
           "settings": {
-            "icon": "gaming",
-            "custom_icon": "",
-            "name": "Components",
-            "link": "",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "font_weight": "normal",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "icon_color": "",
-            "border_color": "",
-            "hover_border_color": "",
-            "hover_bg_color": "",
-            "hover_shadow_color": ""
+            "icon": "camera",
+            "name": "Camera Filters",
+            "link": "\/collections\/camera-filters"
           }
         },
         "category-5": {
           "type": "category",
           "settings": {
-            "icon": "wearable",
-            "custom_icon": "",
-            "name": "Wearables",
-            "link": "",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "font_weight": "normal",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "icon_color": "",
-            "border_color": "",
-            "hover_border_color": "",
-            "hover_bg_color": "",
-            "hover_shadow_color": ""
+            "icon": "smartphone",
+            "name": "Mobile Controllers",
+            "link": "\/collections\/mobile-controllers"
           }
         }
       },
@@ -443,104 +175,42 @@
         "category-3",
         "category-4",
         "category-5"
-      ],
-      "settings": {
-        "show_section": true,
-        "show_on_desktop": true,
-        "show_on_mobile": true,
-        "container_width": "full",
-        "grid_gap": 32,
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40,
-        "color_scheme": "background-1"
-      }
+      ]
     },
     "deal": {
       "type": "deal-of-the-day",
+      "settings": {
+        "show_section": true,
+        "container_width": "full",
+        "color_scheme": "background-2",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
       "blocks": {
         "image": {
           "type": "image",
           "settings": {
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0
+            "image": "shopify:\/\/shop_images\/bolt-deal-headphone.jpg"
           }
         },
         "title": {
           "type": "title",
           "settings": {
-            "title": "Premium [Wireless Headphones] — Studio Edition",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 16,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 16,
-            "font_size": "medium",
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "highlight_color": "",
-            "highlight_gradient": ""
+            "title": "Premium [Wireless Headphones] — Studio Edition"
           }
         },
         "description": {
           "type": "description",
           "settings": {
-            "description": "Immersive sound with active noise cancellation, 40-hour battery life, and ultra-comfortable over-ear design.",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 24,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 24,
-            "font_size": "medium",
-            "font_weight": "normal",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": ""
+            "description": "Immersive sound with active noise cancellation, 40-hour battery life, and ultra-comfortable over-ear design."
           }
         },
         "countdown": {
           "type": "countdown",
           "settings": {
-            "end_date": "2025-12-31 23:59",
-            "show_years": false,
-            "show_months": false,
-            "show_weeks": false,
-            "show_days": true,
-            "show_hours": true,
-            "show_minutes": true,
-            "show_seconds": true,
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 32,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 24,
-            "font_size": "medium",
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "uppercase",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": ""
+            "end_date": "2025-12-31 23:59"
           }
         },
         "price": {
@@ -548,56 +218,13 @@
           "settings": {
             "current_price": "$149",
             "original_price": "$269",
-            "savings_text": "Save $120",
-            "show_current_price": true,
-            "show_original_price": true,
-            "show_savings": true,
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 32,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 24,
-            "font_size": "medium",
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "current_price_color": "",
-            "original_price_color": "",
-            "savings_text_color": "",
-            "savings_bg_color": "",
-            "bg_color": "",
-            "bg_gradient": ""
+            "savings_text": "Save $120"
           }
         },
         "button": {
           "type": "button",
           "settings": {
-            "label": "Grab This Deal",
-            "link": "",
-            "button_style": "primary",
-            "open_in_new_tab": false,
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "font_size": "medium",
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "uppercase",
-            "letter_spacing": 1,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "hover_text_color": "",
-            "hover_bg_color": "",
-            "hover_border_color": "",
-            "hover_shadow_color": ""
+            "label": "Grab This Deal"
           }
         }
       },
@@ -608,66 +235,30 @@
         "countdown",
         "price",
         "button"
-      ],
-      "settings": {
-        "show_section": true,
-        "show_on_desktop": true,
-        "show_on_mobile": true,
-        "container_width": "full",
-        "max_width": 1200,
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40,
-        "color_scheme": "background-2"
-      }
+      ]
     },
     "bestsellers": {
       "type": "bestsellers-asymmetric",
+      "settings": {
+        "show_section": true,
+        "container_width": "full",
+        "color_scheme": "background-1",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
       "blocks": {
         "heading": {
           "type": "bs_heading",
           "settings": {
-            "heading": "Best [Sellers]",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 16,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 16,
-            "font_size": "medium",
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "highlight_color": "",
-            "highlight_gradient": ""
+            "heading": "Best [Sellers]"
           }
         },
         "subheading": {
           "type": "bs_subheading",
           "settings": {
-            "subheading": "Our most loved products — chosen by thousands of customers.",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "max_width": 600,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "font_size": 1.1,
-            "font_weight": "normal",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.6,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": ""
+            "subheading": "Our most loved products — chosen by thousands of customers."
           }
         },
         "view_all": {
@@ -675,143 +266,34 @@
           "settings": {
             "label": "View All",
             "link": "/collections/all",
-            "open_in_new_tab": false,
-            "show_on_desktop": true,
-            "show_on_mobile": false,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "hover_text_color": "",
-            "hover_bg_color": ""
+            "show_on_mobile": false
           }
         },
         "product-0": {
           "type": "product_card",
           "settings": {
-            "product": "",
             "category": "Gaming Gear",
-            "title": "",
-            "price": "",
-            "link": "",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "show_title": true,
-            "show_category": true,
-            "show_price": true,
             "show_rating": true,
-            "rating": 5,
-            "rating_count": "124",
-            "image_ratio": "adapt",
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "title_size": 1.2,
-            "title_weight": "bold",
-            "title_style": "normal",
-            "title_transform": "none",
-            "title_spacing": 0,
-            "title_line_height": 1.2,
-            "price_size": 1.4,
-            "price_weight": "bold",
-            "price_style": "normal",
-            "price_transform": "none",
-            "price_spacing": 0,
-            "price_line_height": 1.2,
-            "card_bg": "",
-            "category_color": "",
-            "title_color": "",
-            "price_color": "",
-            "rating_color": ""
+            "image": "shopify:\/\/shop_images\/bolt-bestseller-keyboard.jpg",
+            "title": "Apex Mechanical Keyboard"
           }
         },
         "product-1": {
           "type": "product_card",
           "settings": {
-            "product": "",
             "category": "Wearables",
-            "title": "",
-            "price": "",
-            "link": "",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "show_title": true,
-            "show_category": true,
-            "show_price": true,
             "show_rating": true,
-            "rating": 5,
-            "rating_count": "124",
-            "image_ratio": "adapt",
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "title_size": 1.2,
-            "title_weight": "bold",
-            "title_style": "normal",
-            "title_transform": "none",
-            "title_spacing": 0,
-            "title_line_height": 1.2,
-            "price_size": 1.4,
-            "price_weight": "bold",
-            "price_style": "normal",
-            "price_transform": "none",
-            "price_spacing": 0,
-            "price_line_height": 1.2,
-            "card_bg": "",
-            "category_color": "",
-            "title_color": "",
-            "price_color": "",
-            "rating_color": ""
+            "image": "shopify:\/\/shop_images\/bolt-bestseller-watch.jpg",
+            "title": "Horizon Smartwatch v2"
           }
         },
         "product-2": {
           "type": "product_card",
           "settings": {
-            "product": "",
             "category": "Accessories",
-            "title": "",
-            "price": "",
-            "link": "",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "show_title": true,
-            "show_category": true,
-            "show_price": true,
             "show_rating": true,
-            "rating": 5,
-            "rating_count": "124",
-            "image_ratio": "adapt",
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "title_size": 1.2,
-            "title_weight": "bold",
-            "title_style": "normal",
-            "title_transform": "none",
-            "title_spacing": 0,
-            "title_line_height": 1.2,
-            "price_size": 1.4,
-            "price_weight": "bold",
-            "price_style": "normal",
-            "price_transform": "none",
-            "price_spacing": 0,
-            "price_line_height": 1.2,
-            "card_bg": "",
-            "category_color": "",
-            "title_color": "",
-            "price_color": "",
-            "rating_color": ""
+            "image": "shopify:\/\/shop_images\/bolt-bestseller-hub.jpg",
+            "title": "Sleek 8-in-1 Hub"
           }
         }
       },
@@ -822,66 +304,37 @@
         "product-0",
         "product-1",
         "product-2"
-      ],
-      "settings": {
-        "show_section": true,
-        "show_on_desktop": true,
-        "show_on_mobile": true,
-        "container_width": "full",
-        "max_width": 1200,
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40,
-        "color_scheme": "background-1"
-      }
+      ]
     },
     "trending": {
       "type": "trending-horizontal",
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
       "blocks": {
         "heading": {
           "type": "trending_heading",
           "settings": {
-            "heading": "Trending [Now]",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 16,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 16,
-            "font_size": "medium",
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "highlight_color": "",
-            "highlight_gradient": ""
+            "heading": "Trending [Now]"
           }
         },
         "subheading": {
           "type": "trending_subheading",
           "settings": {
-            "subheading": "This week's most wanted — shop before they're gone.",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "max_width": 600,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "font_size": 1.1,
-            "font_weight": "normal",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.6,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": ""
+            "subheading": "This week's most wanted — shop before they're gone."
+          }
+        },
+        "collection": {
+          "type": "collection_strip",
+          "settings": {
+            "collection": "accessories",
+            "products_to_show": 5
           }
         },
         "view_all": {
@@ -889,56 +342,7 @@
           "settings": {
             "label": "View All",
             "link": "/collections/all",
-            "open_in_new_tab": false,
-            "show_on_desktop": true,
-            "show_on_mobile": false,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "hover_text_color": "",
-            "hover_bg_color": ""
-          }
-        },
-        "collection": {
-          "type": "collection_strip",
-          "settings": {
-            "collection": "smartphones",
-            "columns_desktop": "4",
-            "columns_tablet": "3",
-            "columns_mobile": "2",
-            "grid_gap": 20,
-            "image_ratio": "square",
-            "products_to_show": 5,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "show_category": true,
-            "show_vendor": false,
-            "show_price": true,
-            "show_compare_price": true,
-            "show_rating": true,
-            "show_quick_view": true,
-            "show_add_to_cart": true,
-            "show_description": false,
-            "show_divider": true,
-            "title_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "divider_color": "",
-            "vendor_color": "",
-            "desc_color": "",
-            "price_color": "",
-            "compare_price_color": ""
+            "show_on_mobile": false
           }
         }
       },
@@ -947,66 +351,30 @@
         "subheading",
         "view_all",
         "collection"
-      ],
-      "settings": {
-        "show_section": true,
-        "show_on_desktop": true,
-        "show_on_mobile": true,
-        "container_width": "standard",
-        "max_width": 1200,
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40,
-        "color_scheme": "background-1"
-      }
+      ]
     },
     "reviews": {
       "type": "customer-reviews",
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+        "color_scheme": "background-2",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
       "blocks": {
         "heading": {
           "type": "review_heading",
           "settings": {
-            "heading": "What Customers [Say]",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 16,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 16,
-            "font_size": "medium",
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "highlight_color": "",
-            "highlight_gradient": ""
+            "heading": "What Customers [Say]"
           }
         },
         "subheading": {
           "type": "review_subheading",
           "settings": {
-            "subheading": "Real reviews from verified buyers who love our products.",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "max_width": 600,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "font_size": 1.1,
-            "font_weight": "normal",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.6,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": ""
+            "subheading": "Real reviews from verified buyers who love our products."
           }
         },
         "review-0": {
@@ -1014,43 +382,7 @@
           "settings": {
             "author_name": "Sarah J.",
             "review_text": "Absolutely love this product! The quality is outstanding and it exceeded my expectations in every way.",
-            "date": "",
-            "product": "",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "show_avatar": true,
-            "show_rating": true,
-            "show_verified_badge": true,
-            "show_product": false,
-            "show_product_image": true,
-            "show_product_title": true,
-            "show_product_price": true,
-            "show_compare_price": false,
-            "show_product_vendor": false,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "author_name_size": 1,
-            "author_weight": "bold",
-            "author_style": "normal",
-            "author_transform": "none",
-            "author_spacing": 0,
-            "author_line_height": 1.2,
-            "text_size": 1,
-            "text_weight": "normal",
-            "text_style": "italic",
-            "text_transform": "none",
-            "text_spacing": 0,
-            "text_line_height": 1.7,
-            "rating": 5,
-            "card_bg": "",
-            "author_color": "",
-            "text_color": "",
-            "stars_color": "",
-            "verified_color": "",
-            "verified_bg_color": "",
-            "date_color": ""
+            "avatar": "shopify:\/\/shop_images\/bolt-reviewer-sarah.jpg"
           }
         },
         "review-1": {
@@ -1058,43 +390,7 @@
           "settings": {
             "author_name": "Michael R.",
             "review_text": "Great value for the price. The customer service was also very helpful with my questions.",
-            "date": "",
-            "product": "",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "show_avatar": true,
-            "show_rating": true,
-            "show_verified_badge": true,
-            "show_product": false,
-            "show_product_image": true,
-            "show_product_title": true,
-            "show_product_price": true,
-            "show_compare_price": false,
-            "show_product_vendor": false,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "author_name_size": 1,
-            "author_weight": "bold",
-            "author_style": "normal",
-            "author_transform": "none",
-            "author_spacing": 0,
-            "author_line_height": 1.2,
-            "text_size": 1,
-            "text_weight": "normal",
-            "text_style": "italic",
-            "text_transform": "none",
-            "text_spacing": 0,
-            "text_line_height": 1.7,
-            "rating": 5,
-            "card_bg": "",
-            "author_color": "",
-            "text_color": "",
-            "stars_color": "",
-            "verified_color": "",
-            "verified_bg_color": "",
-            "date_color": ""
+            "avatar": "shopify:\/\/shop_images\/bolt-reviewer-michael.jpg"
           }
         },
         "review-2": {
@@ -1102,43 +398,7 @@
           "settings": {
             "author_name": "Emily D.",
             "review_text": "One of the best purchases I've made this year. I've already recommended it to all my friends!",
-            "date": "",
-            "product": "",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "show_avatar": true,
-            "show_rating": true,
-            "show_verified_badge": true,
-            "show_product": false,
-            "show_product_image": true,
-            "show_product_title": true,
-            "show_product_price": true,
-            "show_compare_price": false,
-            "show_product_vendor": false,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "author_name_size": 1,
-            "author_weight": "bold",
-            "author_style": "normal",
-            "author_transform": "none",
-            "author_spacing": 0,
-            "author_line_height": 1.2,
-            "text_size": 1,
-            "text_weight": "normal",
-            "text_style": "italic",
-            "text_transform": "none",
-            "text_spacing": 0,
-            "text_line_height": 1.7,
-            "rating": 5,
-            "card_bg": "",
-            "author_color": "",
-            "text_color": "",
-            "stars_color": "",
-            "verified_color": "",
-            "verified_bg_color": "",
-            "date_color": ""
+            "avatar": "shopify:\/\/shop_images\/bolt-reviewer-emily.jpg"
           }
         }
       },
@@ -1148,118 +408,48 @@
         "review-0",
         "review-1",
         "review-2"
-      ],
+      ]
+    },
+    "cta": {
+      "type": "cta-banner",
       "settings": {
         "show_section": true,
-        "show_on_desktop": true,
-        "show_on_mobile": true,
         "container_width": "standard",
-        "max_width": 1200,
+        "show_divider": false,
+        "color_scheme": "background-1",
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 40,
         "padding_bottom_mobile": 40,
-        "color_scheme": "background-2"
-      }
-    },
-    "cta": {
-      "type": "cta-banner",
+        "background_image": "shopify:\/\/shop_images\/bolt-cta-bg.jpg"
+      },
       "blocks": {
         "heading": {
           "type": "cta_heading",
           "settings": {
-            "heading": "Join the Club & Get [20% Off]",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "margin_top": 0,
-            "margin_bottom": 24,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 24,
-            "heading_size": "medium",
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "highlight_color": "",
-            "highlight_gradient": ""
+            "heading": "Join the Club & Get [20% Off]"
           }
         },
         "description": {
           "type": "cta_text",
           "settings": {
-            "text": "Sign up for free and unlock exclusive tech deals, early access to gadget drops, and personalized recommendations.",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "max_width": 800,
-            "margin_top": 0,
-            "margin_bottom": 40,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 24,
-            "font_size": 1.1,
-            "font_weight": "normal",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 1.6,
-            "text_color": "",
-            "bg_color": "",
-            "bg_gradient": ""
+            "text": "Sign up for free and unlock exclusive tech deals, early access to gadget drops, and personalized recommendations."
           }
         },
         "button_1": {
           "type": "cta_button",
           "settings": {
             "label": "Join Free",
-            "link": "",
-            "open_in_new_tab": false,
-            "show_on_desktop": true,
-            "show_on_mobile": true,
             "style": "primary",
-            "button_size": "medium",
-            "show_arrow": true,
-            "full_width_mobile": false,
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "uppercase",
-            "letter_spacing": 1,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "border_color": "",
-            "hover_text_color": "",
-            "hover_bg_color": "",
-            "hover_border_color": "",
-            "hover_shadow_color": ""
+            "show_arrow": true
           }
         },
         "button_2": {
           "type": "cta_button",
           "settings": {
             "label": "Learn More",
-            "link": "",
-            "open_in_new_tab": false,
-            "show_on_desktop": true,
-            "show_on_mobile": true,
             "style": "outline",
-            "button_size": "medium",
-            "show_arrow": false,
-            "full_width_mobile": false,
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "uppercase",
-            "letter_spacing": 1,
-            "line_height": 1.2,
-            "text_color": "",
-            "bg_color": "",
-            "border_color": "",
-            "hover_text_color": "",
-            "hover_bg_color": "",
-            "hover_border_color": "",
-            "hover_shadow_color": ""
+            "show_arrow": false
           }
         }
       },
@@ -1268,22 +458,7 @@
         "description",
         "button_1",
         "button_2"
-      ],
-      "settings": {
-        "show_section": true,
-        "show_on_desktop": true,
-        "show_on_mobile": true,
-        "container_width": "standard",
-        "max_width": 1200,
-        "show_divider": false,
-        "enable_animation": false,
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40,
-        "color_scheme": "background-1",
-        "enable_overlay": true
-      }
+      ]
     }
   },
   "order": [

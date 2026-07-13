@@ -115,45 +115,13 @@ body.qv-active .shopify-section:not(#shopify-section-quick-view) {
     transform: scale(1.04);
 }
 
-/* Custom adapt-to-image overrides */
-.qv-image-panel.aspect-adapt {
-    height: auto !important;
-    min-height: 0 !important;
-    display: block !important;
-}
 
-.qv-image-panel.aspect-adapt img {
-    position: relative !important;
-    display: block !important;
-    width: 100% !important;
-    height: auto !important;
-    object-fit: contain !important;
-}
 
 .qv-details {
     padding: 36px 32px;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-}
-
-/* Desktop layout constraint where the image height drives the modal height */
-@media (min-width: 769px) {
-    .qv-image-panel ~ .qv-details {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        width: 50%;
-        overflow-y: auto;
-    }
-    .qv-modal.image-right .qv-image-panel {
-        grid-column: 2;
-    }
-    .qv-modal.image-right .qv-image-panel ~ .qv-details {
-        right: auto;
-        left: 0;
-    }
 }
 
 .qv-category {
