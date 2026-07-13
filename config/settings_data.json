@@ -37,7 +37,7 @@
             "type": "image",
             "settings": {
               "image_position": "left",
-              "image_aspect_ratio": "portrait",
+              "image_aspect_ratio": "landscape",
               "image_border_radius": 0,
               "enable_zoom": true
             }
