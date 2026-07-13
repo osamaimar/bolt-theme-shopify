@@ -1,0 +1,270 @@
+/* About Team Page - Timeline Section */
+/* Color Scheme Mappings */
+.timeline-section {
+  position: relative;
+  background-color: var(--section-bg, var(--bg-primary));
+  color: var(--section-text, var(--text-primary));
+}
+
+.timeline-section.color-background-1 {
+  --section-bg: var(--bg-primary);
+  --section-text: var(--text-primary);
+  --section-text-secondary: var(--text-secondary);
+  --badge-bg: var(--color-accent-10);
+  --badge-border: var(--color-accent-20);
+  --badge-text: var(--color-accent);
+  --dot-border: var(--bg-primary);
+  --timeline-line-color: var(--color-accent-40);
+}
+.timeline-section.color-background-2 {
+  --section-bg: var(--bg-secondary);
+  --section-text: var(--text-primary);
+  --section-text-secondary: var(--text-secondary);
+  --badge-bg: var(--color-accent-10);
+  --badge-border: var(--color-accent-20);
+  --badge-text: var(--color-accent);
+  --dot-border: var(--bg-secondary);
+  --timeline-line-color: var(--color-accent-40);
+}
+.timeline-section.color-inverse {
+  --section-bg: var(--color-white);
+  --section-text: var(--bg-primary);
+  --section-text-secondary: rgba(0, 0, 0, 0.7);
+  --badge-bg: rgba(var(--color-primary-rgb), 0.1);
+  --badge-border: rgba(var(--color-primary-rgb), 0.2);
+  --badge-text: var(--color-primary);
+  --dot-border: var(--color-white);
+  --timeline-line-color: rgba(var(--color-primary-rgb), 0.15);
+}
+.timeline-section.color-accent-1 {
+  --section-bg: var(--color-primary);
+  --section-text: var(--text-inverse, #fff);
+  --section-text-secondary: rgba(255, 255, 255, 0.8);
+  --badge-bg: rgba(255, 255, 255, 0.15);
+  --badge-border: rgba(255, 255, 255, 0.25);
+  --badge-text: var(--color-white);
+  --dot-border: var(--color-primary);
+  --timeline-line-color: rgba(255, 255, 255, 0.3);
+}
+.timeline-section.color-accent-2 {
+  --section-bg: var(--color-accent);
+  --section-text: var(--bg-primary);
+  --section-text-secondary: rgba(0, 0, 0, 0.7);
+  --badge-bg: rgba(0, 0, 0, 0.08);
+  --badge-border: rgba(0, 0, 0, 0.15);
+  --badge-text: rgba(0, 0, 0, 0.9);
+  --dot-border: var(--color-accent);
+  --timeline-line-color: rgba(0, 0, 0, 0.15);
+}
+
+.timeline {
+  position: relative;
+  width: 100%;
+  max-width: var(--timeline-max-width, 900px);
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--timeline-line-color) 15%,
+    var(--timeline-line-color) 85%,
+    transparent
+  );
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* Dot on the line */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: var(--spacing-sm);
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background: var(--color-accent-secondary);
+  border-radius: 50%;
+  border: 3px solid var(--dot-border, var(--bg-primary));
+  box-shadow: 0 0 0 3px var(--color-accent-secondary-30);
+  z-index: 2;
+}
+
+/* Glow ring */
+.timeline-item::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: var(--spacing-sm);
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-accent-secondary-10);
+  z-index: 1;
+}
+
+.timeline-content {
+  text-align: end;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  text-align: start;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.timeline-item:nth-child(even) .timeline-year-badge {
+  grid-column: 1;
+  grid-row: 1;
+  text-align: end;
+  justify-self: end;
+}
+
+/* Explicit layout classes for manual positioning */
+.timeline-item.layout-left .timeline-content {
+  text-align: end;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.timeline-item.layout-left .timeline-year-badge {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: start;
+}
+
+.timeline-item.layout-right .timeline-content {
+  text-align: start;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.timeline-item.layout-right .timeline-year-badge {
+  grid-column: 1;
+  grid-row: 1;
+  text-align: end;
+  justify-self: end;
+}
+
+.timeline-year-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 6px var(--spacing-md);
+  border-radius: var(--radius-md);
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  color: var(--badge-text);
+  font-size: 0.9rem;
+  font-weight: var(--font-weight-bold);
+  align-self: start;
+  width: fit-content;
+}
+
+.timeline-year-badge svg {
+  width: 16px;
+  height: 16px;
+}
+
+.timeline-content h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--section-text, var(--text-inverse, #fff));
+  margin-bottom: 0.5rem;
+}
+
+.timeline-content p {
+  color: var(--section-text-secondary, var(--text-secondary, rgba(255,255,255,0.8)));
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.timeline-content .cta-button,
+.timeline-content .hero-button,
+.timeline-cta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1.25rem;
+  text-decoration: none;
+}
+
+.timeline-cta.link {
+  font-size: 0.95rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  transition: color 0.3s ease;
+}
+
+.timeline-cta.link:hover {
+  text-decoration: underline;
+  color: var(--color-secondary);
+}
+
+.timeline-custom-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-custom-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 768px) {
+
+  .timeline::before {
+    left: 20px;
+  }
+
+  .timeline-item {
+    grid-template-columns: 1fr;
+    padding-inline-start: 50px;
+    gap: 12px;
+  }
+
+  .timeline-item::before,
+  .timeline-item::after {
+    left: 20px;
+  }
+
+  .timeline-content,
+  .timeline-item:nth-child(even) .timeline-content,
+  .timeline-item.layout-left .timeline-content,
+  .timeline-item.layout-right .timeline-content {
+    text-align: start;
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .timeline-year-badge,
+  .timeline-item:nth-child(even) .timeline-year-badge,
+  .timeline-item.layout-left .timeline-year-badge,
+  .timeline-item.layout-right .timeline-year-badge {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+}

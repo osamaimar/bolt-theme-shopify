@@ -1,0 +1,507 @@
+{
+  "sections": {
+    "hero": {
+      "type": "showcase-hero",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "alignment": "left",
+        "layout": "image-right",
+        "image_ratio": "adapt",
+        "container_width": "standard",
+        "max_width": 1340,
+        "show_price": true,
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "badge": "New Arrival"
+          }
+        },
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "title": "Quantum [X15 Laptop]",
+            "font_size": "large",
+            "font_weight": "bold",
+            "highlight_color": ""
+          }
+        },
+        "desc_1": {
+          "type": "description",
+          "settings": {
+            "description": "Breakthrough performance with the latest M3-powered chip, stunning 15\" Retina display, and 20+ hours of battery life. Built for professionals who demand excellence."
+          }
+        },
+        "list_1": {
+          "type": "list",
+          "settings": {
+            "text": "Free shipping on all orders over $50",
+            "icon": "check"
+          }
+        },
+        "list_2": {
+          "type": "list",
+          "settings": {
+            "text": "2-year warranty included",
+            "icon": "check"
+          }
+        },
+        "list_3": {
+          "type": "list",
+          "settings": {
+            "text": "30-day money-back guarantee",
+            "icon": "check"
+          }
+        },
+        "btns_1": {
+          "type": "buttons",
+          "settings": {
+            "show_view_details": true,
+            "view_details_label": "View Details",
+            "view_details_link": "",
+            "view_details_open_in_new_tab": false,
+            "view_details_show_icon": true,
+            "view_details_style": "outline",
+            "view_details_show_on_desktop": true,
+            "view_details_show_on_mobile": true,
+            "view_details_alignment": "left",
+            "view_details_margin_top": 0,
+            "view_details_margin_bottom": 0,
+            "view_details_margin_top_mobile": 0,
+            "view_details_margin_bottom_mobile": 0,
+            "view_details_font_size": "medium",
+            "view_details_font_weight": "bold",
+            "view_details_font_style": "normal",
+            "view_details_text_transform": "none",
+            "view_details_letter_spacing": 0,
+            "view_details_line_height": 120,
+            "view_details_text_color": "",
+            "view_details_bg_color": "",
+            "view_details_bg_gradient": "",
+            "view_details_border_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "heading_1",
+        "desc_1",
+        "list_1",
+        "list_2",
+        "list_3",
+        "btns_1"
+      ]
+    },
+    "featured": {
+      "type": "showcase-featured",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "standard",
+        "max_width": 1340,
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "title": "Top [Picks]",
+            "link_label": "Browse All",
+            "link_url": "",
+            "heading_tag": "h2",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_link": true,
+            "alignment": "space-between",
+            "margin_top": 0,
+            "margin_bottom": 24,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 24,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 115,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "highlight_color": "",
+            "highlight_gradient": "",
+            "show_link_icon": true,
+            "link_font_size": "medium",
+            "link_font_weight": "normal",
+            "link_font_style": "normal",
+            "link_text_transform": "none",
+            "link_letter_spacing": 0,
+            "link_line_height": 115,
+            "link_text_color": "",
+            "link_hover_color": "",
+            "link_bg_color": "",
+            "link_bg_gradient": ""
+          }
+        },
+        "carousel_1": {
+          "type": "product_carousel",
+          "settings": {
+            "limit": 8,
+            "view_details_label": "View Details",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_view_details": true,
+            "show_price": true,
+            "columns_desktop": "4",
+            "columns_tablet": "3",
+            "columns_mobile": "1",
+            "image_ratio": "square",
+            "margin_top": 0,
+            "margin_bottom": 24,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 24,
+            "title_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "btn_text_color": "",
+            "btn_hover_text_color": "",
+            "btn_bg_color": "",
+            "btn_bg_gradient": "",
+            "btn_hover_bg_color": "",
+            "btn_hover_bg_gradient": "",
+            "btn_border_color": "",
+            "btn_hover_border_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "carousel_1"
+      ]
+    },
+    "stats": {
+      "type": "showcase-stats",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "standard",
+        "max_width": 1340,
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "stat-1": {
+          "type": "stat",
+          "settings": {
+            "icon": "gadgets",
+            "value": "500+",
+            "label": "Smart Gadgets"
+          }
+        },
+        "stat-2": {
+          "type": "stat",
+          "settings": {
+            "icon": "customers",
+            "value": "12K+",
+            "label": "Happy Customers"
+          }
+        },
+        "stat-3": {
+          "type": "stat",
+          "settings": {
+            "icon": "rating",
+            "value": "4.9",
+            "label": "Average Rating"
+          }
+        },
+        "stat-4": {
+          "type": "stat",
+          "settings": {
+            "icon": "guarantee",
+            "value": "100%",
+            "label": "Money-Back Guarantee"
+          }
+        }
+      },
+      "block_order": [
+        "stat-1",
+        "stat-2",
+        "stat-3",
+        "stat-4"
+      ]
+    },
+    "main": {
+      "type": "showcase-catalog",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "standard",
+        "max_width": 1340,
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "title": "All [Products]",
+            "heading_tag": "h2",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_view_toggle": true,
+            "alignment": "space-between",
+            "margin_top": 0,
+            "margin_bottom": 24,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 24,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 115,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "highlight_color": "",
+            "highlight_gradient": "",
+            "toggle_icon_color": "",
+            "toggle_icon_active_color": "",
+            "toggle_bg_color": "",
+            "toggle_bg_gradient": "",
+            "toggle_border_color": ""
+          }
+        },
+        "grid_1": {
+          "type": "products_grid",
+          "settings": {
+            "products_per_page": 12,
+            "view_details_label": "Add to Cart",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_vendor": false,
+            "show_description": false,
+            "show_view_details": true,
+            "show_price": true,
+            "show_compare_price": true,
+            "show_divider": true,
+            "columns_desktop": "3",
+            "columns_tablet": "2",
+            "columns_mobile": "1",
+            "image_ratio": "square",
+            "margin_top": 0,
+            "margin_bottom": 24,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 24,
+            "title_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "divider_color": "",
+            "vendor_color": "",
+            "desc_color": "",
+            "price_color": "",
+            "compare_price_color": "",
+            "btn_text_color": "",
+            "btn_hover_text_color": "",
+            "btn_bg_color": "",
+            "btn_bg_gradient": "",
+            "btn_hover_bg_color": "",
+            "btn_hover_bg_gradient": "",
+            "btn_border_color": "",
+            "btn_hover_border_color": ""
+          }
+        },
+        "pagination_1": {
+          "type": "pagination",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "center",
+            "margin_top": 60,
+            "margin_bottom": 0,
+            "margin_top_mobile": 40,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": "",
+            "hover_border_color": "",
+            "hover_bg_color": "",
+            "hover_shadow_color": "",
+            "active_text_color": "",
+            "active_bg_color": "",
+            "active_bg_gradient": "",
+            "active_border_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "grid_1",
+        "pagination_1"
+      ]
+    },
+    "cta": {
+      "type": "showcase-cta",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "alignment": "center",
+        "container_width": "standard",
+        "max_width": 1340,
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "title": "Can't Find What You [Need]?",
+            "heading_tag": "h2",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "center",
+            "margin_top": 0,
+            "margin_bottom": 18,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 18,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 115,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "highlight_color": "",
+            "highlight_gradient": ""
+          }
+        },
+        "desc_1": {
+          "type": "description",
+          "settings": {
+            "description": "We provide custom tech builds and enterprise infrastructure solutions. Tell us your vision and our engineers will bring it to life — no compromises.",
+            "description_tag": "p",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "center",
+            "margin_top": 0,
+            "margin_bottom": 28,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 28,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 170,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "highlight_color": "",
+            "highlight_gradient": ""
+          }
+        },
+        "btn_1": {
+          "type": "button",
+          "settings": {
+            "label": "Request a Quote",
+            "url": "",
+            "style": "primary",
+            "open_in_new_tab": false,
+            "show_button": true,
+            "show_icon": true,
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": ""
+          }
+        },
+        "btn_2": {
+          "type": "button",
+          "settings": {
+            "label": "Learn About Us",
+            "url": "",
+            "style": "outline",
+            "open_in_new_tab": false,
+            "show_button": true,
+            "show_icon": false,
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "desc_1",
+        "btn_1",
+        "btn_2"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "featured",
+    "stats",
+    "main",
+    "cta"
+  ]
+}

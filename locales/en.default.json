@@ -1,0 +1,388 @@
+{
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "close_menu": "Close menu",
+    "open_menu": "Open menu",
+    "toggle_submenu": "Toggle submenu",
+    "refresh_page": "Page refreshed",
+    "unit_price_separator": "per",
+    "back_to_top": "Back to top",
+    "account": "Account",
+    "link_messages": {
+      "new_window": "Opens in a new window"
+    }
+  },
+  "sections": {
+    "header": {
+      "navigation": "Main navigation",
+      "announcement": "Announcement",
+      "popular_searches": "Popular Searches",
+      "cart_count": "items"
+    },
+    "footer": {
+      "all_rights_reserved": "All rights reserved.",
+      "payment_methods": "Payment methods",
+      "newsletter": {
+        "placeholder": "Your email address",
+        "submit": "Subscribe",
+        "success": "Thanks for subscribing!"
+      }
+    },
+    "cart": {
+      "cart_error": "An error occurred while updating your cart.",
+      "cart_quantity_error_html": "You can only add {{ quantity }} of this item to your cart.",
+      "buttons": {
+        "clear": "Clear"
+      }
+    },
+    "collection_list": {
+      "items_count": "{{ count }} items",
+      "explore": "Explore"
+    },
+    "slideshow": {
+      "pause_slideshow": "Pause slideshow",
+      "play_slideshow": "Play slideshow"
+    },
+    "featured_collection": {
+      "view_all": "View All"
+    }
+  },
+  "search": {
+    "placeholder": "Search our store...",
+    "submit": "Search",
+    "title": "Search",
+    "no_results_html": "No results found for \"{{ terms }}\"",
+    "results_for_html": "{{ count }} results for \"{{ terms }}\""
+  },
+  "newsletter": {
+    "success": "Thanks for subscribing!"
+  },
+  "general": {
+    "breadcrumb": {
+      "home": "Home",
+      "products": "Products"
+    },
+    "home": "Home",
+    "share_link_copied": "Link copied to clipboard!",
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Previous page",
+      "next": "Next page"
+    },
+    "share": {
+      "copy_to_clipboard_confirmation": "Link copied to clipboard"
+    },
+    "search": {
+      "all": "All Products",
+      "submit": "Search",
+      "title": "Search",
+      "placeholder": "Search our store...",
+      "recent": "Recent Searches",
+      "clear_all": "Clear All",
+      "esc_key": "ESC",
+      "to_search": "to search",
+      "to_close": "to close",
+      "to_toggle": "to toggle",
+      "no_results_html": "No results found for \"{{ terms }}\"",
+      "results_for_html": "{{ count }} results for \"{{ terms }}\"",
+      "no_results": "No results found for \"{{ terms }}\"",
+      "results_with_count": "{{ count }} products found for \"{{ terms }}\"",
+      "results_count": "products found",
+      "no_results_help": "Try a different search term or browse our categories.",
+      "start_searching_title": "Ready to find something?",
+      "start_searching_text": "Type your keywords above to browse our premium electronics collection."
+    },
+    "newsletter_form": {
+      "email_placeholder": "Your email",
+      "submit": "Subscribe",
+      "confirmation": "Thanks for subscribing!"
+    },
+    "coming_soon": {
+      "show_subscribe": "Show subscribe form"
+    },
+    "countdown": {
+      "years": "Years",
+      "months": "Months",
+      "weeks": "Weeks",
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds"
+    },
+    "faq": {
+      "no_results_html": "No questions match your search. Try a different keyword or <span class=\"highlight-text\">browse all categories</span>."
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "on_sale": "Sale",
+      "quick_view": "Quick View",
+      "select_options": "Select Options",
+      "view_details": "View Details",
+      "view_grid": "Grid View",
+      "view_list": "List View",
+      "vendor": "Vendor",
+      "price": {
+        "from_price_html": "From {{ price }}",
+        "regular_price": "Regular price",
+        "sale_price": "Sale price",
+        "unit_price": "Unit price"
+      },
+      "media": {
+        "image_available": "Image {{ index }} available"
+      },
+      "value_unavailable": "{{ option_value }} is currently unavailable",
+      "in_stock": "In Stock",
+      "free_express_shipping": "Free Express Shipping",
+      "warranty_included": "2-Year Warranty Included",
+      "easy_returns": "30-Day Easy Returns",
+      "view_all_products": "View All Products",
+      "no_products_available": "No products available",
+      "no_products_found": "No products found in this collection.",
+      "no_products_found_short": "No products found.",
+      "reviews": "Reviews",
+      "off": "OFF",
+      "stars": "Stars",
+      "based_on_reviews_html": "Based on {{ count }} reviews",
+      "review_app_placeholder": "Review content would be rendered here. Please paste your review app snippet in the block settings.",
+      "category": "Category",
+      "product_name_placeholder": "Product Name",
+      "description_placeholder": "Product description goes here.",
+      "shipping_note": "Free Express Shipping · 2-Year Warranty",
+      "tab_description": "Description",
+      "tab_specifications": "Specifications",
+      "tab_custom_content": "Custom Content",
+      "spec_driver_size": "Driver Size",
+      "spec_driver_size_val": "40mm Dynamic",
+      "spec_frequency_resp": "Frequency Resp.",
+      "spec_frequency_resp_val": "20Hz - 40kHz (Hi-Res)",
+      "spec_battery_life": "Battery Life",
+      "spec_battery_life_val": "Up to 40 Hours",
+      "spec_charging_port": "Charging Port",
+      "spec_charging_port_val": "USB-C",
+      "spec_bluetooth": "Bluetooth",
+      "spec_bluetooth_val": "V5.2",
+      "spec_warranty": "Warranty",
+      "spec_warranty_val": "2-Year Manufacturer",
+      "badge_new": "New",
+      "badge_hot": "Hot",
+      "variant_label": "Variant",
+      "quantity_label": "Quantity",
+      "verified_review": "Verified",
+      "sample_product": "Sample Product",
+      "title_placeholder": "Product Title"
+    }
+  },
+  "blogs": {
+    "article": {
+      "read_more": "Read more",
+      "read_more_title": "Read more about {{ title }}",
+      "read_time": "{{ count }} min read"
+    }
+  },
+  "blog": {
+    "article_metadata_html": "By {{ author }} on {{ date }}",
+    "article_comments": "{{ count }} comments",
+    "comment_form_title": "Leave a comment",
+    "comment_form_name": "Name",
+    "comment_form_email": "Email",
+    "comment_form_body": "Message",
+    "comment_form_submit": "Post comment",
+    "no_categories": "No categories available",
+    "no_tags": "No tags available",
+    "no_blogs": "No blogs available",
+    "all_articles": "All Articles",
+    "read_more": "Read more",
+    "read_full": "Read Full Article",
+    "filter_all": "All Topics",
+    "no_articles": "No articles found.",
+    "showing_articles": "Showing {{ count }} articles",
+    "previous_article": "Previous Article",
+    "next_article": "Next Article",
+    "written_by": "Written by",
+    "share_this_article": "Share this article:",
+    "no_comments_yet": "No comments yet",
+    "featured_products": "Featured Products"
+  },
+  "cart": {
+    "title": "Your Cart",
+    "remove": "Remove",
+    "update": "Update Cart",
+    "clear": "Clear Cart",
+    "checkout": "Proceed to Checkout",
+    "subtotal": "Subtotal",
+    "tax": "Tax",
+    "total": "Total",
+    "shipping": "Shipping",
+    "calculated_at_checkout": "Calculated at checkout",
+    "included": "Included",
+    "free_shipping_remaining_html": "You're <strong>{{ amount }}</strong> away from free shipping!",
+    "free_shipping_unlocked": "You've unlocked free shipping!",
+    "tax_shipping_note": "Tax and shipping calculated at checkout",
+    "secondary_text_trans": "Tax and shipping calculated at checkout",
+    "empty_title": "Your cart is empty",
+    "empty": "Your cart is empty",
+    "empty_desc": "Looks like you haven't added anything to your cart yet.",
+    "empty_message": "Looks like you have not added anything to your cart yet.",
+    "continue_shopping": "Continue Shopping",
+    "view_cart": "View Full Cart",
+    "table_product": "Product",
+    "table_price": "Price",
+    "table_qty": "Quantity",
+    "table_total": "Total",
+    "decrease_quantity": "Decrease quantity",
+    "increase_quantity": "Increase quantity",
+    "quantity": "Quantity",
+    "cart_totals": "Cart Totals",
+    "coupon_code": "Coupon Code",
+    "coupon_hint": "Enter your coupon code to get a discount",
+    "coupon_placeholder": "e.g. SAVE20",
+    "discount_code": "Discount code",
+    "apply": "Apply",
+    "add_to_cart": "Add to Cart",
+    "related_services": "Related Services",
+    "you_may_also_like": "You May Also Like",
+    "quantity_for": "Quantity for {{ title }}"
+  },
+  "collections": {
+    "title": "All Collections",
+    "filter_all": "All",
+    "price_min_label": "Min",
+    "price_max_label": "Max",
+    "title_placeholder": "Collection Title",
+    "zero_products": "0 Products",
+    "empty": "No products found in this collection.",
+    "showing_results": "Showing {{ count }} premium products",
+    "showing_results_html": "Showing <strong>{{ count }}</strong> premium products",
+    "results_info_premium_html": "Showing <strong>{{ count }}</strong> premium products",
+    "filter_all_gear": "All Gear",
+    "filter_laptops": "Laptops",
+    "filter_phones": "Smartphones",
+    "filter_audio": "Audio",
+    "filter_gaming": "Gaming",
+    "filter_smart_home": "Smart Home",
+    "search_placeholder": "Quick find product...",
+    "sort_by": "Sort by:",
+    "sort_featured": "Featured",
+    "sort_price_low": "Price: Low to High",
+    "sort_price_high": "Price: High to Low",
+    "sort_rating": "Highest Rated",
+    "pagination_prev": "Previous page",
+    "pagination_next": "Next page",
+    "showing_range_html": "Showing <strong>{{ first }}–{{ last }}</strong> of <strong>{{ total }}</strong> products",
+    "showing_count_html": "Showing <strong>{{ count }}</strong> premium products",
+    "show_filters": "Show Filters",
+    "no_search_results": "No products match your search in this view.",
+    "showing_collections": "Showing {{ count }} collection",
+    "showing_collections_plural": "Showing {{ count }} collections",
+    "showing_range_collections": "Showing {{ first }}–{{ last }} of {{ total }} collections",
+    "showing_zero_collections": "Showing 0 of 0 collections",
+    "no_collections_found": "No collections found matching your selection.",
+    "select_collection": "Select a collection to show products."
+  },
+  "catalog": {
+    "page_title_showcase": "Tech Showcase | BoltElectronics",
+    "title_showcase": "Quantum [X15 Laptop]",
+    "desc_showcase": "Breakthrough performance with the latest M3-powered chip, stunning 15\" Retina display, and 20+ hours of battery life. Built for professionals who demand excellence.",
+    "rating_info": "{{ rating }} ({{ count }} reviews)",
+    "btn_add_to_cart": "Add to Cart",
+    "btn_view_specs": "View Specs",
+    "title_picks": "Top [Picks]",
+    "btn_browse_all": "Browse All",
+    "prod_prodisplay_ultra_title": "ProDisplay Ultra",
+    "prod_watch_nexa_title": "NexaWatch Gen 2",
+    "prod_laptop_skytab_title": "SkyTab Pro",
+    "prod_sonicpods_title": "SonicPods Pro",
+    "prod_gamepad_pro_title": "GameMaster Pro",
+    "currency_symbol": "$",
+    "currency_short": "USD",
+    "btn_view_details": "View Details",
+    "stat_smart_gadgets": "Smart Gadgets",
+    "stat_happy_customers": "Happy Customers",
+    "stat_avg_rating": "Average Rating",
+    "stat_guarantee_100": "Money-Back Guarantee",
+    "filter_all_items": "All Items",
+    "filter_computers": "Computers",
+    "filter_mobile": "Mobile",
+    "filter_audio": "Audio",
+    "filter_gaming": "Gaming"
+  },
+  "404": {
+    "title": "404 Page Not Found",
+    "not_found": "The page you looking for doesn't exist.",
+    "back_to_shopping": "Back to shopping"
+  },
+  "password": {
+    "title": "Opening Soon",
+    "password": "Password",
+    "enter": "Enter",
+    "header_text": "Password Page Header",
+    "footer_text": "Password Page Footer"
+  },
+  "gift_card": {
+    "balance": "Balance",
+    "expired": "Expired",
+    "expires_on": "Expires on {{ date }}",
+    "card": "Gift card",
+    "use_at_checkout": "Use this code at checkout",
+    "add_to_apple_wallet": "Add to Apple Wallet"
+  },
+  "customer": {
+    "recover_password": {
+      "email": "Email Address",
+      "success": "We've sent you an email with a link to update your password."
+    }
+  },
+  "custom_labels": {
+    "product": "Product",
+    "price": "Price",
+    "quantity": "Quantity",
+    "total": "Total",
+    "update-cart": "Update Cart",
+    "clear-cart": "Clear Cart",
+    "cart-totals": "Cart Totals",
+    "subtotal": "Subtotal",
+    "tax": "Tax",
+    "included": "Included",
+    "shipping": "Shipping",
+    "calculated-at-checkout": "Calculated at checkout",
+    "proceed-to-checkout": "Proceed to Checkout",
+    "filters": "Filters",
+    "subscribe": "Subscribe",
+    "your-email-address": "Your email address",
+    "all-topics": "All Topics",
+    "read-full-article": "Read Full Article",
+    "read-more": "Read more",
+    "add-to-cart": "Add to Cart",
+    "products": "products",
+    "view-all-products": "View All Products",
+    "no-products-found-in-this-collection": "No products found in this collection.",
+    "no-products-found": "No products found.",
+    "show-filters": "Show Filters",
+    "select-a-collection-to-show-products": "Select a collection to show products.",
+    "view-all": "View All",
+    "page-not-found": "Page [Not Found]",
+    "the-page-you-re-looking-for-doesn-t-exist-or-may-have-been-moved": "The page you're looking for doesn't exist or may have been moved.",
+    "button": "Button",
+    "home": "Home",
+    "return-to-main-page": "Return to main page",
+    "need-help-a-href-pages-contact-get-in-touch-a-with-our-team": "Need help? <a href=\"/pages/contact\">Get in touch</a> with our team."
+  },
+  "hello_world": {
+    "title": "Hello, World!",
+    "desc_1": "The Skeleton theme is a minimal, carefully structured Shopify theme designed to help you quickly get started. Designed with modularity, maintainability, and Shopify's best practices in mind.",
+    "desc_2": "Themes shape the online store experience for merchants and their customers. Build fast, flexible themes at scale using Liquid, Shopify's theme templating language, along with HTML, CSS, JavaScript, and JSON.",
+    "key_concepts_title": "Key Concepts",
+    "key_concepts_desc": "Shopify themes are a package of template files, building blocks, and supporting assets. Use these building blocks to create modular, customizable themes.",
+    "key_concepts_link": "Learn more about key concepts",
+    "liquid_title": "Liquid",
+    "liquid_desc": "The Liquid templating language is the backbone of Shopify themes, and is used to load dynamic content on storefronts. Extend Liquid objects to store and present custom data using metafields.",
+    "liquid_link": "View the Liquid reference",
+    "best_practices_title": "Best Practices",
+    "best_practices_desc": "To optimize your theme development experience, Shopify has established a set of best practices that you can refer to when developing your theme and setting up your toolchains and processes.",
+    "best_practices_link": "Follow best practices"
+  }
+}

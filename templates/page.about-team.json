@@ -1,0 +1,282 @@
+{
+  "sections": {
+    "hero": {
+      "type": "about-team-hero",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "standard",
+        "max_width": 1340,
+        "blocks_position": "center",
+        "color_scheme": "background-1",
+        "padding_top": 100,
+        "padding_bottom": 60,
+        "padding_top_mobile": 100
+      },
+      "blocks": {
+        "header-1": {
+          "type": "header",
+          "settings": {
+            "heading": "The Minds Driving [BoltTheme]"
+          }
+        },
+        "subtitle-1": {
+          "type": "subtitle",
+          "settings": {
+            "subheading": "A dedicated team of engineers, gadget experts, and customer advocates committed to delivering the world's most cutting-edge electronics."
+          }
+        },
+        "stat-1": {
+          "type": "hero_stat",
+          "settings": {
+            "stat_value": "5k+",
+            "stat_label": "Products"
+          }
+        },
+        "stat-2": {
+          "type": "hero_stat",
+          "settings": {
+            "stat_value": "50+",
+            "stat_label": "Top Brands"
+          }
+        },
+        "stat-3": {
+          "type": "hero_stat",
+          "settings": {
+            "stat_value": "100k+",
+            "stat_label": "Happy Techies"
+          }
+        },
+        "stat-4": {
+          "type": "hero_stat",
+          "settings": {
+            "stat_value": "5+",
+            "stat_label": "Years of Trust"
+          }
+        }
+      },
+      "block_order": [
+        "header-1",
+        "subtitle-1",
+        "stat-1",
+        "stat-2",
+        "stat-3",
+        "stat-4"
+      ]
+    },
+    "timeline": {
+      "type": "about-team-timeline",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "standard",
+        "max_width": 1340,
+        "blocks_position": "center",
+        "color_scheme": "background-1",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "blocks": {
+        "header-1": {
+          "type": "header",
+          "settings": {
+            "heading": "Our [Tech Hub]"
+          }
+        },
+        "subtitle-1": {
+          "type": "subtitle",
+          "settings": {
+            "subheading": "From a single workbench to a global digital storefront."
+          }
+        },
+        "event-1": {
+          "type": "timeline_event",
+          "settings": {
+            "event_year": "2019",
+            "event_title": "The Spark",
+            "event_description": "Founded by three tech enthusiasts with a simple goal: provide high-performance hardware that empowers creators and gamers everywhere."
+          }
+        },
+        "event-2": {
+          "type": "timeline_event",
+          "settings": {
+            "event_year": "2020",
+            "event_title": "Rapid Expansion",
+            "event_description": "During a year of digital shift, we doubled our inventory and launched our nationwide express shipping, serving over 10,000 customers."
+          }
+        },
+        "event-3": {
+          "type": "timeline_event",
+          "settings": {
+            "event_year": "2022",
+            "event_title": "Smart Integration",
+            "event_description": "Became an official partner for leading smart home and mobile brands. Opened our first automated logistics hub to ensure lightning-fast delivery."
+          }
+        },
+        "event-4": {
+          "type": "timeline_event",
+          "settings": {
+            "event_year": "2024",
+            "event_title": "The Future of Retail",
+            "event_description": "Now home to over 5,000 unique products and a community of 100k+ tech lovers. Redefining how the world shops for electronics."
+          }
+        }
+      },
+      "block_order": [
+        "header-1",
+        "subtitle-1",
+        "event-1",
+        "event-2",
+        "event-3",
+        "event-4"
+      ]
+    },
+    "team": {
+      "type": "about-team-members",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "standard",
+        "max_width": 1340,
+        "blocks_position": "center",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 40
+      },
+      "blocks": {
+        "header-1": {
+          "type": "header",
+          "settings": {
+            "heading": "Leadership [Team]"
+          }
+        },
+        "subtitle-1": {
+          "type": "subtitle",
+          "settings": {
+            "subheading": "The experienced minds steering our strategy and vision."
+          }
+        },
+        "member-1": {
+          "type": "team_member",
+          "settings": {
+            "member_name": "Sarah Mitchell",
+            "member_role": "Founder & CEO",
+            "member_description": "15+ years in tech retail. Passionate about making high-end gadgets accessible to everyone.",
+            "use_placeholder": true,
+            "show_socials": true
+          }
+        },
+        "member-2": {
+          "type": "team_member",
+          "settings": {
+            "member_name": "David Chen",
+            "member_role": "CTO & Lead Engineer",
+            "member_description": "Hardware enthusiast and software architect. Ensures our platform is as fast as the tech we sell.",
+            "use_placeholder": true,
+            "show_socials": true
+          }
+        },
+        "member-3": {
+          "type": "team_member",
+          "settings": {
+            "member_name": "Maria Garcia",
+            "member_role": "Head of Product Design",
+            "member_description": "Award-winning designer focused on curation. Hand-picks every device for style and peak performance.",
+            "use_placeholder": true,
+            "show_socials": true
+          }
+        },
+        "member-4": {
+          "type": "team_member",
+          "settings": {
+            "member_name": "James Wilson",
+            "member_role": "Logistics Director",
+            "member_description": "Supply chain expert ensuring your gadgets reach your doorstep faster than a fiber-optic connection.",
+            "use_placeholder": true,
+            "show_socials": true
+          }
+        },
+        "member-5": {
+          "type": "team_member",
+          "settings": {
+            "member_name": "Emily Park",
+            "member_role": "Tech Review Lead",
+            "member_description": "Master storyteller who translates complex specs into simple, honest guides for our community.",
+            "use_placeholder": true,
+            "show_socials": true
+          }
+        },
+        "member-6": {
+          "type": "team_member",
+          "settings": {
+            "member_name": "Alex Rivera",
+            "member_role": "Customer Success Lead",
+            "member_description": "Data-driven specialist focused on ensuring your tech journey is seamless from click to unboxing.",
+            "use_placeholder": true,
+            "show_socials": true
+          }
+        }
+      },
+      "block_order": [
+        "header-1",
+        "subtitle-1",
+        "member-1",
+        "member-2",
+        "member-3",
+        "member-4",
+        "member-5",
+        "member-6"
+      ]
+    },
+    "cta": {
+      "type": "about-team-cta",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "standard",
+        "max_width": 1340,
+        "blocks_position": "center",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 40
+      },
+      "blocks": {
+        "icon-1": {
+          "type": "icon",
+          "settings": {
+            "icon": "user-plus",
+            "custom_icon_svg": ""
+          }
+        },
+        "header-1": {
+          "type": "header",
+          "settings": {
+            "heading": "Join the [Future]"
+          }
+        },
+        "subtitle-1": {
+          "type": "subtitle",
+          "settings": {
+            "description": "Are you a gadget lover or a tech wizard? We're looking for driven individuals to help us redefine the electronics shopping experience.",
+            "font_size": "large"
+          }
+        }
+      },
+      "block_order": [
+        "icon-1",
+        "header-1",
+        "subtitle-1"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "timeline",
+    "team",
+    "cta"
+  ]
+}

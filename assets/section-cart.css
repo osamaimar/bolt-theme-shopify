@@ -1,0 +1,183 @@
+/* assets/section-cart.css */
+.cart-section {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.cart-header-title {
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+.cart-header-title h1 {
+    font-size: 2.8rem;
+    font-weight: var(--font-weight-extra-bold);
+    color: var(--text-primary);
+}
+
+.cart-header-title span {
+    color: var(--color-secondary);
+}
+
+.cart-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Cart List */
+.cart-list-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.cart-row {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1.5fr 1fr 40px;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cart-heading-row {
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    background: rgba(var(--text-primary-rgb), 0.03);
+    font-size: 0.95rem;
+}
+
+.cart-product-cell {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cart-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(var(--color-secondary-rgb), 0.1);
+    border: 1px solid rgba(var(--color-secondary-rgb), 0.2);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-secondary);
+    flex-shrink: 0;
+}
+
+.cart-product-info h4 {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: var(--font-weight-semibold);
+}
+
+.cart-product-info p {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.cart-qty-ctrl {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(var(--text-primary-rgb), 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 4px 12px;
+    gap: 15px;
+}
+
+.qty-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.qty-btn:hover {
+    color: var(--color-secondary);
+}
+
+.cart-remove-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cart-remove-btn:hover {
+    color: var(--error);
+}
+
+/* Cart Totals */
+.cart-totals-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 30px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.final-total {
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+    font-weight: var(--font-weight-bold);
+    font-size: 1.1rem;
+}
+
+.btn-checkout {
+    width: 100%;
+    background: var(--color-accent);
+    color: var(--bg-secondary);
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-base);
+    margin-top: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-checkout:hover {
+    box-shadow: 0 8px 24px rgba(var(--color-secondary-rgb), 0.3);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 1024px) {
+    .cart-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .cart-row.cart-heading-row {
+        display: none;
+    }
+    .cart-row {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "product product"
+            "price qty"
+            "total total";
+        position: relative;
+    }
+    .cart-product-cell { grid-area: product; padding-inline-end: 40px; }
+    .cart-price-cell { grid-area: price; }
+    .cart-qty-cell { grid-area: qty; display: flex; justify-content: flex-end; }
+    .cart-total-cell { grid-area: total; border-top: 1px dashed var(--border-color); }
+    .cart-remove-cell { position: absolute; top: 20px; inset-inline-end: 20px; }
+}

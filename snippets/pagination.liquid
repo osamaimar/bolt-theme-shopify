@@ -1,0 +1,39 @@
+{% comment %}
+    Renders a pagination bar
+
+    Accepts:
+    - paginate: {Object} Paginate Liquid object (required)
+
+    Usage:
+    {% render 'pagination', paginate: paginate %}
+{% endcomment %}
+
+{{ 'component-pagination.css' | asset_url | stylesheet_tag }}
+
+{%- if paginate.pages > 1 -%}
+  <nav class="cpd-pagination" role="navigation" aria-label="Pagination">
+    {%- if paginate.previous -%}
+      <a href="{{ paginate.previous.url }}" class="cpd-page-link" aria-label="Previous page">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </a>
+    {%- endif -%}
+
+    {%- for part in paginate.parts -%}
+      {%- if part.is_link -%}
+        <a href="{{ part.url }}" class="cpd-page-link" aria-label="Go to page {{ part.title }}">{{ part.title }}</a>
+      {%- else -%}
+        <span class="cpd-page-link {% if part.title == paginate.current_page %}active{% endif %}" aria-current="page">{{ part.title }}</span>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if paginate.next -%}
+      <a href="{{ paginate.next.url }}" class="cpd-page-link" aria-label="Next page">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+    {%- endif -%}
+  </nav>
+{%- endif -%}

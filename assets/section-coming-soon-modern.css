@@ -1,0 +1,372 @@
+/* section-coming-soon-modern.css - Coming Soon Modern Section */
+
+/* =========================================
+   Color Scheme Mappings
+   ========================================= */
+.csm-section.color-default { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.csm-section.color-background-1 { --section-bg: var(--bg-primary); --section-text: var(--text-primary); }
+.csm-section.color-background-2 { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.csm-section.color-accent-1 { --section-bg: var(--color-primary); --section-text: var(--text-inverse); }
+.csm-section.color-accent-2 { --section-bg: var(--color-accent); --section-text: var(--bg-primary); }
+.csm-section.color-inverse { --section-bg: var(--bg-primary); --section-text: var(--text-inverse); }
+
+/* =========================================
+   Section Layout
+   ========================================= */
+.csm-section {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+    overflow: hidden;
+    background: var(--section-bg);
+    color: var(--section-text);
+}
+
+.csm-container {
+    max-width: 720px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+}
+
+/* =========================================
+   Badge
+   ========================================= */
+.csm-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(var(--color-accent-secondary-rgb), 0.1);
+    border: 1px solid rgba(var(--color-accent-secondary-rgb), 0.2);
+    border-radius: 50px;
+    padding: 8px 22px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-accent-secondary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.csm-badge svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+@keyframes csm-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes csm-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes csm-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+/* =========================================
+   Title
+   ========================================= */
+.csm-title {
+    color: var(--text-inverse);
+    line-height: 1.1;
+}
+
+.csm-title .csm-accent {
+    color: var(--color-accent-secondary);
+}
+
+/* =========================================
+   Description
+   ========================================= */
+.csm-description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* =========================================
+   Countdown Card
+   ========================================= */
+.csm-countdown-card {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(var(--color-accent-rgb), 0.2);
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.csm-countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.csm-time-block {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(var(--color-accent-rgb), 0.2);
+    border-radius: 14px;
+    padding: 24px 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.csm-time-block:hover {
+    border-color: rgba(var(--color-accent-rgb), 0.4);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.csm-time-value {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-accent);
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.csm-time-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.csm-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(var(--color-accent-rgb), 0.2);
+    border: none;
+    margin: 0;
+}
+
+/* =========================================
+   Subscribe Form
+   ========================================= */
+.csm-subscribe {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.csm-subscribe-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-inverse);
+    margin: 0;
+}
+
+.csm-subscribe-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0 0 8px 0;
+}
+
+.csm-form {
+    display: flex;
+    gap: 12px;
+}
+
+.csm-form .form-input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px 18px;
+    border: 1px solid rgba(var(--color-accent-rgb), 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-inverse);
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.csm-form .form-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.csm-form .btn-submit {
+    padding: 14px 28px;
+    background: var(--color-accent);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.csm-form .btn-submit:hover {
+    background: var(--color-accent-secondary);
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   Social Links
+   ========================================= */
+.csm-social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.csm-social-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.social-link {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(var(--color-accent-rgb), 0.2);
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: rgba(var(--color-accent-rgb), 0.1);
+    border-color: rgba(var(--color-accent-rgb), 0.4);
+    color: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+.social-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* =========================================
+   Footer Links
+   ========================================= */
+.csm-footer-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    flex-wrap: wrap;
+}
+
+.csm-footer-links a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.csm-footer-links a:hover {
+    color: var(--color-accent-secondary);
+    text-decoration: underline;
+}
+
+.csm-link-sep {
+    color: rgba(var(--color-accent-rgb), 0.3);
+}
+
+/* =========================================
+   Form Messages
+   ========================================= */
+.form-message {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.form-message--success {
+    background: rgba(var(--color-accent-rgb), 0.1);
+    border: 1px solid rgba(var(--color-accent-rgb), 0.3);
+    color: var(--color-accent);
+}
+
+/* =========================================
+   Responsive
+   ========================================= */
+@media (max-width: 600px) {
+    .csm-section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .csm-countdown-card {
+        padding: 24px 16px;
+    }
+
+    .csm-countdown-grid {
+        gap: 8px;
+    }
+
+    .csm-time-block {
+        padding: 16px 8px;
+    }
+
+    .csm-time-value {
+        font-size: 1.8rem;
+    }
+
+    .csm-time-label {
+        font-size: 10px;
+    }
+
+    .csm-form {
+        flex-direction: column;
+    }
+
+    .csm-form .btn-submit {
+        width: 100%;
+    }
+}
+
+/* RTL Support */
+[dir="rtl"] .csm-form .btn-submit {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+/* Visibility Utilities */
+@media screen and (min-width: 769px) {
+  .hidden-desktop {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+}

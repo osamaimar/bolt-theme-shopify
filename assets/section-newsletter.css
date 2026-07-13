@@ -1,0 +1,260 @@
+/* assets/section-newsletter.css — matches .hec-newsletter-* classes in newsletter.liquid */
+/* Color Scheme Mapping */
+.hec-newsletter.color-default { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.hec-newsletter.color-background-1 { --section-bg: var(--bg-primary); --section-text: var(--text-primary); }
+.hec-newsletter.color-background-2 { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.hec-newsletter.color-accent-1 { --section-bg: var(--color-primary); --section-text: var(--text-inverse); }
+.hec-newsletter.color-accent-2 { --section-bg: var(--color-accent); --section-text: var(--bg-primary); }
+.hec-newsletter.color-inverse { --section-bg: var(--bg-primary); --section-text: var(--text-inverse); }
+
+.hec-newsletter {
+    padding: 0;
+    background: var(--section-bg, var(--bg-secondary));
+    color: var(--section-text, var(--text-primary));
+    position: relative;
+    overflow: hidden;
+    border: none;
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgba(var(--color-secondary-rgb), 0.2), transparent) 1;
+}
+
+.hec-newsletter-card::before {
+    content: '';
+    position: absolute;
+    top: -150px;
+    left: -150px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(var(--color-secondary-rgb), 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hec-newsletter-card::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(var(--color-accent-rgb, var(--color-secondary-rgb)), 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hec-newsletter-card {
+    text-align: center;
+    padding: var(--spacing-4xl) var(--spacing-2xl);
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+}
+
+.hec-newsletter-icon {
+    position: relative;
+    z-index: 1;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--spacing-xl);
+    background: var(--color-secondary);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg-secondary);
+    box-shadow: 0 0 40px rgba(var(--color-secondary-rgb), 0.3);
+    transition: all 0.3s ease;
+}
+
+.hec-newsletter-card:hover .hec-newsletter-icon {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(var(--color-secondary-rgb), 0.4);
+}
+
+.hec-newsletter-icon svg {
+    width: 40px;
+    height: 40px;
+}
+
+.hec-newsletter-card h2 {
+    position: relative;
+    z-index: 1;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--section-text, var(--text-primary));
+    margin-bottom: var(--spacing-md);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.hec-newsletter-card h2 span {
+    color: var(--color-secondary);
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hec-newsletter-card > p {
+    position: relative;
+    z-index: 1;
+    font-size: 1.15rem;
+    color: var(--section-text, var(--text-secondary));
+    max-width: 560px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+    opacity: 0.9;
+}
+
+.hec-newsletter-form {
+    position: relative;
+    z-index: 1;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.hec-newsletter-form-container .field {
+    display: flex;
+    gap: var(--spacing-md);
+    padding: 10px;
+    background: var(--color-white-3);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-2xl);
+    transition: all 0.3s ease;
+}
+
+.hec-newsletter-form-container .field:focus-within {
+    border-color: var(--color-accent-secondary-40);
+    background: var(--color-white-5);
+    box-shadow: 0 0 30px var(--color-accent-secondary-10);
+}
+
+.hec-newsletter-input {
+    flex: 1;
+    padding: var(--spacing-md) 20px;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    font-family: inherit;
+    outline: none;
+}
+
+.hec-newsletter-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+.hec-newsletter-submit {
+    padding: var(--spacing-md) 36px;
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-accent, var(--color-secondary)));
+    color: var(--bg-secondary);
+    border: none;
+    border-radius: 18px;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    white-space: nowrap;
+    box-shadow: 0 10px 20px rgba(var(--color-secondary-rgb), 0.2);
+}
+
+.hec-newsletter-submit:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(var(--color-secondary-rgb), 0.4);
+}
+
+.hec-newsletter-submit:active {
+    transform: translateY(-1px);
+}
+
+.hec-newsletter-note {
+    position: relative;
+    z-index: 1;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.hec-newsletter-note::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--color-secondary);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.hec-newsletter-success {
+    padding: var(--spacing-lg);
+    text-align: center;
+}
+
+.newsletter-form-success {
+    color: var(--success, #22c55e);
+    font-size: 1.2rem;
+    font-weight: var(--font-weight-bold);
+}
+
+.newsletter-form-error {
+    display: block;
+    color: var(--error, #ef4444);
+    font-size: 0.85rem;
+    margin-top: var(--spacing-sm);
+    text-align: center;
+}
+
+/* ===========================
+   Responsive
+   =========================== */
+@media (max-width: 768px) {
+    .hec-newsletter-card {
+        padding: var(--spacing-2xl) var(--spacing-lg);
+        border-radius: 30px;
+    }
+
+    .hec-newsletter-card h2 {
+        font-size: 2rem;
+    }
+
+    .hec-newsletter-icon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .hec-newsletter-icon svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .hec-newsletter-form-container .field {
+        flex-direction: column;
+        padding: var(--spacing-sm);
+        background: transparent;
+        border: none;
+    }
+
+    .hec-newsletter-input {
+        background: rgba(var(--text-primary-rgb), 0.05);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-xl, 16px);
+        margin-bottom: var(--spacing-sm);
+        width: 100%;
+        text-align: center;
+    }
+
+    .hec-newsletter-submit {
+        width: 100%;
+        border-radius: var(--radius-xl, 16px);
+    }
+}

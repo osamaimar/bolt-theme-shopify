@@ -1,0 +1,155 @@
+{% render 'section-padding',
+  section_id: section.id,
+  padding_top: section.settings.padding_top,
+  padding_bottom: section.settings.padding_bottom,
+  padding_top_mobile: section.settings.padding_top_mobile,
+  padding_bottom_mobile: section.settings.padding_bottom_mobile,
+  padding_left: section.settings.padding_left,
+  padding_right: section.settings.padding_right,
+  padding_left_mobile: section.settings.padding_left_mobile,
+  padding_right_mobile: section.settings.padding_right_mobile
+%}
+<div class="custom-section full-width">
+  {% if section.settings.background_image %}
+    <div class="custom-section__background">
+      {{ section.settings.background_image | image_url: width: 2000 | image_tag }}
+    </div>
+  {% endif %}
+
+  <div class="custom-section__content">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .custom-section {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+  .custom-section__background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+  }
+  .custom-section__background img {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .custom-section__content {
+    display: grid;
+    grid-template-columns: var(--content-grid);
+  }
+  .custom-section__content > * {
+    grid-column: 2;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:general.custom_section",
+  "blocks": [{ "type": "@theme" }],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "t:labels.background"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Mobile)",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.custom_section"
+    }
+  ]
+}
+{% endschema %}

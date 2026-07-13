@@ -1,0 +1,170 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+
+        "color_scheme": "background-1",
+        "padding_top": 20,
+        "padding_top_mobile": 0,
+        "padding_bottom": 0
+      }
+    },
+    "main": {
+      "type": "product-main",
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "highlight_last_word": true
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "rating_value": "4.9",
+            "review_count": "128"
+          }
+        },
+        "price": {
+          "type": "price"
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "word_count": 35
+          }
+        },
+        "divider_1": {
+          "type": "divider"
+        },
+        "highlights": {
+          "type": "highlights",
+          "settings": {
+            "h1_icon_select": "zap",
+            "h1_text": "Active Noise Cancelling",
+            "h2_icon_select": "star",
+            "h2_text": "Hi-Res Audio Cert.",
+            "h3_icon_select": "shield",
+            "h3_text": "24-Month Warranty",
+            "h4_icon_select": "battery",
+            "h4_text": "40h Battery Life"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons"
+        },
+        "divider_2": {
+          "type": "divider"
+        }
+      },
+      "block_order": [
+        "title",
+        "rating",
+        "price",
+        "description",
+        "divider_1",
+        "highlights",
+        "buy_buttons",
+        "divider_2"
+      ]
+    },
+    "tabs": {
+      "type": "product-tabs",
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "desc": {
+          "type": "description",
+          "settings": {
+            "title": "Description"
+          }
+        },
+        "specs": {
+          "type": "specifications",
+          "settings": {
+            "title": "Specifications"
+          }
+        },
+        "reviews": {
+          "type": "reviews",
+          "settings": {
+            "title": "Reviews",
+            "rating_avg": "4.9",
+            "review_count": "128"
+          }
+        }
+      },
+      "block_order": [
+        "desc",
+        "specs",
+        "reviews"
+      ]
+    },
+    "related": {
+      "type": "product-related",
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+        "color_scheme": "background-1",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "You May Also [Like]",
+            "heading_alignment": "left",
+            "show_view_all": true
+          }
+        },
+        "grid": {
+          "type": "product_grid",
+          "settings": {
+            "products_to_show": 4,
+            "columns_desktop": "4",
+            "columns_tablet": "2",
+            "columns_mobile": "1",
+            "show_category": true,
+            "show_rating": true,
+            "show_quick_view": true,
+            "show_add_to_cart": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "grid"
+      ]
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "tabs",
+    "related"
+  ]
+}

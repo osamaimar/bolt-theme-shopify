@@ -1,0 +1,68 @@
+{%- if section.settings.enable_back_to_top -%}
+  <style>
+    {%- if section.settings.bg_color != blank -%}
+      .back-to-top-btn {
+        background-color: {{ section.settings.bg_color }} !important;
+      }
+    {%- endif -%}
+    {%- if section.settings.text_color != blank -%}
+      .back-to-top-btn {
+        color: {{ section.settings.text_color }} !important;
+      }
+    {%- endif -%}
+    {%- if section.settings.hover_bg_color != blank -%}
+      .back-to-top-btn:hover {
+        background-color: {{ section.settings.hover_bg_color }} !important;
+      }
+    {%- endif -%}
+    {%- if section.settings.hover_text_color != blank -%}
+      .back-to-top-btn:hover {
+        color: {{ section.settings.hover_text_color }} !important;
+      }
+    {%- endif -%}
+  </style>
+  {% render 'back-to-top' %}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Back to Top Button",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_back_to_top",
+      "label": "Enable back to top button",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Button Background Color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Button Icon Color"
+    },
+    {
+      "type": "color",
+      "id": "hover_bg_color",
+      "label": "Button Hover Background Color"
+    },
+    {
+      "type": "color",
+      "id": "hover_text_color",
+      "label": "Button Hover Icon Color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Back to Top Button"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,318 @@
+{{ 'section-catalog-main.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-card.css' | asset_url | stylesheet_tag }}
+{% render 'section-padding',
+  section_id: section.id,
+  padding_top: section.settings.padding_top,
+  padding_bottom: section.settings.padding_bottom,
+  padding_top_mobile: section.settings.padding_top_mobile,
+  padding_bottom_mobile: section.settings.padding_bottom_mobile,
+  padding_left: section.settings.padding_left,
+  padding_right: section.settings.padding_right,
+  padding_left_mobile: section.settings.padding_left_mobile,
+  padding_right_mobile: section.settings.padding_right_mobile
+%}
+
+{%- if section.settings.show_section -%}
+<section 
+  class="catalog-grid-section color-{{ section.settings.color_scheme }}" 
+  id="shopify-section-{{ section.id }}"
+>
+  <div class="{% if section.settings.container_width == 'full' %}container-fluid{% elsif section.settings.container_width == 'narrow' %}container-narrow{% else %}catalog-container{% endif %}">
+    
+    {%- paginate collection.products by section.settings.products_per_page -%}
+      <div 
+        class="cpd-product-grid" 
+        id="catalog-grid-{{ section.id }}"
+        data-section-id="{{ section.id }}"
+        style="--columns-desktop: {{ section.settings.columns_desktop }}; --columns-tablet: {{ section.settings.columns_tablet }}; --columns-mobile: {{ section.settings.columns_mobile }};"
+      >
+        {%- for product in collection.products -%}
+          {% render 'product-card-grid', 
+            product: product, 
+            show_vendor: section.settings.show_vendor, 
+            show_price: section.settings.show_price,
+
+            show_quick_view: section.settings.show_quick_view,
+            show_add_to_cart: section.settings.show_add_to_cart
+          %}
+        {%- else -%}
+          <p class="catalog-empty">{{ 'collections.empty' | t | default: 'No products found in this collection.' }}</p>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 and section.settings.show_pagination -%}
+        <div class="catalog-pagination">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" class="page-link" aria-label="{{ 'general.pagination.previous' | t }}">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </a>
+          {%- endif -%}
+
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <a href="{{ part.url }}" class="page-link">{{ part.title }}</a>
+            {%- else -%}
+              <span class="page-link active" aria-current="page">{{ part.title }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="page-link" aria-label="{{ 'general.pagination.next' | t }}">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+
+  </div>
+</section>
+
+<script>
+function initCatalogGrid() {
+  const grid = document.getElementById('catalog-grid-{{ section.id }}');
+  if (!grid) return;
+
+  const productCards = grid.querySelectorAll('.cpd-product-card');
+  
+  // Card spotlight effect
+  productCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mouse-x', ((e.clientX - rect.left) / rect.width) * 100 + '%');
+      card.style.setProperty('--mouse-y', ((e.clientY - rect.top) / rect.height) * 100 + '%');
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initCatalogGrid);
+document.addEventListener('shopify:section:load', (event) => {
+  if (event.detail.sectionId === '{{ section.id }}') {
+    initCatalogGrid();
+  }
+});
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product Grid",
+  "tag": "section",
+  "class": "section-product-grid",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 4,
+      "max": 48,
+      "step": 4,
+      "label": "Products per page",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Grid Layout"
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "default": "4",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" },
+        { "value": "5", "label": "5" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "columns_tablet",
+      "label": "Columns on tablet",
+      "default": "3",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "default": "2",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Product Cards"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show price",
+      "default": true
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_quick_view",
+      "label": "Show quick view button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_add_to_cart",
+      "label": "Show add to cart button",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Pagination"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pagination",
+      "label": "Show pagination",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section Style"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "default": "standard",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "full", "label": "Full width" },
+        { "value": "narrow", "label": "Narrow" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Mobile)",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Grid"
+    }
+  ]
+}
+{% endschema %}

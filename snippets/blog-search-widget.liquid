@@ -1,0 +1,27 @@
+{%- comment -%}Search Widget Block{%- endcomment -%}
+<div class="blog-sidebar-widget block-{{ block.id }}{% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %}{% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
+  
+  {%- if block.settings.show_title -%}
+    {%- assign heading_tag = block.settings.heading_tag | default: 'h3' -%}
+    <{{ heading_tag }} class="blog-sidebar-widget-title size-{{ block.settings.font_size | default: 'medium' }}">
+      {%- if block.settings.show_icon -%}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      {%- endif -%}
+      {{ block.settings.heading | default: 'Search' }}
+    </{{ heading_tag }}>
+  {%- endif -%}
+
+  <form action="{{ routes.search_url }}" method="get" class="blog-sidebar-search" role="search">
+    {%- if block.settings.show_input_icon -%}
+      <svg class="blog-sidebar-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    {%- endif -%}
+    <input type="search" name="q" class="blog-sidebar-search-input" placeholder="{{ block.settings.placeholder | default: 'Search articles...' }}" required>
+    <input type="hidden" name="type" value="article">
+  </form>
+</div>

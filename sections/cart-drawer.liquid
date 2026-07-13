@@ -1,0 +1,155 @@
+{%- comment -%}
+  Cart Drawer Section - BoltTheme
+  Handles the global slide-out cart with AJAX updates.
+{%- endcomment -%}
+
+{{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+
+<div class="cd-overlay" id="cd-overlay" role="dialog" aria-modal="true" aria-labelledby="cd-drawer-title">
+    <div class="cd-backdrop" id="cd-backdrop"></div>
+    <aside class="cd-drawer" id="cd-drawer">
+        <!-- Loader Overlay -->
+        <div class="cd-loader" id="cd-loader" aria-hidden="true">
+            <div class="cd-spinner-wrapper">
+                <div class="cd-spinner"></div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="cd-header">
+            <div class="cd-header-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+                <h2 id="cd-drawer-title">{{ 'cart.title' | t }}</h2>
+                <span class="cd-count" aria-live="polite" aria-label="{{ cart.item_count }} {{ 'sections.header.cart_count' | t | default: 'items' }}">
+                    {{ cart.item_count }}
+                </span>
+            </div>
+            <button type="button" class="cd-close" id="cd-close" aria-label="{{ 'accessibility.close_menu' | t }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Shipping Bar -->
+        {%- if settings.enable_free_shipping_threshold and settings.free_shipping_threshold != blank -%}
+            {%- assign threshold = settings.free_shipping_threshold | times: 100 -%}
+            {%- assign remaining = threshold | minus: cart.total_price -%}
+            {%- assign progress = cart.total_price | times: 100 | divided_by: threshold -%}
+            {%- if progress > 100 -%}{%- assign progress = 100 -%}{%- endif -%}
+
+            <div class="cd-shipping-bar" aria-live="polite">
+                <div class="cd-shipping-text">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="1" y="3" width="15" height="13"></rect>
+                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                        <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                    </svg>
+                    <span>
+                        {%- if remaining > 0 -%}
+                            {%- assign remaining_money = remaining | money -%}
+                            {{ 'cart.free_shipping_remaining_html' | t: amount: remaining_money }}
+                        {%- else -%}
+                            {{ 'cart.free_shipping_unlocked' | t }}
+                        {%- endif -%}
+                    </span>
+                </div>
+                <div class="cd-shipping-track" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
+                    <div class="cd-shipping-progress" style="width: {{ progress }}%"></div>
+                </div>
+            </div>
+        {%- endif -%}
+
+        <!-- Cart Items -->
+        <div class="cd-items" id="cd-items" {%- if cart.item_count == 0 -%}hidden{%- endif -%}>
+            {%- if cart.item_count > 0 -%}
+                {%- for item in cart.items -%}
+                    <article class="cd-item" data-key="{{ item.key }}" data-item-id="{{ item.id }}">
+                        <div class="cd-item-image">
+                            {%- if item.image -%}
+                                {{ item.image | image_url: width: 120 | image_tag: loading: 'lazy', alt: item.product.title }}
+                            {%- else -%}
+                                {{ 'product-1' | placeholder_svg_tag }}
+                            {%- endif -%}
+                        </div>
+                        <div class="cd-item-info">
+                            <h3 class="cd-item-title">
+                                <a href="{{ item.url }}">{{ item.product.title }}</a>
+                            </h3>
+                            {%- if item.variant.title != 'Default Title' -%}
+                                <p class="cd-item-variant">{{ item.variant.title }}</p>
+                            {%- endif -%}
+                            
+                            <div class="cd-item-bottom">
+                                <div class="cd-item-qty">
+                                    <button type="button" class="cd-qty-btn" data-change="-1" aria-label="{{ 'cart.update' | t }}: {{ item.product.title }} - 1">
+                                        <span>−</span>
+                                    </button>
+                                    <span class="cd-qty-value" aria-live="polite">{{ item.quantity }}</span>
+                                    <button type="button" class="cd-qty-btn" data-change="1" aria-label="{{ 'cart.update' | t }}: {{ item.product.title }} + 1">
+                                        <span>+</span>
+                                    </button>
+                                </div>
+                                <span class="cd-item-price" aria-live="polite">
+                                    {{ item.final_line_price | money }}
+                                </span>
+                            </div>
+                        </div>
+                        <button type="button" class="cd-item-remove" data-remove aria-label="{{ 'cart.remove' | t }}: {{ item.product.title }}">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                        </button>
+                    </article>
+                {%- endfor -%}
+            {%- endif -%}
+        </div>
+
+        <!-- Empty State -->
+        <div class="cd-empty" id="cd-empty" {%- if cart.item_count > 0 -%}hidden{%- endif -%}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <h3>{{ 'cart.empty_title' | t }}</h3>
+            <p>{{ 'cart.empty_desc' | t }}</p>
+            <a href="{{ routes.all_products_collection_url }}" class="cd-empty-btn">{{ 'cart.continue_shopping' | t }}</a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="cd-footer" id="cd-footer" {%- if cart.item_count == 0 -%}style="display:none"{%- endif -%}>
+            <div class="cd-subtotal-row">
+                <span class="cd-subtotal-label">{{ 'cart.subtotal' | t }}</span>
+                <span class="cd-subtotal-value" aria-live="polite">{{ cart.total_price | money }}</span>
+            </div>
+            <p class="cd-tax-note">{{ 'cart.tax_shipping_note' | t }}</p>
+            
+            <form action="{{ routes.cart_url }}" method="post">
+                <button type="submit" name="checkout" class="cd-checkout-btn">
+                    {{ 'cart.checkout' | t }}
+                </button>
+            </form>
+            <a href="{{ routes.cart_url }}" class="cd-view-cart-btn">{{ 'cart.view_cart' | t }}</a>
+        </footer>
+    </aside>
+</div>
+
+{% schema %}
+{
+  "name": "Cart Drawer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Drawer settings are in Theme Settings"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,491 @@
+{{ 'section-coming-soon-simple.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.show_section -%}
+{% render 'section-padding',
+  section_id: section.id,
+  padding_top: section.settings.padding_top,
+  padding_bottom: section.settings.padding_bottom,
+  padding_top_mobile: section.settings.padding_top_mobile,
+  padding_bottom_mobile: section.settings.padding_bottom_mobile,
+  padding_left: section.settings.padding_left,
+  padding_right: section.settings.padding_right,
+  padding_left_mobile: section.settings.padding_left_mobile,
+  padding_right_mobile: section.settings.padding_right_mobile
+%}
+<style>
+  #shopify-section-{{ section.id }} .opening-soon-section {
+    min-height: {{ section.settings.min_height }}px;
+  }
+</style>
+
+<section class="opening-soon-section color-{{ section.settings.color_scheme }}" id="shopify-section-{{ section.id }}">
+  <div class="opening-soon-container">
+    {%- if section.settings.show_badge -%}
+      <div class="opening-soon-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        {{ section.settings.badge_text }}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h1 class="opening-soon-title">
+        {{ section.settings.heading | replace: '[', '<span class="title-accent">' | replace: ']', '</span>' }}
+      </h1>
+    {%- endif -%}
+
+    {%- if section.settings.description != blank -%}
+      <p class="opening-soon-description">{{ section.settings.description }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.show_countdown -%}
+      <div class="opening-soon-countdown" id="opening-soon-countdown-{{ section.id }}">
+        <div class="countdown-block">
+          <span class="countdown-value" id="countdown-days-{{ section.id }}">00</span>
+          <span class="countdown-label">{{ section.settings.days_label }}</span>
+        </div>
+        <div class="countdown-block">
+          <span class="countdown-value" id="countdown-hours-{{ section.id }}">00</span>
+          <span class="countdown-label">{{ section.settings.hours_label }}</span>
+        </div>
+        <div class="countdown-block">
+          <span class="countdown-value" id="countdown-minutes-{{ section.id }}">00</span>
+          <span class="countdown-label">{{ section.settings.minutes_label }}</span>
+        </div>
+        <div class="countdown-block">
+          <span class="countdown-value" id="countdown-seconds-{{ section.id }}">00</span>
+          <span class="countdown-label">{{ section.settings.seconds_label }}</span>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <hr class="opening-soon-divider" />
+
+    {%- if section.settings.show_subscribe -%}
+      <div class="opening-soon-subscribe">
+        <p class="subscribe-heading">{{ section.settings.subscribe_title }}</p>
+        <p class="subscribe-subtext">{{ section.settings.subscribe_subtext }}</p>
+        {%- capture form_id -%}subscribe-form-{{ section.id }}{%- endcapture -%}
+        {%- form 'customer', id: form_id, class: 'subscribe-form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="form-message form-message--success">{{ section.settings.success_message }}</p>
+          {%- else -%}
+            <input type="email" name="contact[email]" class="form-input" placeholder="{{ section.settings.email_placeholder }}" aria-label="{{ section.settings.email_placeholder }}" required />
+            <button type="submit" class="btn-submit">{{ section.settings.button_label }}</button>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+
+    <hr class="opening-soon-separator" />
+
+    {%- if section.settings.show_social -%}
+      <div class="opening-soon-social">
+        <p class="opening-soon-social-label">{{ section.settings.social_label }}</p>
+        <div class="social-links">
+          {%- if section.settings.show_facebook -%}
+            <a href="{{ section.settings.facebook_link | default: '#' }}" class="social-link" title="Follow on Facebook" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon-social">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.show_instagram -%}
+            <a href="{{ section.settings.instagram_link | default: '#' }}" class="social-link" title="Follow on Instagram" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-social">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.show_linkedin -%}
+            <a href="{{ section.settings.linkedin_link | default: '#' }}" class="social-link" title="Follow on LinkedIn" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon-social">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_footer_links -%}
+      <div class="opening-soon-footer-links" dir="auto">
+        <a href="{{ section.settings.password_link | default: routes.account_login_url }}" class="access-link">{{ section.settings.password_text }}</a>
+        <span class="access-link-separator">·</span>
+        <span class="owner-note"><span>{{ section.settings.owner_text }}</span> <a href="{{ section.settings.login_link | default: routes.account_login_url }}">{{ section.settings.login_text }}</a></span>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+(function() {
+  var launchDate = new Date('{{ section.settings.launch_date | default: 'now' }}');
+  if (isNaN(launchDate.getTime())) {
+    launchDate = new Date();
+    launchDate.setDate(launchDate.getDate() + 30);
+  }
+
+  function updateCountdown() {
+    var now = new Date().getTime();
+    var distance = launchDate.getTime() - now;
+
+    if (distance < 0) {
+      document.getElementById('countdown-days-{{ section.id }}').textContent = '00';
+      document.getElementById('countdown-hours-{{ section.id }}').textContent = '00';
+      document.getElementById('countdown-minutes-{{ section.id }}').textContent = '00';
+      document.getElementById('countdown-seconds-{{ section.id }}').textContent = '00';
+      return;
+    }
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById('countdown-days-{{ section.id }}').textContent = days < 10 ? '0' + days : days;
+    document.getElementById('countdown-hours-{{ section.id }}').textContent = hours < 10 ? '0' + hours : hours;
+    document.getElementById('countdown-minutes-{{ section.id }}').textContent = minutes < 10 ? '0' + minutes : minutes;
+    document.getElementById('countdown-seconds-{{ section.id }}').textContent = seconds < 10 ? '0' + seconds : seconds;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Coming Soon - Simple",
+  "tag": "section",
+  "class": "section-coming-soon-simple",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Something Amazing Is<br /><span class=\"title-accent\">Coming Soon</span>",
+      "info": "Use HTML for line breaks and styling"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "We're putting the finishing touches on a brand-new experience. Stay tuned — great things are worth the wait."
+    },
+    {
+      "type": "header",
+      "content": "Status Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show badge",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Coming Soon"
+    },
+    {
+      "type": "header",
+      "content": "Countdown Timer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "label": "Show countdown",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "launch_date",
+      "label": "Launch date",
+      "info": "Format: YYYY-MM-DD or leave empty for 30 days from now"
+    },
+    {
+      "type": "text",
+      "id": "days_label",
+      "label": "Days label",
+      "default": "Days"
+    },
+    {
+      "type": "text",
+      "id": "hours_label",
+      "label": "Hours label",
+      "default": "Hours"
+    },
+    {
+      "type": "text",
+      "id": "minutes_label",
+      "label": "Minutes label",
+      "default": "Minutes"
+    },
+    {
+      "type": "text",
+      "id": "seconds_label",
+      "label": "Seconds label",
+      "default": "Seconds"
+    },
+    {
+      "type": "header",
+      "content": "Subscribe Form"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subscribe",
+      "label": "Show subscribe form",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "subscribe_title",
+      "label": "Subscribe title",
+      "default": "Get Notified When We Launch"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_subtext",
+      "label": "Subscribe subtext",
+      "default": "Be the first to know — no spam, just the big announcement."
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "Enter your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Notify Me"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks! We'll notify you when we launch."
+    },
+    {
+      "type": "header",
+      "content": "Social Links"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social links",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "social_label",
+      "label": "Social label",
+      "default": "Follow Us"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_facebook",
+      "label": "Show Facebook",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "facebook_link",
+      "label": "Facebook link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_instagram",
+      "label": "Show Instagram",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "instagram_link",
+      "label": "Instagram link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_linkedin",
+      "label": "Show LinkedIn",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "linkedin_link",
+      "label": "LinkedIn link"
+    },
+    {
+      "type": "header",
+      "content": "Footer Links"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_footer_links",
+      "label": "Show footer links",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "password_text",
+      "label": "Password link text",
+      "default": "Enter using password"
+    },
+    {
+      "type": "url",
+      "id": "password_link",
+      "label": "Password link"
+    },
+    {
+      "type": "text",
+      "id": "owner_text",
+      "label": "Owner text",
+      "default": "Are you the store owner?"
+    },
+    {
+      "type": "text",
+      "id": "login_text",
+      "label": "Login link text",
+      "default": "Log in here"
+    },
+    {
+      "type": "url",
+      "id": "login_link",
+      "label": "Login link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "min": 400,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "label": "Minimum height",
+      "default": 700
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Coming Soon - Simple"
+    }
+  ]
+}
+{% endschema %}

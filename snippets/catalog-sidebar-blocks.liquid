@@ -1,0 +1,136 @@
+{%- case block.type -%}
+  {%- when 'list_filter' -%}
+    <div class="cpd-filter-block {% unless block.settings.open_by_default %}collapsed{% endunless %}" {{ block.shopify_attributes }}>
+      <div class="cpd-filter-title" onclick="this.parentElement.classList.toggle('collapsed')">
+        <div class="cpd-filter-label">
+          {%- if block.settings.icon == 'custom' and block.settings.custom_icon != blank -%}
+            {{ block.settings.custom_icon }}
+          {%- elsif block.settings.icon != 'none' -%}
+            {%- case block.settings.icon -%}
+              {%- when 'tag' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" /><line x1="7" y1="7" x2="7.01" y2="7" /></svg>
+              {%- when 'type' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /></svg>
+              {%- when 'brand' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M12 8v8M8 12h8"/></svg>
+              {%- when 'box' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              {%- when 'filter' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+              {%- when 'card' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              {%- when 'price' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            {%- endcase -%}
+          {%- endif -%}
+          <span>{{ block.settings.title }}</span>
+        </div>
+        <svg class="cpd-filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="cpd-category-list" style="max-height: {{ block.settings.max_height }}px; overflow-y: auto;">
+        <button class="cpd-category-item active" data-filter="all">
+          <span>{{ 'collections.filter_all' | t }}</span> 
+        </button>
+        
+        {%- if block.settings.filter_source == 'vendor' -%}
+          {%- for vendor in collection.all_vendors -%}
+            <button class="cpd-category-item" data-filter="{{ vendor | handle }}" data-source="vendor">
+              <span>{{ vendor }}</span>
+              {%- if block.settings.show_count -%}
+                <span class="cpd-count" data-count-source="vendor" data-count-val="{{ vendor | escape }}">0</span>
+              {%- endif -%}
+            </button>
+          {%- endfor -%}
+        {%- elsif block.settings.filter_source == 'type' -%}
+          {%- for type in collection.all_types -%}
+            {%- if type != blank -%}
+              <button class="cpd-category-item" data-filter="{{ type | handle }}" data-source="type">
+                <span>{{ type }}</span>
+                {%- if block.settings.show_count -%}
+                  <span class="cpd-count" data-count-source="type" data-count-val="{{ type | escape }}">0</span>
+                {%- endif -%}
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+ 
+  {%- when 'price_range' -%}
+    <div class="cpd-filter-block {% unless block.settings.open_by_default %}collapsed{% endunless %}" {{ block.shopify_attributes }}>
+      <div class="cpd-filter-title" onclick="this.parentElement.classList.toggle('collapsed')">
+        <div class="cpd-filter-label">
+          {%- if block.settings.icon == 'custom' and block.settings.custom_icon != blank -%}
+            {{ block.settings.custom_icon }}
+          {%- elsif block.settings.icon != 'none' -%}
+            {%- case block.settings.icon -%}
+              {%- when 'tag' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" /><line x1="7" y1="7" x2="7.01" y2="7" /></svg>
+              {%- when 'type' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /></svg>
+              {%- when 'brand' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M12 8v8M8 12h8"/></svg>
+              {%- when 'box' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              {%- when 'filter' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+              {%- when 'card' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              {%- when 'price' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            {%- endcase -%}
+          {%- endif -%}
+          <span>{{ block.settings.title }}</span>
+        </div>
+        <svg class="cpd-filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="cpd-price-range">
+        <div class="cpd-price-inputs">
+          <div class="cpd-price-field">
+            <label for="cpd-price-min">{{ 'collections.price_min_label' | t }}</label>
+            <input type="number" id="cpd-price-min" placeholder="0" />
+          </div>
+          <span class="cpd-price-separator">—</span>
+          <div class="cpd-price-field">
+            <label for="cpd-price-max">{{ 'collections.price_max_label' | t }}</label>
+            <input type="number" id="cpd-price-max" placeholder="500" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {%- when 'tags' -%}
+    <div class="cpd-filter-block {% unless block.settings.open_by_default %}collapsed{% endunless %}" {{ block.shopify_attributes }}>
+      <div class="cpd-filter-title" onclick="this.parentElement.classList.toggle('collapsed')">
+        <div class="cpd-filter-label">
+          {%- if block.settings.icon == 'custom' and block.settings.custom_icon != blank -%}
+            {{ block.settings.custom_icon }}
+          {%- elsif block.settings.icon != 'none' -%}
+            {%- case block.settings.icon -%}
+              {%- when 'tag' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" /><line x1="7" y1="7" x2="7.01" y2="7" /></svg>
+              {%- when 'type' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /></svg>
+              {%- when 'brand' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M12 8v8M8 12h8"/></svg>
+              {%- when 'box' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              {%- when 'filter' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+              {%- when 'card' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              {%- when 'price' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            {%- endcase -%}
+          {%- endif -%}
+          <span>{{ block.settings.title }}</span>
+        </div>
+        <svg class="cpd-filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="cpd-tags-list">
+        {%- for tag in collection.all_tags -%}
+          <button class="cpd-tag" data-tag="{{ tag | handle }}">{{ tag }}</button>
+        {%- endfor -%}
+      </div>
+    </div>
+{%- endcase -%}

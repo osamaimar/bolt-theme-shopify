@@ -1,0 +1,241 @@
+/* Contact Page Form Section */
+.contact-page-form-section {
+  /* Padding handled dynamically via section padding settings */
+}
+
+.contact-page-form-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: start;
+}
+
+.contact-info-block {
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.info-block-content {
+  flex: 1;
+}
+
+.contact-info-block .section-title {
+  color: var(--text-inverse);
+}
+
+.contact-info-block .section-title .highlight-text {
+  color: var(--color-accent);
+}
+
+.contact-info-block .support-desc {
+  color: var(--text-muted);
+}
+
+.why-choose-us h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 20px;
+  color: var(--text-inverse);
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: var(--font-size-base);
+  color: var(--text-muted);
+}
+
+.feature-list li svg {
+  width: 20px;
+  height: 20px;
+  color: var(--color-accent);
+  margin-inline-end: 15px;
+  flex-shrink: 0;
+}
+
+/* Form Styles */
+.contact-form-container {
+  background: var(--color-white-3);
+  border: 1px solid var(--color-accent-secondary-20);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+}
+
+.contact-form-container h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 30px;
+  color: var(--text-inverse);
+}
+
+.contact-form .form-group {
+  margin-bottom: 20px;
+}
+
+.contact-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.contact-form label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-inverse);
+  margin-bottom: 8px;
+}
+
+.contact-form .form-control {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: var(--font-size-base);
+  color: var(--text-inverse);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  transition: border-color 0.2s ease;
+}
+
+.contact-form .form-control:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.contact-form textarea.form-control {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-form .btn-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 14px 32px;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--bg-primary);
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 14px var(--color-accent-20);
+}
+
+.contact-form .btn-submit:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+}
+
+.form-success {
+  text-align: center;
+  padding: 40px;
+  background: var(--color-white-3);
+  border: 1px solid var(--color-accent-secondary-20);
+  border-radius: var(--radius-lg);
+}
+
+.form-success h3 {
+  font-size: var(--font-size-2xl);
+  color: var(--color-accent);
+  margin-bottom: 16px;
+}
+
+.honeypot-field {
+  display: none;
+}
+
+/* Image Block Styles */
+.contact-image-wrapper {
+  margin-top: 30px;
+  border-radius: var(--contact-img-radius, 16px);
+  overflow: hidden;
+}
+
+.contact-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--contact-img-radius, 16px);
+}
+
+.contact-image-wrapper .placeholder-svg {
+  width: 100%;
+  height: 300px;
+  background: var(--bg-secondary);
+}
+
+@media (max-width: 900px) {
+  .contact-page-form-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-info-block {
+    padding-right: 0;
+  }
+
+  .contact-form .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form-container {
+    padding: 24px;
+  }
+}
+
+/* Color Scheme Variants */
+.contact-page-form-section { background-color: var(--bg-primary); }
+
+/* Background Options */
+.contact-page-form-section.color-background-1 { background-color: var(--bg-primary); }
+.contact-page-form-section.color-background-2 { background-color: var(--bg-secondary); }
+
+/* Inverse - Light background for contrast */
+.contact-page-form-section.color-inverse {
+  background-color: var(--color-white);
+}
+.contact-page-form-section.color-inverse .contact-info-block .section-title,
+.contact-page-form-section.color-inverse .why-choose-us h3,
+.contact-page-form-section.color-inverse .contact-form-container h3,
+.contact-page-form-section.color-inverse .contact-form label {
+  color: rgb(var(--color-black-rgb));
+}
+.contact-page-form-section.color-inverse .contact-info-block .support-desc,
+.contact-page-form-section.color-inverse .feature-list li {
+  color: rgba(var(--color-black-rgb), 0.7);
+}
+.contact-page-form-section.color-inverse .contact-form-container {
+  background: rgba(var(--color-black-rgb), 0.05);
+  border-color: rgba(var(--color-black-rgb), 0.1);
+}
+.contact-page-form-section.color-inverse .contact-form .form-control {
+  background: var(--color-white);
+  border-color: rgba(var(--color-black-rgb), 0.2);
+  color: rgb(var(--color-black-rgb));
+}
+.contact-page-form-section.color-inverse .feature-list li svg {
+  color: rgb(var(--color-black-rgb));
+}
+
+/* Accent colors */
+.contact-page-form-section.color-accent-1 { background-color: var(--color-primary); }
+.contact-page-form-section.color-accent-2 { background-color: var(--color-accent); }
+.contact-page-form-section.color-accent-2 .contact-info-block .section-title,
+.contact-page-form-section.color-accent-2 .why-choose-us h3,
+.contact-page-form-section.color-accent-2 .contact-form-container h3,
+.contact-page-form-section.color-accent-2 .contact-form label,
+.contact-page-form-section.color-accent-2 .contact-info-block .support-desc,
+.contact-page-form-section.color-accent-2 .feature-list li {
+  color: rgb(var(--color-black-rgb));
+}

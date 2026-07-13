@@ -1,0 +1,287 @@
+{{ 'section-trust-bar.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.show_section -%}
+{% render 'section-padding',
+  section_id: section.id,
+  padding_left: section.settings.padding_left,
+  padding_right: section.settings.padding_right,
+  padding_left_mobile: section.settings.padding_left_mobile,
+  padding_right_mobile: section.settings.padding_right_mobile
+%}
+<style>
+  #shopify-section-{{ section.id }} { padding: 0 !important; }
+  #shopify-section-{{ section.id }} .hec-trust-bar {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .hec-trust-bar {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+  }
+</style>
+<section class="hec-trust-bar color-{{ section.settings.color_scheme }}{% if section.settings.enable_animation %} animate-on-scroll{% endif %}" id="shopify-section-{{ section.id }}">
+  <div class="{% if section.settings.container_width == 'full' %}container-fluid{% elsif section.settings.container_width == 'narrow' %}container-narrow{% else %}container{% endif %}">
+    {%- if section.settings.heading != blank -%}
+      <div class="hec-section-header-text" style="margin-bottom: var(--spacing-xl); text-align: center;">
+        <h2 style="font-size: 1.8rem;">{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    <div class="hec-trust-grid" style="--columns-desktop: {{ section.settings.columns }};">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'trust_item' -%}
+            <div class="hec-trust-item" {{ block.shopify_attributes }}>
+              <div class="hec-trust-icon">
+                {%- if block.settings.custom_icon_svg != blank -%}
+                  {{ block.settings.custom_icon_svg }}
+                {%- else -%}
+                  {%- case block.settings.icon -%}
+                    {%- when 'shipping' -%}{% render 'icon-shipping' %}
+                    {%- when 'returns' -%}{% render 'icon-returns' %}
+                    {%- when 'secure' -%}{% render 'icon-secure' %}
+                    {%- when 'support' -%}{% render 'icon-support' %}
+                    {%- when 'quality' -%}{% render 'icon-check' %}
+                    {%- when 'warranty' -%}{% render 'icon-secure' %}
+                    {%- when 'laptop' -%}{% render 'icon-laptop' %}
+                    {%- when 'phone' -%}{% render 'icon-phone' %}
+                    {%- when 'headphones' -%}{% render 'icon-headphones' %}
+                    {%- when 'tools' -%}{% render 'icon-tools' %}
+                    {%- when 'gamepad' -%}{% render 'icon-gamepad' %}
+                    {%- when 'watch' -%}{% render 'icon-watch' %}
+                    {%- when 'check' -%}{% render 'icon-check' %}
+                    {%- when 'heart' -%}{% render 'icon-heart' %}
+                    {%- when 'star' -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  {%- endcase -%}
+                {%- endif -%}
+              </div>
+              <div class="hec-trust-label">
+                <strong>{{ block.settings.title }}</strong>
+                <span>{{ block.settings.subtitle }}</span>
+              </div>
+            </div>
+          {%- when '@app' -%}
+            {% render block %}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Trust Bar",
+  "tag": "section",
+  "class": "section-trust-bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "Columns per row",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "default": "standard",
+      "options": [
+        { "value": "full", "label": "Full width" },
+        { "value": "standard", "label": "Standard" },
+        { "value": "narrow", "label": "Narrow" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable scroll animation",
+      "default": false,
+      "info": "Content will fade in when scrolling into view"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust item",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "shipping",
+          "options": [
+            { "value": "", "label": "Custom (use HTML below)" },
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "returns", "label": "Returns" },
+            { "value": "secure", "label": "Secure" },
+            { "value": "support", "label": "Support" },
+            { "value": "quality", "label": "Quality" },
+            { "value": "warranty", "label": "Warranty" },
+            { "value": "laptop", "label": "Laptop" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "headphones", "label": "Headphones" },
+            { "value": "tools", "label": "Tools / Repair" },
+            { "value": "gamepad", "label": "Gaming" },
+            { "value": "watch", "label": "Smart Watch" },
+            { "value": "check", "label": "Check" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "star", "label": "Star" }
+          ],
+          "info": "Select an icon or use custom HTML below"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_icon_svg",
+          "label": "Custom SVG",
+          "info": "Paste custom SVG code here to override the selected icon. Leave empty to use preset icons.",
+          "placeholder": "<svg>...</svg>"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "On orders over $50"
+        }
+      ]
+    },
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "Trust Bar",
+      "blocks": [
+        { "type": "trust_item", "settings": { "icon": "shipping", "title": "Free Shipping", "subtitle": "On orders over $50" } },
+        { "type": "trust_item", "settings": { "icon": "secure", "title": "Secure Checkout", "subtitle": "256-bit SSL encryption" } },
+        { "type": "trust_item", "settings": { "icon": "returns", "title": "30-Day Returns", "subtitle": "Hassle-free refunds" } },
+        { "type": "trust_item", "settings": { "icon": "support", "title": "24/7 Support", "subtitle": "Always here to help" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

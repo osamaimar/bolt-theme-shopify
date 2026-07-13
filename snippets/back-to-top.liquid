@@ -1,0 +1,16 @@
+{%- comment -%}
+  Back to Top Button - BoltTheme
+{%- endcomment -%}
+
+{{ 'component-back-to-top.css' | asset_url | stylesheet_tag }}
+
+<button type="button" 
+        class="back-to-top-btn" 
+        id="BackToTop" 
+        aria-label="{{ 'accessibility.back_to_top' | t | default: 'Back to top' }}" 
+        aria-hidden="true" 
+        tabindex="-1">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</button>

@@ -1,0 +1,25 @@
+{%- comment -%}Recent Posts Widget Block{%- endcomment -%}
+<div class="blog-sidebar-widget block-{{ block.id }}{% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %}{% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
+  {%- assign heading_tag = block.settings.heading_tag | default: 'h3' -%}
+<{{ heading_tag }} class="blog-sidebar-widget-title size-{{ block.settings.font_size | default: 'medium' }}">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"/>
+      <polyline points="12 6 12 12 16 14"/>
+    </svg>
+    {{ block.settings.heading | default: 'Recent Posts' }}
+  </{{ heading_tag }}>
+  <div class="blog-sidebar-popular-list">
+    {%- assign recent_articles = blog.articles | sort: 'published_at' | reverse | slice: 0, block.settings.show_count -%}
+    {%- for article in recent_articles -%}
+      <a href="{{ article.url }}" class="blog-sidebar-popular-item">
+        {%- if block.settings.show_thumbnails and article.image -%}
+          {{ article.image | image_url: width: 144 | image_tag: loading: 'lazy', alt: article.title, class: 'blog-sidebar-popular-thumb' }}
+        {%- endif -%}
+        <div class="blog-sidebar-popular-info">
+          <span class="blog-sidebar-popular-title">{{ article.title }}</span>
+          <span class="blog-sidebar-popular-date">{{ article.published_at | date: '%b %d, %Y' }}</span>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>

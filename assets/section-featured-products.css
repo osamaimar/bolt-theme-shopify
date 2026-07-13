@@ -1,0 +1,114 @@
+/* assets/section-featured-products.css */
+/* ===========================
+   Featured Products Grid
+   =========================== */
+/* Color Scheme Mapping */
+.hec-products.color-default { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.hec-products.color-background-1 { --section-bg: var(--bg-primary); --section-text: var(--text-primary); }
+.hec-products.color-background-2 { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.hec-products.color-accent-1 { --section-bg: var(--color-primary); --section-text: var(--text-inverse); }
+.hec-products.color-accent-2 { --section-bg: var(--color-accent); --section-text: var(--bg-primary); }
+.hec-products.color-inverse { --section-bg: var(--bg-primary); --section-text: var(--text-inverse); }
+
+.hec-products {
+    padding: 0;
+    background: var(--section-bg, var(--bg-secondary));
+    color: var(--section-text, var(--text-inverse));
+    border: none;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent, var(--color-accent-secondary-20), transparent) 1;
+}
+
+.hec-section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-2xl);
+    gap: var(--spacing-lg);
+}
+
+.hec-section-header-text h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--section-text, var(--text-inverse));
+    margin-bottom: var(--spacing-sm);
+}
+
+.hec-section-header-text p {
+    font-size: 1.15rem;
+    color: var(--section-text, var(--text-secondary));
+    opacity: 0.8;
+}
+
+.hec-section-header-text h2 span {
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-accent, var(--color-secondary)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hec-section-header-text p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.hec-section-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 12px var(--spacing-lg);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    color: var(--text-inverse);
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-semibold);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.hec-section-link:hover {
+    border-color: rgba(var(--color-secondary-rgb), 0.4);
+    background: var(--color-white-5);
+    color: var(--color-secondary);
+}
+
+.hec-section-link svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s;
+}
+
+.hec-section-link:hover svg {
+    transform: translateX(4px);
+}
+
+
+.hec-products-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--columns-desktop, 4), 1fr);
+    gap: var(--spacing-lg);
+}
+
+@media (max-width: 1024px) {
+    .hec-products-grid {
+        grid-template-columns: repeat(min(2, var(--columns-desktop, 4)), 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .hec-products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hec-products .hec-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .hec-products {
+        padding: 0;
+    }
+}

@@ -1,0 +1,902 @@
+{{ 'section-gift-card-modern.css' | asset_url | stylesheet_tag }}
+
+<style>
+  /* Standard Block Spacing overrides */
+  #section-{{ section.id }} .gcm-how-block {
+    margin-top: var(--m-t, 0px) !important;
+    margin-bottom: var(--m-b, 0px) !important;
+  }
+  @media screen and (max-width: 768px) {
+    #section-{{ section.id }} .gcm-how-block {
+      margin-top: var(--m-t-m, var(--m-t, 0px)) !important;
+      margin-bottom: var(--m-b-m, var(--m-b, 0px)) !important;
+    }
+  }
+
+  /* Responsive Font Sizing for Heading */
+  #section-{{ section.id }} .gcm-how-title.size-small { font-size: 1.5rem; }
+  #section-{{ section.id }} .gcm-how-title.size-medium { font-size: 2.0rem; }
+  #section-{{ section.id }} .gcm-how-title.size-large { font-size: 2.5rem; }
+  @media screen and (max-width: 768px) {
+    #section-{{ section.id }} .gcm-how-title.size-small { font-size: 1.25rem; }
+    #section-{{ section.id }} .gcm-how-title.size-medium { font-size: 1.5rem; }
+    #section-{{ section.id }} .gcm-how-title.size-large { font-size: 1.8rem; }
+  }
+
+  /* Heading Highlight styling */
+  #section-{{ section.id }} .gcm-how-title span {
+    background: var(--highlight-gradient, var(--color-accent)) !important;
+    -webkit-background-clip: var(--highlight-clip, text) !important;
+    background-clip: var(--highlight-clip, text) !important;
+    -webkit-text-fill-color: var(--highlight-fill, transparent) !important;
+    display: inline-block;
+    color: var(--highlight-color, inherit) !important;
+  }
+
+  /* Responsive Font Sizing for Subheading */
+  #section-{{ section.id }} .gcm-how-subtitle.size-small { font-size: 0.85rem; }
+  #section-{{ section.id }} .gcm-how-subtitle.size-medium { font-size: 1.0rem; }
+  #section-{{ section.id }} .gcm-how-subtitle.size-large { font-size: 1.2rem; }
+  @media screen and (max-width: 768px) {
+    #section-{{ section.id }} .gcm-how-subtitle.size-small { font-size: 0.75rem; }
+    #section-{{ section.id }} .gcm-how-subtitle.size-medium { font-size: 0.85rem; }
+    #section-{{ section.id }} .gcm-how-subtitle.size-large { font-size: 1.0rem; }
+  }
+</style>
+
+{%- if section.settings.show_section -%}
+{% render 'section-padding',
+  section_id: section.id,
+  padding_left: section.settings.padding_left,
+  padding_right: section.settings.padding_right,
+  padding_left_mobile: section.settings.padding_left_mobile,
+  padding_right_mobile: section.settings.padding_right_mobile
+%}
+<div class="gcm-how-section color-{{ section.settings.color_scheme }}" id="section-{{ section.id }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="{% if section.settings.container_width == 'wide' %}gcm-container-fluid{% elsif section.settings.container_width == 'narrow' %}gcm-container-narrow{% else %}gcm-container{% endif %}">
+    <div class="gcm-how-header" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'header' -%}
+            {%- if block.settings.show_on_desktop or block.settings.show_on_mobile -%}
+              {%- assign heading_tag = block.settings.heading_tag | default: 'h2' -%}
+              {%- assign h_color = block.settings.highlight_color -%}
+              {%- assign h_gradient = block.settings.highlight_gradient -%}
+              <{{ heading_tag }} class="gcm-how-title gcm-how-block size-{{ block.settings.font_size | default: 'medium' }}{% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %}{% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                  {{ block.shopify_attributes }} 
+                  style="
+                    --m-t: {{ block.settings.margin_top | default: 0 }}px; 
+                    --m-b: {{ block.settings.margin_bottom | default: 18 }}px; 
+                    --m-t-m: {{ block.settings.margin_top_mobile | default: 0 }}px; 
+                    --m-b-m: {{ block.settings.margin_bottom_mobile | default: 18 }}px; 
+                    font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; 
+                    font-style: {{ block.settings.font_style | default: 'normal' }}; 
+                    text-transform: {{ block.settings.text_transform | default: 'none' }}; 
+                    letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px; 
+                    line-height: {{ block.settings.line_height | default: 115 | divided_by: 100.0 }}; 
+                    text-align: {{ 'center' | default: 'center' }};
+                    {% if block.settings.text_color != blank %}color: {{ block.settings.text_color }} !important;{% endif %} 
+                    {% if block.settings.bg_gradient != blank %}background: {{ block.settings.bg_gradient }} !important;{% elsif block.settings.bg_color != blank %}background-color: {{ block.settings.bg_color }} !important;{% endif %}
+                    {% if h_gradient != blank and h_gradient != 'rgba(0,0,0,0)' %}--highlight-gradient: {{ h_gradient }}; --highlight-clip: text; --highlight-fill: transparent; --highlight-color: transparent;
+                    {% elsif h_color != blank and h_color != 'rgba(0,0,0,0)' %}--highlight-color: {{ h_color }}; --highlight-gradient: none; --highlight-clip: initial; --highlight-fill: {{ h_color }};
+                    {% endif %}
+                  ">
+                {{ block.settings.title | default: 'How It Works' | replace: '[', '<span>' | replace: ']', '</span>' }}
+              </{{ heading_tag }}>
+            {%- endif -%}
+          {%- when 'subtitle' -%}
+            {%- if block.settings.show_on_desktop or block.settings.show_on_mobile -%}
+              {%- assign subheading_tag = block.settings.subheading_tag | default: 'p' -%}
+              <{{ subheading_tag }} class="gcm-how-subtitle gcm-how-block size-{{ block.settings.font_size | default: 'medium' }}{% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %}{% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                  {{ block.shopify_attributes }} 
+                  style="
+                    --m-t: {{ block.settings.margin_top | default: 0 }}px; 
+                    --m-b: {{ block.settings.margin_bottom | default: 28 }}px; 
+                    --m-t-m: {{ block.settings.margin_top_mobile | default: 0 }}px; 
+                    --m-b-m: {{ block.settings.margin_bottom_mobile | default: 28 }}px; 
+                    width: 100% !important; max-width: {{ block.settings.max_width | default: 800 }}px !important;
+                    text-align: {{ 'center' | default: 'center' }};
+                    font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; 
+                    font-style: {{ block.settings.font_style | default: 'normal' }}; 
+                    text-transform: {{ block.settings.text_transform | default: 'none' }}; 
+                    letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px; 
+                    line-height: {{ block.settings.line_height | default: 170 | divided_by: 100.0 }}; 
+                    {% if block.settings.text_color != blank %}color: {{ block.settings.text_color }} !important;{% endif %} 
+                    {% if block.settings.bg_gradient != blank %}background: {{ block.settings.bg_gradient }} !important;{% elsif block.settings.bg_color != blank %}background-color: {{ block.settings.bg_color }} !important;{% endif %}
+                  ">
+                {{ block.settings.subheading }}
+              </{{ subheading_tag }}>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="gcm-steps-grid">
+      {% assign step_index = 0 %}
+      {% for block in section.blocks %}
+        {%- if block.type == 'step' -%}
+          {%- if block.settings.show_on_desktop != false or block.settings.show_on_mobile != false -%}
+            {% assign step_index = step_index | plus: 1 %}
+            <div class="gcm-step-card gcm-how-block{% unless block.settings.show_on_desktop != false %} hidden-desktop{% endunless %}{% unless block.settings.show_on_mobile != false %} hidden-mobile{% endunless %}" 
+                 {{ block.shopify_attributes }}
+                 style="
+                   --m-t: {{ block.settings.margin_top | default: 0 }}px; 
+                   --m-b: {{ block.settings.margin_bottom | default: 0 }}px; 
+                   --m-t-m: {{ block.settings.margin_top_mobile | default: 0 }}px; 
+                   --m-b-m: {{ block.settings.margin_bottom_mobile | default: 0 }}px; 
+                   text-align: {{ 'center' | default: 'center' }};
+                   font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; 
+                   font-style: {{ block.settings.font_style | default: 'normal' }}; 
+                   text-transform: {{ block.settings.text_transform | default: 'none' }}; 
+                   letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px; 
+                   line-height: {{ block.settings.line_height | default: 120 | divided_by: 100.0 }}; 
+                   {% if block.settings.text_color != blank %}color: {{ block.settings.text_color }} !important;{% endif %} 
+                   {% if block.settings.bg_gradient != blank %}background: {{ block.settings.bg_gradient }} !important;{% elsif block.settings.bg_color != blank %}background-color: {{ block.settings.bg_color }} !important;{% endif %}
+                 ">
+              <div class="gcm-step-number">{{ step_index }}</div>
+              <div class="gcm-step-icon">
+              {%- if block.settings.custom_icon_svg != blank -%}
+                {{ block.settings.custom_icon_svg }}
+              {%- else -%}
+                {%- case block.settings.icon -%}
+                  {%- when 'copy' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  {%- when 'cart' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                  {%- when 'check' -%}{% render 'icon-check' %}
+                  {%- when 'shipping' -%}{% render 'icon-shipping' %}
+                  {%- when 'returns' -%}{% render 'icon-returns' %}
+                  {%- when 'secure' -%}{% render 'icon-secure' %}
+                  {%- when 'support' -%}{% render 'icon-support' %}
+                  {%- when 'quality' -%}{% render 'icon-check' %}
+                  {%- when 'warranty' -%}{% render 'icon-secure' %}
+                  {%- when 'laptop' -%}{% render 'icon-laptop' %}
+                  {%- when 'phone' -%}{% render 'icon-phone' %}
+                  {%- when 'headphones' -%}{% render 'icon-headphones' %}
+                  {%- when 'tools' -%}{% render 'icon-tools' %}
+                  {%- when 'gamepad' -%}{% render 'icon-gamepad' %}
+                  {%- when 'watch' -%}{% render 'icon-watch' %}
+                  {%- when 'heart' -%}{% render 'icon-heart' %}
+                  {%- when 'star' -%}{% render 'icon-star' %}
+                  {%- when 'gift' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+                {%- endcase -%}
+              {%- endif -%}
+            </div>
+            <h3 class="gcm-step-title" style="color: inherit;">{{ block.settings.title }}</h3>
+            <div class="gcm-step-desc" style="color: inherit;">{{ block.settings.description }}</div>
+          </div>
+          {%- endif -%}
+        {%- endif -%}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Gift Card - How It Works",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "options": [
+        {
+          "value": "narrow",
+          "label": "Narrow"
+        },
+        {
+          "value": "standard",
+          "label": "Standard"
+        },
+        {
+          "value": "wide",
+          "label": "Wide"
+        }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "inverse", "label": "Inverse" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" }
+      ],
+      "default": "background-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 60
+    },
+  ],
+  "blocks": [
+    {
+      "type": "header",
+      "name": "Header",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "How It [Works]",
+          "info": "Use [ ] to highlight text"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading Tag",
+          "default": "h2",
+          "options": [
+            { "value": "h1", "label": "h1" },
+            { "value": "h2", "label": "h2" },
+            { "value": "h3", "label": "h3" },
+            { "value": "h4", "label": "h4" },
+            { "value": "h5", "label": "h5" },
+            { "value": "h6", "label": "h6" },
+            { "value": "div", "label": "div" },
+            { "value": "p", "label": "p" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 18
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Casing",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "label": "Line Height",
+          "default": 115
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "highlight_color",
+          "label": "Highlight Text Color"
+        },
+        {
+          "type": "color_background",
+          "id": "highlight_gradient",
+          "label": "Highlight Text Gradient"
+        }
+      ]
+    },
+    {
+      "type": "subtitle",
+      "name": "Subtitle",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Redeem your gift card in three simple steps"
+        },
+        {
+          "type": "select",
+          "id": "subheading_tag",
+          "label": "Subheading Tag",
+          "default": "p",
+          "options": [
+            { "value": "h1", "label": "h1" },
+            { "value": "h2", "label": "h2" },
+            { "value": "h3", "label": "h3" },
+            { "value": "h4", "label": "h4" },
+            { "value": "h5", "label": "h5" },
+            { "value": "h6", "label": "h6" },
+            { "value": "div", "label": "div" },
+            { "value": "p", "label": "p" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 400,
+          "max": 1200,
+          "step": 10,
+          "unit": "px",
+          "label": "Max Width",
+          "default": 800
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 28
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 28
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "label": "Line Height",
+          "default": 170
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "copy",
+          "options": [
+            { "value": "", "label": "Custom (use HTML below)" },
+            { "value": "copy", "label": "Copy" },
+            { "value": "cart", "label": "Shopping Cart" },
+            { "value": "check", "label": "Check" },
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "returns", "label": "Returns" },
+            { "value": "secure", "label": "Secure" },
+            { "value": "support", "label": "Support" },
+            { "value": "quality", "label": "Quality" },
+            { "value": "warranty", "label": "Warranty" },
+            { "value": "laptop", "label": "Laptop" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "headphones", "label": "Headphones" },
+            { "value": "tools", "label": "Tools / Repair" },
+            { "value": "gamepad", "label": "Gaming" },
+            { "value": "watch", "label": "Smart Watch" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "star", "label": "Star" },
+            { "value": "gift", "label": "Gift" }
+          ],
+          "info": "Select an icon or use custom HTML below"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_icon_svg",
+          "label": "Custom SVG",
+          "info": "Paste custom SVG code here to override the selected icon. Leave empty to use preset icons.",
+          "placeholder": "<svg>...</svg>"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title",
+          "default": "Step Title"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Step description",
+          "default": "<p>Description of this step in the redemption process.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Casing",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "label": "Line Height",
+          "default": 120
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        }
+      ]
+    }
+  ],
+
+  "default": {
+    "blocks": [
+      { "type": "header" },
+        { "type": "subtitle" },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Copy Your Code",
+            "description": "<p>Click the copy button to grab your unique gift card code</p>",
+            "icon": "copy"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Explore Store",
+            "description": "<p>Browse our latest smartphones, laptops, and smart home devices</p>",
+            "icon": "cart"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Apply at Checkout",
+            "description": "<p>Paste your code at checkout and enjoy instant savings</p>",
+            "icon": "check"
+          }
+        }
+      ]
+  }
+}
+{% endschema %}

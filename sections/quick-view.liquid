@@ -1,0 +1,752 @@
+{{ 'component-quick-view.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'quick-view.js' | asset_url }}" defer="defer"></script>
+
+{%- assign image_block = section.blocks | where: 'type', 'image' | first -%}
+
+<style>
+  #qv-overlay .qv-modal {
+    max-width: {{ section.settings.modal_max_width }}px;
+    border-radius: {{ section.settings.modal_border_radius }}px;
+  }
+  #qv-overlay .qv-backdrop {
+    background-color: {{ section.settings.overlay_color }};
+    opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+  }
+  {%- if image_block -%}
+    {% if image_block.settings.image_position == 'right' %}
+      @media (min-width: 769px) {
+        #qv-overlay .qv-modal { grid-template-columns: 1fr 1fr; }
+        #qv-overlay .qv-image-panel { order: 2; }
+        #qv-overlay .qv-details { order: 1; }
+      }
+    {% endif %}
+  {%- else -%}
+    #qv-overlay .qv-modal { grid-template-columns: 1fr; }
+    #qv-overlay .qv-image-panel { display: none; }
+  {%- endif -%}
+
+  .qv-image-panel {
+    border-radius: var(--image-radius, 0);
+  }
+  
+  .qv-modal:hover .qv-image-panel img {
+    transform: none !important;
+  }
+  .qv-image-panel.zoom-enabled:hover img {
+    transform: scale(1.08) !important;
+  }
+
+  .qv-image-panel.aspect-square {
+    aspect-ratio: 1 / 1 !important;
+  }
+  .qv-image-panel.aspect-portrait {
+    aspect-ratio: 3 / 4 !important;
+  }
+  .qv-image-panel.aspect-landscape {
+    aspect-ratio: 4 / 3 !important;
+  }
+  
+  .qv-image-panel {
+    height: auto !important;
+    min-height: 0 !important;
+    align-self: center;
+    width: 100%;
+  }
+  .qv-image-panel img {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  @media (max-width: 768px) {
+    .qv-image-panel {
+      max-height: 320px !important;
+    }
+  }
+
+  .qv-availability[style*="--avail-bullet-color"]::before {
+    background: var(--avail-bullet-color) !important;
+  }
+  .qv-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: var(--color-secondary);
+  }
+  .qv-feature-icon .qv-icon-wrapper svg {
+    width: 14px;
+    height: 14px;
+    color: currentColor;
+    display: block;
+  }
+</style>
+
+{%- if section.settings.enable_quick_view -%}
+<div class="qv-overlay color-{{ section.settings.color_scheme }}" id="qv-overlay" role="dialog" aria-modal="true" aria-label="Quick product view">
+    <div class="qv-backdrop" id="qv-backdrop"></div>
+    <div class="qv-modal">
+        <button class="qv-close" id="qv-close" aria-label="Close quick view">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+
+        {%- if image_block -%}
+            <div class="qv-image-panel aspect-{{ image_block.settings.image_aspect_ratio }} {% if image_block.settings.enable_zoom %}zoom-enabled{% endif %}" style="--image-radius: {{ image_block.settings.image_border_radius }}px;" {{ image_block.shopify_attributes }}>
+                <img id="qv-image" src="{{ 'blank.svg' | asset_url }}" alt="Product image" width="800" height="800" />
+            </div>
+        {%- endif -%}
+
+        <div class="qv-details" style="text-align: {{ 'left' }}; align-items: {% if 'left' == 'center' %}center{% else %}flex-start{% endif %};">
+            {%- for block in section.blocks -%}
+                {%- unless block.type == 'image' -%}
+                    {%- case block.type -%}
+                        {%- when 'category' -%}
+                            <span class="qv-category" id="qv-category" style="{% if block.settings.badge_color != blank %}--cat-color: {{ block.settings.badge_color }}; color: var(--cat-color);{% endif %} {% if block.settings.badge_bg != blank %}--cat-bg: {{ block.settings.badge_bg }}; background: var(--cat-bg); border-color: var(--cat-bg);{% endif %} text-transform: {{ block.settings.text_case }};" {{ block.shopify_attributes }}>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <span id="qv-category-text">{{ 'products.product.category' | t }}</span>
+                            </span>
+                        {%- when 'title' -%}
+                            <h2 class="qv-title" id="qv-title" style="font-size: {{ block.settings.title_font_size }}rem; font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; {% if block.settings.title_color != blank %}color: {{ block.settings.title_color }};{% endif %}" {{ block.shopify_attributes }}>{{ 'products.product.product_name_placeholder' | t }}</h2>
+                        {%- when 'price' -%}
+                            <div class="qv-price-row" style="--price-font-size: {{ block.settings.price_font_size }}rem;" {{ block.shopify_attributes }}>
+                                <span class="qv-price" id="qv-price" style="{% if block.settings.price_color != blank %}color: {{ block.settings.price_color }} !important;{% endif %} font-size: var(--price-font-size);">$0</span>
+                                <span class="qv-availability" style="{% if block.settings.availability_color != blank %}color: {{ block.settings.availability_color }} !important; --avail-bullet-color: {{ block.settings.availability_color }};{% endif %}">{{ block.settings.in_stock_label }}</span>
+                            </div>
+                        {%- when 'divider' -%}
+                            {%- assign thickness = block.settings.thickness | default: 1 -%}
+                            {%- assign divider_color = block.settings.divider_color | default: 'var(--border-light)' -%}
+                            {%- assign margin_top = block.settings.margin_top | default: 20 -%}
+                            {%- assign margin_bottom = block.settings.margin_bottom | default: 20 -%}
+                            <div class="qv-divider" style="height: {{ thickness }}px; background: {{ divider_color }}; margin-top: {{ margin_top }}px; margin-bottom: {{ margin_bottom }}px;" {{ block.shopify_attributes }}></div>
+                        {%- when 'description' -%}
+                            <p class="qv-description" id="qv-description" style="max-height: {{ block.settings.description_max_height }}px; font-size: {{ block.settings.desc_font_size }}rem; {% if block.settings.desc_color != blank %}color: {{ block.settings.desc_color }};{% endif %}" {{ block.shopify_attributes }}>{{ 'products.product.description_placeholder' | t }}</p>
+                        {%- when 'features' -%}
+                            {%- assign icon_1 = block.settings.feature_1_icon | default: 'warranty' -%}
+                            {%- assign icon_2 = block.settings.feature_2_icon | default: 'shipping' -%}
+                            {%- assign icon_3 = block.settings.feature_3_icon | default: 'returns' -%}
+                            {%- if icon_1 == blank -%}{%- assign icon_1 = 'warranty' -%}{%- endif -%}
+                            {%- if icon_2 == blank -%}{%- assign icon_2 = 'shipping' -%}{%- endif -%}
+                            {%- if icon_3 == blank -%}{%- assign icon_3 = 'returns' -%}{%- endif -%}
+                            <div class="qv-features" id="qv-features" style="{% if block.settings.text_color != blank %}--feat-text-color: {{ block.settings.text_color }}; color: var(--feat-text-color);{% endif %}" {{ block.shopify_attributes }}>
+                                {%- if block.settings.feature_1_text != blank -%}
+                                    {%- assign f1_val = block.settings.feature_1_text -%}
+                                    {%- assign temp_key = 'custom_labels.' | append: f1_val | handleize -%}
+                                    {%- assign temp_trans = temp_key | t -%}
+                                    {%- unless temp_trans contains 'translation' or temp_trans contains 'Translation' -%}
+                                        {%- assign f1_val = temp_trans -%}
+                                    {%- endunless -%}
+                                    <div class="qv-feature" style="color: var(--feat-text-color, inherit);">
+                                        <div class="qv-feature-icon" style="{% if block.settings.icon_bg_color != blank %}background: {{ block.settings.icon_bg_color }}; border-color: {{ block.settings.icon_bg_color }};{% endif %}">
+                                            <span class="qv-icon-wrapper" style="{% if block.settings.icon_color != blank %}color: {{ block.settings.icon_color }};{% endif %}">
+                                                {%- if icon_1 != 'none' -%}
+                                                    {%- case icon_1 -%}
+                                                        {%- when 'shipping' -%}{% render 'icon-shipping' %}
+                                                        {%- when 'returns' -%}{% render 'icon-returns' %}
+                                                        {%- when 'secure' -%}{% render 'icon-secure' %}
+                                                        {%- when 'support' -%}{% render 'icon-support' %}
+                                                        {%- when 'quality' -%}{% render 'icon-check' %}
+                                                        {%- when 'warranty' -%}{% render 'icon-secure' %}
+                                                        {%- when 'check' -%}{% render 'icon-check' %}
+                                                        {%- when 'star' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                                    {%- endcase -%}
+                                                {%- else -%}
+                                                    {{ block.settings.feature_1_custom_svg }}
+                                                {%- endif -%}
+                                            </span>
+                                        </div>
+                                        <span>{{ f1_val }}</span>
+                                    </div>
+                                {%- endif -%}
+                                {%- if block.settings.feature_2_text != blank -%}
+                                    {%- assign f2_val = block.settings.feature_2_text -%}
+                                    {%- assign temp_key = 'custom_labels.' | append: f2_val | handleize -%}
+                                    {%- assign temp_trans = temp_key | t -%}
+                                    {%- unless temp_trans contains 'translation' or temp_trans contains 'Translation' -%}
+                                        {%- assign f2_val = temp_trans -%}
+                                    {%- endunless -%}
+                                    <div class="qv-feature" style="color: var(--feat-text-color, inherit);">
+                                        <div class="qv-feature-icon" style="{% if block.settings.icon_bg_color != blank %}background: {{ block.settings.icon_bg_color }}; border-color: {{ block.settings.icon_bg_color }};{% endif %}">
+                                            <span class="qv-icon-wrapper" style="{% if block.settings.icon_color != blank %}color: {{ block.settings.icon_color }};{% endif %}">
+                                                {%- if icon_2 != 'none' -%}
+                                                    {%- case icon_2 -%}
+                                                        {%- when 'shipping' -%}{% render 'icon-shipping' %}
+                                                        {%- when 'returns' -%}{% render 'icon-returns' %}
+                                                        {%- when 'secure' -%}{% render 'icon-secure' %}
+                                                        {%- when 'support' -%}{% render 'icon-support' %}
+                                                        {%- when 'quality' -%}{% render 'icon-check' %}
+                                                        {%- when 'warranty' -%}{% render 'icon-secure' %}
+                                                        {%- when 'check' -%}{% render 'icon-check' %}
+                                                        {%- when 'star' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                                    {%- endcase -%}
+                                                {%- else -%}
+                                                    {{ block.settings.feature_2_custom_svg }}
+                                                {%- endif -%}
+                                            </span>
+                                        </div>
+                                        <span>{{ f2_val }}</span>
+                                    </div>
+                                {%- endif -%}
+                                {%- if block.settings.feature_3_text != blank -%}
+                                    {%- assign f3_val = block.settings.feature_3_text -%}
+                                    {%- assign temp_key = 'custom_labels.' | append: f3_val | handleize -%}
+                                    {%- assign temp_trans = temp_key | t -%}
+                                    {%- unless temp_trans contains 'translation' or temp_trans contains 'Translation' -%}
+                                        {%- assign f3_val = temp_trans -%}
+                                    {%- endunless -%}
+                                    <div class="qv-feature" style="color: var(--feat-text-color, inherit);">
+                                        <div class="qv-feature-icon" style="{% if block.settings.icon_bg_color != blank %}background: {{ block.settings.icon_bg_color }}; border-color: {{ block.settings.icon_bg_color }};{% endif %}">
+                                            <span class="qv-icon-wrapper" style="{% if block.settings.icon_color != blank %}color: {{ block.settings.icon_color }};{% endif %}">
+                                                {%- if icon_3 != 'none' -%}
+                                                    {%- case icon_3 -%}
+                                                        {%- when 'shipping' -%}{% render 'icon-shipping' %}
+                                                        {%- when 'returns' -%}{% render 'icon-returns' %}
+                                                        {%- when 'secure' -%}{% render 'icon-secure' %}
+                                                        {%- when 'support' -%}{% render 'icon-support' %}
+                                                        {%- when 'quality' -%}{% render 'icon-check' %}
+                                                        {%- when 'warranty' -%}{% render 'icon-secure' %}
+                                                        {%- when 'check' -%}{% render 'icon-check' %}
+                                                        {%- when 'star' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                                    {%- endcase -%}
+                                                {%- else -%}
+                                                    {{ block.settings.feature_3_custom_svg }}
+                                                {%- endif -%}
+                                            </span>
+                                        </div>
+                                        <span>{{ f3_val }}</span>
+                                    </div>
+                                {%- endif -%}
+                            </div>
+                        {%- when 'quantity_selector' -%}
+                            <div class="qv-quantity-row" {{ block.shopify_attributes }}>
+                                <span class="qv-quantity-label" style="{% if block.settings.qty_text_color != blank %}color: {{ block.settings.qty_text_color }};{% endif %}">{{ block.settings.quantity_label }}</span>
+                                <div class="qv-quantity-control" style="{% if block.settings.qty_bg_color != blank %}background: {{ block.settings.qty_bg_color }};{% endif %}">
+                                    <button class="qv-qty-btn" id="qv-qty-minus" aria-label="Decrease quantity" style="{% if block.settings.qty_text_color != blank %}color: {{ block.settings.qty_text_color }};{% endif %}">−</button>
+                                    <span class="qv-qty-value" id="qv-qty-value" style="{% if block.settings.qty_text_color != blank %}color: {{ block.settings.qty_text_color }};{% endif %}">1</span>
+                                    <button class="qv-qty-btn" id="qv-qty-plus" aria-label="Increase quantity" style="{% if block.settings.qty_text_color != blank %}color: {{ block.settings.qty_text_color }};{% endif %}">+</button>
+                                </div>
+                            </div>
+                        {%- when 'actions' -%}
+                            <div class="qv-actions" {{ block.shopify_attributes }}>
+                                {%- if block.settings.add_to_cart_label == blank or block.settings.add_to_cart_label == 'Add to Cart' -%}
+                                    {%- assign qv_atc_label = 'products.product.add_to_cart' | t -%}
+                                {%- else -%}
+                                    {%- assign qv_atc_label = block.settings.add_to_cart_label -%}
+                                {%- endif -%}
+                                {%- if block.settings.view_details_label == blank or block.settings.view_details_label == 'View Details' -%}
+                                    {%- assign qv_view_details_label = 'products.product.view_details' | t -%}
+                                {%- else -%}
+                                    {%- assign qv_view_details_label = block.settings.view_details_label -%}
+                                {%- endif -%}
+                                <button class="qv-add-to-cart" id="qv-add-to-cart" data-open-cart style="{% if block.settings.atc_bg_color != blank %}background: {{ block.settings.atc_bg_color }};{% endif %} {% if block.settings.atc_text_color != blank %}color: {{ block.settings.atc_text_color }};{% endif %}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                                    </svg>
+                                    <span>{{ qv_atc_label }}</span>
+                                </button>
+                                <a href="#" class="qv-view-full" id="qv-view-full" style="{% if block.settings.details_bg_color != blank %}background: {{ block.settings.details_bg_color }};{% endif %} {% if block.settings.details_text_color != blank %}color: {{ block.settings.details_text_color }}; border-color: {{ block.settings.details_text_color }};{% endif %}">
+                                    <span>{{ qv_view_details_label }}</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="9 18 15 12 9 6"/>
+                                    </svg>
+                                </a>
+                            </div>
+                    {%- endcase -%}
+                {%- endunless -%}
+            {%- endfor -%}
+        </div>
+    </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Quick View Popup",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_quick_view",
+      "label": "Enable Quick View",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1",
+      "options": [
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Modal Layout"
+    },
+    {
+      "type": "range",
+      "id": "modal_max_width",
+      "min": 400,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "label": "Modal Max Width",
+      "default": 920
+    },
+    {
+      "type": "range",
+      "id": "modal_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border Radius",
+      "default": 28
+    },
+    {
+      "type": "header",
+      "content": "Overlay Styling"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Backdrop Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay Opacity",
+      "default": 70
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Product Image",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Image Position",
+          "default": "left",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "image_aspect_ratio",
+          "label": "Image Aspect Ratio",
+          "default": "square",
+          "options": [
+            { "value": "square", "label": "Square" },
+            { "value": "portrait", "label": "Portrait" },
+            { "value": "landscape", "label": "Landscape" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "image_border_radius",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "label": "Image Border Radius",
+          "default": 0
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_zoom",
+          "label": "Enable Zoom on Hover",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "name": "Category badge",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "text_case",
+          "label": "Text Case",
+          "default": "uppercase",
+          "options": [
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" },
+            { "value": "none", "label": "None" }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "badge_color",
+          "label": "Badge Text Color"
+        },
+        {
+          "type": "color",
+          "id": "badge_bg",
+          "label": "Badge Background Color"
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "title_font_size",
+          "min": 1,
+          "max": 3,
+          "step": 0.1,
+          "unit": "rem",
+          "label": "Title Font Size",
+          "default": 1.6
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title Color"
+        }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Price and availability",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "in_stock_label",
+          "label": "In Stock label",
+          "default": "In Stock"
+        },
+        {
+          "type": "range",
+          "id": "price_font_size",
+          "min": 1,
+          "max": 2.5,
+          "step": 0.1,
+          "unit": "rem",
+          "label": "Price Font Size",
+          "default": 1.6
+        },
+        {
+          "type": "color",
+          "id": "price_color",
+          "label": "Price Color"
+        },
+        {
+          "type": "color",
+          "id": "availability_color",
+          "label": "Availability Color"
+        }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Separator line",
+      "settings": [
+        {
+          "type": "range",
+          "id": "thickness",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "label": "Line Thickness",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 60,
+          "step": 4,
+          "unit": "px",
+          "label": "Margin Top",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 60,
+          "step": 4,
+          "unit": "px",
+          "label": "Margin Bottom",
+          "default": 20
+        },
+        {
+          "type": "color",
+          "id": "divider_color",
+          "label": "Line Color"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "description_max_height",
+          "min": 50,
+          "max": 400,
+          "step": 10,
+          "unit": "px",
+          "label": "Description Max Height",
+          "default": 200
+        },
+        {
+          "type": "range",
+          "id": "desc_font_size",
+          "min": 0.8,
+          "max": 1.5,
+          "step": 0.1,
+          "unit": "rem",
+          "label": "Description Font Size",
+          "default": 0.9
+        },
+        {
+          "type": "color",
+          "id": "desc_color",
+          "label": "Description Text Color"
+        }
+      ]
+    },
+    {
+      "type": "features",
+      "name": "Feature Highlights",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "feature_1_icon",
+          "label": "Feature 1 Icon",
+          "default": "warranty",
+          "options": [
+            { "value": "warranty", "label": "Warranty" },
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "returns", "label": "Returns" },
+            { "value": "secure", "label": "Secure" },
+            { "value": "support", "label": "Support" },
+            { "value": "quality", "label": "Quality" },
+            { "value": "check", "label": "Check" },
+            { "value": "star", "label": "Star" },
+            { "value": "none", "label": "Custom SVG (paste below)" }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "feature_1_custom_svg",
+          "label": "Feature 1 Custom SVG",
+          "info": "Paste custom SVG here if select is Custom SVG"
+        },
+        {
+          "type": "text",
+          "id": "feature_1_text",
+          "label": "Feature 1 Text",
+          "default": "2-Year Warranty Included"
+        },
+        {
+          "type": "select",
+          "id": "feature_2_icon",
+          "label": "Feature 2 Icon",
+          "default": "shipping",
+          "options": [
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "returns", "label": "Returns" },
+            { "value": "secure", "label": "Secure" },
+            { "value": "support", "label": "Support" },
+            { "value": "quality", "label": "Quality" },
+            { "value": "warranty", "label": "Warranty" },
+            { "value": "check", "label": "Check" },
+            { "value": "star", "label": "Star" },
+            { "value": "none", "label": "Custom SVG (paste below)" }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "feature_2_custom_svg",
+          "label": "Feature 2 Custom SVG",
+          "info": "Paste custom SVG here if select is Custom SVG"
+        },
+        {
+          "type": "text",
+          "id": "feature_2_text",
+          "label": "Feature 2 Text",
+          "default": "Free Express Shipping"
+        },
+        {
+          "type": "select",
+          "id": "feature_3_icon",
+          "label": "Feature 3 Icon",
+          "default": "returns",
+          "options": [
+            { "value": "returns", "label": "Returns" },
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "secure", "label": "Secure" },
+            { "value": "support", "label": "Support" },
+            { "value": "quality", "label": "Quality" },
+            { "value": "warranty", "label": "Warranty" },
+            { "value": "check", "label": "Check" },
+            { "value": "star", "label": "Star" },
+            { "value": "none", "label": "Custom SVG (paste below)" }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "feature_3_custom_svg",
+          "label": "Feature 3 Custom SVG",
+          "info": "Paste custom SVG here if select is Custom SVG"
+        },
+        {
+          "type": "text",
+          "id": "feature_3_text",
+          "label": "Feature 3 Text",
+          "default": "30-Day Easy Returns"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "icon_bg_color",
+          "label": "Icon Background Color"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        }
+      ]
+    },
+    {
+      "type": "quantity_selector",
+      "name": "Quantity Selector",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "quantity_label",
+          "label": "Quantity label",
+          "default": "Quantity"
+        },
+        {
+          "type": "color",
+          "id": "qty_bg_color",
+          "label": "Selector Background Color"
+        },
+        {
+          "type": "color",
+          "id": "qty_text_color",
+          "label": "Selector Text/Icon Color"
+        }
+      ]
+    },
+    {
+      "type": "actions",
+      "name": "Buy/Details Buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "add_to_cart_label",
+          "label": "Add to Cart label",
+          "default": "Add to Cart"
+        },
+        {
+          "type": "text",
+          "id": "view_details_label",
+          "label": "View Details label",
+          "default": "View Details"
+        },
+        {
+          "type": "color",
+          "id": "atc_bg_color",
+          "label": "Add to Cart Background"
+        },
+        {
+          "type": "color",
+          "id": "atc_text_color",
+          "label": "Add to Cart Text Color"
+        },
+        {
+          "type": "color",
+          "id": "details_bg_color",
+          "label": "View Details Background"
+        },
+        {
+          "type": "color",
+          "id": "details_text_color",
+          "label": "View Details Text/Border Color"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "image"
+      },
+      {
+        "type": "category"
+      },
+      {
+        "type": "title"
+      },
+      {
+        "type": "price"
+      },
+      {
+        "type": "divider"
+      },
+      {
+        "type": "description"
+      },
+      {
+        "type": "features"
+      },
+      {
+        "type": "quantity_selector"
+      },
+      {
+        "type": "actions"
+      }
+    ]
+  }
+}
+{% endschema %}

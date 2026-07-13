@@ -1,0 +1,276 @@
+{{ 'section-promo.css' | asset_url | stylesheet_tag }}
+
+
+{% render 'section-padding',
+  section_id: section.id,
+  padding_left: section.settings.padding_left,
+  padding_right: section.settings.padding_right,
+  padding_left_mobile: section.settings.padding_left_mobile,
+  padding_right_mobile: section.settings.padding_right_mobile
+%}
+<style>
+  #shopify-section-{{ section.id }} { padding: 0 !important; }
+  #shopify-section-{{ section.id }} .hec-promo {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .hec-promo {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+  }
+</style>
+<section class="hec-promo color-{{ section.settings.color_scheme }}" id="hec-promo-{{ section.id }}" aria-label="Promotions">
+  <div class="container">
+    <div class="hec-promo-grid" style="--columns-desktop: {{ section.settings.columns_desktop }};">
+      {%- for block in section.blocks -%}
+        <div class="hec-promo-card hec-promo-card--{{ block.settings.layout }} hec-promo-card--align-{{ 'left' }}" 
+             id="hec-promo-card-{{ block.id }}" 
+             {{ block.shopify_attributes }}>
+          
+          <div class="hec-promo-card-bg">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1500 | image_tag: 
+                loading: 'lazy',
+                class: 'promo-card-image',
+                widths: '375, 550, 750, 1100, 1500',
+                alt: block.settings.heading | escape
+              }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+
+          <div class="hec-promo-card-overlay"></div>
+
+          <div class="hec-promo-card-body">
+            {%- if block.settings.show_tag and block.settings.tag != blank -%}
+              <span class="hec-promo-tag">{{ block.settings.tag }}</span>
+            {%- endif -%}
+            
+            {%- if block.settings.show_heading and block.settings.heading != blank -%}
+              <h3>{{ block.settings.heading | newline_to_br | replace: '[', '<span>' | replace: ']', '</span>' }}</h3>
+            {%- endif -%}
+            
+            {%- if block.settings.show_description and block.settings.description != blank -%}
+              <p>{{ block.settings.description }}</p>
+            {%- endif -%}
+            
+            {%- if block.settings.button_link != blank and block.settings.button_text != blank -%}
+              <a href="{{ block.settings.button_link }}" class="hec-promo-btn" aria-label="{{ block.settings.button_text }} - {{ block.settings.heading | strip_html }}">
+                {{ block.settings.button_text }}
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path d="M5 12h14"></path>
+                  <path d="M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Promotional Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2,
+      "label": "Columns on desktop"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Mobile)",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "promo_card",
+      "name": "Promo Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Card layout",
+          "default": "background",
+          "options": [
+            { "value": "background", "label": "Image as Background" },
+            { "value": "split", "label": "Split (Image left)" }
+          ]
+        },
+        
+        {
+          "type": "checkbox",
+          "id": "show_tag",
+          "label": "Show tag",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Tech Deal"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_heading",
+          "label": "Show heading",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Up to 40% Off Tech Upgrade Sale",
+          "info": "Use [text] for gradient highlight."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_description",
+          "label": "Show description",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Don't miss our biggest tech sale of the season. Future-ready gear at unbeatable prices."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Sale"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promotional Banner",
+      "blocks": [
+        {
+          "type": "promo_card"
+        },
+        {
+          "type": "promo_card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,64 @@
+{% comment %}
+    Renders a product card for the sidebar catalog grid (v2 style)
+    Matching: catalog-products-sidebar.html -> theme-card-v2
+{% endcomment %}
+
+{%- assign product_tags = "" -%}{%- for tag in product.tags -%}{%- assign product_tags = product_tags | append: tag | append: " " -%}{%- endfor -%}
+
+<article class="theme-card-v2 cpd-product-card" 
+  data-vendor="{{ product.vendor | handle }}" 
+  data-type="{{ product.type | handle }}" 
+  data-tags="{{ product_tags | handle }}"
+  data-price="{{ product.price | divided_by: 100.0 }}"
+  data-category="{{ product.collections.first.title | default: product.type | escape }}"
+>
+  <div class="card-v2-image-box">
+    <a href="{{ product.url }}" class="full-unstyled-link">
+      {%- if product.featured_media -%}
+        <img
+          src="{{ product.featured_media | image_url: width: 600 }}"
+          alt="{{ product.featured_media.alt | escape }}"
+          loading="lazy"
+          width="{{ product.featured_media.width }}"
+          height="{{ product.featured_media.height }}"
+          class="card-v2-image"
+        >
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'card-v2-image placeholder-svg' }}
+      {%- endif -%}
+    </a>
+  </div>
+
+  <div class="card-v2-body">
+    <div class="card-v2-category">{{ product.vendor | escape }}</div>
+    <h3 class="card-v2-title">
+      <a href="{{ product.url }}">{{ product.title | escape }}</a>
+    </h3>
+
+    <div class="card-v2-meta">
+      <span class="card-v2-price">{{ product.price | money }}</span>
+      {%- if show_rating -%}
+        <div class="rating-v2">
+          <span style="color:var(--color-accent-secondary)">
+            {%- for i in (1..5) -%}★{%- endfor -%}
+          </span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="card-v2-footer">
+      {%- if show_add_to_cart -%}
+        {%- if product.available -%}
+          <form method="post" action="{{ routes.cart_add_url }}" class="cpd-product-cta-form" style="flex-grow: 1;">
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+            <button type="submit" class="btn-v2-primary" style="width: 100%;">
+              {{ 'products.product.add_to_cart' | t }}
+            </button>
+          </form>
+        {%- else -%}
+          <button class="btn-v2-primary disabled" style="flex-grow: 1;">{{ 'products.product.sold_out' | t }}</button>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</article>

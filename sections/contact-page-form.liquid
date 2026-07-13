@@ -1,0 +1,2104 @@
+{{ 'section-contact-page-form.css' | asset_url | stylesheet_tag }}
+
+<style>
+  /* Section Spacing / Visibility overrides */
+  #shopify-section-{{ section.id }} .contact-page-form-section {
+    padding-top: {{ section.settings.padding_top }}px !important;
+    padding-bottom: {{ section.settings.padding_bottom }}px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .contact-page-form-section {
+      padding-top: {{ section.settings.padding_top_mobile | default: section.settings.padding_top }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom_mobile | default: section.settings.padding_bottom }}px !important;
+    }
+  }
+
+  /* Container Width overrides */
+  #shopify-section-{{ section.id }} .container-fluid {
+    max-width: 100% !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    margin: 0 auto !important;
+  }
+  #shopify-section-{{ section.id }} .container-narrow {
+    max-width: 800px !important;
+    margin: 0 auto !important;
+  }
+  #shopify-section-{{ section.id }} .container {
+    max-width: {{ section.settings.max_width | default: 1340 }}px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Info Column blocks_position overrides */
+  #shopify-section-{{ section.id }} .contact-info-block {
+    display: flex;
+    flex-direction: column;
+    {%- if section.settings.blocks_position == 'left' -%}
+      align-items: flex-start !important;
+      text-align: left !important;
+    {%- elsif section.settings.blocks_position == 'right' -%}
+      align-items: flex-end !important;
+      text-align: right !important;
+    {%- else -%}
+      align-items: center !important;
+      text-align: center !important;
+    {%- endif -%}
+  }
+
+  /* Description Spacing / Font size overrides */
+  #shopify-section-{{ section.id }} .support-desc {
+    margin-top: var(--desc-t, 10px) !important;
+    margin-bottom: var(--desc-b, 30px) !important;
+  }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .support-desc {
+      margin-top: var(--desc-t-m, var(--desc-t, 10px)) !important;
+      margin-bottom: var(--desc-b-m, var(--desc-b, 30px)) !important;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .support-desc.size-small { font-size: 13px !important; }
+  #shopify-section-{{ section.id }} .support-desc.size-medium { font-size: 16px !important; }
+  #shopify-section-{{ section.id }} .support-desc.size-large { font-size: 20px !important; }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .support-desc.size-small { font-size: 11px !important; }
+    #shopify-section-{{ section.id }} .support-desc.size-medium { font-size: 14px !important; }
+    #shopify-section-{{ section.id }} .support-desc.size-large { font-size: 17px !important; }
+  }
+
+  /* Title Spacing / Font size overrides */
+  #shopify-section-{{ section.id }} .section-title {
+    margin-top: var(--m-t, 0px) !important;
+    margin-bottom: var(--m-b, 20px) !important;
+  }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .section-title {
+      margin-top: var(--m-t-m, var(--m-t, 0px)) !important;
+      margin-bottom: var(--m-b-m, var(--m-b, 20px)) !important;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .section-title.size-small { font-size: 24px !important; }
+  #shopify-section-{{ section.id }} .section-title.size-medium { font-size: 32px !important; }
+  #shopify-section-{{ section.id }} .section-title.size-large { font-size: 40px !important; }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .section-title.size-small { font-size: 20px !important; }
+    #shopify-section-{{ section.id }} .section-title.size-medium { font-size: 26px !important; }
+    #shopify-section-{{ section.id }} .section-title.size-large { font-size: 32px !important; }
+  }
+
+  /* Benefits Title overrides - smaller than main title */
+  #shopify-section-{{ section.id }} .benefits-title.size-small { font-size: 16px !important; }
+  #shopify-section-{{ section.id }} .benefits-title.size-medium { font-size: 20px !important; }
+  #shopify-section-{{ section.id }} .benefits-title.size-large { font-size: 24px !important; }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .benefits-title.size-small { font-size: 14px !important; }
+    #shopify-section-{{ section.id }} .benefits-title.size-medium { font-size: 18px !important; }
+    #shopify-section-{{ section.id }} .benefits-title.size-large { font-size: 22px !important; }
+  }
+
+  {%- for block in section.blocks -%}
+{%- liquid
+  assign b_align_alignment = ''
+  case block.type
+      when 'header'
+        assign b_align_alignment = ''
+      when 'description'
+        assign b_align_alignment = ''
+      when 'benefits_heading'
+        assign b_align_alignment = ''
+      when 'benefit'
+        assign b_align_alignment = 'left'
+      when 'form'
+        assign b_align_alignment = 'left'
+  endcase
+-%}
+    {%- if block.type == 'benefit' -%}
+      /* Benefit Block Styling for {{ block.id }} */
+      #shopify-section-{{ section.id }} .block-{{ block.id }} {
+        margin-top: {{ block.settings.margin_top }}px !important;
+        margin-bottom: {{ block.settings.margin_bottom }}px !important;
+        text-align: {{ b_align_alignment }} !important;
+        {%- if b_align_alignment == 'center' -%}
+          justify-content: center !important;
+        {%- elsif b_align_alignment == 'right' -%}
+          justify-content: flex-end !important;
+        {%- else -%}
+          justify-content: flex-start !important;
+        {%- endif -%}
+        {% if block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' %}
+          background: {{ block.settings.bg_color }} !important;
+        {% endif %}
+        {% if block.settings.bg_gradient != blank and block.settings.bg_gradient != 'rgba(0,0,0,0)' %}
+          background: {{ block.settings.bg_gradient }} !important;
+        {% endif %}
+      }
+      @media screen and (max-width: 768px) {
+        #shopify-section-{{ section.id }} .block-{{ block.id }} {
+          margin-top: {{ block.settings.margin_top_mobile }}px !important;
+          margin-bottom: {{ block.settings.margin_bottom_mobile }}px !important;
+        }
+      }
+
+      /* Viewport visibility */
+      {%- unless block.settings.show_on_desktop -%}
+        @media screen and (min-width: 1025px) {
+          #shopify-section-{{ section.id }} .block-{{ block.id }} {
+            display: none !important;
+          }
+        }
+      {%- endunless -%}
+      {%- unless block.settings.show_on_tablet -%}
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+          #shopify-section-{{ section.id }} .block-{{ block.id }} {
+            display: none !important;
+          }
+        }
+      {%- endunless -%}
+      {%- unless block.settings.show_on_mobile -%}
+        @media screen and (max-width: 768px) {
+          #shopify-section-{{ section.id }} .block-{{ block.id }} {
+            display: none !important;
+          }
+        }
+      {%- endunless -%}
+
+      /* Typography */
+      #shopify-section-{{ section.id }} .block-{{ block.id }} span {
+        font-size: {{ block.settings.font_size | replace: 'small', '13px' | replace: 'medium', '15px' | replace: 'large', '18px' }} !important;
+        font-weight: {%- if block.settings.font_weight == 'bold' -%}700{%- else -%}400{%- endif -%} !important;
+        font-style: {{ block.settings.font_style }} !important;
+        text-transform: {{ block.settings.text_transform }} !important;
+        letter-spacing: {{ block.settings.letter_spacing }}px !important;
+        line-height: {{ block.settings.line_height }}% !important;
+      }
+
+      /* Colors */
+      {% if block.settings.text_color != blank and block.settings.text_color != 'rgba(0,0,0,0)' %}
+        #shopify-section-{{ section.id }} .block-{{ block.id }} span {
+          color: {{ block.settings.text_color }} !important;
+        }
+      {% endif %}
+      {% if block.settings.icon_color != blank and block.settings.icon_color != 'rgba(0,0,0,0)' %}
+        #shopify-section-{{ section.id }} .block-{{ block.id }} svg {
+          stroke: {{ block.settings.icon_color }} !important;
+        }
+      {% endif %}
+
+    {%- elsif block.type == 'form' -%}
+      /* Form Block Styling for {{ block.id }} */
+      #shopify-section-{{ section.id }} .block-{{ block.id }} {
+        margin-top: {{ block.settings.margin_top }}px !important;
+        margin-bottom: {{ block.settings.margin_bottom }}px !important;
+        {% if block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' %}
+          background: {{ block.settings.bg_color }} !important;
+        {% endif %}
+        {% if block.settings.bg_gradient != blank and block.settings.bg_gradient != 'rgba(0,0,0,0)' %}
+          background: {{ block.settings.bg_gradient }} !important;
+        {% endif %}
+        {% if block.settings.border_color != blank and block.settings.border_color != 'rgba(0,0,0,0)' %}
+          border: 1px solid {{ block.settings.border_color }} !important;
+        {% endif %}
+      }
+      @media screen and (max-width: 768px) {
+        #shopify-section-{{ section.id }} .block-{{ block.id }} {
+          margin-top: {{ block.settings.margin_top_mobile }}px !important;
+          margin-bottom: {{ block.settings.margin_bottom_mobile }}px !important;
+        }
+      }
+
+      /* Viewport visibility */
+      {%- unless block.settings.show_on_desktop -%}
+        @media screen and (min-width: 1025px) {
+          #shopify-section-{{ section.id }} .block-{{ block.id }} {
+            display: none !important;
+          }
+        }
+      {%- endunless -%}
+      {%- unless block.settings.show_on_tablet -%}
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+          #shopify-section-{{ section.id }} .block-{{ block.id }} {
+            display: none !important;
+          }
+        }
+      {%- endunless -%}
+      {%- unless block.settings.show_on_mobile -%}
+        @media screen and (max-width: 768px) {
+          #shopify-section-{{ section.id }} .block-{{ block.id }} {
+            display: none !important;
+          }
+        }
+      {%- endunless -%}
+
+      /* Alignment override */
+      #shopify-section-{{ section.id }} .block-{{ block.id }} .contact-form {
+        text-align: {{ b_align_alignment }} !important;
+      }
+
+      /* Heading Typography & Colors */
+      #shopify-section-{{ section.id }} .block-{{ block.id }} .contact-form > h3 {
+        font-size: {{ block.settings.font_size | replace: 'small', '18px' | replace: 'medium', '22px' | replace: 'large', '28px' }} !important;
+        font-weight: {%- if block.settings.font_weight == 'bold' -%}700{%- else -%}400{%- endif -%} !important;
+        font-style: {{ block.settings.font_style }} !important;
+        text-transform: {{ block.settings.text_transform }} !important;
+        letter-spacing: {{ block.settings.letter_spacing }}px !important;
+        line-height: {{ block.settings.line_height }}% !important;
+        {% if block.settings.heading_color != blank and block.settings.heading_color != 'rgba(0,0,0,0)' %}
+          color: {{ block.settings.heading_color }} !important;
+        {% endif %}
+      }
+
+      /* Field Labels Typography & Colors */
+      #shopify-section-{{ section.id }} .block-{{ block.id }} label {
+        font-size: {{ block.settings.font_size | replace: 'small', '12px' | replace: 'medium', '14px' | replace: 'large', '16px' }} !important;
+        font-weight: {%- if block.settings.font_weight == 'bold' -%}700{%- else -%}400{%- endif -%} !important;
+        font-style: {{ block.settings.font_style }} !important;
+        text-transform: {{ block.settings.text_transform }} !important;
+        letter-spacing: {{ block.settings.letter_spacing }}px !important;
+        line-height: {{ block.settings.line_height }}% !important;
+        {% if block.settings.label_color != blank and block.settings.label_color != 'rgba(0,0,0,0)' %}
+          color: {{ block.settings.label_color }} !important;
+        {% endif %}
+      }
+
+      /* Input Fields Typography & Colors */
+      #shopify-section-{{ section.id }} .block-{{ block.id }} .form-control,
+      #shopify-section-{{ section.id }} .block-{{ block.id }} .form-control::placeholder {
+        font-size: {{ block.settings.font_size | replace: 'small', '12px' | replace: 'medium', '14px' | replace: 'large', '16px' }} !important;
+        font-weight: {%- if block.settings.font_weight == 'bold' -%}700{%- else -%}400{%- endif -%} !important;
+        font-style: {{ block.settings.font_style }} !important;
+        text-transform: {{ block.settings.text_transform }} !important;
+        letter-spacing: {{ block.settings.letter_spacing }}px !important;
+        line-height: {{ block.settings.line_height }}% !important;
+      }
+      #shopify-section-{{ section.id }} .block-{{ block.id }} .form-control {
+        {% if block.settings.input_bg_color != blank and block.settings.input_bg_color != 'rgba(0,0,0,0)' %}
+          background-color: {{ block.settings.input_bg_color }} !important;
+        {% endif %}
+        {% if block.settings.input_text_color != blank and block.settings.input_text_color != 'rgba(0,0,0,0)' %}
+          color: {{ block.settings.input_text_color }} !important;
+        {% endif %}
+        {% if block.settings.input_border_color != blank and block.settings.input_border_color != 'rgba(0,0,0,0)' %}
+          border-color: {{ block.settings.input_border_color }} !important;
+        {% endif %}
+      }
+      {% if block.settings.input_focus_border_color != blank and block.settings.input_focus_border_color != 'rgba(0,0,0,0)' %}
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .form-control:focus {
+          border-color: {{ block.settings.input_focus_border_color }} !important;
+        }
+      {% endif %}
+      {% if block.settings.input_placeholder_color != blank and block.settings.input_placeholder_color != 'rgba(0,0,0,0)' %}
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .form-control::placeholder {
+          color: {{ block.settings.input_placeholder_color }} !important;
+          opacity: 1;
+        }
+      {% endif %}
+
+      /* Submit Button Typography & Colors */
+      #shopify-section-{{ section.id }} .block-{{ block.id }} .btn-submit {
+        font-size: {{ block.settings.font_size | replace: 'small', '12px' | replace: 'medium', '14px' | replace: 'large', '16px' }} !important;
+        font-weight: {%- if block.settings.font_weight == 'bold' -%}700{%- else -%}400{%- endif -%} !important;
+        font-style: {{ block.settings.font_style }} !important;
+        text-transform: {{ block.settings.text_transform }} !important;
+        letter-spacing: {{ block.settings.letter_spacing }}px !important;
+        line-height: {{ block.settings.line_height }}% !important;
+        {% if block.settings.button_bg_color != blank and block.settings.button_bg_color != 'rgba(0,0,0,0)' %}
+          background: {{ block.settings.button_bg_color }} !important;
+        {% endif %}
+        {% if block.settings.button_bg_gradient != blank and block.settings.button_bg_gradient != 'rgba(0,0,0,0)' %}
+          background: {{ block.settings.button_bg_gradient }} !important;
+        {% endif %}
+        {% if block.settings.button_text_color != blank and block.settings.button_text_color != 'rgba(0,0,0,0)' %}
+          color: {{ block.settings.button_text_color }} !important;
+        {% endif %}
+        {% if block.settings.button_border_color != blank and block.settings.button_border_color != 'rgba(0,0,0,0)' %}
+          border: 1px solid {{ block.settings.button_border_color }} !important;
+        {% endif %}
+      }
+      #shopify-section-{{ section.id }} .block-{{ block.id }} .btn-submit:hover {
+        {% if block.settings.button_hover_bg_color != blank and block.settings.button_hover_bg_color != 'rgba(0,0,0,0)' %}
+          background: {{ block.settings.button_hover_bg_color }} !important;
+        {% endif %}
+        {% if block.settings.button_hover_text_color != blank and block.settings.button_hover_text_color != 'rgba(0,0,0,0)' %}
+          color: {{ block.settings.button_hover_text_color }} !important;
+        {% endif %}
+        {% if block.settings.button_hover_border_color != blank and block.settings.button_hover_border_color != 'rgba(0,0,0,0)' %}
+          border-color: {{ block.settings.button_hover_border_color }} !important;
+        {% endif %}
+      }
+
+      /* Success banner box overrides */
+      #shopify-section-{{ section.id }} .block-{{ block.id }} .form-success {
+        {% if block.settings.success_bg_color != blank and block.settings.success_bg_color != 'rgba(0,0,0,0)' %}
+          background-color: {{ block.settings.success_bg_color }} !important;
+        {% endif %}
+        {% if block.settings.success_border_color != blank and block.settings.success_border_color != 'rgba(0,0,0,0)' %}
+          border: 1px solid {{ block.settings.success_border_color }} !important;
+        {% endif %}
+      }
+      #shopify-section-{{ section.id }} .block-{{ block.id }} .form-success h3 {
+        font-size: {{ block.settings.font_size | replace: 'small', '12px' | replace: 'medium', '14px' | replace: 'large', '16px' }} !important;
+        font-weight: {%- if block.settings.font_weight == 'bold' -%}700{%- else -%}400{%- endif -%} !important;
+        font-style: {{ block.settings.font_style }} !important;
+        text-transform: {{ block.settings.text_transform }} !important;
+        letter-spacing: {{ block.settings.letter_spacing }}px !important;
+        line-height: {{ block.settings.line_height }}% !important;
+        {% if block.settings.success_text_color != blank and block.settings.success_text_color != 'rgba(0,0,0,0)' %}
+          color: {{ block.settings.success_text_color }} !important;
+        {% endif %}
+      }
+
+      /* Error alert banner box overrides */
+      #shopify-section-{{ section.id }} .block-{{ block.id }} .form-errors,
+      #shopify-section-{{ section.id }} .block-{{ block.id }} .form-errors li {
+        font-size: {{ block.settings.font_size | replace: 'small', '12px' | replace: 'medium', '14px' | replace: 'large', '16px' }} !important;
+        font-weight: {%- if block.settings.font_weight == 'bold' -%}700{%- else -%}400{%- endif -%} !important;
+        font-style: {{ block.settings.font_style }} !important;
+        text-transform: {{ block.settings.text_transform }} !important;
+        letter-spacing: {{ block.settings.letter_spacing }}px !important;
+        line-height: {{ block.settings.line_height }}% !important;
+      }
+      #shopify-section-{{ section.id }} .block-{{ block.id }} .form-errors {
+        {% if block.settings.error_bg_color != blank and block.settings.error_bg_color != 'rgba(0,0,0,0)' %}
+          background-color: {{ block.settings.error_bg_color }} !important;
+        {% endif %}
+        {% if block.settings.error_border_color != blank and block.settings.error_border_color != 'rgba(0,0,0,0)' %}
+          border: 1px solid {{ block.settings.error_border_color }} !important;
+        {% endif %}
+        {% if block.settings.error_text_color != blank and block.settings.error_text_color != 'rgba(0,0,0,0)' %}
+          color: {{ block.settings.error_text_color }} !important;
+        {% endif %}
+      }
+    {%- endif -%}
+  {%- endfor -%}
+</style>
+
+{% render 'section-padding',
+  section_id: section.id,
+  padding_top: section.settings.padding_top,
+  padding_bottom: section.settings.padding_bottom,
+  padding_top_mobile: section.settings.padding_top_mobile,
+  padding_bottom_mobile: section.settings.padding_bottom_mobile
+%}
+
+{%- if section.settings.show_section -%}
+<section
+  class="contact-page-form-section color-{{ section.settings.color_scheme }} {% unless section.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless section.settings.show_on_mobile %} hidden-mobile{% endunless %}"
+  id="shopify-section-{{ section.id }}"
+>
+  <div class="{% if section.settings.container_width == 'full' %}container-fluid{% elsif section.settings.container_width == 'narrow' %}container-narrow{% else %}container{% endif %}">
+    <div class="contact-page-form-wrapper">
+
+      {%- comment -%}Info Column - Render blocks for info content{%- endcomment -%}
+      <div class="contact-info-block">
+        {%- assign in_benefits = false -%}
+        {%- for block in section.blocks -%}
+{%- liquid
+  assign b_align_alignment = ''
+  case block.type
+      when 'header'
+        assign b_align_alignment = ''
+      when 'description'
+        assign b_align_alignment = ''
+      when 'benefits_heading'
+        assign b_align_alignment = ''
+      when 'benefit'
+        assign b_align_alignment = 'left'
+      when 'form'
+        assign b_align_alignment = 'left'
+  endcase
+-%}
+          {%- if block.type == 'benefit' -%}
+            {%- if in_benefits == false -%}
+              {{ '<div class="why-choose-us"><ul class="feature-list">' }}
+              {%- assign in_benefits = true -%}
+            {%- endif -%}
+          {%- else -%}
+            {%- if in_benefits == true -%}
+              {{ '</ul></div>' }}
+              {%- assign in_benefits = false -%}
+            {%- endif -%}
+          {%- endif -%}
+
+          {%- case block.type -%}
+
+            {%- when 'header' -%}
+              {%- if block.settings.heading != blank -%}
+                {%- assign heading_tag = block.settings.heading_tag | default: 'h2' -%}
+                {%- assign h_color = block.settings.highlight_color -%}
+                {%- assign h_gradient = block.settings.highlight_gradient -%}
+                {%- assign head_text_align = b_align_alignment -%}
+                {%- if head_text_align == blank -%}
+                  {%- if section.settings.blocks_position == 'left' -%}
+                    {%- assign head_text_align = 'left' -%}
+                  {%- elsif section.settings.blocks_position == 'right' -%}
+                    {%- assign head_text_align = 'right' -%}
+                  {%- else -%}
+                    {%- assign head_text_align = 'center' -%}
+                  {%- endif -%}
+                {%- endif -%}
+                <{{ heading_tag }}
+                  class="section-title size-{{ block.settings.font_size | default: 'large' }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}"
+                  {{ block.shopify_attributes }}
+                  style="
+                    --m-t: {{ block.settings.margin_top | default: 0 }}px;
+                    --m-b: {{ block.settings.margin_bottom | default: 20 }}px;
+                    --m-t-m: {{ block.settings.margin_top_mobile | default: 0 }}px;
+                    --m-b-m: {{ block.settings.margin_bottom_mobile | default: 16 }}px;
+                    font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %};
+                    font-style: {{ block.settings.font_style | default: 'normal' }};
+                    text-transform: {{ block.settings.text_transform | default: 'none' }};
+                    letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px;
+                    line-height: {{ block.settings.line_height | default: 120 }}%;
+                    text-align: {{ head_text_align }};
+                    width: 100% !important;
+                    max-width: {{ block.settings.max_width | default: 800 }}px !important;
+                    {%- if section.settings.blocks_position == 'left' -%}
+                      margin-left: 0 !important;
+                      margin-right: auto !important;
+                    {%- elsif section.settings.blocks_position == 'right' -%}
+                      margin-left: auto !important;
+                      margin-right: 0 !important;
+                    {%- else -%}
+                      margin-left: auto !important;
+                      margin-right: auto !important;
+                    {%- endif -%}
+                    {% if block.settings.text_color != blank and block.settings.text_color != 'rgba(0,0,0,0)' %}color: {{ block.settings.text_color }} !important;{% endif %}
+                    {% if block.settings.bg_gradient != blank %}background: {{ block.settings.bg_gradient }} !important;{% elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' %}background: {{ block.settings.bg_color }} !important;{% endif %}
+                  "
+                >
+                  {%- if h_gradient != blank and h_gradient != 'rgba(0,0,0,0)' -%}
+                    {%- assign highlight_span = '<span class="highlight-text" style="background: ' | append: h_gradient | append: '; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">' -%}
+                  {%- elsif h_color != blank and h_color != 'rgba(0,0,0,0)' -%}
+                    {%- assign highlight_span = '<span class="highlight-text" style="color: ' | append: h_color | append: ';">' -%}
+                  {%- else -%}
+                    {%- assign highlight_span = '<span class="highlight-text">' -%}
+                  {%- endif -%}
+                  {{ block.settings.heading | replace: '[', highlight_span | replace: ']', '</span>' }}
+                </{{ heading_tag }}>
+              {%- endif -%}
+
+            {%- when 'description' -%}
+              {%- if block.settings.description != blank -%}
+                {%- assign description_tag = block.settings.description_tag | default: 'p' -%}
+                {%- assign desc_text_align = b_align_alignment -%}
+                {%- if desc_text_align == blank -%}
+                  {%- if section.settings.blocks_position == 'left' -%}
+                    {%- assign desc_text_align = 'left' -%}
+                  {%- elsif section.settings.blocks_position == 'right' -%}
+                    {%- assign desc_text_align = 'right' -%}
+                  {%- else -%}
+                    {%- assign desc_text_align = 'center' -%}
+                  {%- endif -%}
+                {%- endif -%}
+                <{{ description_tag }}
+                  class="support-desc size-{{ block.settings.font_size | default: 'medium' }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}"
+                  {{ block.shopify_attributes }}
+                  style="
+                    --desc-t: {{ block.settings.margin_top | default: 10 }}px;
+                    --desc-b: {{ block.settings.margin_bottom | default: 30 }}px;
+                    --desc-t-m: {{ block.settings.margin_top_mobile | default: 10 }}px;
+                    --desc-b-m: {{ block.settings.margin_bottom_mobile | default: 20 }}px;
+                    font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %};
+                    font-style: {{ block.settings.font_style | default: 'normal' }};
+                    text-transform: {{ block.settings.text_transform | default: 'none' }};
+                    letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px;
+                    line-height: {{ block.settings.line_height | default: 170 }}%;
+                    text-align: {{ desc_text_align }};
+                    width: 100% !important;
+                    max-width: {{ block.settings.max_width | default: 800 }}px !important;
+                    {%- if section.settings.blocks_position == 'left' -%}
+                      margin-left: 0 !important;
+                      margin-right: auto !important;
+                    {%- elsif section.settings.blocks_position == 'right' -%}
+                      margin-left: auto !important;
+                      margin-right: 0 !important;
+                    {%- else -%}
+                      margin-left: auto !important;
+                      margin-right: auto !important;
+                    {%- endif -%}
+                    {% if block.settings.text_color != blank and block.settings.text_color != 'rgba(0,0,0,0)' %}color: {{ block.settings.text_color }} !important;{% endif %}
+                    {% if block.settings.bg_gradient != blank %}background: {{ block.settings.bg_gradient }} !important;{% elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' %}background: {{ block.settings.bg_color }} !important;{% endif %}
+                  "
+                >
+                  {%- if block.settings.highlight_gradient != blank and block.settings.highlight_gradient != 'rgba(0,0,0,0)' -%}
+                    {%- assign highlight_span = '<span class="highlight-text" style="background: ' | append: block.settings.highlight_gradient | append: '; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">' -%}
+                  {%- elsif block.settings.highlight_color != blank and block.settings.highlight_color != 'rgba(0,0,0,0)' -%}
+                    {%- assign highlight_span = '<span class="highlight-text" style="color: ' | append: block.settings.highlight_color | append: ';">' -%}
+                  {%- else -%}
+                    {%- assign highlight_span = '<span class="highlight-text">' -%}
+                  {%- endif -%}
+                  {{ block.settings.description | replace: '[', highlight_span | replace: ']', '</span>' }}
+                </{{ description_tag }}>
+              {%- endif -%}
+
+            {%- when 'benefits_heading' -%}
+              {%- if block.settings.heading != blank -%}
+                {%- assign heading_tag = block.settings.heading_tag | default: 'h3' -%}
+                {%- assign h_color = block.settings.highlight_color -%}
+                {%- assign h_gradient = block.settings.highlight_gradient -%}
+                {%- assign head_text_align = b_align_alignment -%}
+                {%- if head_text_align == blank -%}
+                  {%- if section.settings.blocks_position == 'left' -%}
+                    {%- assign head_text_align = 'left' -%}
+                  {%- elsif section.settings.blocks_position == 'right' -%}
+                    {%- assign head_text_align = 'right' -%}
+                  {%- else -%}
+                    {%- assign head_text_align = 'center' -%}
+                  {%- endif -%}
+                {%- endif -%}
+                <div class="why-choose-us {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }} style="margin-bottom: 0; padding-bottom: 0; width: 100%;">
+                  <{{ heading_tag }}
+                    class="section-title benefits-title size-{{ block.settings.font_size | default: 'medium' }}"
+                    style="
+                      --m-t: {{ block.settings.margin_top | default: 0 }}px;
+                      --m-b: {{ block.settings.margin_bottom | default: 12 }}px;
+                      --m-t-m: {{ block.settings.margin_top_mobile | default: 0 }}px;
+                      --m-b-m: {{ block.settings.margin_bottom_mobile | default: 8 }}px;
+                      font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %};
+                      font-style: {{ block.settings.font_style | default: 'normal' }};
+                      text-transform: {{ block.settings.text_transform | default: 'none' }};
+                      letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px;
+                      line-height: {{ block.settings.line_height | default: 120 }}%;
+                      text-align: {{ head_text_align }};
+                      width: 100% !important;
+                      {%- if section.settings.blocks_position == 'left' -%}
+                        margin-left: 0 !important;
+                        margin-right: auto !important;
+                      {%- elsif section.settings.blocks_position == 'right' -%}
+                        margin-left: auto !important;
+                        margin-right: 0 !important;
+                      {%- else -%}
+                        margin-left: auto !important;
+                        margin-right: auto !important;
+                      {%- endif -%}
+                      {% if block.settings.text_color != blank and block.settings.text_color != 'rgba(0,0,0,0)' %}color: {{ block.settings.text_color }} !important;{% endif %}
+                      {% if block.settings.bg_gradient != blank %}background: {{ block.settings.bg_gradient }} !important;{% elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' %}background: {{ block.settings.bg_color }} !important;{% endif %}
+                    "
+                  >
+                    {%- if h_gradient != blank and h_gradient != 'rgba(0,0,0,0)' -%}
+                      {%- assign highlight_span = '<span class="highlight-text" style="background: ' | append: h_gradient | append: '; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">' -%}
+                    {%- elsif h_color != blank and h_color != 'rgba(0,0,0,0)' -%}
+                      {%- assign highlight_span = '<span class="highlight-text" style="color: ' | append: h_color | append: ';">' -%}
+                    {%- else -%}
+                      {%- assign highlight_span = '<span class="highlight-text">' -%}
+                    {%- endif -%}
+                    {{ block.settings.heading | replace: '[', highlight_span | replace: ']', '</span>' }}
+                  </{{ heading_tag }}>
+                </div>
+              {%- endif -%}
+
+            {%- when 'benefit' -%}
+              {%- if block.settings.text != blank -%}
+                <li class="block-{{ block.id }}" {{ block.shopify_attributes }}>
+                  {%- if block.settings.show_icon -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 6 9 17l-5-5"/>
+                    </svg>
+                  {%- endif -%}
+                  <span>{{ block.settings.text }}</span>
+                </li>
+              {%- endif -%}
+
+            {%- when 'image' -%}
+              <div class="contact-image-wrapper {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }} style="--contact-img-radius: {{ block.settings.border_radius }}px;">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'contact-image', alt: block.settings.image.alt | default: 'Contact image' }}
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+
+          {%- endcase -%}
+        {%- endfor -%}
+        {%- if in_benefits == true -%}
+          {{ '</ul></div>' }}
+        {%- endif -%}
+      </div>
+
+      {%- comment -%}Form Column - Render form block{%- endcomment -%}
+      {%- for block in section.blocks -%}
+{%- liquid
+  assign b_align_alignment = ''
+  case block.type
+      when 'header'
+        assign b_align_alignment = ''
+      when 'description'
+        assign b_align_alignment = ''
+      when 'benefits_heading'
+        assign b_align_alignment = ''
+      when 'benefit'
+        assign b_align_alignment = 'left'
+      when 'form'
+        assign b_align_alignment = 'left'
+  endcase
+-%}
+        {%- if block.type == 'form' -%}
+          {%- assign show_block = true -%}
+          {%- if block.settings.visibility_customer_status == 'logged_in' and customer == nil -%}
+            {%- assign show_block = false -%}
+          {%- elsif block.settings.visibility_customer_status == 'guest' and customer != nil -%}
+            {%- assign show_block = false -%}
+          {%- endif -%}
+
+          {%- if show_block -%}
+            <div class="contact-form-container block-{{ block.id }}" {{ block.shopify_attributes }}>
+              {%- form 'contact', class: 'contact-form' -%}
+                {%- if form.posted_successfully? -%}
+                  <div class="form-success">
+                    <h3>{{ block.settings.success_message }}</h3>
+                  </div>
+                {%- else -%}
+                  {%- if form.errors -%}
+                    <div class="form-errors">
+                      {{ form.errors | default_errors }}
+                    </div>
+                  {%- endif -%}
+
+                  <div style="display:none;" aria-hidden="true">
+                    <input type="text" name="contact[honeypot]" tabindex="-1" autocomplete="off" class="honeypot-field">
+                  </div>
+
+                  {%- if block.settings.show_form_heading and block.settings.form_heading != blank -%}
+                    <h3>{{ block.settings.form_heading }}</h3>
+                  {%- endif -%}
+
+                  {%- if block.settings.show_name_field -%}
+                    <div class="form-group">
+                      {%- if block.settings.show_labels -%}
+                        <label for="contact-name-{{ section.id }}-{{ block.id }}">{{ block.settings.name_label }}</label>
+                      {%- endif -%}
+                      <input
+                        type="text"
+                        id="contact-name-{{ section.id }}-{{ block.id }}"
+                        name="contact[name]"
+                        required
+                        placeholder="{{ block.settings.name_placeholder }}"
+                        class="form-control"
+                      />
+                    </div>
+                  {%- endif -%}
+
+                  {%- if block.settings.show_email_field or block.settings.show_phone_field -%}
+                    <div class="form-row">
+                      {%- if block.settings.show_email_field -%}
+                        <div class="form-group">
+                          {%- if block.settings.show_labels -%}
+                            <label for="contact-email-{{ section.id }}-{{ block.id }}">{{ block.settings.email_label }}</label>
+                          {%- endif -%}
+                          <input
+                            type="email"
+                            id="contact-email-{{ section.id }}-{{ block.id }}"
+                            name="contact[email]"
+                            required
+                            placeholder="{{ block.settings.email_placeholder }}"
+                            class="form-control"
+                          />
+                        </div>
+                      {%- endif -%}
+                      {%- if block.settings.show_phone_field -%}
+                        <div class="form-group">
+                          {%- if block.settings.show_labels -%}
+                            <label for="contact-phone-{{ section.id }}-{{ block.id }}">{{ block.settings.phone_label }}</label>
+                          {%- endif -%}
+                          <input
+                            type="tel"
+                            id="contact-phone-{{ section.id }}-{{ block.id }}"
+                            name="contact[phone]"
+                            placeholder="{{ block.settings.phone_placeholder }}"
+                            class="form-control"
+                          />
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+
+                  {%- if block.settings.show_message_field -%}
+                    <div class="form-group">
+                      {%- if block.settings.show_labels -%}
+                        <label for="contact-message-{{ section.id }}-{{ block.id }}">{{ block.settings.message_label }}</label>
+                      {%- endif -%}
+                      <textarea
+                        id="contact-message-{{ section.id }}-{{ block.id }}"
+                        name="contact[body]"
+                        required
+                        rows="5"
+                        placeholder="{{ block.settings.message_placeholder }}"
+                        class="form-control"
+                      ></textarea>
+                    </div>
+                  {%- endif -%}
+
+                  <button type="submit" class="btn-submit">{{ block.settings.submit_label }}</button>
+                {%- endif -%}
+              {%- endform -%}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Contact Page Form",
+  "tag": "section",
+  "class": "section-contact-page-form",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_desktop",
+      "label": "Show on Desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "Show on Mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "blocks_position",
+      "label": "Blocks Position",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "default": "standard",
+      "options": [
+        { "value": "full", "label": "Full width" },
+        { "value": "standard", "label": "Standard" },
+        { "value": "narrow", "label": "Narrow" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1200
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1",
+      "options": [
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "inverse", "label": "Inverse" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "header",
+      "name": "Header",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Visit Our [Support Center]",
+          "info": "Use [text] to highlight text with accent color"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading Tag",
+          "info": "Specify heading code types for SEO and search engines.",
+          "default": "h2",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" },
+            { "value": "div", "label": "div" },
+            { "value": "span", "label": "span" },
+            { "value": "p", "label": "p" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 400,
+          "max": 1200,
+          "step": 10,
+          "unit": "px",
+          "label": "Maximum width",
+          "default": 800
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "large",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 120
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "highlight_color",
+          "label": "Highlight Text Color"
+        },
+        {
+          "type": "color_background",
+          "id": "highlight_gradient",
+          "label": "Highlight Text Gradient"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Whether you're looking for the perfect laptop, need a screen repair, or have questions about your home theater setup, our tech enthusiasts are ready to provide expert guidance and solutions tailored to your lifestyle."
+        },
+        {
+          "type": "select",
+          "id": "description_tag",
+          "label": "Description Tag",
+          "default": "p",
+          "options": [
+            { "value": "p", "label": "p" },
+            { "value": "span", "label": "span" },
+            { "value": "div", "label": "div" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 400,
+          "max": 1200,
+          "step": 10,
+          "unit": "px",
+          "label": "Maximum width",
+          "default": 800
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 20
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 170
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "highlight_color",
+          "label": "Highlight Text Color"
+        },
+        {
+          "type": "color_background",
+          "id": "highlight_gradient",
+          "label": "Highlight Text Gradient"
+        }
+      ]
+    },
+    {
+      "type": "benefits_heading",
+      "name": "Benefits Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Benefits heading",
+          "default": "Why Shop With Us?",
+          "info": "Use [text] to highlight text with accent color"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading Tag",
+          "info": "Specify heading code types for SEO and search engines.",
+          "default": "h3",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" },
+            { "value": "div", "label": "div" },
+            { "value": "span", "label": "span" },
+            { "value": "p", "label": "p" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 8
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 120
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "highlight_color",
+          "label": "Highlight Text Color"
+        },
+        {
+          "type": "color_background",
+          "id": "highlight_gradient",
+          "label": "Highlight Text Gradient"
+        }
+      ]
+    },
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_tablet",
+          "label": "Show on Tablet",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_icon",
+          "label": "Show Icon",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 15
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Benefit text",
+          "default": "100% Genuine products from official brands"
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 160
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        }
+      ]
+    },
+    {
+      "type": "form",
+      "name": "Contact Form",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_tablet",
+          "label": "Show on Tablet",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "visibility_customer_status",
+          "label": "Customer Visibility",
+          "default": "all",
+          "options": [
+            { "value": "all", "label": "Show to everyone" },
+            { "value": "logged_in", "label": "Logged-in customers only" },
+            { "value": "guest", "label": "Guests / Logged-out only" }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_form_heading",
+          "label": "Show Form Heading",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_labels",
+          "label": "Show Field Labels",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_name_field",
+          "label": "Show Name Field",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_email_field",
+          "label": "Show Email Field",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_phone_field",
+          "label": "Show Phone Field",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_message_field",
+          "label": "Show Message Field",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "form_heading",
+          "label": "Form heading",
+          "default": "Start Your Project"
+        },
+        {
+          "type": "text",
+          "id": "name_label",
+          "label": "Name label",
+          "default": "Name"
+        },
+        {
+          "type": "text",
+          "id": "name_placeholder",
+          "label": "Name placeholder",
+          "default": "Your full name"
+        },
+        {
+          "type": "text",
+          "id": "email_label",
+          "label": "Email label",
+          "default": "Email Address"
+        },
+        {
+          "type": "text",
+          "id": "email_placeholder",
+          "label": "Email placeholder",
+          "default": "your@email.com"
+        },
+        {
+          "type": "text",
+          "id": "phone_label",
+          "label": "Phone label",
+          "default": "Phone"
+        },
+        {
+          "type": "text",
+          "id": "phone_placeholder",
+          "label": "Phone placeholder",
+          "default": "(555) 123-4567"
+        },
+        {
+          "type": "text",
+          "id": "message_label",
+          "label": "Message label",
+          "default": "How can we help?"
+        },
+        {
+          "type": "text",
+          "id": "message_placeholder",
+          "label": "Message placeholder",
+          "default": "Describe your inquiry (e.g., product availability, repair status, technical issue)..."
+        },
+        {
+          "type": "text",
+          "id": "submit_label",
+          "label": "Submit button label",
+          "default": "Submit"
+        },
+        {
+          "type": "text",
+          "id": "success_message",
+          "label": "Success message",
+          "default": "Thanks for contacting us! We'll get back to you soon."
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 120
+        },
+        {
+          "type": "header",
+          "content": "Colors - Container"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Form Container Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Form Container Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Form Container Border Color"
+        },
+        {
+          "type": "header",
+          "content": "Colors - Text & Labels"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Form Heading Color"
+        },
+        {
+          "type": "color",
+          "id": "label_color",
+          "label": "Field Label Color"
+        },
+        {
+          "type": "header",
+          "content": "Colors - Inputs"
+        },
+        {
+          "type": "color",
+          "id": "input_bg_color",
+          "label": "Input Background Color"
+        },
+        {
+          "type": "color",
+          "id": "input_text_color",
+          "label": "Input Text Color"
+        },
+        {
+          "type": "color",
+          "id": "input_placeholder_color",
+          "label": "Input Placeholder Color"
+        },
+        {
+          "type": "color",
+          "id": "input_border_color",
+          "label": "Input Border Color"
+        },
+        {
+          "type": "color",
+          "id": "input_focus_border_color",
+          "label": "Input Focus Border Color"
+        },
+        {
+          "type": "header",
+          "content": "Colors - Submit Button"
+        },
+        {
+          "type": "color",
+          "id": "button_bg_color",
+          "label": "Submit Button Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "button_bg_gradient",
+          "label": "Submit Button Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Submit Button Text Color"
+        },
+        {
+          "type": "color",
+          "id": "button_border_color",
+          "label": "Submit Button Border Color"
+        },
+        {
+          "type": "color",
+          "id": "button_hover_bg_color",
+          "label": "Submit Button Hover Background Color"
+        },
+        {
+          "type": "color",
+          "id": "button_hover_text_color",
+          "label": "Submit Button Hover Text Color"
+        },
+        {
+          "type": "color",
+          "id": "button_hover_border_color",
+          "label": "Submit Button Hover Border Color"
+        },
+        {
+          "type": "header",
+          "content": "Colors - Feedback Banners"
+        },
+        {
+          "type": "color",
+          "id": "success_bg_color",
+          "label": "Success Banner Background Color"
+        },
+        {
+          "type": "color",
+          "id": "success_text_color",
+          "label": "Success Banner Text Color"
+        },
+        {
+          "type": "color",
+          "id": "success_border_color",
+          "label": "Success Banner Border Color"
+        },
+        {
+          "type": "color",
+          "id": "error_bg_color",
+          "label": "Error Alert Background Color"
+        },
+        {
+          "type": "color",
+          "id": "error_text_color",
+          "label": "Error Alert Text Color"
+        },
+        {
+          "type": "color",
+          "id": "error_border_color",
+          "label": "Error Alert Border Color"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Contact Image",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "range",
+          "id": "border_radius",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Border radius",
+          "default": 16
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Page Form",
+      "blocks": [
+        {
+          "type": "header"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "benefits_heading"
+        },
+        {
+          "type": "benefit"
+        },
+        {
+          "type": "form"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

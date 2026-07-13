@@ -1,0 +1,242 @@
+{{ 'section-newsletter.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.show_section -%}
+{% render 'section-padding',
+  section_id: section.id,
+  padding_left: section.settings.padding_left,
+  padding_right: section.settings.padding_right,
+  padding_left_mobile: section.settings.padding_left_mobile,
+  padding_right_mobile: section.settings.padding_right_mobile
+%}
+<style>
+  #shopify-section-{{ section.id }} { padding: 0 !important; }
+  #shopify-section-{{ section.id }} .hec-newsletter {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .hec-newsletter {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+  }
+</style>
+
+<section class="hec-newsletter color-{{ section.settings.color_scheme }}" id="shopify-section-{{ section.id }}" aria-label="Newsletter signup">
+  <div class="container">
+    <div class="hec-newsletter-card">
+      <div class="hec-newsletter-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      </div>
+      
+      {%- if section.settings.heading != blank -%}
+        <h2>{{ section.settings.heading | replace: '[', '<span>' | replace: ']', '</span>' }}</h2>
+      {%- endif -%}
+      
+      {%- if section.settings.description != blank -%}
+        <p>{{ section.settings.description | strip_html }}</p>
+      {%- endif -%}
+
+      {%- form 'customer', class: 'hec-newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        
+        {%- if form.posted_successfully? -%}
+          <div class="hec-newsletter-success">
+            <h3 class="newsletter-form-success" tabindex="-1" autofocus>{{ section.settings.success_message }}</h3>
+          </div>
+        {%- else -%}
+          <div class="hec-newsletter-form-container">
+            <div class="field">
+              <label class="visually-hidden" for="NewsletterForm-{{ section.id }}">
+                {{ 'general.newsletter_form.email_placeholder' | t }}
+              </label>
+              <input type="email" name="contact[email]" id="NewsletterForm-{{ section.id }}"
+                class="hec-newsletter-input" value="{{ form.email }}"
+                aria-required="true" autocorrect="off" autocapitalize="off" autocomplete="email"
+                {% if form.errors %}
+                  aria-invalid="true"
+                  aria-describedby="Newsletter-error--{{ section.id }}"
+                {% endif %}
+                placeholder="{{ section.settings.placeholder_text | default: 'Your email' }}" 
+                required />
+              
+              <button type="submit" class="hec-newsletter-submit" name="commit" id="Subscribe-{{ section.id }}">
+                {{ section.settings.button_label }}
+              </button>
+            </div>
+            
+            {%- if form.errors -%}
+              <small class="newsletter-form-error" id="Newsletter-error--{{ section.id }}">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+
+      {%- if section.settings.disclaimer != blank -%}
+        <p class="hec-newsletter-note">{{ section.settings.disclaimer }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "class": "section-newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Stay in the Loop"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Get exclusive tech offers, early access to new drops, and gear guides delivered to your inbox.</p>"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_text",
+      "label": "Email placeholder",
+      "default": "Enter your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for subscribing!"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer text",
+      "default": "No spam, unsubscribe anytime. We respect your privacy."
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    }
+  ],
+  "blocks": [
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter"
+    }
+  ]
+}
+{% endschema %}

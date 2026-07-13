@@ -1,0 +1,29 @@
+{%- comment -%}Article Comment Form Block{%- endcomment -%}
+{%- if blog.comments_enabled? -%}
+  <div class="article-comment-form-wrapper" {{ block.shopify_attributes }}>
+    <h{{ block.settings.heading_level }}>{{ 'blog.comment_form_title' | t }}</h{{ block.settings.heading_level }}>
+    
+    {% form 'new_comment', article %}
+      {{ form.errors | default_errors }}
+      
+      <div class="article-comment-form">
+        <div class="form-group">
+          <label for="author-{{ block.id }}">{{ 'blog.comment_form_name' | t }}</label>
+          <input type="text" name="comment[author]" id="author-{{ block.id }}" value="{{ form.author }}" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email-{{ block.id }}">{{ 'blog.comment_form_email' | t }}</label>
+          <input type="email" name="comment[email]" id="email-{{ block.id }}" value="{{ form.email }}" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="body-{{ block.id }}">{{ 'blog.comment_form_body' | t }}</label>
+          <textarea name="comment[body]" id="body-{{ block.id }}" required>{{ form.body }}</textarea>
+        </div>
+        
+        <button type="submit" class="btn">{{ 'blog.comment_form_submit' | t }}</button>
+      </div>
+    {% endform %}
+  </div>
+{%- endif -%}

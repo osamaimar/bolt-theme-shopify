@@ -1,0 +1,525 @@
+{{ 'section-search.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'section-search.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  #shopify-section-{{ section.id }} {
+    padding: 0 !important;
+  }
+  #shopify-section-{{ section.id }} .search-bar-outer {
+    padding-top: {{ section.settings.padding_top }}px !important;
+    padding-bottom: {{ section.settings.padding_bottom }}px !important;
+    display: flow-root !important;
+  }
+  {%- unless section.settings.show_on_desktop -%}
+    @media screen and (min-width: 769px) {
+      #shopify-section-{{ section.id }} .search-bar-outer {
+        display: none !important;
+      }
+    }
+  {%- endunless -%}
+  {%- unless section.settings.show_on_mobile -%}
+    @media screen and (max-width: 768px) {
+      #shopify-section-{{ section.id }} .search-bar-outer {
+        display: none !important;
+      }
+    }
+  {%- endunless -%}
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .search-bar-outer {
+      padding-top: {{ section.settings.padding_top_mobile | default: section.settings.padding_top }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom_mobile | default: section.settings.padding_bottom }}px !important;
+    }
+  }
+
+  /* Scoped layout max width */
+  #shopify-section-{{ section.id }} .search-container {
+    {% if section.settings.container_width == 'narrow' %}
+      max-width: 800px !important;
+    {% elsif section.settings.container_width == 'standard' %}
+      max-width: {{ section.settings.max_width }}px !important;
+    {% elsif section.settings.container_width == 'full' %}
+      max-width: 100% !important;
+      padding-left: 5% !important;
+      padding-right: 5% !important;
+    {% endif %}
+    margin: 0 auto !important;
+  }
+
+  #shopify-section-{{ section.id }} .search-bar-content {
+    display: flex;
+    flex-direction: column;
+    align-items: {% if section.settings.blocks_position == 'left' %}flex-start{% elsif section.settings.blocks_position == 'right' %}flex-end{% else %}center{% endif %} !important;
+  }
+
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'search_input' -%}
+        #shopify-section-{{ section.id }} .block-{{ block.id }} {
+          transition: all 0.3s ease;
+          width: 100% !important;
+          {% if block.settings.max_width != blank %}
+            max-width: {{ block.settings.max_width }}px !important;
+          {% endif %}
+          {% if section.settings.blocks_position == 'left' %}
+            margin-left: 0 !important;
+            margin-right: auto !important;
+          {% elsif section.settings.blocks_position == 'right' %}
+            margin-left: auto !important;
+            margin-right: 0 !important;
+          {% else %}
+            margin-left: auto !important;
+            margin-right: auto !important;
+          {% endif %}
+          margin-top: {{ block.settings.margin_top }}px !important;
+          margin-bottom: {{ block.settings.margin_bottom }}px !important;
+        }
+        @media screen and (max-width: 768px) {
+          #shopify-section-{{ section.id }} .block-{{ block.id }} {
+            margin-top: {{ block.settings.margin_top_mobile | default: block.settings.margin_top }}px !important;
+            margin-bottom: {{ block.settings.margin_bottom_mobile | default: block.settings.margin_bottom }}px !important;
+            {% if section.settings.blocks_position == 'left' %}
+              margin-left: 0 !important;
+              margin-right: auto !important;
+            {% elsif section.settings.blocks_position == 'right' %}
+              margin-left: auto !important;
+              margin-right: 0 !important;
+            {% else %}
+              margin-left: auto !important;
+              margin-right: auto !important;
+            {% endif %}
+          }
+        }
+
+        #shopify-section-{{ section.id }} .block-{{ block.id }} #search-input {
+          {% if block.settings.text_color != blank %}
+            color: {{ block.settings.text_color }} !important;
+          {% endif %}
+          {% if block.settings.bg_gradient != blank %}
+            background: {{ block.settings.bg_gradient }} !important;
+          {% elsif block.settings.bg_color != blank %}
+            background-color: {{ block.settings.bg_color }} !important;
+            background-image: none !important;
+          {% endif %}
+          {% if block.settings.border_color != blank %}
+            border-color: {{ block.settings.border_color }} !important;
+          {% endif %}
+        }
+
+        #shopify-section-{{ section.id }} .block-{{ block.id }} #search-input::placeholder {
+          {% if block.settings.placeholder_color != blank %}
+            color: {{ block.settings.placeholder_color }} !important;
+          {% endif %}
+        }
+
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .search-icon {
+          {% if block.settings.icon_color != blank %}
+            color: {{ block.settings.icon_color }} !important;
+          {% endif %}
+        }
+
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .search-clear-btn {
+          {% if block.settings.clear_btn_icon_color != blank %}
+            color: {{ block.settings.clear_btn_icon_color }} !important;
+          {% endif %}
+          {% if block.settings.clear_btn_bg_color != blank %}
+            background-color: {{ block.settings.clear_btn_bg_color }} !important;
+          {% endif %}
+        }
+
+        /* Hover and focus states on the field input */
+        #shopify-section-{{ section.id }} .block-{{ block.id }} #search-input:hover,
+        #shopify-section-{{ section.id }} .block-{{ block.id }} #search-input:focus {
+          {% if block.settings.hover_border_color != blank %}
+            border-color: {{ block.settings.hover_border_color }} !important;
+          {% endif %}
+          {% if block.settings.hover_bg_color != blank %}
+            background-color: {{ block.settings.hover_bg_color }} !important;
+            background-image: none !important;
+          {% endif %}
+          {% if block.settings.hover_shadow_color != blank %}
+            box-shadow: 0 0 0 4px rgba(var(--color-accent-secondary-rgb), 0.1), 0 4px 12px {{ block.settings.hover_shadow_color }} !important;
+          {% endif %}
+        }
+
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .search-clear-btn:hover {
+          {% if block.settings.clear_btn_hover_icon_color != blank %}
+            color: {{ block.settings.clear_btn_hover_icon_color }} !important;
+          {% endif %}
+          {% if block.settings.clear_btn_hover_bg_color != blank %}
+            background-color: {{ block.settings.clear_btn_hover_bg_color }} !important;
+          {% endif %}
+        }
+    {%- endcase -%}
+  {%- endfor -%}
+
+  {%- for block in section.blocks -%}
+    {%- unless block.settings.show_on_desktop -%}
+      @media screen and (min-width: 769px) {
+        #shopify-section-{{ section.id }} .block-{{ block.id }} {
+          display: none !important;
+        }
+      }
+    {%- endunless -%}
+    {%- unless block.settings.show_on_mobile -%}
+      @media screen and (max-width: 768px) {
+        #shopify-section-{{ section.id }} .block-{{ block.id }} {
+          display: none !important;
+        }
+      }
+    {%- endunless -%}
+  {%- endfor -%}
+</style>
+
+{%- if section.settings.show_section -%}
+<div class="search-bar-outer color-{{ section.settings.color_scheme }} {% unless section.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless section.settings.show_on_mobile %} hidden-mobile{% endunless %}">
+  <div class="search-container {% if section.settings.container_width == 'full' %}search-container--full{% endif %}">
+    <div class="search-bar-content">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'search_input' -%}
+            <form action="{{ routes.search_url }}" method="get" role="search" class="search-bar block-{{ block.id }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" id="search-bar" {{ block.shopify_attributes }}>
+              {%- if block.settings.show_search_icon -%}
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </svg>
+              {%- endif -%}
+              {%- liquid
+                assign display_terms = search.terms | replace_first: 'type:', '|||' | split: '|||' | first | replace_first: 'tag:', '|||' | split: '|||' | first | strip | remove: '*'
+              -%}
+              <input 
+                type="search" 
+                name="q" 
+                id="search-input"
+                value="{{ display_terms | escape }}" 
+                placeholder="{{ block.settings.placeholder }}" 
+                autocomplete="off"
+                style="{% unless block.settings.show_search_icon %}padding-left: 20px;{% endunless %}"
+              />
+              <input type="hidden" name="type" value="product">
+              {%- if block.settings.show_clear_button -%}
+                <button type="button" class="search-clear-btn" id="search-clear" title="Clear search" style="display: none;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                  </svg>
+                </button>
+              {%- endif -%}
+            </form>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Search Bar",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_desktop",
+      "label": "Show on Desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "Show on Mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "default": "standard",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "full", "label": "Full Width" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 400,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "label": "Max Width",
+      "default": 1200
+    },
+    {
+      "type": "select",
+      "id": "blocks_position",
+      "label": "Blocks Position",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1",
+      "options": [
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding (Mobile)",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "search_input",
+      "name": "Search Field",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Search gadgets, accessories, tools..."
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_search_icon",
+          "label": "Show search icon",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_clear_button",
+          "label": "Show clear button",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout & Spacing"
+        },
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 200,
+          "max": 800,
+          "step": 10,
+          "unit": "px",
+          "label": "Max Width",
+          "default": 720
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Top margin (desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Bottom margin (desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Top margin (mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Bottom margin (mobile)",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Colors & Borders"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Input Text Color"
+        },
+        {
+          "type": "color",
+          "id": "placeholder_color",
+          "label": "Placeholder Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border Color"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "clear_btn_icon_color",
+          "label": "Clear Button Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "clear_btn_bg_color",
+          "label": "Clear Button Background Color"
+        },
+        {
+          "type": "header",
+          "content": "Hover/Focus Styles"
+        },
+        {
+          "type": "color",
+          "id": "hover_border_color",
+          "label": "Hover Border Color"
+        },
+        {
+          "type": "color",
+          "id": "hover_bg_color",
+          "label": "Hover Background Color"
+        },
+        {
+          "type": "color",
+          "id": "hover_shadow_color",
+          "label": "Hover Shadow Color"
+        },
+        {
+          "type": "color",
+          "id": "clear_btn_hover_icon_color",
+          "label": "Clear Button Hover Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "clear_btn_hover_bg_color",
+          "label": "Clear Button Hover Background Color"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Search Bar",
+      "blocks": [
+        {
+          "type": "search_input"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

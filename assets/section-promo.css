@@ -1,0 +1,214 @@
+/* assets/section-promo.css */
+/* Color Scheme Mapping */
+.hec-promo.color-default { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.hec-promo.color-background-1 { --section-bg: var(--bg-primary); --section-text: var(--text-primary); }
+.hec-promo.color-background-2 { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.hec-promo.color-accent-1 { --section-bg: var(--color-primary); --section-text: var(--text-inverse); }
+.hec-promo.color-accent-2 { --section-bg: var(--color-accent); --section-text: var(--bg-primary); }
+.hec-promo.color-inverse { --section-bg: var(--bg-primary); --section-text: var(--text-inverse); }
+
+.hec-promo {
+    padding: 0;
+    background: var(--section-bg, var(--bg-secondary));
+    color: var(--section-text, var(--text-primary));
+}
+
+.hec-promo-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--columns-desktop, 2), 1fr);
+    gap: var(--spacing-lg);
+}
+
+.hec-promo-card {
+    position: relative;
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    display: flex;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    min-height: 380px;
+}
+
+.hec-promo-card--background {
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--spacing-2xl) 40px;
+}
+
+.hec-promo-card--split {
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    min-height: 420px;
+}
+
+/* Split layout children */
+.hec-promo-card--split .hec-promo-card-bg {
+    position: relative;
+    width: 50%;
+    height: 100%;
+}
+
+.hec-promo-card--split .hec-promo-card-body {
+    width: 50%;
+    padding: 40px;
+    max-width: none;
+}
+
+.hec-promo-card:hover {
+    border-color: rgba(var(--color-secondary-rgb), 0.4);
+    transform: translateY(-8px);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
+}
+
+.hec-promo-card-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.hec-promo-card-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.hec-promo-card:hover .hec-promo-card-bg img {
+    transform: scale(1.1);
+}
+
+/* Overlay for background style */
+.hec-promo-card--background::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--bg-primary-95) 40%, transparent 100%);
+    z-index: 1;
+}
+
+.hec-promo-card--align-center.hec-promo-card--background::after {
+    background: linear-gradient(180deg, var(--bg-primary-95) 60%, transparent 100%);
+}
+
+.hec-promo-card-body {
+    position: relative;
+    z-index: 2;
+    max-width: 480px;
+}
+
+.hec-promo-card--align-center {
+    text-align: center;
+    align-items: center;
+}
+
+.hec-promo-card--align-center .hec-promo-card-body {
+    margin: 0 auto;
+}
+
+.hec-promo-tag {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 100px;
+    background: var(--color-secondary);
+    color: var(--bg-secondary);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-lg);
+}
+
+.hec-promo-card-body h3 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-inverse);
+    line-height: 1.1;
+    margin-bottom: var(--spacing-md);
+    letter-spacing: -0.02em;
+}
+
+.hec-promo-card-body h3 span {
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hec-promo-card-body p {
+    font-size: 1.05rem;
+    color: var(--text-inverse);
+    opacity: 0.85;
+    line-height: 1.6;
+    margin-bottom: var(--spacing-xl);
+}
+
+.hec-promo-card--split .hec-promo-card-body h3,
+.hec-promo-card--split .hec-promo-card-body p {
+    color: var(--section-text, var(--text-primary));
+}
+
+.hec-promo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: var(--color-white-10);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--color-white-20);
+    border-radius: 12px;
+    color: var(--text-inverse);
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.hec-promo-card--split .hec-promo-btn {
+    background: var(--color-secondary);
+    color: var(--bg-secondary);
+    border: none;
+}
+
+.hec-promo-btn:hover {
+    background: var(--color-secondary);
+    color: var(--bg-secondary);
+    transform: scale(1.05);
+}
+
+.hec-promo-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 1024px) {
+    .hec-promo-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .hec-promo-card--split {
+        flex-direction: column;
+        min-height: auto;
+    }
+    
+    .hec-promo-card--split .hec-promo-card-bg,
+    .hec-promo-card--split .hec-promo-card-body {
+        width: 100%;
+    }
+    
+    .hec-promo-card--split .hec-promo-card-bg {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hec-promo-card--background {
+        padding: 40px 24px;
+        min-height: 340px;
+    }
+    
+    .hec-promo-card-body h3 {
+        font-size: 1.75rem;
+    }
+}

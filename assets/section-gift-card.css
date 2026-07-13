@@ -1,0 +1,485 @@
+/* assets/section-gift-card.css */
+
+/* Color Scheme Mappings for Gift Card Main Section */
+.gc-section.color-background-1 { --section-bg: var(--bg-primary); --section-text: var(--text-primary); }
+.gc-section.color-background-2 { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.gc-section.color-inverse { --section-bg: var(--bg-primary); --section-text: var(--text-inverse); }
+.gc-section.color-accent-1 { --section-bg: var(--color-accent); --section-text: var(--bg-primary); }
+.gc-section.color-accent-2 { --section-bg: var(--color-accent-secondary); --section-text: var(--bg-primary); }
+
+.gc-section {
+    padding: 20px 20px var(--spacing-5xl);
+    background-color: var(--section-bg, var(--bg-primary));
+    color: var(--section-text, var(--text-primary));
+    min-height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header Text */
+.gc-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.gc-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.gc-title span {
+    color: var(--color-accent);
+}
+
+.gc-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ---- Main Gift Card Box ---- */
+.gc-card-box {
+    width: 100%;
+    max-width: 640px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-2xl);
+    padding: 60px 40px 40px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    margin-bottom: var(--spacing-4xl);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.gc-card-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gc-gift-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.gc-gift-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Balance */
+.gc-balance-label {
+    font-size: var(--font-size-2xl);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.gc-balance-amount {
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--color-secondary);
+    line-height: 1;
+    margin-bottom: 40px;
+    letter-spacing: -2px;
+}
+
+/* Code Row */
+.gc-code-container {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px dashed var(--border-primary);
+    border-radius: var(--radius-lg);
+    padding: 12px 12px 12px var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.gc-code-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: calc(var(--font-size-xl) * var(--code-font-scale, 1));
+    font-weight: var(--code-font-weight, bold);
+    font-style: var(--code-font-style, normal);
+    text-transform: var(--code-text-transform, none);
+    letter-spacing: var(--code-letter-spacing, 2px);
+    line-height: var(--code-line-height, 1);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.gc-copy-btn {
+    background: var(--color-secondary);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gc-copy-btn:hover {
+    background: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+/* Info Grid */
+.gc-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    width: 100%;
+    margin-bottom: var(--spacing-md);
+}
+
+.gc-info-item {
+    background: rgba(var(--text-primary-rgb), 0.03);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md) 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.gc-info-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--icon-bg-color, var(--color-accent-10));
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--icon-color, var(--color-accent));
+}
+
+.gc-info-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.gc-info-text {
+    flex: 1;
+}
+
+.gc-info-label {
+    display: block;
+    font-size: 0.75em;
+    color: var(--label-color, inherit);
+    text-transform: inherit;
+    margin-bottom: 2px;
+    opacity: 0.7;
+    font-weight: inherit;
+    font-style: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+}
+
+.gc-info-val {
+    font-size: 1em;
+    font-weight: inherit;
+    color: var(--value-color, inherit);
+    font-style: inherit;
+    text-transform: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+}
+
+/* QR Code Section - Updated from V3 Design */
+.gc-qr-section {
+    width: 100%;
+    margin-bottom: 30px;
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-light);
+}
+
+.gc-qr-label-row {
+    font-size: calc(0.7rem * var(--qr-font-scale, 1));
+    font-weight: var(--qr-font-weight, var(--font-weight-semibold));
+    font-style: var(--qr-font-style, normal);
+    color: var(--qr-label-color, var(--text-secondary));
+    text-transform: var(--qr-text-transform, uppercase);
+    letter-spacing: var(--qr-letter-spacing, 1.5px);
+    line-height: var(--qr-line-height, normal);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.gc-qr-label-row svg {
+    width: 14px;
+    height: 14px;
+    color: var(--qr-label-color, var(--color-accent));
+}
+
+.gc-qr-area {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.gc-qr-frame {
+    padding: 10px;
+    background: var(--qr-frame-bg, var(--color-black-20));
+    border: 1px solid var(--qr-frame-border, var(--border-light));
+    border-radius: var(--radius-lg);
+    flex-shrink: 0;
+}
+
+.gc-qr-frame canvas {
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px var(--color-black-20);
+}
+
+.gc-qr-info {
+    flex: 1;
+    text-align: start;
+}
+
+.gc-qr-title {
+    font-size: calc(var(--font-size-base) * var(--qr-font-scale, 1));
+    font-weight: var(--qr-font-weight, var(--font-weight-bold));
+    font-style: var(--qr-font-style, normal);
+    text-transform: var(--qr-text-transform, none);
+    letter-spacing: var(--qr-letter-spacing, normal);
+    line-height: var(--qr-line-height, 1.2);
+    color: var(--qr-title-color, var(--text-primary));
+    margin-bottom: 6px;
+}
+
+.gc-qr-desc {
+    font-size: calc(0.9rem * var(--qr-font-scale, 1));
+    font-weight: var(--qr-font-weight, normal);
+    font-style: var(--qr-font-style, normal);
+    text-transform: var(--qr-text-transform, none);
+    letter-spacing: var(--qr-letter-spacing, normal);
+    line-height: var(--qr-line-height, 1.5);
+    color: var(--qr-desc-color, var(--text-secondary));
+}
+
+/* Start Shopping Button */
+.gc-footer-btn {
+    width: 100%;
+    background: var(--color-accent);
+    color: var(--bg-primary);
+    border: 1px solid transparent;
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
+
+.gc-footer-btn:hover {
+    color: var(--btn-hover-text, var(--bg-primary)) !important;
+    background: var(--btn-hover-gradient, var(--btn-hover-bg, var(--color-accent-secondary))) !important;
+    border-color: var(--btn-hover-border, transparent) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px var(--color-accent-secondary-20);
+}
+
+/* ---- Featured Services Section ---- */
+/* Color Scheme Mappings for Gift Card Categories Section */
+.gc-featured-section.color-background-1 { --section-bg: var(--bg-primary); --section-text: var(--text-primary); }
+.gc-featured-section.color-background-2 { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.gc-featured-section.color-inverse { --section-bg: var(--bg-primary); --section-text: var(--text-inverse); }
+.gc-featured-section.color-accent-1 { --section-bg: var(--color-accent); --section-text: var(--bg-primary); }
+.gc-featured-section.color-accent-2 { --section-bg: var(--color-accent-secondary); --section-text: var(--bg-primary); }
+
+.gc-featured-section {
+    background-color: var(--section-bg, var(--bg-primary));
+    color: var(--section-text, var(--text-primary));
+}
+
+/* Container Width Classes */
+.gc-featured-section .container {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.gc-featured-section .container-narrow {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.gc-featured-section .container-fluid {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.gc-featured-header {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.gc-featured-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.gc-services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+.gc-service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.gc-service-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--color-secondary);
+}
+
+.gc-service-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--color-accent-10);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-secondary);
+}
+
+.gc-service-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.gc-service-title {
+    font-size: var(--font-size-xl);
+    font-weight: bold;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.gc-service-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.gc-desc-highlight {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+    .gc-services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .gc-title {
+        font-size: 2.5rem;
+    }
+
+    .gc-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gc-services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gc-card-box {
+        padding: 40px var(--spacing-lg) 30px;
+    }
+
+    .gc-balance-amount {
+        font-size: 3.5rem;
+    }
+
+    .gc-qr-area {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .gc-qr-info {
+        text-align: center;
+    }
+
+    .gc-code-container {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 16px !important;
+        gap: 16px !important;
+    }
+
+    .gc-code-text {
+        text-align: center !important;
+        font-size: max(1.1rem, calc(var(--font-size-lg) * var(--code-font-scale, 1))) !important;
+        letter-spacing: max(1px, calc(var(--code-letter-spacing, 2px) - 1px)) !important;
+        width: 100% !important;
+        word-wrap: break-word !important;
+    }
+
+    .gc-copy-btn {
+        width: 100% !important;
+        text-align: center !important;
+    }
+}
+
+/* Container Width Classes scoped to .gc-section */
+.gc-section .container {
+    max-width: var(--page-width, 1200px);
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.gc-section .container-narrow {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.gc-section .container-fluid {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+

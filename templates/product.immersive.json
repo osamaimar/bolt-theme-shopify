@@ -1,0 +1,149 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "product-immersive-breadcrumb",
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom": 0,
+        "padding_bottom_mobile": 0
+      }
+    },
+    "main": {
+      "type": "product-immersive-main",
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 40,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "highlight_last_word": true
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "rating_value": "4.9",
+            "review_count": "156",
+            "stars_active": 5
+          }
+        },
+        "price": {
+          "type": "price"
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "word_count": 35
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons"
+        },
+        "divider": {
+          "type": "divider"
+        },
+        "description_accordion": {
+          "type": "description_accordion",
+          "settings": {
+            "title": "Description"
+          }
+        },
+        "key_features": {
+          "type": "general_accordion",
+          "settings": {
+            "title": "Key Features",
+            "content_type": "features",
+            "feat_1_icon_select": "clock",
+            "feat_1_text": "70hr Battery Life",
+            "feat_2_icon_select": "compass",
+            "feat_2_text": "Pro-Grade Sensor",
+            "feat_3_icon_select": "wireless",
+            "feat_3_text": "Wireless 2.4GHz",
+            "feat_4_icon_select": "shield",
+            "feat_4_text": "Build Quality"
+          }
+        },
+        "specifications_accordion": {
+          "type": "specifications_accordion",
+          "settings": {
+            "title": "Specifications"
+          }
+        },
+        "reviews_accordion": {
+          "type": "reviews_accordion",
+          "settings": {
+            "title": "Reviews",
+            "review_count": "156"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "rating",
+        "price",
+        "description",
+        "buy_buttons",
+        "divider",
+        "description_accordion",
+        "key_features",
+        "specifications_accordion",
+        "reviews_accordion"
+      ]
+    },
+    "related": {
+      "type": "product-related",
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+        "color_scheme": "background-1",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "You May Also [Like]",
+            "heading_alignment": "left",
+            "show_view_all": true
+          }
+        },
+        "grid": {
+          "type": "product_grid",
+          "settings": {
+            "products_to_show": 4,
+            "columns_desktop": "4",
+            "columns_tablet": "2",
+            "columns_mobile": "1",
+            "show_category": true,
+            "show_rating": true,
+            "show_quick_view": true,
+            "show_add_to_cart": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "grid"
+      ]
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "related"
+  ]
+}

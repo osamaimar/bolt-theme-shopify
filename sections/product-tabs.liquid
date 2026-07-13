@@ -1,0 +1,447 @@
+{{ 'section-product.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.show_section -%}
+{% render 'section-padding',
+  section_id: section.id,
+  padding_top: section.settings.padding_top,
+  padding_bottom: section.settings.padding_bottom,
+  padding_top_mobile: section.settings.padding_top_mobile,
+  padding_bottom_mobile: section.settings.padding_bottom_mobile
+%}
+
+<style>
+  #shopify-section-{{ section.id }} { padding: 0 !important; }
+  #shopify-section-{{ section.id }} .pd-tabs-outer {
+    padding-top: {{ section.settings.padding_top }}px !important;
+    padding-bottom: {{ section.settings.padding_bottom }}px !important;
+  }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .pd-tabs-outer {
+      padding-top: {{ section.settings.padding_top_mobile }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px !important;
+    }
+  }
+
+  .pd-tabs-nav {
+    justify-content: {% if 'left' == 'center' %}center{% elsif 'left' == 'right' %}flex-end{% else %}flex-start{% endif %};
+  }
+
+  {%- for block in section.blocks -%}
+    {%- if block.type != '@app' -%}
+      #pd-tab-btn-{{ block.id }} {
+        margin-top: {{ block.settings.margin_top | default: 0 }}px !important;
+        margin-bottom: {{ block.settings.margin_bottom | default: 0 }}px !important;
+        {% if block.settings.text_color != blank %}--block-text-color: {{ block.settings.text_color }};{% endif %}
+        {% if block.settings.bg_color != blank %}--block-bg: {{ block.settings.bg_color }};{% endif %}
+      }
+      #pd-tab-btn-{{ block.id }} {
+        color: var(--block-text-color, inherit) !important;
+        background: var(--block-bg, transparent) !important;
+        font-size: {{ block.settings.font_size }}rem;
+        font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %};
+        font-style: {{ block.settings.font_style }};
+        text-transform: {{ block.settings.text_transform }};
+        letter-spacing: {{ block.settings.letter_spacing }}px;
+        line-height: {{ block.settings.line_height }};
+      }
+      @media screen and (max-width: 768px) {
+        #pd-tab-btn-{{ block.id }} {
+          margin-top: {{ block.settings.margin_top_mobile | default: 0 }}px !important;
+          margin-bottom: {{ block.settings.margin_bottom_mobile | default: 0 }}px !important;
+        }
+      }
+    {%- endif -%}
+  {%- endfor -%}
+</style>
+
+<div class="pd-tabs-outer color-{{ section.settings.color_scheme }} {% unless section.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless section.settings.show_on_mobile %} hidden-mobile{% endunless %}">
+  <div class="pd-page {% if section.settings.container_width == 'full' %}pd-page--full{% elsif section.settings.container_width == 'narrow' %}pd-page--narrow{% endif %}">
+    <div class="pd-tabs-section" id="pd-tabs-section">
+      
+      <div class="pd-tabs-nav" id="pd-tabs-nav">
+        {%- for block in section.blocks -%}
+          {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
+          <button id="pd-tab-btn-{{ block.id }}" class="pd-tab-btn {% if forloop.first %}active{% endif %} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" data-tab="{{ block.id }}" {{ block.shopify_attributes }}>
+            {{ block.settings.title }}
+            {%- if block.type == 'reviews' -%}
+              <span>({{ block.settings.review_count | default: '0' }})</span>
+            {%- endif -%}
+          </button>
+        {%- endfor -%}
+      </div>
+
+      <div class="pd-tabs-content-wrap">
+        {%- for block in section.blocks -%}
+          <div class="pd-tab-content {% if forloop.first %}active{% endif %} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" id="pd-tab-{{ block.id }}">
+            {%- case block.type -%}
+              
+              {%- when 'description' -%}
+                <div class="pd-desc-content">
+                  {{ product.description }}
+                </div>
+
+              {%- when 'specifications' -%}
+                <table class="pd-specs-table">
+                  {%- if block.settings.show_product_options -%}
+                    {%- for option in product.options_with_values -%}
+                      <tr>
+                        <td>{{ option.name }}</td>
+                        <td>
+                          {%- for value in option.values -%}
+                            {{ value }}{% unless forloop.last %}, {% endunless %}
+                          {%- endfor -%}
+                        </td>
+                      </tr>
+                    {%- endfor -%}
+                  {%- endif -%}
+                  
+                  {%- if block.settings.show_metafields and block.settings.metafield_namespace != blank -%}
+                    {%- assign namespace = block.settings.metafield_namespace -%}
+                    {%- for metafield in product.metafields[namespace] -%}
+                      <tr>
+                        <td>{{ metafield | first | replace: '_', ' ' | capitalize }}</td>
+                        <td>{{ metafield | last }}</td>
+                      </tr>
+                    {%- endfor -%}
+                  {%- endif -%}
+                  
+                  {%- liquid
+                    assign spec_1_lbl = block.settings.spec_1_label
+                    if spec_1_lbl == 'Driver Size'
+                      assign spec_1_lbl = 'products.product.spec_driver_size' | t
+                    endif
+                    assign spec_1_val = block.settings.spec_1_value
+                    if spec_1_val == '40mm Dynamic'
+                      assign spec_1_val = 'products.product.spec_driver_size_val' | t
+                    endif
+
+                    assign spec_2_lbl = block.settings.spec_2_label
+                    if spec_2_lbl == 'Frequency Resp.'
+                      assign spec_2_lbl = 'products.product.spec_frequency_resp' | t
+                    endif
+                    assign spec_2_val = block.settings.spec_2_value
+                    if spec_2_val == '20Hz - 40kHz (Hi-Res)'
+                      assign spec_2_val = 'products.product.spec_frequency_resp_val' | t
+                    endif
+
+                    assign spec_3_lbl = block.settings.spec_3_label
+                    if spec_3_lbl == 'Battery Life'
+                      assign spec_3_lbl = 'products.product.spec_battery_life' | t
+                    endif
+                    assign spec_3_val = block.settings.spec_3_value
+                    if spec_3_val == 'Up to 40 Hours'
+                      assign spec_3_val = 'products.product.spec_battery_life_val' | t
+                    endif
+
+                    assign spec_4_lbl = block.settings.spec_4_label
+                    if spec_4_lbl == 'Charging Port'
+                      assign spec_4_lbl = 'products.product.spec_charging_port' | t
+                    endif
+                    assign spec_4_val = block.settings.spec_4_value
+                    if spec_4_val == 'USB-C'
+                      assign spec_4_val = 'products.product.spec_charging_port_val' | t
+                    endif
+
+                    assign spec_5_lbl = block.settings.spec_5_label
+                    if spec_5_lbl == 'Bluetooth'
+                      assign spec_5_lbl = 'products.product.spec_bluetooth' | t
+                    endif
+                    assign spec_5_val = block.settings.spec_5_value
+                    if spec_5_val == 'V5.2'
+                      assign spec_5_val = 'products.product.spec_bluetooth_val' | t
+                    endif
+
+                    assign spec_6_lbl = block.settings.spec_6_label
+                    if spec_6_lbl == 'Warranty'
+                      assign spec_6_lbl = 'products.product.spec_warranty' | t
+                    endif
+                    assign spec_6_val = block.settings.spec_6_value
+                    if spec_6_val == '2-Year Manufacturer'
+                      assign spec_6_val = 'products.product.spec_warranty_val' | t
+                    endif
+                  -%}
+                  
+                  {%- if spec_1_lbl != blank -%}<tr><td>{{ spec_1_lbl }}</td><td>{{ spec_1_val }}</td></tr>{%- endif -%}
+                  {%- if spec_2_lbl != blank -%}<tr><td>{{ spec_2_lbl }}</td><td>{{ spec_2_val }}</td></tr>{%- endif -%}
+                  {%- if spec_3_lbl != blank -%}<tr><td>{{ spec_3_lbl }}</td><td>{{ spec_3_val }}</td></tr>{%- endif -%}
+                  {%- if spec_4_lbl != blank -%}<tr><td>{{ spec_4_lbl }}</td><td>{{ spec_4_val }}</td></tr>{%- endif -%}
+                  {%- if spec_5_lbl != blank -%}<tr><td>{{ spec_5_lbl }}</td><td>{{ spec_5_val }}</td></tr>{%- endif -%}
+                  {%- if spec_6_lbl != blank -%}<tr><td>{{ spec_6_lbl }}</td><td>{{ spec_6_val }}</td></tr>{%- endif -%}
+                </table>
+
+              {%- when 'reviews' -%}
+                <div class="pd-reviews-summary">
+                  <div class="pd-reviews-avg">
+                    <span class="pd-reviews-avg-number">{{ block.settings.rating_avg }}</span>
+                    <div class="pd-stars">
+                      {%- for i in (1..5) -%}
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                      {%- endfor -%}
+                    </div>
+                    <span class="pd-reviews-avg-count">{{ 'products.product.based_on_reviews_html' | t: count: block.settings.review_count }}</span>
+                  </div>
+                  <div class="pd-reviews-bars">
+                    {%- for i in (1..5) reversed -%}
+                      {%- capture bar_pct -%}bar_{{ i }}_pct{%- endcapture -%}
+                      <div class="pd-review-bar-row">
+                        <span class="pd-review-bar-label">{{ i }} {{ 'products.product.stars' | t }}</span>
+                        <div class="pd-review-bar-track"><div class="pd-review-bar-fill" style="width:{{ block.settings[bar_pct] }}%"></div></div>
+                        <span class="pd-review-bar-pct">{{ block.settings[bar_pct] }}%</span>
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                </div>
+                
+                <div class="pd-reviews-list">
+                  {%- if block.settings.app_snippet != blank -%}
+                    {{ block.settings.app_snippet }}
+                  {%- else -%}
+                    <p style="text-align:center; padding: 2rem; color: var(--text-muted);">{{ 'products.product.review_app_placeholder' | t }}</p>
+                  {%- endif -%}
+                </div>
+
+              {%- when 'custom' -%}
+                <div class="pd-custom-tab">
+                  {{ block.settings.content }}
+                </div>
+
+            {%- endcase -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}
+          <div class="pd-tab-app-block" {{ block.shopify_attributes }}>
+            {% render block %}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product Tabs",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_desktop",
+      "label": "Show on Desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "Show on Mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "default": "standard",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "full", "label": "Full Width" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top Desktop", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom Desktop", "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top Mobile", "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom Mobile", "default": 40 },
+
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1",
+      "options": [
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "description",
+      "name": "Description Tab",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "text", "id": "title", "label": "Tab Title", "default": "Description" },
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 0 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 0 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 0 },
+        { "type": "header", "content": "Typography" },
+        { "type": "range", "id": "font_size", "min": 0.8, "max": 2.0, "step": 0.1, "unit": "rem", "label": "Font size", "default": 1.0 },
+        { "type": "select", "id": "font_weight", "label": "Font Weight", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "bold", "label": "Bold" }] },
+        { "type": "select", "id": "font_style", "label": "Font Style", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }] },
+        { "type": "select", "id": "text_transform", "label": "Text Transform", "default": "none", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "Uppercase" }, { "value": "lowercase", "label": "Lowercase" }, { "value": "capitalize", "label": "Capitalize" }] },
+        { "type": "range", "id": "letter_spacing", "min": -5, "max": 10, "step": 0.5, "unit": "px", "label": "Letter Spacing", "default": 0 },
+        { "type": "range", "id": "line_height", "min": 0.8, "max": 2.0, "step": 0.1, "unit": "em", "label": "Line Height", "default": 1.2 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "text_color", "label": "Text Color" },
+        { "type": "color", "id": "bg_color", "label": "Background Color" }
+      ]
+    },
+    {
+      "type": "specifications",
+      "name": "Specifications Tab",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "text", "id": "title", "label": "Tab Title", "default": "Specifications" },
+        { "type": "checkbox", "id": "show_product_options", "label": "Auto-include product options", "default": true },
+        { "type": "checkbox", "id": "show_metafields", "label": "Auto-include metafields", "default": false },
+        { "type": "text", "id": "metafield_namespace", "label": "Metafield Namespace", "default": "custom" },
+        { "type": "text", "id": "spec_1_label", "label": "Spec 1 Label", "default": "Driver Size" },
+        { "type": "text", "id": "spec_1_value", "label": "Spec 1 Value", "default": "40mm Dynamic" },
+        { "type": "text", "id": "spec_2_label", "label": "Spec 2 Label", "default": "Frequency Resp." },
+        { "type": "text", "id": "spec_2_value", "label": "Spec 2 Value", "default": "20Hz - 40kHz (Hi-Res)" },
+        { "type": "text", "id": "spec_3_label", "label": "Spec 3 Label", "default": "Battery Life" },
+        { "type": "text", "id": "spec_3_value", "label": "Spec 3 Value", "default": "Up to 40 Hours" },
+        { "type": "text", "id": "spec_4_label", "label": "Spec 4 Label", "default": "Charging Port" },
+        { "type": "text", "id": "spec_4_value", "label": "Spec 4 Value", "default": "USB-C" },
+        { "type": "text", "id": "spec_5_label", "label": "Spec 5 Label", "default": "Bluetooth" },
+        { "type": "text", "id": "spec_5_value", "label": "Spec 5 Value", "default": "V5.2" },
+        { "type": "text", "id": "spec_6_label", "label": "Spec 6 Label", "default": "Warranty" },
+        { "type": "text", "id": "spec_6_value", "label": "Spec 6 Value", "default": "2-Year Manufacturer" },
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 0 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 0 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 0 },
+        { "type": "header", "content": "Typography" },
+        { "type": "range", "id": "font_size", "min": 0.8, "max": 2.0, "step": 0.1, "unit": "rem", "label": "Font size", "default": 1.0 },
+        { "type": "select", "id": "font_weight", "label": "Font Weight", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "bold", "label": "Bold" }] },
+        { "type": "select", "id": "font_style", "label": "Font Style", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }] },
+        { "type": "select", "id": "text_transform", "label": "Text Transform", "default": "none", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "Uppercase" }, { "value": "lowercase", "label": "Lowercase" }, { "value": "capitalize", "label": "Capitalize" }] },
+        { "type": "range", "id": "letter_spacing", "min": -5, "max": 10, "step": 0.5, "unit": "px", "label": "Letter Spacing", "default": 0 },
+        { "type": "range", "id": "line_height", "min": 0.8, "max": 2.0, "step": 0.1, "unit": "em", "label": "Line Height", "default": 1.2 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "text_color", "label": "Text Color" },
+        { "type": "color", "id": "bg_color", "label": "Background Color" }
+      ]
+    },
+    {
+      "type": "reviews",
+      "name": "Reviews Tab",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "text", "id": "title", "label": "Tab Title", "default": "Reviews" },
+        { "type": "text", "id": "rating_avg", "label": "Average Rating", "default": "4.9" },
+        { "type": "text", "id": "review_count", "label": "Review Count", "default": "128" },
+        { "type": "text", "id": "bar_5_pct", "label": "5 Stars %", "default": "82" },
+        { "type": "text", "id": "bar_4_pct", "label": "4 Stars %", "default": "12" },
+        { "type": "text", "id": "bar_3_pct", "label": "3 Stars %", "default": "4" },
+        { "type": "text", "id": "bar_2_pct", "label": "2 Stars %", "default": "1" },
+        { "type": "text", "id": "bar_1_pct", "label": "1 Star %", "default": "1" },
+        { "type": "liquid", "id": "app_snippet", "label": "Review App Snippet" },
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 0 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 0 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 0 },
+        { "type": "header", "content": "Typography" },
+        { "type": "range", "id": "font_size", "min": 0.8, "max": 2.0, "step": 0.1, "unit": "rem", "label": "Font size", "default": 1.0 },
+        { "type": "select", "id": "font_weight", "label": "Font Weight", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "bold", "label": "Bold" }] },
+        { "type": "select", "id": "font_style", "label": "Font Style", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }] },
+        { "type": "select", "id": "text_transform", "label": "Text Transform", "default": "none", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "Uppercase" }, { "value": "lowercase", "label": "Lowercase" }, { "value": "capitalize", "label": "Capitalize" }] },
+        { "type": "range", "id": "letter_spacing", "min": -5, "max": 10, "step": 0.5, "unit": "px", "label": "Letter Spacing", "default": 0 },
+        { "type": "range", "id": "line_height", "min": 0.8, "max": 2.0, "step": 0.1, "unit": "em", "label": "Line Height", "default": 1.2 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "text_color", "label": "Text Color" },
+        { "type": "color", "id": "bg_color", "label": "Background Color" }
+      ]
+    },
+    {
+      "type": "custom",
+      "name": "Custom Tab",
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "text", "id": "title", "label": "Tab Title", "default": "Custom Tab" },
+        { "type": "richtext", "id": "content", "label": "Tab Content" },
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 0 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 0 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 0 },
+        { "type": "header", "content": "Typography" },
+        { "type": "range", "id": "font_size", "min": 0.8, "max": 2.0, "step": 0.1, "unit": "rem", "label": "Font size", "default": 1.0 },
+        { "type": "select", "id": "font_weight", "label": "Font Weight", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "bold", "label": "Bold" }] },
+        { "type": "select", "id": "font_style", "label": "Font Style", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }] },
+        { "type": "select", "id": "text_transform", "label": "Text Transform", "default": "none", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "Uppercase" }, { "value": "lowercase", "label": "Lowercase" }, { "value": "capitalize", "label": "Capitalize" }] },
+        { "type": "range", "id": "letter_spacing", "min": -5, "max": 10, "step": 0.5, "unit": "px", "label": "Letter Spacing", "default": 0 },
+        { "type": "range", "id": "line_height", "min": 0.8, "max": 2.0, "step": 0.1, "unit": "em", "label": "Line Height", "default": 1.2 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "text_color", "label": "Text Color" },
+        { "type": "color", "id": "bg_color", "label": "Background Color" }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Tabs",
+      "blocks": [
+        { "type": "description" },
+        { "type": "specifications" },
+        { "type": "reviews" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

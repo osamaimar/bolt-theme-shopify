@@ -1,0 +1,116 @@
+/* ===========================
+   Image with Text Section
+   =========================== */
+/* Color Scheme Mapping */
+.image-with-text-section.color-default { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.image-with-text-section.color-background-1 { --section-bg: var(--bg-primary); --section-text: var(--text-primary); }
+.image-with-text-section.color-background-2 { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.image-with-text-section.color-accent-1 { --section-bg: var(--color-primary); --section-text: var(--text-inverse); }
+.image-with-text-section.color-accent-2 { --section-bg: var(--color-accent); --section-text: var(--bg-primary); }
+.image-with-text-section.color-inverse { --section-bg: var(--bg-primary); --section-text: var(--text-inverse); }
+
+.image-with-text-section {
+    padding: var(--spacing-4xl) 0;
+    overflow: hidden;
+    background: var(--section-bg, var(--bg-secondary));
+    color: var(--section-text, var(--text-primary));
+}
+
+.image-with-text-grid {
+    display: grid;
+    gap: var(--spacing-6xl);
+    align-items: center;
+}
+
+.image-with-text-grid--reversed {
+    direction: ltr; /* Ensure base grid is always LTR for flip */
+}
+
+/* Position flip logic */
+.image-with-text-grid--reversed .image-with-text-media {
+    order: 2;
+}
+
+.image-with-text-grid--reversed .image-with-text-content {
+    order: 1;
+}
+
+.image-with-text-media {
+    position: relative;
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    line-height: 0;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.image-with-text-media:hover {
+    transform: scale(1.02);
+}
+
+.image-with-text-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+.image-with-text-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+}
+
+.image-with-text-content h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--section-text, var(--text-inverse));
+}
+
+.image-with-text-content .rte {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--section-text, var(--text-secondary));
+    opacity: 0.8;
+    max-width: 580px;
+}
+
+.image-with-text-content .btn {
+    margin-top: var(--spacing-md);
+    width: fit-content;
+}
+
+/* ===========================
+   Responsive
+   =========================== */
+@media (max-width: 1024px) {
+    .image-with-text-grid {
+        gap: var(--spacing-4xl);
+    }
+}
+
+@media (max-width: 768px) {
+    .image-with-text-grid {
+        grid-template-columns: 1fr !important; /* Force stack on mobile */
+        gap: var(--spacing-3xl);
+    }
+
+    .image-with-text-grid--reversed .image-with-text-media {
+        order: 1; /* Reset order for stacking */
+    }
+
+    .image-with-text-grid--reversed .image-with-text-content {
+        order: 2;
+    }
+
+    .image-with-text-content h2 {
+        font-size: 2.2rem;
+    }
+
+    .image-with-text-content .rte {
+        font-size: 1rem;
+    }
+}

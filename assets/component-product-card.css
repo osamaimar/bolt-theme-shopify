@@ -1,0 +1,374 @@
+/* assets/component-product-card.css */
+/* Ported from home-ecommerce-modern.css product card styles */
+.cpd-product-card {
+    background: var(--bg-glass);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, border-color, box-shadow;
+    transform: translate3d(0, 0, 0);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+}
+
+.cpd-product-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--color-secondary-rgb), 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.cpd-product-card:hover {
+    transform: translate3d(0, -10px, 0);
+    border-color: var(--color-accent-secondary);
+    box-shadow: 0 20px 40px var(--color-black-40);
+}
+
+.cpd-product-card:hover::before {
+    opacity: 1;
+}
+
+.cpd-product-thumb {
+    position: relative;
+    aspect-ratio: var(--card-image-ratio, 1 / 1);
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
+    transform: translate3d(0, 0, 0);
+}
+
+.cpd-product-thumb img,
+.cpd-product-thumb svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.cpd-product-card:hover .cpd-product-thumb img,
+.cpd-product-card:hover .cpd-product-thumb svg {
+    transform: scale(1.1);
+}
+
+.card__badge {
+    position: absolute;
+    top: 14px;
+    inset-inline-start: 14px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.badge {
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 0.68rem;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.badge--sale {
+    background: linear-gradient(135deg, var(--gradient-error-start), var(--gradient-error-end));
+    color: var(--text-inverse);
+}
+
+.badge--new {
+    background: var(--gradient-success-start);
+    color: var(--bg-secondary);
+}
+
+.badge--sold-out {
+    background: var(--color-black-50);
+    color: var(--color-white);
+}
+
+
+
+.cpd-product-overlay { /* Quick view overlay */
+    position: absolute;
+    bottom: 0;
+    inset-inline-start: 0;
+    inset-inline-end: 0;
+    padding: var(--spacing-md);
+    background: linear-gradient(0deg, var(--bg-primary-95) 0%, transparent 100%);
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.cpd-product-card:hover .cpd-product-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cpd-quick-view-btn, .cpd-product-cta {
+    padding: 10px var(--spacing-lg);
+    background: var(--color-secondary);
+    color: var(--bg-secondary);
+    border: none;
+    border-radius: 10px;
+    font-weight: var(--font-weight-bold);
+    font-size: 0.82rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.cpd-quick-view-btn.loading, .cpd-product-cta.loading {
+    pointer-events: none;
+    color: transparent !important;
+}
+
+.cpd-quick-view-btn.loading svg, .cpd-product-cta.loading svg {
+    visibility: hidden;
+}
+
+.cpd-quick-view-btn.loading::after, .cpd-product-cta.loading::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--bg-secondary);
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: cpdSpinner 0.8s linear infinite;
+    left: calc(50% - 10px);
+    top: calc(50% - 10px);
+}
+
+@keyframes cpdSpinner {
+    to { transform: rotate(360deg); }
+}
+
+.cpd-quick-view-btn:hover, .cpd-product-cta:hover {
+    box-shadow: 0 8px 24px rgba(var(--color-secondary-rgb), 0.3);
+    background: var(--color-secondary);
+}
+
+.cpd-quick-view-btn svg, .cpd-product-cta svg {
+    width: 16px;
+    height: 16px;
+}
+
+.cpd-product-info {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cpd-product-category,
+.caption-with-letter-spacing {
+    font-size: 0.72rem;
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-secondary);
+    margin-bottom: 6px;
+}
+
+.cpd-product-name {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-inverse);
+    margin: 0 0 var(--spacing-sm);
+    line-height: 1.3;
+    font-family: var(--font-body-family);
+}
+
+.cpd-product-name a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.cpd-product-name a:hover {
+    color: var(--color-secondary);
+}
+
+.cpd-product-desc {
+    display: none; /* Hide snippet description on grid view */
+}
+
+.cpd-product-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.cpd-product-stars {
+    display: flex;
+    gap: 2px;
+    color: var(--color-secondary);
+}
+
+.cpd-product-stars svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+    transition: transform 0.2s ease;
+}
+
+.cpd-product-stars svg.filled {
+    color: var(--color-secondary);
+    fill: currentColor;
+}
+
+.cpd-product-stars svg.half-filled {
+    color: var(--color-secondary);
+    opacity: 0.7;
+}
+
+.cpd-product-stars svg.empty {
+    color: var(--text-lighter);
+    opacity: 0.3;
+}
+
+.cpd-product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-light);
+}
+
+.cpd-product-footer.no-divider {
+    border-top: none;
+}
+
+.cpd-product-price {
+    font-size: 1.2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-secondary);
+}
+
+.cpd-product-price s {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-decoration: line-through;
+    margin-inline-start: 8px;
+    font-weight: normal;
+}
+
+.cpd-product-discount {
+    font-size: 0.72rem;
+    font-weight: var(--font-weight-bold);
+    background: var(--color-error-10);
+    color: var(--color-error);
+    padding: 3px var(--spacing-sm);
+    border-radius: 6px;
+}
+/* ─── Minimal Product Card Style ─── */
+.cpd-product-card--minimal {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.cpd-product-card--minimal:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.cpd-product-card--minimal .cpd-product-thumb {
+    border-radius: var(--radius-lg, 12px);
+    background: var(--bg-glass);
+}
+
+.cpd-product-card--minimal .cpd-product-info {
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+    padding-top: var(--spacing-md);
+    background: transparent;
+}
+
+.cpd-product-card--minimal .cpd-product-name {
+    font-size: 1.05rem;
+    font-weight: var(--font-weight-medium);
+}
+
+
+
+.cpd-product-card--minimal .cpd-product-overlay {
+    bottom: var(--spacing-sm);
+    inset-inline-start: var(--spacing-sm);
+    inset-inline-end: var(--spacing-sm);
+    background: transparent;
+}
+
+.cpd-product-card--minimal .cpd-quick-view-btn {
+    width: 100%;
+}
+
+/* ─── Responsiveness Refinements ─── */
+@media (max-width: 768px) {
+    .cpd-product-info {
+        padding: 15px;
+    }
+
+    .cpd-product-name {
+        font-size: 0.95rem;
+    }
+
+    .cpd-product-price {
+        font-size: 1.1rem;
+    }
+
+    .cpd-product-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .cpd-product-cta-form, 
+    .cpd-product-cta {
+        width: 100%;
+    }
+
+    .cpd-product-cta {
+        padding: 12px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cpd-product-info {
+        padding: 12px;
+    }
+
+    .cpd-product-name {
+        font-size: 0.9rem;
+    }
+
+}

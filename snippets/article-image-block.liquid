@@ -1,0 +1,10 @@
+{%- comment -%}Article Image Block{%- endcomment -%}
+{%- if article.image -%}
+  <div class="article-image-wrapper" {{ block.shopify_attributes }}>
+    {%- if block.settings.image_width == 'full' -%}
+      {{ article.image | image_url: width: 1200 | image_tag: loading: 'eager', alt: article.image.alt | default: article.title, class: 'article-image article-image--full' }}
+    {%- else -%}
+      {{ article.image | image_url: width: 800 | image_tag: loading: 'eager', alt: article.image.alt | default: article.title, class: 'article-image article-image--contained' }}
+    {%- endif -%}
+  </div>
+{%- endif -%}

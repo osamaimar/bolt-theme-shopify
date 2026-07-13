@@ -1,0 +1,91 @@
+/* Contact FAQ Section */
+.contact-faq-section {
+  /* Padding handled dynamically via section padding settings */
+}
+
+.contact-faq-header {
+  /* Alignment and layouts handled dynamically */
+}
+
+.contact-faq-header .section-title {
+  color: var(--text-inverse);
+}
+
+.contact-faq-header .section-title .highlight-text {
+  color: var(--color-accent);
+}
+
+.contact-faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  text-align: start;
+}
+
+.contact-faq-card {
+  background: var(--color-white-3);
+  border: 1px solid var(--color-accent-secondary-20);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  transition: all 0.3s ease;
+}
+
+.contact-faq-card:hover {
+  border-color: var(--color-accent);
+  background: var(--color-white-5);
+}
+
+.contact-faq-card .card-title {
+  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 15px;
+  color: var(--text-inverse);
+  line-height: 1.4;
+}
+
+.contact-faq-card p {
+  font-size: var(--font-size-base);
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .contact-faq-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Color Scheme Variants */
+.contact-faq-section { background-color: var(--bg-primary); }
+
+/* Background Options */
+.contact-faq-section.color-background-1 { background-color: var(--bg-primary); }
+.contact-faq-section.color-background-2 { background-color: var(--bg-secondary); }
+
+/* Inverse - Light background for contrast */
+.contact-faq-section.color-inverse {
+  background-color: var(--color-white);
+}
+.contact-faq-section.color-inverse .contact-faq-header .section-title {
+  color: rgb(var(--color-black-rgb));
+}
+.contact-faq-section.color-inverse .contact-faq-card {
+  background: rgba(var(--color-black-rgb), 0.05);
+  border-color: rgba(var(--color-black-rgb), 0.1);
+}
+.contact-faq-section.color-inverse .contact-faq-card .card-title {
+  color: rgb(var(--color-black-rgb));
+}
+.contact-faq-section.color-inverse .contact-faq-card p {
+  color: rgba(var(--color-black-rgb), 0.7);
+}
+
+/* Accent colors */
+.contact-faq-section.color-accent-1 { background-color: var(--color-primary); }
+.contact-faq-section.color-accent-2 { background-color: var(--color-accent); }
+.contact-faq-section.color-accent-2 .contact-faq-header .section-title,
+.contact-faq-section.color-accent-2 .contact-faq-card .card-title,
+.contact-faq-section.color-accent-2 .contact-faq-card p {
+  color: rgb(var(--color-black-rgb));
+}

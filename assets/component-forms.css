@@ -1,0 +1,90 @@
+/* assets/component-forms.css */
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-row {
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.form-input,
+.form-control {
+  width: 100%;
+  background: rgba(var(--text-primary-rgb), 0.05);
+  border: 1px solid rgba(var(--color-accent-rgb), 0.2);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-md);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.form-input::placeholder,
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+
+.form-input:focus,
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  background: rgba(var(--text-primary-rgb), 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--color-accent-rgb), 0.2);
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Custom Select Appearance */
+select.form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-inline-end: 42px;
+  cursor: pointer;
+}
+
+[dir="rtl"] select.form-control {
+  background-position: left 14px center;
+}
+
+select.form-control option {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Custom Validation Styling */
+.form-control:not(:placeholder-shown):invalid {
+  border-color: var(--error) !important;
+  box-shadow: 0 0 0 3px rgba(var(--color-error-rgb), 0.1);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23ef4444' viewBox='0 0 16 16'%3E%3Cpath d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-inline-end: 40px;
+}
+
+.form-control:not(:placeholder-shown):valid {
+  border-color: var(--success) !important;
+}
+
+[dir="rtl"] .form-control:not(:placeholder-shown):invalid {
+  background-position: left 12px center;
+}

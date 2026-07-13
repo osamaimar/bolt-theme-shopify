@@ -1,0 +1,208 @@
+/* assets/section-services-page.css */
+/* Services Page Section Styles */
+
+/* Color Scheme Variants - Default */
+.services-page-section {
+  background-color: var(--section-bg, var(--bg-primary));
+  color: var(--section-text, var(--text-primary));
+}
+
+/* Background Options */
+.services-page-section.color-background-1 { background-color: var(--bg-primary); color: var(--text-primary); }
+.services-page-section.color-background-2 { background-color: var(--bg-secondary); color: var(--text-primary); }
+
+/* Inverse - Light background for contrast */
+.services-page-section.color-inverse { 
+  background-color: var(--color-white);
+  color: var(--color-black-rgb);
+}
+.services-page-section.color-inverse .main-title,
+.services-page-section.color-inverse .card-title,
+.services-page-section.color-inverse .service-description strong {
+  color: var(--color-black-rgb);
+}
+.services-page-section.color-inverse .service-description,
+.services-page-section.color-inverse .page-intro-text {
+  color: rgba(var(--color-black-rgb), 0.7);
+}
+.services-page-section.color-inverse .service-page-card {
+  background: rgba(var(--color-black-rgb), 0.05);
+  border-color: rgba(var(--color-black-rgb), 0.1);
+}
+
+/* Accent 1 */
+.services-page-section.color-accent-1 { 
+  background-color: var(--color-primary); 
+  color: var(--text-inverse);
+}
+.services-page-section.color-accent-1 .main-title,
+.services-page-section.color-accent-1 .card-title,
+.services-page-section.color-accent-1 .service-description strong {
+  color: var(--text-inverse);
+}
+.services-page-section.color-accent-1 .service-description,
+.services-page-section.color-accent-1 .page-intro-text {
+  color: rgba(var(--color-white-rgb), 0.8);
+}
+.services-page-section.color-accent-1 .service-page-card {
+  background: rgba(var(--color-white-rgb), 0.05);
+  border-color: rgba(var(--color-white-rgb), 0.1);
+}
+
+/* Accent 2 */
+.services-page-section.color-accent-2 { 
+  background-color: var(--color-accent); 
+  color: var(--color-black-rgb);
+}
+.services-page-section.color-accent-2 .main-title,
+.services-page-section.color-accent-2 .card-title,
+.services-page-section.color-accent-2 .service-description,
+.services-page-section.color-accent-2 .service-description strong,
+.services-page-section.color-accent-2 .page-intro-text {
+  color: var(--color-black-rgb);
+}
+.services-page-section.color-accent-2 .service-page-card {
+  background: rgba(var(--color-black-rgb), 0.05);
+  border-color: rgba(var(--color-black-rgb), 0.1);
+}
+
+/* Header Styles */
+.services-page-header .main-title {
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-md);
+  color: var(--section-text, var(--text-primary));
+}
+
+.services-page-header .highlight-text {
+  color: var(--color-accent-secondary);
+}
+
+.services-page-header .page-intro-text {
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Services Grid */
+.services-grid-page {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* Service Page Card */
+.service-page-card {
+  background: var(--color-white-3, rgba(var(--text-primary-rgb), 0.03));
+  border: 1px solid var(--color-accent-20, rgba(var(--color-accent-rgb), 0.2));
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.service-page-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-accent-secondary);
+  background: var(--color-white-5, rgba(var(--text-primary-rgb), 0.05));
+  box-shadow: 0 10px 30px var(--color-black-10, rgba(0, 0, 0, 0.1));
+}
+
+/* Service Page Icon */
+.service-page-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--color-accent-secondary-10, rgba(var(--color-accent-secondary-rgb), 0.1));
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--color-accent-secondary);
+  flex-shrink: 0;
+}
+
+.service-page-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Card Title */
+.service-page-card .card-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--section-text, var(--text-primary));
+  margin-bottom: var(--spacing-md);
+  line-height: 1.3;
+}
+
+/* Service Description */
+.service-page-card .service-description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.service-page-card .service-description p {
+  margin: 0;
+}
+
+.service-page-card .service-description strong {
+  color: var(--section-text, var(--text-primary));
+  font-weight: var(--font-weight-bold);
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .services-grid-page {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-grid-page {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .services-page-header .page-intro-text {
+    font-size: var(--font-size-base);
+  }
+
+  .service-page-card {
+    padding: 24px;
+  }
+
+  .service-page-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .service-page-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-page-card {
+    padding: 20px;
+  }
+}
+
+/* Visibility classes */
+@media screen and (min-width: 769px) {
+  .hidden-desktop {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+}

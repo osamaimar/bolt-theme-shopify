@@ -1,0 +1,315 @@
+/* Legal Masonry Section Styles */
+
+.legal-masonry-section {
+  --legal-masonry-max-width: 1200px;
+  --legal-masonry-gap: 30px;
+  --legal-masonry-columns: 3;
+}
+
+.legal-masonry-section .container,
+.legal-masonry-section .container-narrow,
+.legal-masonry-section .container-fluid {
+  max-width: var(--legal-masonry-max-width, 1200px);
+  margin: 0 auto;
+}
+
+/* Hero Section */
+.legal-hero {
+  margin-bottom: 3rem;
+}
+
+.legal-hero .main-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.legal-hero .highlight-text {
+  color: var(--color-accent);
+}
+
+.legal-hero .legal-meta {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Content Wrapper */
+.legal-content-wrapper {
+  max-width: var(--legal-masonry-max-width, 1200px);
+  margin: 0 auto;
+}
+
+/* Masonry Grid */
+.legal-masonry-container {
+  display: grid;
+  grid-template-columns: repeat(var(--legal-masonry-columns, 3), 1fr);
+  gap: var(--legal-masonry-gap, 30px);
+  margin-bottom: 2rem;
+}
+
+/* Masonry Cards - Glassmorphism */
+.legal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.3s ease;
+  break-inside: avoid;
+}
+
+.legal-card:hover {
+  border-color: var(--color-accent-30);
+  box-shadow: 0 10px 30px var(--color-accent-10);
+  transform: translateY(-4px);
+}
+
+/* Card Icon */
+.legal-icon {
+  width: var(--icon-size, 48px);
+  height: var(--icon-size, 48px);
+  margin-bottom: 1.25rem;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.legal-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke-width: 1.5;
+}
+
+.legal-card h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-inverse);
+}
+
+.legal-card-content {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.legal-card-content p {
+  margin-bottom: 0.875rem;
+}
+
+.legal-card-content p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-card-content ul {
+  margin: 0.875rem 0;
+  padding-left: 1.25rem;
+}
+
+.legal-card-content li {
+  margin-bottom: 0.35rem;
+}
+
+.legal-card-content h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 1rem 0 0.5rem;
+  color: var(--text-inverse);
+}
+
+.legal-card-content strong {
+  font-weight: 600;
+  color: var(--text-inverse);
+}
+
+/* Download Button */
+.legal-download-wrapper {
+  margin-top: 1rem;
+}
+
+/* Divider Block */
+.legal-divider {
+  border: none;
+  border-top: 1px solid var(--border-light);
+  margin: 3rem 0 2rem;
+}
+
+.legal-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: transparent;
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.legal-download-btn:hover {
+  border-color: var(--color-accent-40);
+  background: var(--color-accent-10);
+}
+
+.legal-download-btn svg {
+  color: var(--color-accent);
+}
+
+.legal-download-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Text Alignment */
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center .legal-download-btn,
+.text-center .main-title {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-center .legal-icon {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-right .legal-download-btn,
+.text-right .main-title {
+  margin-left: auto;
+}
+
+.text-right .legal-icon {
+  margin-left: auto;
+}
+
+/* Responsive */
+@media screen and (max-width: 1024px) {
+  .legal-masonry-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .legal-masonry-section {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+  }
+
+  .legal-hero {
+    margin-bottom: 2rem;
+  }
+
+  .legal-hero .main-title {
+    font-size: 1.75rem;
+  }
+
+  .legal-masonry-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .legal-card {
+    padding: 1.5rem;
+  }
+
+  .legal-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .legal-card h2 {
+    font-size: 1rem;
+  }
+
+  .legal-download-wrapper {
+    margin-top: 1rem;
+  }
+
+  .legal-divider {
+    margin: 2rem 0 1.5rem;
+  }
+
+  .legal-download-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Color Scheme Variants - Default */
+.legal-masonry-section { background-color: var(--bg-primary); }
+
+/* Background Options */
+.legal-masonry-section.color-background-1 { background-color: var(--bg-primary); }
+.legal-masonry-section.color-background-2 { background-color: var(--bg-secondary); }
+
+/* Inverse - Light background for contrast */
+.legal-masonry-section.color-inverse { 
+  background-color: var(--color-white);
+}
+.legal-masonry-section.color-inverse .legal-hero .main-title,
+.legal-masonry-section.color-inverse .legal-card h2,
+.legal-masonry-section.color-inverse .legal-card-content strong {
+  color: rgb(var(--color-black-rgb));
+}
+.legal-masonry-section.color-inverse .legal-card-content,
+.legal-masonry-section.color-inverse .legal-hero .legal-meta {
+  color: rgba(var(--color-black-rgb), 0.7);
+}
+.legal-masonry-section.color-inverse .legal-card {
+  background: rgba(var(--color-black-rgb), 0.05);
+  border-color: rgba(var(--color-black-rgb), 0.1);
+}
+.legal-masonry-section.color-inverse .legal-icon {
+  color: rgb(var(--color-black-rgb));
+}
+
+/* Accent colors */
+.legal-masonry-section.color-accent-1 { background-color: var(--color-primary); }
+.legal-masonry-section.color-accent-2 { background-color: var(--color-accent); }
+.legal-masonry-section.color-accent-2 .legal-hero .main-title,
+.legal-masonry-section.color-accent-2 .legal-card h2,
+.legal-masonry-section.color-accent-2 .legal-card-content,
+.legal-masonry-section.color-accent-2 .legal-card-content strong {
+  color: rgb(var(--color-black-rgb));
+}
+.legal-masonry-section.color-accent-2 .legal-icon {
+  color: rgb(var(--color-black-rgb));
+}
+
+/* Download button styling */
+.legal-download-btn {
+  background: transparent;
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+}
+
+.legal-download-btn:hover {
+  border-color: var(--color-accent-40);
+  background: var(--color-accent-10);
+}
+
+.legal-download-btn svg {
+  color: var(--color-accent);
+}
+
+/* RTL Support */
+[dir="rtl"] .legal-card-content ul {
+  padding-left: 0;
+  padding-right: 1.25rem;
+}

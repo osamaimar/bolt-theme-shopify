@@ -1,0 +1,34 @@
+{%- comment -%}Tags Widget Block{%- endcomment -%}
+<div class="blog-sidebar-widget block-{{ block.id }}{% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %}{% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
+  {%- if block.settings.show_title != false -%}
+    {%- assign heading_tag = block.settings.heading_tag | default: 'h3' -%}
+    <{{ heading_tag }} class="blog-sidebar-widget-title size-{{ block.settings.font_size | default: 'medium' }}">
+      {%- if block.settings.show_icon != false -%}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+          <line x1="7" y1="7" x2="7.01" y2="7" />
+        </svg>
+      {%- endif -%}
+      {{ block.settings.heading | default: 'Tags' }}
+    </{{ heading_tag }}>
+  {%- endif -%}
+  <div class="blog-sidebar-tags">
+    {%- if block.settings.source == 'blog_tags' and blog.all_tags.size > 0 -%}
+      {%- for tag in blog.all_tags limit: block.settings.max_tags -%}
+        <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="blog-sidebar-tag">{{ tag }}</a>
+      {%- endfor -%}
+    {%- elsif block.settings.source == 'article_tags' and article.tags.size > 0 -%}
+      {%- for tag in article.tags limit: block.settings.max_tags -%}
+        <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="blog-sidebar-tag">{{ tag }}</a>
+      {%- endfor -%}
+    {%- else -%}
+      {%- assign manual_tags = block.settings.manual_tags | newline_to_br | split: '<br />' -%}
+      {%- for tag in manual_tags limit: block.settings.max_tags -%}
+        {%- assign tag_clean = tag | strip -%}
+        {%- if tag_clean != '' -%}
+          <a href="{{ blog.url }}/tagged/{{ tag_clean | handle }}" class="blog-sidebar-tag">{{ tag_clean }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>

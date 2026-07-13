@@ -1,0 +1,209 @@
+{% comment %}
+    Renders a product card
+
+    Accepts:
+    - product_card_product: {Object} Product Liquid object (optional)
+    - media_size: {String} Size of the product image card. Values are 'square' and 'portrait'. Default is 'square' (optional)
+    - show_secondary_image: {Boolean} Show the secondary image on hover. Default: false (optional)
+    - add_image_padding: {Boolean} Add padding to the image. Default: false (optional)
+    - show_vendor: {Boolean} Show the product vendor. Default: false (optional)
+    - show_price: {Boolean} Show the product price. Default: true (optional)
+    - show_badges: {Boolean} Show the product badges. Default: true (optional)
+    - show_add_to_cart: {Boolean} Show add to cart button. Default: true (optional)
+    - card_style: {String} Style of the product card. Values are 'standard' and 'minimal'. Default: 'standard' (optional)
+
+    Usage:
+    {% render 'product-card', product_card_product: product %}
+{% endcomment %}
+
+{{ 'component-product-card.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  if show_price == nil
+    assign show_price = true
+  endif
+  if show_compare_price == nil
+    assign show_compare_price = true
+  endif
+  if show_title == nil
+    assign show_title = true
+  endif
+  if show_reviews == nil
+    assign show_reviews = true
+  endif
+  if show_rating_count == nil
+    assign show_rating_count = true
+  endif
+  if show_line_divider == nil
+    assign show_line_divider = true
+  endif
+  if show_add_to_cart == nil
+    assign show_add_to_cart = true
+  endif
+  if show_quick_view == nil
+    assign show_quick_view = true
+  endif
+  if show_description == nil
+    assign show_description = true
+  endif
+  if show_cta_in_footer == nil
+    assign show_cta_in_footer = true
+  endif
+  if show_category == nil
+    assign show_category = false
+  endif
+
+  assign card_image_ratio = '1 / 1'
+  if image_ratio == 'portrait' or image_ratio == '3/4' or image_ratio == '3-4'
+    assign card_image_ratio = '3 / 4'
+  elsif image_ratio == 'landscape' or image_ratio == '4/3' or image_ratio == '4-3'
+    assign card_image_ratio = '4 / 3'
+  elsif image_ratio == 'adapt' or image_ratio == 'auto' or image_ratio == 'adapt-to-image'
+    if product_card_product.featured_media
+      assign card_image_ratio = product_card_product.featured_media.aspect_ratio
+    else
+      assign card_image_ratio = '1 / 1'
+    endif
+  elsif image_ratio == 'square' or image_ratio == '1/1'
+    assign card_image_ratio = '1 / 1'
+  endif
+-%}
+
+<div class="cpd-product-card cpd-product-card--{{ card_style | default: 'standard' }}" data-category="{{ product_card_product.type | handle }}" style="--card-image-ratio: {{ card_image_ratio }};">
+  <div class="cpd-product-thumb">
+    <a href="{{ product_card_product.url }}" class="full-unstyled-link">
+      {%- if product_card_product.featured_media -%}
+        <img
+          srcset="{%- if product_card_product.featured_media.width >= 165 -%}{{ product_card_product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+            {%- if product_card_product.featured_media.width >= 360 -%}{{ product_card_product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
+            {%- if product_card_product.featured_media.width >= 533 -%}{{ product_card_product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
+            {%- if product_card_product.featured_media.width >= 720 -%}{{ product_card_product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
+            {%- if product_card_product.featured_media.width >= 940 -%}{{ product_card_product.featured_media | image_url: width: 940 }} 940w,{%- endif -%}
+            {%- if product_card_product.featured_media.width >= 1066 -%}{{ product_card_product.featured_media | image_url: width: 1066 }} 1066w,{%- endif -%}
+            {{ product_card_product.featured_media | image_url }} {{ product_card_product.featured_media.width }}w"
+          src="{{ product_card_product.featured_media | image_url: width: 533 }}"
+          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+          alt="{{ product_card_product.featured_media.alt | escape }}"
+          loading="lazy"
+          class="motion-reduce"
+          width="{{ product_card_product.featured_media.width }}"
+          height="{{ product_card_product.featured_media.height }}"
+        >
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </a>
+
+    {%- if show_badges != false -%}
+      <div class="card__badge">
+        {%- if product_card_product.available == false -%}
+          <span class="badge badge--sold-out" aria-hidden="true">{{ 'products.product.sold_out' | t }}</span>
+        {%- elsif product_card_product.compare_at_price > product_card_product.price and product_card_product.available -%}
+          <span class="badge badge--sale" aria-hidden="true">{{ 'products.product.on_sale' | t }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if show_quick_view -%}
+      <div class="cpd-product-overlay">
+        <a href="{{ product_card_product.url }}" class="cpd-quick-view-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          {{ 'products.product.quick_view' | t }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="cpd-product-info">
+    {%- if show_category -%}
+      <div class="cpd-product-category">{{ product_card_product.type }}</div>
+    {%- endif -%}
+
+    {%- if show_vendor -%}
+      <span class="visually-hidden">{{ 'products.product.vendor' | t }}</span>
+      <div class="caption-with-letter-spacing light">{{ product_card_product.vendor }}</div>
+    {%- endif -%}
+
+    {%- if show_title != false -%}
+      <div class="cpd-product-name">
+        <a href="{{ product_card_product.url }}" class="full-unstyled-link">
+          {{ product_card_product.title | escape }}
+        </a>
+      </div>
+    {%- endif -%}
+
+    {%- if show_description -%}
+      <p class="cpd-product-desc">
+        {{ product_card_product.description | strip_html | truncatewords: 20 }}
+      </p>
+    {%- endif -%}
+
+    {%- if show_reviews -%}
+      {%- liquid
+        assign display_rating = rating_value | default: product_card_product.metafields.reviews.rating.value | default: 4.5
+        assign display_count = rating_count | default: product_card_product.metafields.reviews.rating_count | default: 12
+        assign display_rating = display_rating | plus: 0
+        assign rating_decimal = display_rating | modulo: 1
+        assign rating_full = display_rating | floor
+      -%}
+      <div class="cpd-product-rating">
+        <div class="cpd-product-stars">
+          {%- assign rating_full_plus_one = rating_full | plus: 1 -%}
+          {%- for i in (1..5) -%}
+            {%- if i <= rating_full -%}
+              <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+            {%- elsif rating_decimal > 0 and i == rating_full_plus_one -%}
+              <svg viewBox="0 0 24 24" class="half-filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+            {%- else -%}
+              <svg viewBox="0 0 24 24" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- if show_rating_count -%}
+          <span class="cpd-rating-count">({{ display_count }})</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="cpd-product-footer{% unless show_line_divider %} no-divider{% endunless %}">
+      {%- if show_price -%}
+        <div class="cpd-product-price">
+           {{ product_card_product.price | money }}
+           {%- if product_card_product.compare_at_price > product_card_product.price and show_compare_price -%}
+             <s>{{ product_card_product.compare_at_price | money }}</s>
+           {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if show_cta_in_footer or show_add_to_cart -%}
+        <div class="cpd-product-buttons" style="display: flex; gap: 8px; align-items: center;">
+          {%- if show_cta_in_footer -%}
+            <a href="{{ product_card_product.url }}" class="cpd-product-cta cpd-product-cta--details">
+              {%- if view_details_label != blank -%}
+                {{ view_details_label }}
+              {%- else -%}
+                {{ 'products.product.view_details' | t }}
+              {%- endif -%}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          {%- endif -%}
+
+          {%- if show_add_to_cart -%}
+            {%- if product_card_product.available -%}
+              <form method="post" action="{{ routes.cart_add_url }}" class="cpd-product-cta-form" style="margin: 0;">
+                <input type="hidden" name="id" value="{{ product_card_product.variants.first.id }}" />
+                <button type="submit" class="cpd-product-cta">
+                  {{ 'products.product.add_to_cart' | t }}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </form>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

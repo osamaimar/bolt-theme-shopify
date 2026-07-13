@@ -1,0 +1,297 @@
+/* Legal Grid Section Styles */
+
+.legal-grid-section {
+  --legal-grid-max-width: 1200px;
+  --legal-grid-gap: 60px;
+}
+
+.legal-grid-section .container,
+.legal-grid-section .container-narrow,
+.legal-grid-section .container-fluid {
+  max-width: var(--legal-grid-max-width, 1200px);
+  margin: 0 auto;
+}
+
+/* Hero Section */
+.legal-hero {
+  margin-bottom: 3rem;
+}
+
+.legal-hero .main-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.legal-hero .highlight-text {
+  color: var(--color-accent);
+}
+
+.legal-hero .legal-meta {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Content Wrapper */
+.legal-content-wrapper {
+  max-width: var(--legal-grid-max-width, 1200px);
+  margin: 0 auto;
+}
+
+/* Two Column Grid */
+.legal-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--legal-grid-gap, 60px);
+  margin-bottom: 2rem;
+}
+
+/* Columns */
+.legal-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Legal Sections */
+.legal-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease, border-color 0.3s ease;
+}
+
+.legal-section:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.legal-section h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: rgb(var(--color-foreground));
+}
+
+.legal-section-content {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: rgba(var(--color-foreground), 0.85);
+}
+
+.legal-section-content p {
+  margin-bottom: 1rem;
+}
+
+.legal-section-content p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-section-content ul {
+  margin: 1rem 0;
+  padding-left: 1.25rem;
+}
+
+.legal-section-content li {
+  margin-bottom: 0.4rem;
+}
+
+.legal-section-content strong {
+  font-weight: 600;
+  color: var(--text-inverse);
+}
+
+/* Download Button */
+.legal-download-wrapper {
+  margin-top: 1rem;
+}
+
+/* Divider Block */
+.legal-divider {
+  border: none;
+  border-top: 1px solid var(--border-light);
+  margin: 3rem 0 2rem;
+}
+
+.legal-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: transparent;
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.legal-download-btn:hover {
+  border-color: var(--color-accent-40);
+  background: var(--color-accent-10);
+}
+
+.legal-download-btn svg {
+  color: var(--color-accent);
+}
+
+.legal-download-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Text Alignment */
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center .legal-download-btn,
+.text-center .main-title {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-right .legal-download-btn,
+.text-right .main-title {
+  margin-left: auto;
+}
+
+/* Responsive */
+@media screen and (max-width: 900px) {
+  .legal-grid-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .legal-col {
+    gap: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .legal-grid-section {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+  }
+
+  .legal-hero {
+    margin-bottom: 2rem;
+  }
+
+  .legal-hero .main-title {
+    font-size: 1.75rem;
+  }
+
+  .legal-grid-container {
+    gap: 1rem;
+  }
+
+  .legal-section {
+    padding: 1.25rem;
+  }
+
+  .legal-section h2 {
+    font-size: 1rem;
+  }
+
+  .legal-download-wrapper {
+    margin-top: 1rem;
+  }
+
+  .legal-divider {
+    margin: 2rem 0 1.5rem;
+  }
+
+  .legal-download-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Color Scheme Variants - Default */
+.legal-grid-section { background-color: var(--bg-primary); }
+
+/* Background Options */
+.legal-grid-section.color-background-1 { background-color: var(--bg-primary); }
+.legal-grid-section.color-background-2 { background-color: var(--bg-secondary); }
+
+/* Inverse - Light background for contrast */
+.legal-grid-section.color-inverse { 
+  background-color: var(--color-white);
+}
+.legal-grid-section.color-inverse .legal-hero .main-title,
+.legal-grid-section.color-inverse .legal-section h2,
+.legal-grid-section.color-inverse .legal-section-content strong {
+  color: rgb(var(--color-black-rgb));
+}
+.legal-grid-section.color-inverse .legal-section-content,
+.legal-grid-section.color-inverse .legal-hero .legal-meta {
+  color: rgba(var(--color-black-rgb), 0.7);
+}
+.legal-grid-section.color-inverse .legal-section {
+  background: rgba(var(--color-black-rgb), 0.05);
+  border-color: rgba(var(--color-black-rgb), 0.1);
+}
+
+/* Accent colors */
+.legal-grid-section.color-accent-1 { background-color: var(--color-primary); }
+.legal-grid-section.color-accent-2 { background-color: var(--color-accent); }
+.legal-grid-section.color-accent-2 .legal-hero .main-title,
+.legal-grid-section.color-accent-2 .legal-section h2,
+.legal-grid-section.color-accent-2 .legal-section-content,
+.legal-grid-section.color-accent-2 .legal-section-content strong {
+  color: rgb(var(--color-black-rgb));
+}
+
+/* Sections use glassmorphism effect */
+.legal-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+}
+
+.legal-section:hover {
+  border-color: var(--color-accent-30);
+  box-shadow: 0 10px 30px var(--color-accent-10);
+}
+
+.legal-section h2 {
+  color: var(--text-inverse);
+}
+
+.legal-section-content {
+  color: var(--text-secondary);
+}
+
+.legal-section-content strong {
+  color: var(--text-inverse);
+}
+
+/* Download button styling */
+.legal-download-btn {
+  background: transparent;
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+}
+
+.legal-download-btn:hover {
+  border-color: var(--color-accent-40);
+  background: var(--color-accent-10);
+}
+
+.legal-download-btn svg {
+  color: var(--color-accent);
+}

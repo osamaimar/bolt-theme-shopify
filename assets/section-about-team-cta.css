@@ -1,0 +1,250 @@
+/* Color Scheme Mappings */
+.about-cta-section {
+  position: relative;
+  background-color: var(--section-bg, var(--bg-primary));
+  color: var(--section-text, var(--text-primary));
+}
+
+.about-cta-section.color-background-1 {
+  --section-bg: var(--bg-primary);
+  --section-text: var(--text-primary);
+  --section-text-secondary: var(--text-secondary);
+  --cta-card-bg: linear-gradient(135deg, var(--gradient-primary-end) 0%, var(--gradient-primary-start) 100%);
+  --cta-card-text: var(--color-white);
+  --cta-card-border: var(--color-white-10);
+  --cta-highlight-text: var(--color-accent-secondary, #55e4ed);
+  --btn-primary-bg: #55e4ed;
+  --btn-primary-hover-bg: #7de9f0;
+  --btn-primary-text: #000;
+  --btn-outline-text: #fff;
+  --btn-outline-border: rgba(255, 255, 255, 0.3);
+  --btn-outline-hover-bg: rgba(255, 255, 255, 0.1);
+  --icon-bg: var(--color-accent-secondary-10, rgba(85, 228, 237, 0.1));
+  --icon-color: var(--color-accent-secondary, #55e4ed);
+}
+.about-cta-section.color-background-2 {
+  --section-bg: var(--bg-secondary);
+  --section-text: var(--text-primary);
+  --section-text-secondary: var(--text-secondary);
+  --cta-card-bg: linear-gradient(135deg, var(--gradient-primary-end) 0%, var(--gradient-primary-start) 100%);
+  --cta-card-text: var(--color-white);
+  --cta-card-border: var(--color-white-10);
+  --cta-highlight-text: var(--color-accent-secondary, #55e4ed);
+  --btn-primary-bg: #55e4ed;
+  --btn-primary-hover-bg: #7de9f0;
+  --btn-primary-text: #000;
+  --btn-outline-text: #fff;
+  --btn-outline-border: rgba(255, 255, 255, 0.3);
+  --btn-outline-hover-bg: rgba(255, 255, 255, 0.1);
+  --icon-bg: var(--color-accent-secondary-10, rgba(85, 228, 237, 0.1));
+  --icon-color: var(--color-accent-secondary, #55e4ed);
+}
+.about-cta-section.color-inverse {
+  --section-bg: var(--color-white);
+  --section-text: var(--bg-primary);
+  --section-text-secondary: rgba(0, 0, 0, 0.7);
+  --cta-card-bg: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.03) 0%, rgba(var(--color-accent-rgb), 0.05) 100%);
+  --cta-card-text: var(--bg-primary);
+  --cta-card-border: rgba(0, 0, 0, 0.08);
+  --cta-highlight-text: var(--color-primary);
+  --btn-primary-bg: var(--color-primary);
+  --btn-primary-hover-bg: var(--color-accent-secondary);
+  --btn-primary-text: var(--color-white);
+  --btn-outline-text: var(--bg-primary);
+  --btn-outline-border: rgba(0, 0, 0, 0.2);
+  --btn-outline-hover-bg: rgba(0, 0, 0, 0.05);
+  --icon-bg: rgba(var(--color-primary-rgb), 0.08);
+  --icon-color: var(--color-primary);
+}
+.about-cta-section.color-accent-1 {
+  --section-bg: var(--color-primary);
+  --section-text: var(--text-inverse, #fff);
+  --section-text-secondary: rgba(255, 255, 255, 0.8);
+  --cta-card-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  --cta-card-text: var(--text-inverse, #fff);
+  --cta-card-border: rgba(255, 255, 255, 0.15);
+  --cta-highlight-text: var(--color-accent-secondary, #55e4ed);
+  --btn-primary-bg: var(--color-white);
+  --btn-primary-hover-bg: var(--color-accent-secondary);
+  --btn-primary-text: var(--color-primary);
+  --btn-outline-text: var(--color-white);
+  --btn-outline-border: rgba(255, 255, 255, 0.3);
+  --btn-outline-hover-bg: rgba(255, 255, 255, 0.1);
+  --icon-bg: rgba(255, 255, 255, 0.15);
+  --icon-color: var(--color-white);
+}
+.about-cta-section.color-accent-2 {
+  --section-bg: var(--color-accent);
+  --section-text: var(--bg-primary);
+  --section-text-secondary: rgba(0, 0, 0, 0.7);
+  --cta-card-bg: linear-gradient(135deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.03) 100%);
+  --cta-card-text: var(--bg-primary);
+  --cta-card-border: rgba(0, 0, 0, 0.12);
+  --cta-highlight-text: var(--color-primary);
+  --btn-primary-bg: var(--color-primary);
+  --btn-primary-hover-bg: var(--color-accent-secondary);
+  --btn-primary-text: var(--color-white);
+  --btn-outline-text: var(--bg-primary);
+  --btn-outline-border: rgba(0, 0, 0, 0.2);
+  --btn-outline-hover-bg: rgba(0, 0, 0, 0.05);
+  --icon-bg: rgba(0, 0, 0, 0.08);
+  --icon-color: var(--bg-primary);
+}
+
+.about-cta-section {
+  position: relative;
+}
+
+.about-cta-card {
+  background: var(--cta-card-bg, linear-gradient(135deg, var(--gradient-primary-end) 0%, var(--gradient-primary-start) 100%));
+  border-radius: 30px;
+  text-align: center;
+  padding: var(--spacing-4xl) 40px;
+  position: relative;
+  overflow: hidden;
+  color: var(--cta-card-text, var(--color-white));
+  border: 1px solid var(--cta-card-border, var(--color-white-10));
+  box-shadow: 0 10px 40px var(--color-black-30);
+}
+
+.about-cta-content {
+  position: relative;
+  z-index: 10;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.about-cta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-cta-icon svg {
+  display: block;
+}
+
+.about-cta-content .section-title {
+  font-size: clamp(1.5rem, 4vw, 1.875rem);
+  font-weight: 700;
+  color: var(--cta-card-text, #fff) !important;
+  margin-bottom: 24px;
+}
+
+.about-cta-content .highlight-text {
+  color: var(--cta-highlight-text, var(--color-accent-secondary, #55e4ed));
+}
+
+.about-cta-content p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--cta-card-text, rgba(255, 255, 255, 0.9));
+  opacity: 0.9;
+  margin-bottom: 40px;
+}
+
+.about-cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.btn-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--btn-primary-bg, #55e4ed);
+  color: var(--btn-primary-text, #000);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-cta-primary:hover {
+  background: var(--btn-primary-hover-bg, #7de9f0);
+  transform: translateY(-2px);
+}
+
+.btn-cta-primary svg {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-cta-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: transparent;
+  color: var(--btn-outline-text, #fff);
+  border: 1px solid var(--btn-outline-border, rgba(255, 255, 255, 0.3));
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-cta-outline:hover {
+  background: var(--btn-outline-hover-bg, rgba(255, 255, 255, 0.1));
+  border-color: var(--btn-outline-text, rgba(255, 255, 255, 0.5));
+}
+
+.btn-cta-outline svg {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 768px) {
+
+  .about-cta-card {
+    padding: 60px 24px;
+  }
+
+  .about-cta-content .section-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .about-cta-content p {
+    font-size: var(--font-size-base);
+  }
+
+  .about-cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-cta-primary,
+  .btn-cta-outline {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Background Pattern styles for the CTA Card */
+.about-cta-card .bg-pattern {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.about-cta-card .pattern-top-left {
+  top: -100px;
+  left: -100px;
+  background: var(--color-secondary, #ff5e62);
+}
+
+.about-cta-card .pattern-bottom-right {
+  bottom: -100px;
+  right: -100px;
+  background: var(--color-accent, #55e4ed);
+}

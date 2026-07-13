@@ -1,0 +1,102 @@
+/* assets/section-trust-bar.css */
+/* ===========================
+   Trust Banner
+   =========================== */
+/* Color Scheme Mapping */
+.hec-trust-bar.color-default { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.hec-trust-bar.color-background-1 { --section-bg: var(--bg-primary); --section-text: var(--text-primary); }
+.hec-trust-bar.color-background-2 { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.hec-trust-bar.color-accent-1 { --section-bg: var(--color-primary); --section-text: var(--text-inverse); }
+.hec-trust-bar.color-accent-2 { --section-bg: var(--color-accent); --section-text: var(--bg-primary); }
+.hec-trust-bar.color-inverse { --section-bg: var(--bg-primary); --section-text: var(--text-inverse); }
+
+.hec-trust-bar {
+    padding: 0;
+    background: var(--section-bg, var(--bg-secondary));
+    color: var(--section-text, var(--text-primary));
+    border: none;
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent, var(--color-accent-secondary-20), transparent) 1;
+}
+
+.hec-trust-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--columns-desktop, 4), 1fr);
+    gap: var(--spacing-xl);
+}
+
+@media (max-width: 1024px) {
+    .hec-trust-grid {
+        grid-template-columns: repeat(min(2, var(--columns-desktop, 4)), 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .hec-trust-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.hec-trust-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: 20px var(--spacing-lg);
+    background: var(--bg-glass);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    transition: all 0.3s ease;
+}
+
+.hec-trust-item:hover {
+    border-color: var(--color-accent-secondary-20);
+    background: var(--bg-glass-hover);
+    transform: translateY(-2px);
+}
+
+.hec-trust-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    background: var(--color-accent-secondary-10);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--section-text, var(--color-accent-secondary));
+    flex-shrink: 0;
+}
+
+.hec-trust-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.hec-trust-label {
+    display: flex;
+    flex-direction: column;
+}
+
+.hec-trust-label strong {
+    font-size: 0.95rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--section-text, var(--text-primary));
+}
+
+.hec-trust-label span {
+    font-size: 0.8rem;
+    color: var(--section-text, var(--text-secondary));
+    opacity: 0.8;
+}
+
+@media (max-width: 1024px) {
+    .hec-trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 580px) {
+    .hec-trust-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,222 @@
+/* Color Scheme Mappings */
+.team-section {
+  position: relative;
+  background-color: var(--section-bg, var(--bg-primary));
+  color: var(--section-text, var(--text-primary));
+}
+
+.team-section.color-background-1 {
+  --section-bg: var(--bg-primary);
+  --section-text: var(--text-primary);
+  --section-text-secondary: var(--text-secondary);
+  --card-bg: var(--bg-card);
+  --card-border: var(--border-primary);
+  --team-role-color: var(--color-accent-secondary, #55e4ed);
+  --badge-bg: var(--color-accent-secondary-10);
+  --badge-border: var(--color-accent-secondary-30);
+  --badge-text: var(--color-accent-secondary);
+  --card-glow: var(--color-black-30);
+  --card-image-glow: rgba(0, 0, 0, 0.6);
+}
+.team-section.color-background-2 {
+  --section-bg: var(--bg-secondary);
+  --section-text: var(--text-primary);
+  --section-text-secondary: var(--text-secondary);
+  --card-bg: var(--bg-card);
+  --card-border: var(--border-primary);
+  --team-role-color: var(--color-accent-secondary, #55e4ed);
+  --badge-bg: var(--color-accent-secondary-10);
+  --badge-border: var(--color-accent-secondary-30);
+  --badge-text: var(--color-accent-secondary);
+  --card-glow: var(--color-black-30);
+  --card-image-glow: rgba(0, 0, 0, 0.6);
+}
+.team-section.color-inverse {
+  --section-bg: var(--color-white);
+  --section-text: var(--bg-primary);
+  --section-text-secondary: rgba(0, 0, 0, 0.7);
+  --card-bg: rgba(0, 0, 0, 0.03);
+  --card-border: rgba(0, 0, 0, 0.08);
+  --team-role-color: var(--color-primary);
+  --badge-bg: rgba(var(--color-primary-rgb), 0.08);
+  --badge-border: rgba(var(--color-primary-rgb), 0.15);
+  --badge-text: var(--color-primary);
+  --card-glow: rgba(0, 0, 0, 0.08);
+  --card-image-glow: var(--color-white);
+}
+.team-section.color-accent-1 {
+  --section-bg: var(--color-primary);
+  --section-text: var(--text-inverse, #fff);
+  --section-text-secondary: rgba(255, 255, 255, 0.8);
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --card-border: rgba(255, 255, 255, 0.15);
+  --team-role-color: var(--color-accent-secondary, #55e4ed);
+  --badge-bg: rgba(255, 255, 255, 0.15);
+  --badge-border: rgba(255, 255, 255, 0.25);
+  --badge-text: var(--color-white);
+  --card-glow: rgba(0, 0, 0, 0.25);
+  --card-image-glow: rgba(0, 0, 0, 0.4);
+}
+.team-section.color-accent-2 {
+  --section-bg: var(--color-accent);
+  --section-text: var(--bg-primary);
+  --section-text-secondary: rgba(0, 0, 0, 0.7);
+  --card-bg: rgba(0, 0, 0, 0.06);
+  --card-border: rgba(0, 0, 0, 0.12);
+  --team-role-color: var(--bg-primary);
+  --badge-bg: rgba(0, 0, 0, 0.08);
+  --badge-border: rgba(0, 0, 0, 0.15);
+  --badge-text: rgba(0, 0, 0, 0.9);
+  --card-glow: rgba(0, 0, 0, 0.15);
+  --card-image-glow: var(--color-accent);
+}
+
+.team-section {
+  position: relative;
+}
+
+.team-grid {
+  display: grid;
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.team-card {
+  background: var(--card-bg, var(--bg-card));
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--card-border, var(--border-primary));
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px var(--card-glow, var(--color-black-30));
+}
+
+.team-card-image {
+  width: 100%;
+  height: 280px;
+  background: linear-gradient(135deg, var(--gradient-primary-start), var(--gradient-primary-end));
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-card-image::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, var(--card-image-glow, var(--bg-card)), transparent);
+  pointer-events: none;
+}
+
+.team-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--badge-bg, var(--color-accent-secondary-10));
+  border: 3px solid var(--badge-border, var(--color-accent-secondary-30));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--badge-text, var(--color-accent-secondary));
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.team-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.team-avatar svg {
+  width: 48px;
+  height: 48px;
+}
+
+.team-card-body {
+  padding: var(--spacing-lg);
+  text-align: center;
+}
+
+.team-card-body h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--section-text, var(--text-inverse, #fff));
+  margin-bottom: 8px;
+}
+
+.team-role {
+  font-size: 0.875rem;
+  color: var(--team-role-color, var(--color-accent-secondary, #55e4ed));
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.team-card-body p {
+  font-size: 0.9rem;
+  color: var(--section-text-secondary, var(--text-secondary, rgba(255,255,255,0.8)));
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.team-socials {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.team-social-link {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--card-border, var(--border-primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--section-text-secondary, var(--text-secondary));
+  transition: all 0.3s ease;
+}
+
+.team-social-link:hover {
+  background: var(--badge-bg, var(--color-accent-secondary-10));
+  border-color: var(--badge-border, var(--color-accent-secondary-30));
+  color: var(--badge-text, var(--color-accent-secondary));
+}
+
+.team-social-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+
+
+@media (max-width: 600px) {
+  .team-grid {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}

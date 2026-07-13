@@ -1,0 +1,91 @@
+/* Cart Related Products Section */
+
+.cart-related-products-section {
+  position: relative;
+  background-color: var(--bg-primary);
+}
+
+/* Color Schemes */
+.cart-related-products-section.color-background-1 {
+  background-color: var(--bg-primary);
+}
+
+.cart-related-products-section.color-background-2 {
+  background-color: var(--bg-secondary);
+}
+
+.cart-related-products-section.color-inverse {
+  background-color: var(--color-white);
+}
+
+.cart-related-products-section.color-accent-1 {
+  background-color: var(--color-primary);
+}
+
+.cart-related-products-section.color-accent-2 {
+  background-color: var(--color-accent);
+}
+
+.cart-related-products-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.cart-related-products-header .section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--color-text, #ffffff);
+}
+
+.cart-related-products-header .section-title span {
+  color: var(--color-accent, #3b82f6);
+}
+
+.cart-related-products-header .section-subheading {
+  font-size: 1rem;
+  color: var(--text-lighter, rgba(255, 255, 255, 0.6));
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.cart-related-products-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--columns-mobile, 2), 1fr);
+  gap: 1.5rem;
+}
+
+.cart-related-products-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.5));
+}
+
+/* Tablet breakpoint */
+@media screen and (min-width: 750px) {
+  .cart-related-products-grid {
+    grid-template-columns: repeat(var(--columns-tablet, 2), 1fr);
+    gap: 2rem;
+  }
+  
+  .cart-related-products-header .section-title {
+    font-size: 2.25rem;
+  }
+}
+
+/* Desktop breakpoint */
+@media screen and (min-width: 990px) {
+  .cart-related-products-grid {
+    grid-template-columns: repeat(var(--columns-desktop, 4), 1fr);
+  }
+  
+  .cart-related-products-header {
+    margin-bottom: 3rem;
+  }
+}
+
+/* Ensure product cards within this section inherit proper spacing */
+.cart-related-products-grid .cpd-product-card {
+  height: 100%;
+}

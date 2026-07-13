@@ -1,0 +1,33 @@
+{%- comment -%}Popular Posts Widget Block{%- endcomment -%}
+<div class="blog-sidebar-widget block-{{ block.id }}{% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %}{% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
+  {%- if block.settings.show_title -%}
+    {%- assign heading_tag = block.settings.heading_tag | default: 'h3' -%}
+    <{{ heading_tag }} class="blog-sidebar-widget-title size-{{ block.settings.font_size | default: 'medium' }}">
+      {%- if block.settings.show_icon -%}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+        </svg>
+      {%- endif -%}
+      {{ block.settings.heading | default: 'Popular Posts' }}
+    </{{ heading_tag }}>
+  {%- endif -%}
+  <div class="blog-sidebar-popular-list">
+    {%- for i in (1..block.settings.show_count) -%}
+      {%- assign article_key = 'article_' | append: i -%}
+      {%- assign article_setting = block.settings[article_key] -%}
+      {%- if article_setting != blank -%}
+        <a href="{{ article_setting.url }}" class="blog-sidebar-popular-item">
+          {%- if block.settings.show_thumbnails and article_setting.image -%}
+            {{ article_setting.image | image_url: width: 144 | image_tag: loading: 'lazy', alt: article_setting.title, class: 'blog-sidebar-popular-thumb' }}
+          {%- endif -%}
+          <div class="blog-sidebar-popular-info">
+            <span class="blog-sidebar-popular-title">{{ article_setting.title }}</span>
+            {%- if block.settings.show_date -%}
+              <span class="blog-sidebar-popular-date">{{ article_setting.published_at | date: '%b %d, %Y' }}</span>
+            {%- endif -%}
+          </div>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>

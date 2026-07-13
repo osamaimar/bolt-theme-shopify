@@ -1,0 +1,285 @@
+{{ 'section-featured-products.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.show_section -%}
+{% render 'section-padding',
+  section_id: section.id,
+  padding_left: section.settings.padding_left,
+  padding_right: section.settings.padding_right,
+  padding_left_mobile: section.settings.padding_left_mobile,
+  padding_right_mobile: section.settings.padding_right_mobile
+%}
+<style>
+  #shopify-section-{{ section.id }} { padding: 0 !important; }
+  #shopify-section-{{ section.id }} .hec-products {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .hec-products {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+  }
+</style>
+
+<section class="hec-products color-{{ section.settings.color_scheme }}" id="shopify-section-{{ section.id }}">
+  <div class="{% if section.settings.container_width == 'full' %}container-fluid{% elsif section.settings.container_width == 'narrow' %}container-narrow{% else %}container{% endif %}">
+    <div class="hec-section-header">
+      <div class="hec-section-header-text">
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading | replace: '[', '<span>' | replace: ']', '</span>' }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p>{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+      
+      {%- if section.settings.view_all_label != blank and section.settings.collection != blank -%}
+        <a href="{{ collections[section.settings.collection].url }}" class="hec-section-link{% unless section.settings.show_link_mobile %} hidden-mobile{% endunless %}" id="view-all-products-{{ section.id }}">
+          {{ section.settings.view_all_label }}
+          {% render 'icon-arrow' %}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="hec-products-grid" style="--columns-desktop: {{ section.settings.columns }};">
+      {%- assign products_to_show = section.settings.products_to_show -%}
+      {%- if section.settings.collection != blank -%}
+        {%- for product in collections[section.settings.collection].products limit: products_to_show -%}
+          {% render 'product-card', 
+            product_card_product: product, 
+            show_vendor: section.settings.show_vendor, 
+            show_price: section.settings.show_price,
+            card_style: section.settings.card_style,
+            show_add_to_cart: section.settings.show_add_to_cart
+          %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..products_to_show) -%}
+          <div class="cpd-product-card onboarding-placeholder">
+            <div class="cpd-product-thumb">
+              {{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+            <div class="cpd-product-info">
+              <div class="caption-with-letter-spacing light">{{ 'products.product.vendor' | t }}</div>
+              <h3 class="cpd-product-name">{{ 'products.product.title_placeholder' | t }}</h3>
+              <div class="cpd-product-footer">
+                <span class="cpd-product-price">$99.99</span>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "tag": "section",
+  "class": "section-featured-products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Trending Products"
+    },
+    {
+      "type": "inline_richtext",
+          "id": "subheading",
+      "label": "Subheading",
+      "default": "Our most popular items loved by thousands of customers worldwide."
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "\"View All\" link text",
+      "default": "View All Products"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_link_mobile",
+      "label": "Show \"View All\" link on Mobile",
+      "default": false
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Products to show",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns per row",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show price",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_add_to_cart",
+      "label": "Show add to cart button",
+      "default": true
+    },
+
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "default": "standard",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "minimal", "label": "Minimal" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "default": "full",
+      "options": [
+        { "value": "full", "label": "Full width" },
+        { "value": "standard", "label": "Standard" },
+        { "value": "narrow", "label": "Narrow" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    }
+  ],
+  "blocks": [
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products"
+    }
+  ]
+}
+{% endschema %}

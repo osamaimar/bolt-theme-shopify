@@ -1,0 +1,208 @@
+/* assets/section-featured-collections.css */
+/* ===========================
+   Featured Collections
+   =========================== */
+/* Color Scheme Mapping */
+.hec-collections.color-default { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.hec-collections.color-background-1 { --section-bg: var(--bg-primary); --section-text: var(--text-primary); }
+.hec-collections.color-background-2 { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.hec-collections.color-accent-1 { --section-bg: var(--color-primary); --section-text: var(--text-inverse); }
+.hec-collections.color-accent-2 { --section-bg: var(--color-accent); --section-text: var(--bg-primary); }
+.hec-collections.color-inverse { --section-bg: var(--bg-primary); --section-text: var(--text-inverse); }
+
+.hec-collections {
+    padding: 0;
+    background: var(--section-bg, var(--bg-secondary));
+    color: var(--section-text, var(--text-inverse));
+}
+
+.hec-section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-2xl);
+    gap: var(--spacing-lg);
+}
+
+.hec-section-header-text h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--section-text, var(--text-inverse));
+    margin-bottom: var(--spacing-sm);
+}
+
+.hec-section-header-text h2 span {
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-accent, var(--color-secondary)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hec-section-header-text p {
+    font-size: 1.15rem;
+    color: var(--section-text, var(--text-secondary));
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+.hec-section-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 12px var(--spacing-lg);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    color: var(--text-inverse);
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-semibold);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.hec-section-link:hover {
+    border-color: rgba(var(--color-secondary-rgb), 0.4);
+    background: var(--color-white-5);
+    color: var(--color-secondary);
+}
+
+.hec-section-link svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s;
+}
+
+.hec-section-link:hover svg {
+    transform: translateX(4px);
+}
+
+.hec-collections-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--columns-desktop, 3), 1fr);
+    gap: var(--spacing-lg);
+}
+
+.ccg-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.25);
+    border: 1px solid var(--border-light);
+    display: block;
+}
+
+.ccg-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(var(--color-secondary-rgb), 0.4);
+    box-shadow:
+        0 24px 64px var(--color-black-30),
+        0 0 30px rgba(var(--color-secondary-rgb), 0.1);
+}
+
+.ccg-card-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.ccg-card-img img,
+.ccg-card-img svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.ccg-card:hover .ccg-card-img img,
+.ccg-card:hover .ccg-card-img svg {
+    transform: scale(1.08);
+}
+
+.ccg-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg,
+            var(--bg-primary-95) 0%,
+            var(--color-black-50) 100%);
+    z-index: 1;
+}
+
+.ccg-card-content {
+    position: absolute;
+    bottom: 0;
+    inset-inline-start: 0;
+    inset-inline-end: 0;
+    padding: var(--spacing-lg);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.ccg-card-title {
+    font-size: 1.3rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-inverse);
+    margin-bottom: 6px;
+    text-decoration: none;
+}
+.ccg-card-wrapper-link {
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    z-index: 10;
+}
+
+.ccg-card-title {
+    font-size: 1.3rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-inverse);
+    margin-bottom: 6px;
+}
+
+.ccg-card-count {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.ccg-card-count svg { width: 14px; height: 14px; }
+
+.ccg-card-badge {
+    position: absolute;
+    top: 14px;
+    inset-inline-start: 14px;
+    padding: 5px 14px;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 4;
+    background: linear-gradient(135deg, var(--gradient-warning-start), var(--gradient-warning-end));
+    color: var(--bg-secondary);
+}
+
+.ccg-card-desc, .ccg-card-bottom { display: none; } /* Hide snippet extra details on homepage for minimal look */
+
+@media (max-width: 900px) {
+    .hec-collections-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 580px) {
+    .hec-collections-grid {
+        grid-template-columns: 1fr;
+    }
+    .hec-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

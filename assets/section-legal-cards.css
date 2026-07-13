@@ -1,0 +1,236 @@
+/* Legal Cards Section Styles */
+
+.legal-cards-section {
+  --legal-cards-max-width: 1000px;
+}
+
+.legal-cards-section .container,
+.legal-cards-section .container-narrow,
+.legal-cards-section .container-fluid {
+  max-width: var(--legal-cards-max-width, 1000px);
+  margin: 0 auto;
+}
+
+/* Color Scheme Variants - Default */
+.legal-cards-section { background-color: var(--bg-primary); }
+
+/* Background Options */
+.legal-cards-section.color-background-1 { background-color: var(--bg-primary); }
+.legal-cards-section.color-background-2 { background-color: var(--bg-secondary); }
+
+/* Inverse - Light background for contrast */
+.legal-cards-section.color-inverse { 
+  background-color: var(--color-white);
+}
+.legal-cards-section.color-inverse .legal-hero .main-title,
+.legal-cards-section.color-inverse .legal-card h2,
+.legal-cards-section.color-inverse .legal-card-content strong {
+  color: var(--color-black-rgb);
+}
+.legal-cards-section.color-inverse .legal-card-content,
+.legal-cards-section.color-inverse .legal-hero .legal-meta {
+  color: rgba(var(--color-black-rgb), 0.7);
+}
+.legal-cards-section.color-inverse .legal-card {
+  background: rgba(var(--color-black-rgb), 0.05);
+  border-color: rgba(var(--color-black-rgb), 0.1);
+}
+
+/* Accent colors */
+.legal-cards-section.color-accent-1 { background-color: var(--color-primary); }
+.legal-cards-section.color-accent-2 { background-color: var(--color-accent); }
+.legal-cards-section.color-accent-2 .legal-hero .main-title,
+.legal-cards-section.color-accent-2 .legal-card h2,
+.legal-cards-section.color-accent-2 .legal-card-content,
+.legal-cards-section.color-accent-2 .legal-card-content strong {
+  color: var(--color-black-rgb);
+}
+
+/* Hero Section */
+.legal-hero {
+  margin-bottom: 3rem;
+}
+
+.legal-hero .main-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.legal-hero .highlight-text {
+  color: var(--color-accent);
+}
+
+.legal-hero .legal-meta {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Legal Content */
+.legal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Legal Cards */
+.legal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.3s ease;
+}
+
+.legal-card:hover {
+  border-color: var(--color-accent-30);
+  box-shadow: 0 10px 30px var(--color-accent-10);
+  transform: translateY(-5px);
+}
+
+.legal-card h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-inverse);
+}
+
+.legal-card-content {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.legal-card-content p {
+  margin-bottom: 1rem;
+}
+
+.legal-card-content p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-card-content ul {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.legal-card-content li {
+  margin-bottom: 0.5rem;
+}
+
+.legal-card-content li > ul {
+  margin-top: 0.5rem;
+}
+
+.legal-card-content strong {
+  font-weight: 600;
+  color: var(--text-inverse);
+}
+
+.legal-divider {
+  border: none;
+  border-top: 1px solid var(--border-light, rgba(255,255,255,0.1));
+  margin: 3rem 0 2rem;
+  width: 100%;
+}
+
+.color-inverse .legal-divider,
+.color-accent-2 .legal-divider {
+  border-top-color: rgba(0,0,0,0.1);
+}
+
+/* Download Button */
+.legal-download-wrapper {
+  /* margins and borders moved to .legal-divider block */
+}
+
+.legal-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: transparent;
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.legal-download-btn:hover {
+  border-color: var(--color-accent-40);
+  background: var(--color-accent-10);
+}
+
+.legal-download-btn svg {
+  color: var(--color-accent);
+}
+
+.legal-download-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Text Alignment */
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center .legal-download-btn,
+.text-center .main-title {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-right .legal-download-btn,
+.text-right .main-title {
+  margin-left: auto;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .legal-cards-section {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+  }
+
+  .legal-hero {
+    margin-bottom: 2rem;
+  }
+
+  .legal-hero .main-title {
+    font-size: 1.75rem;
+  }
+
+  .legal-card {
+    padding: 1.25rem;
+  }
+
+  .legal-card h2 {
+    font-size: 1.1rem;
+  }
+
+  .legal-download-wrapper {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+
+  .legal-download-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,136 @@
+/* section-showcase-cta.css */
+.csh-cta-section {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.csh-cta-section.color-background-1 { background-color: var(--bg-primary); }
+.csh-cta-section.color-background-2 { background-color: var(--bg-secondary); }
+.csh-cta-section.color-accent-1 { background-color: var(--color-primary); }
+.csh-cta-section.color-accent-2 { background-color: var(--color-accent); }
+.csh-cta-section.color-inverse { background-color: var(--color-white); color: rgb(var(--color-black-rgb)); }
+
+.csh-cta-section.color-inverse .csh-cta-heading,
+.csh-cta-section.color-inverse .csh-cta-description,
+.csh-cta-section.color-inverse .csh-btn-outline {
+    color: rgb(var(--color-black-rgb));
+}
+
+.csh-cta-section.color-inverse .csh-cta-banner {
+    border-color: rgba(var(--color-black-rgb), 0.1);
+}
+
+.csh-cta-banner {
+    text-align: center;
+    padding: 56px 40px;
+    background: linear-gradient(135deg, var(--color-accent-secondary-10) 0%, var(--bg-glass) 50%, var(--color-accent-10) 100%);
+    border: 1px solid var(--color-accent-secondary-20);
+    border-radius: 28px;
+    position: relative;
+    overflow: hidden;
+}
+
+.csh-cta-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-accent-secondary-40), transparent);
+}
+
+.csh-cta-banner .csh-cta-heading {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-inverse);
+    margin-bottom: 14px;
+}
+
+.csh-cta-banner .csh-cta-heading span {
+    background: var(--color-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.csh-cta-banner .csh-cta-description {
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+    max-width: 550px;
+    margin: 0 auto var(--spacing-xl);
+    line-height: 1.7;
+}
+
+.csh-cta-banner .csh-cta-description span {
+    background: var(--color-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.csh-cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+@media (max-width: 768px) {
+    .csh-cta-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Button Base Styles */
+.csh-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 14px 28px;
+    background: var(--color-accent);
+    color: var(--bg-secondary);
+    border: none;
+    border-radius: 14px;
+    font-weight: var(--font-weight-bold);
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.csh-btn-primary:hover {
+    box-shadow: 0 12px 32px var(--color-accent-secondary-30);
+    transform: translateY(-2px);
+}
+
+.csh-btn-primary svg {
+    width: 18px;
+    height: 18px;
+}
+
+.csh-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 14px 28px;
+    background: transparent;
+    color: var(--text-inverse);
+    border: 1px solid var(--border-light);
+    border-radius: 14px;
+    font-weight: var(--font-weight-semibold);
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.csh-btn-outline:hover {
+    border-color: var(--color-accent-secondary-40);
+    background: var(--color-white-5);
+}
+
+.csh-btn-outline svg {
+    width: 18px;
+    height: 18px;
+}
+

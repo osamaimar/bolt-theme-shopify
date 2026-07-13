@@ -1,0 +1,111 @@
+/* Contact Methods Section */
+.contact-methods-section {
+  /* Spacing handled dynamically via section settings */
+}
+
+.contact-methods-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.contact-method-card {
+  background: var(--color-white-3);
+  border: 1px solid var(--color-accent-20);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.contact-method-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-accent);
+  background: var(--color-white-5);
+}
+
+.contact-method-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--bg-contact);
+  border-radius: var(--radius-lg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--color-accent);
+}
+
+.contact-method-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.contact-method-card .card-title {
+  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 12px;
+  color: var(--text-inverse);
+}
+
+.contact-method-card p {
+  font-size: var(--font-size-base);
+  color: var(--text-muted);
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
+
+.contact-method-card a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-method-card a:hover {
+  color: var(--color-accent-secondary);
+}
+
+@media (max-width: 900px) {
+  .contact-methods-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+  }
+}
+
+/* Color Scheme Variants */
+.contact-methods-section { background-color: var(--bg-primary); }
+
+/* Background Options */
+.contact-methods-section.color-background-1 { background-color: var(--bg-primary); }
+.contact-methods-section.color-background-2 { background-color: var(--bg-secondary); }
+
+/* Inverse - Light background for contrast */
+.contact-methods-section.color-inverse {
+  background-color: var(--color-white);
+}
+.contact-methods-section.color-inverse .contact-method-card {
+  background: rgba(var(--color-black-rgb), 0.05);
+  border-color: rgba(var(--color-black-rgb), 0.1);
+}
+.contact-methods-section.color-inverse .contact-method-card .card-title {
+  color: rgb(var(--color-black-rgb));
+}
+.contact-methods-section.color-inverse .contact-method-card p {
+  color: rgba(var(--color-black-rgb), 0.7);
+}
+.contact-methods-section.color-inverse .contact-method-icon {
+  color: rgb(var(--color-black-rgb));
+  background: rgba(var(--color-black-rgb), 0.1);
+}
+
+/* Accent colors */
+.contact-methods-section.color-accent-1 { background-color: var(--color-primary); }
+.contact-methods-section.color-accent-2 { background-color: var(--color-accent); }
+.contact-methods-section.color-accent-2 .contact-method-card .card-title {
+  color: rgb(var(--color-black-rgb));
+}
+.contact-methods-section.color-accent-2 .contact-method-icon {
+  color: rgb(var(--color-black-rgb));
+}

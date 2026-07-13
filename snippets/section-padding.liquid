@@ -1,0 +1,59 @@
+{%- comment -%}
+  Generates responsive padding styles for a section.
+  
+  @param {string} section_id - The section's unique ID
+  @param {number} padding_top - Top padding (desktop)
+  @param {number} padding_bottom - Bottom padding (desktop)
+  @param {number} padding_top_mobile - Top padding (mobile)
+  @param {number} padding_bottom_mobile - Bottom padding (mobile)
+  @param {number} padding_left - Left padding (desktop)
+  @param {number} padding_right - Right padding (desktop)
+  @param {number} padding_left_mobile - Left padding (mobile)
+  @param {number} padding_right_mobile - Right padding (mobile)
+{%- endcomment -%}
+
+{%- style -%}
+  .shopify-section#shopify-section-{{ section_id }} {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .shopify-section#shopify-section-{{ section_id }} > section,
+  .shopify-section#shopify-section-{{ section_id }} > div:not(.section-padding-exclude) {
+    padding-top: {{ padding_top | default: 0 }}px;
+    padding-bottom: {{ padding_bottom | default: 0 }}px;
+    padding-left: var(--section-padding-left, 0px);
+    padding-right: var(--section-padding-right, 0px);
+  }
+  #main-content > .shopify-section#shopify-section-{{ section_id }}:first-child > section,
+  #main-content > .shopify-section#shopify-section-{{ section_id }}:first-child > div:not(.section-padding-exclude) {
+    padding-top: calc({{ padding_top | default: 0 }}px + 100px) !important;
+  }
+
+  :root {
+    --section-padding-left-{{ section_id }}: {{ padding_left | default: 0 }}px;
+    --section-padding-right-{{ section_id }}: {{ padding_right | default: 0 }}px;
+  }
+
+  .shopify-section#shopify-section-{{ section_id }} {
+    --section-padding-left: {{ padding_left | default: 0 }}px;
+    --section-padding-right: {{ padding_right | default: 0 }}px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .shopify-section#shopify-section-{{ section_id }} > section,
+    .shopify-section#shopify-section-{{ section_id }} > div:not(.section-padding-exclude) {
+      padding-top: {{ padding_top_mobile | default: padding_top | default: 0 }}px;
+      padding-bottom: {{ padding_bottom_mobile | default: padding_bottom | default: 0 }}px;
+      padding-left: var(--section-padding-left, 0px);
+      padding-right: var(--section-padding-right, 0px);
+    }
+    #main-content > .shopify-section#shopify-section-{{ section_id }}:first-child > section,
+    #main-content > .shopify-section#shopify-section-{{ section_id }}:first-child > div:not(.section-padding-exclude) {
+      padding-top: calc({{ padding_top_mobile | default: padding_top | default: 0 }}px + 80px) !important;
+    }
+    .shopify-section#shopify-section-{{ section_id }} {
+      --section-padding-left: {{ padding_left_mobile | default: padding_left | default: 0 }}px;
+      --section-padding-right: {{ padding_right_mobile | default: padding_right | default: 0 }}px;
+    }
+  }
+{%- endstyle -%}

@@ -1,0 +1,275 @@
+{% render 'section-padding',
+  section_id: section.id,
+  padding_top: section.settings.padding_top,
+  padding_bottom: section.settings.padding_bottom,
+  padding_top_mobile: section.settings.padding_top_mobile,
+  padding_bottom_mobile: section.settings.padding_bottom_mobile,
+  padding_left: section.settings.padding_left,
+  padding_right: section.settings.padding_right,
+  padding_left_mobile: section.settings.padding_left_mobile,
+  padding_right_mobile: section.settings.padding_right_mobile
+%}
+{%- if section.settings.show_section -%}
+<section 
+  class="catalog-filters-section color-{{ section.settings.color_scheme }}" 
+  id="shopify-section-{{ section.id }}"
+>
+  <div class="{% if section.settings.container_width == 'full' %}container-fluid{% elsif section.settings.container_width == 'narrow' %}container-narrow{% else %}catalog-container{% endif %}">
+    
+    <div class="catalog-filter-bar" id="catalog-filter-bar-{{ section.id }}">
+      {%- if section.settings.show_all_filter -%}
+        <button class="filter-btn active" data-filter="all">{{ section.settings.all_label | default: 'All Products' }}</button>
+      {%- endif -%}
+      
+      {%- comment -%}Render Filter Item Blocks{%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'filter_item' -%}
+          <button class="filter-btn" data-filter="{{ block.settings.handle }}" {{ block.shopify_attributes }}>
+            {{ block.settings.label }}
+          </button>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if section.settings.use_collection_tags and collection.all_tags.size > 0 -%}
+        {%- for tag in collection.all_tags limit: section.settings.max_filters -%}
+          <button class="filter-btn" data-filter="{{ tag | handle }}">{{ tag }}</button>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+<script>
+function initStandaloneFilters() {
+  const sectionId = '{{ section.id }}';
+  const filterBar = document.getElementById('catalog-filter-bar-' + sectionId);
+  const grid = document.querySelector('.cpd-product-grid');
+  
+  if (!filterBar || !grid) return;
+
+  const productCards = grid.querySelectorAll('.cpd-product-card');
+  const filterBtns = filterBar.querySelectorAll('.filter-btn');
+  
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const filterValue = btn.getAttribute('data-filter');
+      
+      productCards.forEach(card => {
+        const categories = card.getAttribute('data-category').split(' ').filter(c => c.length > 0);
+        if (filterValue === 'all' || categories.includes(filterValue)) {
+          card.style.display = 'flex';
+          card.style.opacity = '0';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transition = 'opacity 0.4s ease';
+          }, 10);
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initStandaloneFilters);
+document.addEventListener('shopify:section:load', (event) => {
+  if (event.detail.sectionId === '{{ section.id }}') {
+    initStandaloneFilters();
+  }
+});
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Category Filters",
+  "tag": "section",
+  "class": "section-catalog-filters",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Filter Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_all_filter",
+      "label": "Show 'All' filter button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "all_label",
+      "label": "All button label",
+      "default": "All Products"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_collection_tags",
+      "label": "Use collection tags automatically",
+      "default": false,
+      "info": "If enabled, tags from the collection will be added to the bar."
+    },
+    {
+      "type": "range",
+      "id": "max_filters",
+      "min": 2,
+      "max": 20,
+      "step": 1,
+      "label": "Max auto-generated filters",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Section Style"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "default": "standard",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "full", "label": "Full width" },
+        { "value": "narrow", "label": "Narrow" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "filter_item",
+      "name": "Category Filter",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Button Label",
+          "default": "Category"
+        },
+        {
+          "type": "text",
+          "id": "handle",
+          "label": "Filter Value (Product type or Tag)",
+          "info": "Enter the product type or tag handle (e.g. 'laptops' for type Laptops)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Filters",
+      "blocks": [
+        { "type": "filter_item", "settings": { "label": "Laptops", "handle": "laptops" } },
+        { "type": "filter_item", "settings": { "label": "Phones", "handle": "phones" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

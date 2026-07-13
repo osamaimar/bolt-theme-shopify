@@ -1,0 +1,100 @@
+<!-- Quick View Modal -->
+<div class="qv-overlay" id="qv-overlay" role="dialog" aria-modal="true" aria-label="Quick product view">
+    <div class="qv-backdrop" id="qv-backdrop"></div>
+    <div class="qv-modal">
+        <!-- Close -->
+        <button class="qv-close" id="qv-close" aria-label="Close quick view">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+
+        <!-- Image Panel -->
+        <div class="qv-image-panel">
+            <img id="qv-image" src="{{ 'blank.svg' | asset_url }}" alt="Product image" width="800" height="800" />
+        </div>
+
+        <!-- Details Panel -->
+        <div class="qv-details">
+            <span class="qv-category" id="qv-category">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                <span id="qv-category-text">{{ 'products.product.category' | t }}</span>
+            </span>
+
+            <h2 class="qv-title" id="qv-title">{{ 'products.product.product_name_placeholder' | t }}</h2>
+
+            <div class="qv-price-row">
+                <span class="qv-price" id="qv-price">$0</span>
+                <span class="qv-availability">{{ 'products.product.in_stock' | t }}</span>
+            </div>
+
+            <div class="qv-divider"></div>
+
+            <p class="qv-description" id="qv-description">{{ 'products.product.description_placeholder' | t }}</p>
+
+            <!-- Feature Highlights -->
+            <div class="qv-features" id="qv-features">
+                <div class="qv-feature">
+                    <div class="qv-feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <span>{{ 'products.product.warranty_included' | t }}</span>
+                </div>
+                <div class="qv-feature">
+                    <div class="qv-feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="3" width="15" height="13"/>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                            <circle cx="5.5" cy="18.5" r="2.5"/>
+                            <circle cx="18.5" cy="18.5" r="2.5"/>
+                        </svg>
+                    </div>
+                    <span>{{ 'products.product.free_express_shipping' | t }}</span>
+                </div>
+                <div class="qv-feature">
+                    <div class="qv-feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                            <polyline points="17 6 23 6 23 12"/>
+                        </svg>
+                    </div>
+                    <span>{{ 'products.product.easy_returns' | t }}</span>
+                </div>
+            </div>
+
+            <!-- Quantity -->
+            <div class="qv-quantity-row">
+                <span class="qv-quantity-label">{{ 'cart.quantity' | t }}</span>
+                <div class="qv-quantity-control">
+                    <button class="qv-qty-btn" id="qv-qty-minus" aria-label="Decrease quantity">−</button>
+                    <span class="qv-qty-value" id="qv-qty-value">1</span>
+                    <button class="qv-qty-btn" id="qv-qty-plus" aria-label="Increase quantity">+</button>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="qv-actions">
+                <button class="qv-add-to-cart" id="qv-add-to-cart" data-open-cart>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    <span>{{ 'products.product.add_to_cart' | t }}</span>
+                </button>
+                <a href="#" class="qv-view-full" id="qv-view-full">
+                    <span>{{ 'products.product.view_details' | t }}</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,191 @@
+/* assets/section-blog.css */
+.blog-section {
+    padding: var(--spacing-xl) 0 var(--spacing-4xl);
+}
+
+.blog-container {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+/* Blog Header */
+.blog-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.blog-title {
+    font-size: 3rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.blog-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+}
+
+/* Category Filter Bar */
+.blog-filter-bar {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    max-width: fit-content;
+    margin: 0 auto 60px;
+}
+
+.blog-filter-btn {
+    padding: 10px var(--spacing-lg);
+    border-radius: 30px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.blog-filter-btn:hover {
+    color: var(--color-secondary);
+    background: rgba(var(--text-primary-rgb), 0.05);
+}
+
+.blog-filter-btn.active {
+    background: var(--color-secondary);
+    color: var(--bg-secondary);
+    border-color: var(--color-secondary);
+}
+
+/* Blog Posts Grid */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.blog-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(var(--color-secondary-rgb), 0.4);
+    box-shadow:
+        0 24px 64px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(var(--color-secondary-rgb), 0.1);
+}
+
+.blog-card-image-wrapper {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.blog-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.blog-card:hover .blog-card-image {
+    transform: scale(1.1);
+}
+
+.blog-card-category {
+    position: absolute;
+    top: var(--spacing-md);
+    inset-inline-start: var(--spacing-md);
+    background: var(--color-accent);
+    color: var(--color-white);
+    padding: var(--spacing-xs) 14px;
+    border-radius: 20px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    z-index: 2;
+    letter-spacing: 0.5px;
+}
+
+.blog-card-content {
+    padding: var(--spacing-lg);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-card-title {
+    font-size: 1.35rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.blog-card-title a:hover {
+    color: var(--color-secondary);
+}
+
+.blog-card-excerpt {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.blog-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+.blog-card-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.blog-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.blog-meta-item svg {
+    width: 16px;
+    height: 16px;
+    color: var(--color-accent);
+}
+
+@media (max-width: 900px) {
+    .blog-title {
+        font-size: 2.2rem;
+    }
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+}

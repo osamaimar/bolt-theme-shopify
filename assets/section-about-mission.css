@@ -1,0 +1,103 @@
+/* About Mission Section */
+/* Color Scheme Mappings */
+.mission-section.color-background-1 { background-color: var(--bg-primary); }
+.mission-section.color-background-2 { background-color: var(--bg-secondary); }
+.mission-section.color-inverse { background-color: var(--bg-primary); }
+.mission-section.color-accent-1 { background-color: var(--color-primary); }
+.mission-section.color-accent-2 { background-color: var(--color-accent); }
+
+/* Container widths */
+.container-fluid {
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.mission-card {
+  background: linear-gradient(135deg, #062c5c 0%, #0d3b76 100%);
+  border-radius: 30px;
+  text-align: center;
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.mission-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 24px;
+  background: rgba(85, 228, 237, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+  color: #55e4ed;
+}
+
+.mission-content {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.mission-content .section-title {
+  font-size: clamp(1.5rem, 4vw, 1.875rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 24px;
+}
+
+.mission-content p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+}
+
+.bg-pattern {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.pattern-top-left {
+  top: -100px;
+  left: -100px;
+}
+
+.pattern-bottom-right {
+  bottom: -100px;
+  right: -100px;
+}
+
+@media (max-width: 768px) {
+  .mission-card {
+    padding: 60px 20px;
+  }
+
+  .mission-content p {
+    font-size: 1rem;
+  }
+
+  .mission-content .section-title {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,1029 @@
+{{ 'section-home-ecommerce-minimal.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.show_section -%}
+{% style %}
+  #shopify-section-{{ section.id }} .hev-review-block {
+    margin-top: var(--m-t, 0px) !important;
+    margin-bottom: var(--m-b, 0px) !important;
+    color: var(--block-text-color, inherit) !important;
+    background: var(--block-bg, transparent) !important;
+  }
+  #shopify-section-{{ section.id }} .hev-reviews-heading span {
+    background: var(--highlight-gradient, var(--color-accent)) !important;
+    -webkit-background-clip: var(--highlight-clip, text) !important;
+    background-clip: var(--highlight-clip, text) !important;
+    -webkit-text-fill-color: var(--highlight-fill, transparent) !important;
+    display: inline-block;
+    color: var(--highlight-color, inherit) !important;
+  }
+
+  /* Review Card Styling */
+  #shopify-section-{{ section.id }} .hev-review-card {
+    background: var(--card-bg, var(--bg-card)) !important;
+    margin-top: var(--m-t, 0px) !important;
+    margin-bottom: var(--m-b, 0px) !important;
+    text-align: var(--text-align, left);
+  }
+  #shopify-section-{{ section.id }} .hev-review-author strong {
+    color: var(--author-color, var(--text-primary)) !important;
+    font-size: var(--author-size, 1rem) !important;
+    font-weight: var(--author-weight, 700) !important;
+    font-style: var(--author-style, normal) !important;
+    text-transform: var(--author-transform, none) !important;
+    letter-spacing: var(--author-spacing, 0px) !important;
+    line-height: var(--author-lh, 1.2) !important;
+  }
+  #shopify-section-{{ section.id }} .hev-review-text {
+    color: var(--text-color, var(--text-secondary)) !important;
+    font-size: var(--text-size, 0.95rem) !important;
+    font-weight: var(--text-weight, 400) !important;
+    font-style: var(--text-style, italic) !important;
+    text-transform: var(--text-transform, none) !important;
+    letter-spacing: var(--text-spacing, 0px) !important;
+    line-height: var(--text-lh, 1.7) !important;
+  }
+  #shopify-section-{{ section.id }} .hev-review-stars {
+    color: var(--stars-color, var(--color-accent-secondary)) !important;
+  }
+  #shopify-section-{{ section.id }} .hev-review-verified {
+    color: var(--verified-color, var(--color-accent-secondary)) !important;
+    background: var(--verified-bg, transparent) !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+  }
+  #shopify-section-{{ section.id }} .hev-review-date {
+    color: var(--date-color, var(--text-secondary)) !important;
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .hev-review-block,
+    #shopify-section-{{ section.id }} .hev-review-card {
+      margin-top: var(--m-t-m, var(--m-t, 0px)) !important;
+      margin-bottom: var(--m-b-m, var(--m-b, 0px)) !important;
+    }
+  }
+{% endstyle %}
+
+{% render 'section-padding',
+  section_id: section.id,
+  padding_top: section.settings.padding_top,
+  padding_bottom: section.settings.padding_bottom,
+  padding_top_mobile: section.settings.padding_top_mobile,
+  padding_bottom_mobile: section.settings.padding_bottom_mobile
+%}
+
+<section class="hev-reviews color-{{ section.settings.color_scheme }} {% unless section.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless section.settings.show_on_mobile %} hidden-mobile{% endunless %}" id="shopify-section-{{ section.id }}">
+    <div class="{% if section.settings.container_width == 'full' %}container-fluid{% elsif section.settings.container_width == 'narrow' %}container-narrow{% else %}container{% endif %}" 
+         style="{% if section.settings.container_width != 'full' %}max-width: {{ section.settings.max_width }}px;{% endif %} margin: 0 auto;">
+        <div class="hev-section-header" style="justify-content: {% if 'left' == 'center' %}center{% elsif 'left' == 'right' %}flex-end{% else %}space-between{% endif %}; text-align: {{ 'left' }};">
+            <div class="hev-section-header-text">
+                {%- for block in section.blocks -%}
+                    {%- case block.type -%}
+                        {%- when 'review_heading' -%}
+                            {%- if block.settings.heading != blank -%}
+                                {%- assign h_color = block.settings.highlight_color -%}
+                                {%- assign h_gradient = block.settings.highlight_gradient -%}
+                                <h2 class="hev-reviews-heading hev-review-block hev-reviews-heading--{{ block.settings.font_size }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                                    style="--m-t: {{ block.settings.margin_top }}px; --m-b: {{ block.settings.margin_bottom }}px; --m-t-m: {{ block.settings.margin_top_mobile }}px; --m-b-m: {{ block.settings.margin_bottom_mobile }}px; font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; font-style: {{ block.settings.font_style }}; text-transform: {{ block.settings.text_transform }}; letter-spacing: {{ block.settings.letter_spacing }}px; line-height: {{ block.settings.line_height }}; {% if block.settings.text_color != blank %}--block-text-color: {{ block.settings.text_color }};{% endif %} {% if block.settings.bg_gradient != blank %}--block-bg: {{ block.settings.bg_gradient }};{% elsif block.settings.bg_color != blank %}--block-bg: {{ block.settings.bg_color }};{% endif %}
+                                    {% if h_gradient != blank and h_gradient != 'rgba(0,0,0,0)' %}--highlight-gradient: {{ h_gradient }}; --highlight-clip: text; --highlight-fill: transparent;
+                                    {% elsif h_color != blank and h_color != 'rgba(0,0,0,0)' %}--highlight-color: {{ h_color }}; --highlight-gradient: none; --highlight-clip: initial; --highlight-fill: {{ h_color }};
+                                    {% endif %}" 
+                                    {{ block.shopify_attributes }}>
+                                    {{ block.settings.heading | replace: '[', '<span>' | replace: ']', '</span>' }}
+                                </h2>
+                            {%- endif -%}
+
+                        {%- when 'review_subheading' -%}
+                            {%- if block.settings.subheading != blank -%}
+                                <p class="hev-review-block {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                                   style="--m-t: {{ block.settings.margin_top }}px; --m-b: {{ block.settings.margin_bottom }}px; --m-t-m: {{ block.settings.margin_top_mobile }}px; --m-b-m: {{ block.settings.margin_bottom_mobile }}px; font-size: {{ block.settings.font_size }}rem; max-width: {{ block.settings.max_width }}px; margin-inline: {% if 'left' == 'center' %}auto{% elsif 'left' == 'right' %}0 0{% else %}0 auto{% endif %}; font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; font-style: {{ block.settings.font_style }}; text-transform: {{ block.settings.text_transform }}; letter-spacing: {{ block.settings.letter_spacing }}px; line-height: {{ block.settings.line_height }}; {% if block.settings.text_color != blank %}--block-text-color: {{ block.settings.text_color }};{% endif %} {% if block.settings.bg_gradient != blank %}--block-bg: {{ block.settings.bg_gradient }};{% elsif block.settings.bg_color != blank %}--block-bg: {{ block.settings.bg_color }};{% endif %}" 
+                                   {{ block.shopify_attributes }}>
+                                    {{ block.settings.subheading }}
+                                </p>
+                            {%- endif -%}
+                    {%- endcase -%}
+                {%- endfor -%}
+            </div>
+        </div>
+
+        <div class="hev-reviews-scroll">
+            {%- for block in section.blocks -%}
+                {%- if block.type == 'review' -%}
+                    <div class="hev-review-card hev-review-card--align-{{ 'left' }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                         style="--m-t: {{ block.settings.margin_top }}px; --m-b: {{ block.settings.margin_bottom }}px; --m-t-m: {{ block.settings.margin_top_mobile }}px; --m-b-m: {{ block.settings.margin_bottom_mobile }}px; --text-align: {{ 'left' }};
+                         --card-bg: {{ block.settings.card_bg | default: 'var(--bg-card)' }};
+                         --author-color: {{ block.settings.author_color | default: 'var(--text-primary)' }};
+                         --author-size: {{ block.settings.author_name_size }}rem;
+                         --author-weight: {% if block.settings.author_weight == 'bold' %}700{% else %}400{% endif %};
+                         --author-style: {{ block.settings.author_style }};
+                         --author-transform: {{ block.settings.author_transform }};
+                         --author-spacing: {{ block.settings.author_spacing }}px;
+                         --author-lh: {{ block.settings.author_line_height }};
+                         --text-color: {{ block.settings.text_color | default: 'var(--text-secondary)' }};
+                         --text-size: {{ block.settings.text_size }}rem;
+                         --text-weight: {% if block.settings.text_weight == 'bold' %}700{% else %}400{% endif %};
+                         --text-style: {{ block.settings.text_style }};
+                         --text-transform: {{ block.settings.text_transform }};
+                         --text-spacing: {{ block.settings.text_spacing }}px;
+                         --text-lh: {{ block.settings.text_line_height }};
+                         --stars-color: {{ block.settings.stars_color | default: 'var(--color-accent-secondary)' }};
+                         --verified-color: {{ block.settings.verified_color | default: 'var(--color-accent-secondary)' }};
+                         --verified-bg: {{ block.settings.verified_bg_color | default: 'transparent' }};
+                         --date-color: {{ block.settings.date_color | default: 'var(--text-secondary)' }};"
+                         {{ block.shopify_attributes }}>
+                        <div class="hev-review-header">
+                            {%- if block.settings.show_avatar -%}
+                                {%- if block.settings.avatar != blank -%}
+                                    {{ block.settings.avatar | image_url: width: 200 | image_tag: loading: 'lazy', alt: block.settings.author_name, class: 'hev-review-avatar' }}
+                                {%- else -%}
+                                    <div class="hev-review-avatar">
+                                        {{ block.settings.author_name | slice: 0 | upcase }}
+                                    </div>
+                                {%- endif -%}
+                            {%- endif -%}
+                            <div class="hev-review-author-meta">
+                                <div class="hev-review-author">
+                                    <strong>{{ block.settings.author_name }}</strong>
+                                    {%- if block.settings.show_verified_badge -%}
+                                        <span class="hev-review-verified">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                            {{ 'products.product.verified_review' | t }}
+                                        </span>
+                                    {%- endif -%}
+                                </div>
+                                {%- if block.settings.date != blank -%}
+                                    <div class="hev-review-date">{{ block.settings.date }}</div>
+                                {%- endif -%}
+                            </div>
+                        </div>
+
+                        {%- if block.settings.show_rating -%}
+                            {%- assign rating = block.settings.rating | default: 5 -%}
+                            <div class="hev-review-stars" aria-label="{{ rating }} star rating">
+                                {%- for i in (1..5) -%}
+                                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="{% if i > rating %}opacity: 0.3;{% endif %}">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                    </svg>
+                                {%- endfor -%}
+                            </div>
+                        {%- endif -%}
+
+                        {%- if block.settings.review_text != blank -%}
+                            <p class="hev-review-text">"{{ block.settings.review_text }}"</p>
+                        {%- endif -%}
+
+                        {%- if block.settings.show_product and block.settings.product != blank -%}
+                            <div class="hev-review-product">
+                                {%- if block.settings.show_product_image and block.settings.product.featured_image != blank -%}
+                                    {{ block.settings.product.featured_image | image_url: width: 100 | image_tag: loading: 'lazy', alt: block.settings.product.title | escape }}
+                                {%- endif -%}
+                                <div class="hev-review-product-info">
+                                    {%- if block.settings.show_product_title -%}
+                                        <div class="hev-review-product-name">{{ block.settings.product.title }}</div>
+                                    {%- endif -%}
+                                    {%- if block.settings.show_product_price -%}
+                                        <div class="hev-review-product-price">
+                                            {{ block.settings.product.price | money }}
+                                            {%- if block.settings.show_compare_price and block.settings.product.compare_at_price > block.settings.product.price -%}
+                                                <span class="old">{{ block.settings.product.compare_at_price | money }}</span>
+                                            {%- endif -%}
+                                        </div>
+                                    {%- endif -%}
+                                    {%- if block.settings.show_product_vendor and block.settings.product.vendor != blank -%}
+                                        <div class="hev-review-product-vendor">{{ block.settings.product.vendor }}</div>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+            {%- endfor -%}
+        </div>
+    </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Customer Reviews",
+  "tag": "section",
+  "class": "section-customer-reviews",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_desktop",
+      "label": "Show on Desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "Show on Mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "default": "standard",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "full", "label": "Full Width" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 400,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "label": "Max Width",
+      "default": 1200
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Typography settings are managed within individual blocks."
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review_heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "What Customers [Say]",
+          "info": "Use [ ] to highlight text with gradient"
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 0.8,
+          "max": 2.0,
+          "step": 0.1,
+          "unit": "em",
+          "label": "Line Height",
+          "default": 1.2
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "highlight_color",
+          "label": "Highlight Text Color"
+        },
+        {
+          "type": "color_background",
+          "id": "highlight_gradient",
+          "label": "Highlight Text Gradient"
+        }
+      ]
+    },
+    {
+      "type": "review_subheading",
+      "name": "Subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Real reviews from verified buyers who love our products."
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 400,
+          "max": 1600,
+          "step": 50,
+          "unit": "px",
+          "label": "Max Width",
+          "default": 600
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "min": 0.8,
+          "max": 2.0,
+          "step": 0.1,
+          "unit": "rem",
+          "label": "Font size",
+          "default": 1.1
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 0.8,
+          "max": 2.0,
+          "step": 0.1,
+          "unit": "em",
+          "label": "Line Height",
+          "default": 1.6
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Review",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Reviewer avatar"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Reviewer name",
+          "default": "John D."
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review text",
+          "default": "The product exceeded my expectations. Great quality and fast shipping!"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Custom date",
+          "placeholder": "May 2026"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_avatar",
+          "label": "Show reviewer avatar",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_rating",
+          "label": "Show rating stars",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_verified_badge",
+          "label": "Show verified badge",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product",
+          "label": "Show reviewed product",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product_image",
+          "label": "Show product image",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product_title",
+          "label": "Show product title",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product_price",
+          "label": "Show product price",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_compare_price",
+          "label": "Show compare at price",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product_vendor",
+          "label": "Show product vendor",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "range",
+          "id": "author_name_size",
+          "min": 0.8,
+          "max": 1.5,
+          "step": 0.1,
+          "unit": "rem",
+          "label": "Author name size",
+          "default": 1.0
+        },
+        {
+          "type": "select",
+          "id": "author_weight",
+          "label": "Author Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "author_style",
+          "label": "Author Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "author_transform",
+          "label": "Author Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "author_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Author Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "author_line_height",
+          "min": 0.8,
+          "max": 2.0,
+          "step": 0.1,
+          "unit": "em",
+          "label": "Author Line Height",
+          "default": 1.2
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "min": 0.8,
+          "max": 1.5,
+          "step": 0.1,
+          "unit": "rem",
+          "label": "Review text size",
+          "default": 1.0
+        },
+        {
+          "type": "select",
+          "id": "text_weight",
+          "label": "Review Text Weight",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_style",
+          "label": "Review Text Style",
+          "default": "italic",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Review Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "text_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Review Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "text_line_height",
+          "min": 0.8,
+          "max": 2.0,
+          "step": 0.1,
+          "unit": "em",
+          "label": "Review Line Height",
+          "default": 1.7
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "card_bg",
+          "label": "Card Background"
+        },
+        {
+          "type": "color",
+          "id": "author_color",
+          "label": "Author Name Color"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Review Text Color"
+        },
+        {
+          "type": "color",
+          "id": "stars_color",
+          "label": "Stars Color"
+        },
+        {
+          "type": "color",
+          "id": "verified_color",
+          "label": "Verified Badge Color"
+        },
+        {
+          "type": "color",
+          "id": "verified_bg_color",
+          "label": "Verified Badge Background Color"
+        },
+        {
+          "type": "color",
+          "id": "date_color",
+          "label": "Date Color"
+        }
+      ]
+    },
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "Customer Reviews",
+      "blocks": [
+        { "type": "review_heading" },
+        { "type": "review_subheading" },
+        {
+          "type": "review",
+          "settings": {
+            "author_name": "Sarah J.",
+            "review_text": "Absolutely love this product!"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

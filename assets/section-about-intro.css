@@ -1,0 +1,194 @@
+/* About Intro Section */
+/* Color Scheme Mappings */
+.intro-section.color-background-1 { background-color: var(--bg-primary); }
+.intro-section.color-background-2 { background-color: var(--bg-secondary); }
+.intro-section.color-inverse { background-color: var(--bg-primary); }
+.intro-section.color-accent-1 { background-color: var(--color-primary); }
+.intro-section.color-accent-2 { background-color: var(--color-accent); }
+
+.intro-section {
+  text-align: center;
+  min-height: var(--intro-min-height, 80vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Container widths */
+.container-fluid {
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Text alignment utilities */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* Button styles */
+.intro-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 24px;
+}
+
+.btn-primary {
+  background: var(--color-accent-secondary, #55e4ed);
+  color: #000;
+}
+
+.btn-primary:hover {
+  background: var(--color-accent-secondary-hover, #7de9f0);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: var(--color-primary, #174d8e);
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: var(--color-accent, #85bbff);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-white, #fff);
+  border: 2px solid var(--color-accent-secondary, #55e4ed);
+}
+
+.btn-outline:hover {
+  background: var(--color-accent-secondary, #55e4ed);
+  color: #000;
+  transform: translateY(-2px);
+}
+
+.intro-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Animation styles */
+.animate-fade-up,
+.animate-fade-in,
+.animate-slide-left,
+.animate-slide-right {
+  opacity: 0;
+}
+
+.animate-fade-up.animate-visible {
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in.animate-visible {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-left.animate-visible {
+  animation: slideLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-right.animate-visible {
+  animation: slideRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* App blocks */
+.intro-app-block {
+  margin-bottom: 24px;
+}
+
+.intro-section .main-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--spacing-lg, 24px);
+  color: var(--section-text, var(--text-primary));
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Support for text alignment settings */
+.text-left .main-title,
+.intro-section.text-left .main-title {
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.text-right .main-title,
+.intro-section.text-right .main-title {
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.intro-section .highlight-text {
+  color: var(--color-accent, #85bbff);
+}
+
+.intro-section .page-intro-text {
+  font-size: 1.25rem;
+  color: var(--section-text, var(--text-secondary));
+  opacity: 0.85;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .intro-section {
+    min-height: calc(var(--intro-min-height, 80vh) * 0.8);
+  }
+
+  .intro-section .main-title {
+    font-size: 2rem;
+  }
+
+  .intro-section .page-intro-text {
+    font-size: 1.125rem;
+  }
+
+  .intro-btn {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+}

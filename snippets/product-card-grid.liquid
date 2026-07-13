@@ -1,0 +1,152 @@
+{% comment %}
+    Renders a product card for catalog grid
+
+    Accepts:
+    - product: {Object} Product Liquid object
+    - show_quick_view: {Boolean} Show quick view button. Default: true
+    - show_price: {Boolean} Show product price. Default: true
+    - show_add_to_cart: {Boolean} Show add to cart button. Default: true
+    - show_vendor: {Boolean} Show product vendor. Default: false
+
+    Usage:
+    {% render 'product-card-grid', product: product %}
+{% endcomment %}
+
+{%- assign product_tags = "" -%}
+{%- for tag in product.tags -%}
+  {%- assign product_tags = product_tags | append: tag | append: " " -%}
+{%- endfor -%}
+
+{%- assign product_options = "" -%}
+{%- for option in product.options_with_values -%}
+  {%- assign product_options = product_options | append: option.name | handle | append: ":" -%}
+  {%- for value in option.values -%}
+    {%- assign product_options = product_options | append: value | handle | append: " " -%}
+  {%- endfor -%}
+  {%- assign product_options = product_options | append: "|" -%}
+{%- endfor -%}
+
+<article class="cpd-product-card{% if hover_image and product.media[1] != nil %} has-hover-image{% endif %}" 
+  data-vendor="{{ product.vendor | handle }}" 
+  data-type="{{ product.type | handle }}" 
+  data-tags="{{ product_tags | handle }}"
+  data-options="{{ product_options }}"
+  data-price="{{ product.price | divided_by: 100.0 }}"
+  data-category="{{ product.collections.first.title | default: product.type | escape }}"
+>
+  <div class="cpd-product-thumb">
+    <a href="{{ product.url }}" class="full-unstyled-link">
+      {%- if show_badges -%}
+        {%- if product.compare_at_price > product.price -%}
+          <span class="cpd-product-badge sale">{{ 'products.product.on_sale' | t }}</span>
+        {%- elsif product.tags contains 'new' or product.tags contains 'New' -%}
+          <span class="cpd-product-badge new">{{ 'products.product.badge_new' | t }}</span>
+        {%- elsif product.tags contains 'hot' or product.tags contains 'Hot' -%}
+          <span class="cpd-product-badge premium">{{ 'products.product.badge_hot' | t }}</span>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if product.featured_media -%}
+        <img
+          srcset="{%- if product.featured_media.width >= 165 -%}{{ product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+            {%- if product.featured_media.width >= 360 -%}{{ product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
+            {%- if product.featured_media.width >= 533 -%}{{ product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
+            {%- if product.featured_media.width >= 720 -%}{{ product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
+            {{ product.featured_media | image_url }} {{ product.featured_media.width }}w"
+          src="{{ product.featured_media | image_url: width: 533 }}"
+          sizes="(min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+          alt="{{ product.featured_media.alt | escape }}"
+          loading="lazy"
+          class="motion-reduce main-img"
+          width="{{ product.featured_media.width }}"
+          height="{{ product.featured_media.height }}"
+        >
+        {%- if hover_image and product.media[1] != nil -%}
+          <img
+            src="{{ product.media[1] | image_url: width: 533 }}"
+            alt="{{ product.media[1].alt | escape }}"
+            loading="lazy"
+            class="cpd-product-hover-img"
+            width="{{ product.media[1].width }}"
+            height="{{ product.media[1].height }}"
+          >
+        {%- endif -%}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </a>
+
+    {%- if show_quick_view != false -%}
+      <div class="cpd-product-overlay">
+        <a href="{{ product.url }}" class="cpd-quick-view-btn" data-i18n="catalog.btn_quick_view">
+          {{ 'products.product.quick_view' | t | default: 'Quick View' }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="cpd-product-info">
+    <div class="cpd-product-meta">
+      {%- if show_vendor -%}
+        <span class="cpd-product-category">{{ product.vendor }}</span>
+      {%- endif -%}
+      
+      {%- if show_rating -%}
+        <div class="cpd-product-stars">
+          {%- for i in (1..5) -%}
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          {%- endfor -%}
+          <span>(4.8)</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <h3 class="cpd-product-name">
+      <a href="{{ product.url }}">{{ product.title | escape }}</a>
+    </h3>
+
+    {%- if show_description and product.description != blank -%}
+      <p class="cpd-product-desc">
+        {{ product.description | strip_html | truncatewords: 20 }}
+      </p>
+    {%- endif -%}
+
+    {%- if show_features -%}
+      <div class="cpd-product-features">
+        {%- for tag in product.tags limit: 3 -%}
+          <span class="cpd-feature-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            {{ tag }}
+          </span>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="cpd-product-footer{% if show_divider == false %} no-divider{% endif %}">
+      {%- if show_price -%}
+        <div class="cpd-product-price">
+          {{ product.price | money }}
+          {%- if product.compare_at_price > product.price -%}
+            <span class="cpd-old-price">{{ product.compare_at_price | money }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if show_add_to_cart -%}
+        {%- if product.available -%}
+          <form method="post" action="{{ routes.cart_add_url }}" class="cpd-product-cta-form">
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+            <button type="submit" class="cpd-product-cta">
+              {{ 'products.product.add_to_cart' | t }}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px; margin-inline-start:4px;">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </button>
+          </form>
+        {%- else -%}
+          <span class="cpd-product-cta disabled">{{ 'products.product.sold_out' | t }}</span>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</article>

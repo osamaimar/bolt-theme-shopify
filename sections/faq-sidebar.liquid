@@ -1,0 +1,2584 @@
+{{ 'section-faq-sidebar.css' | asset_url | stylesheet_tag }}
+
+<style>
+  /* Section Spacing / Visibility overrides */
+  #shopify-section-{{ section.id }} .faq-sidebar-section {
+    padding-top: {{ section.settings.padding_top }}px !important;
+    padding-bottom: {{ section.settings.padding_bottom }}px !important;
+  }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .faq-sidebar-section {
+      padding-top: {{ section.settings.padding_top_mobile | default: section.settings.padding_top }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom_mobile | default: section.settings.padding_bottom }}px !important;
+    }
+  }
+
+  /* Container Width overrides */
+  #shopify-section-{{ section.id }} .container-fluid {
+    max-width: 100% !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    margin: 0 auto !important;
+  }
+  #shopify-section-{{ section.id }} .container-narrow {
+    max-width: 800px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    margin: 0 auto !important;
+  }
+  #shopify-section-{{ section.id }} .container {
+    max-width: {{ section.settings.max_width | default: 1340 }}px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Sidebar styling overrides */
+  {%- if section.settings.sidebar_bg_color != blank and section.settings.sidebar_bg_color != 'rgba(0,0,0,0)' -%}
+    #shopify-section-{{ section.id }} .faq-sidebar {
+      background: {{ section.settings.sidebar_bg_color }} !important;
+    }
+  {%- endif -%}
+
+  /* Accordion icon and rotation indicators */
+  #shopify-section-{{ section.id }} .modern-accordion-header svg {
+    transform: none !important;
+  }
+  #shopify-section-{{ section.id }} .modern-accordion-indicator svg {
+    transition: transform 0.3s ease !important;
+  }
+  #shopify-section-{{ section.id }} .modern-accordion-item.active .modern-accordion-indicator svg {
+    transform: rotate(180deg) !important;
+  }
+
+  /* Responsive Font Sizing scoped specifically to element types */
+  #shopify-section-{{ section.id }} .main-title.size-small { font-size: 2.5rem !important; }
+  #shopify-section-{{ section.id }} .main-title.size-medium { font-size: 3.0rem !important; }
+  #shopify-section-{{ section.id }} .main-title.size-large { font-size: 3.5rem !important; }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .main-title.size-small { font-size: 2.0rem !important; }
+    #shopify-section-{{ section.id }} .main-title.size-medium { font-size: 2.25rem !important; }
+    #shopify-section-{{ section.id }} .main-title.size-large { font-size: 2.5rem !important; }
+  }
+
+  #shopify-section-{{ section.id }} .page-intro-text.size-small { font-size: 1.0rem !important; }
+  #shopify-section-{{ section.id }} .page-intro-text.size-medium { font-size: 1.25rem !important; }
+  #shopify-section-{{ section.id }} .page-intro-text.size-large { font-size: 1.5rem !important; }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .page-intro-text.size-small { font-size: 0.95rem !important; }
+    #shopify-section-{{ section.id }} .page-intro-text.size-medium { font-size: 1.125rem !important; }
+    #shopify-section-{{ section.id }} .page-intro-text.size-large { font-size: 1.35rem !important; }
+  }
+
+  #shopify-section-{{ section.id }} .sidebar-title.size-small { font-size: 0.7rem !important; }
+  #shopify-section-{{ section.id }} .sidebar-title.size-medium { font-size: 0.8rem !important; }
+  #shopify-section-{{ section.id }} .sidebar-title.size-large { font-size: 0.95rem !important; }
+
+  /* Dynamic block styling generated per block instance */
+  {%- for block in section.blocks -%}
+{%- liquid
+  assign b_align_alignment = ''
+  case block.type
+      when 'header'
+        assign b_align_alignment = ''
+      when 'subtitle'
+        assign b_align_alignment = ''
+      when 'results_info'
+        assign b_align_alignment = 'left'
+      when 'sidebar_title'
+        assign b_align_alignment = 'left'
+  endcase
+-%}
+    {%- case block.type -%}
+      {%- when 'header' -%}
+        {%- assign head_align = section.settings.blocks_position | default: 'center' -%}
+        #shopify-section-{{ section.id }} .block-{{ block.id }} {
+          margin-top: {{ block.settings.margin_top | default: 0 }}px !important;
+          margin-bottom: {{ block.settings.margin_bottom | default: 20 }}px !important;
+          max-width: {{ block.settings.max_width | default: 800 }}px !important;
+          width: 100% !important;
+          {%- if head_align == 'left' -%}
+            margin-left: 0 !important;
+            margin-right: auto !important;
+          {%- elsif head_align == 'right' -%}
+            margin-left: auto !important;
+            margin-right: 0 !important;
+          {%- else -%}
+            margin-left: auto !important;
+            margin-right: auto !important;
+          {%- endif -%}
+          {%- if block.settings.bg_gradient != blank -%}
+            background: {{ block.settings.bg_gradient }} !important;
+          {%- elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' -%}
+            background-color: {{ block.settings.bg_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }},
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .main-title {
+          {%- if block.settings.text_color != blank and block.settings.text_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.text_color }} !important;
+          {%- endif -%}
+        }
+        @media screen and (max-width: 768px) {
+          #shopify-section-{{ section.id }} .block-{{ block.id }} {
+            margin-top: {{ block.settings.margin_top_mobile | default: 0 }}px !important;
+            margin-bottom: {{ block.settings.margin_bottom_mobile | default: 16 }}px !important;
+          }
+        }
+      {%- when 'subtitle' -%}
+        {%- assign sub_align = section.settings.blocks_position | default: 'center' -%}
+        #shopify-section-{{ section.id }} .block-{{ block.id }} {
+          margin-top: {{ block.settings.margin_top | default: 0 }}px !important;
+          margin-bottom: {{ block.settings.margin_bottom | default: 28 }}px !important;
+          max-width: {{ block.settings.max_width | default: 800 }}px !important;
+          width: 100% !important;
+          {%- if sub_align == 'left' -%}
+            margin-left: 0 !important;
+            margin-right: auto !important;
+          {%- elsif sub_align == 'right' -%}
+            margin-left: auto !important;
+            margin-right: 0 !important;
+          {%- else -%}
+            margin-left: auto !important;
+            margin-right: auto !important;
+          {%- endif -%}
+          {%- if block.settings.bg_gradient != blank -%}
+            background: {{ block.settings.bg_gradient }} !important;
+          {%- elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' -%}
+            background-color: {{ block.settings.bg_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }},
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .page-intro-text {
+          {%- if block.settings.text_color != blank and block.settings.text_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.text_color }} !important;
+          {%- endif -%}
+        }
+        @media screen and (max-width: 768px) {
+          #shopify-section-{{ section.id }} .block-{{ block.id }} {
+            margin-top: {{ block.settings.margin_top_mobile | default: 0 }}px !important;
+            margin-bottom: {{ block.settings.margin_bottom_mobile | default: 20 }}px !important;
+          }
+        }
+      {%- when 'search' -%}
+        {%- assign search_align = section.settings.blocks_position | default: 'center' -%}
+        #shopify-section-{{ section.id }} .block-{{ block.id }} {
+          margin-top: {{ block.settings.margin_top | default: 0 }}px !important;
+          margin-bottom: {{ block.settings.margin_bottom | default: 28 }}px !important;
+          max-width: {{ block.settings.max_width | default: 500 }}px !important;
+          width: 100% !important;
+          {%- if search_align == 'left' -%}
+            margin-left: 0 !important;
+            margin-right: auto !important;
+          {%- elsif search_align == 'right' -%}
+            margin-left: auto !important;
+            margin-right: 0 !important;
+          {%- else -%}
+            margin-left: auto !important;
+            margin-right: auto !important;
+          {%- endif -%}
+        }
+        @media screen and (max-width: 768px) {
+          #shopify-section-{{ section.id }} .block-{{ block.id }} {
+            margin-top: {{ block.settings.margin_top_mobile | default: 0 }}px !important;
+            margin-bottom: {{ block.settings.margin_bottom_mobile | default: 20 }}px !important;
+          }
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .search-input-wrapper {
+          {%- if block.settings.bg_gradient != blank -%}
+            background: {{ block.settings.bg_gradient }} !important;
+          {%- elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' -%}
+            background-color: {{ block.settings.bg_color }} !important;
+          {%- endif -%}
+          {%- if block.settings.border_color != blank and block.settings.border_color != 'rgba(0,0,0,0)' -%}
+            border-color: {{ block.settings.border_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .search-input-wrapper:hover,
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .search-input-wrapper:focus-within {
+          {%- if block.settings.hover_border_color != blank and block.settings.hover_border_color != 'rgba(0,0,0,0)' -%}
+            border-color: {{ block.settings.hover_border_color }} !important;
+          {%- endif -%}
+          {%- if block.settings.hover_bg_color != blank and block.settings.hover_bg_color != 'rgba(0,0,0,0)' -%}
+            background-color: {{ block.settings.hover_bg_color }} !important;
+          {%- endif -%}
+          {%- if block.settings.hover_shadow_color != blank and block.settings.hover_shadow_color != 'rgba(0,0,0,0)' -%}
+            box-shadow: 0 0 10px {{ block.settings.hover_shadow_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .faq-search-input {
+          {%- if block.settings.text_color != blank and block.settings.text_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.text_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .faq-search-input::placeholder {
+          {%- if block.settings.placeholder_color != blank and block.settings.placeholder_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.placeholder_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }} svg {
+          {%- if block.settings.icon_color != blank and block.settings.icon_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.icon_color }} !important;
+          {%- endif -%}
+        }
+      {%- when 'sidebar_title' -%}
+        #shopify-section-{{ section.id }} .block-{{ block.id }} {
+          margin-top: {{ block.settings.margin_top | default: 20 }}px !important;
+          margin-bottom: {{ block.settings.margin_bottom | default: 20 }}px !important;
+          text-align: {{ b_align_alignment | default: 'left' }} !important;
+          font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %} !important;
+          font-style: {{ block.settings.font_style | default: 'normal' }} !important;
+          text-transform: {{ block.settings.text_transform | default: 'none' }} !important;
+          letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px !important;
+          line-height: {{ block.settings.line_height | default: 120 }}% !important;
+          {%- if block.settings.text_color != blank and block.settings.text_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.text_color }} !important;
+          {%- endif -%}
+          {%- if block.settings.bg_gradient != blank -%}
+            background: {{ block.settings.bg_gradient }} !important;
+          {%- elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' -%}
+            background-color: {{ block.settings.bg_color }} !important;
+          {%- endif -%}
+        }
+        @media screen and (max-width: 768px) {
+          #shopify-section-{{ section.id }} .block-{{ block.id }} {
+            margin-top: {{ block.settings.margin_top_mobile | default: 15 }}px !important;
+            margin-bottom: {{ block.settings.margin_bottom_mobile | default: 15 }}px !important;
+          }
+        }
+      {%- when 'results_info' -%}
+        #shopify-section-{{ section.id }} .block-{{ block.id }} {
+          font-size: {% if block.settings.font_size == 'small' %}0.75rem{% elsif block.settings.font_size == 'large' %}0.95rem{% else %}0.85rem{% endif %} !important;
+          margin-top: {{ block.settings.margin_top | default: 20 }}px !important;
+          margin-bottom: {{ block.settings.margin_bottom | default: 20 }}px !important;
+          text-align: {{ b_align_alignment | default: 'left' }} !important;
+          font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %} !important;
+          font-style: {{ block.settings.font_style | default: 'normal' }} !important;
+          text-transform: {{ block.settings.text_transform | default: 'none' }} !important;
+          letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px !important;
+          line-height: {{ block.settings.line_height | default: 120 }}% !important;
+          {%- if block.settings.text_color != blank and block.settings.text_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.text_color }} !important;
+          {%- endif -%}
+          {%- if block.settings.bg_gradient != blank -%}
+            background: {{ block.settings.bg_gradient }} !important;
+          {%- elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' -%}
+            background-color: {{ block.settings.bg_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }} strong {
+          {%- if block.settings.count_gradient != blank -%}
+            background: {{ block.settings.count_gradient }} !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            color: transparent !important;
+            display: inline-block !important;
+          {%- elsif block.settings.count_color != blank and block.settings.count_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.count_color }} !important;
+          {%- endif -%}
+        }
+        @media screen and (max-width: 768px) {
+          #shopify-section-{{ section.id }} .block-{{ block.id }} {
+            margin-top: {{ block.settings.margin_top_mobile | default: 15 }}px !important;
+            margin-bottom: {{ block.settings.margin_bottom_mobile | default: 15 }}px !important;
+          }
+        }
+      {%- when 'category' -%}
+        #shopify-section-{{ section.id }} .block-{{ block.id }} {
+          margin-top: {{ block.settings.margin_top | default: 0 }}px !important;
+          margin-bottom: {{ block.settings.margin_bottom | default: 0 }}px !important;
+        }
+        @media screen and (max-width: 768px) {
+          #shopify-section-{{ section.id }} .block-{{ block.id }} {
+            margin-top: {{ block.settings.margin_top_mobile | default: 0 }}px !important;
+            margin-bottom: {{ block.settings.margin_bottom_mobile | default: 0 }}px !important;
+          }
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .category-link {
+          font-size: {% if block.settings.font_size == 'small' %}0.85rem{% elsif block.settings.font_size == 'large' %}1.05rem{% else %}0.95rem{% endif %} !important;
+          font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %} !important;
+          font-style: {{ block.settings.font_style | default: 'normal' }} !important;
+          text-transform: {{ block.settings.text_transform | default: 'none' }} !important;
+          letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px !important;
+          line-height: {{ block.settings.line_height | default: 120 }}% !important;
+          {%- if block.settings.text_color != blank and block.settings.text_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.text_color }} !important;
+          {%- endif -%}
+          {%- if block.settings.bg_gradient != blank -%}
+            background: {{ block.settings.bg_gradient }} !important;
+          {%- elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' -%}
+            background-color: {{ block.settings.bg_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .category-link svg {
+          {%- if block.settings.icon_color != blank and block.settings.icon_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.icon_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .category-link.active {
+          {%- if block.settings.active_text_color != blank and block.settings.active_text_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.active_text_color }} !important;
+          {%- endif -%}
+          {%- if block.settings.active_bg_gradient != blank -%}
+            background: {{ block.settings.active_bg_gradient }} !important;
+            border-color: transparent !important;
+          {%- elsif block.settings.active_bg_color != blank and block.settings.active_bg_color != 'rgba(0,0,0,0)' -%}
+            background: {{ block.settings.active_bg_color }} !important;
+            border-color: {{ block.settings.active_bg_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .category-link.active svg {
+          {%- if block.settings.active_icon_color != blank and block.settings.active_icon_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.active_icon_color }} !important;
+          {%- endif -%}
+        }
+      {%- when 'question' -%}
+        #shopify-section-{{ section.id }} .block-{{ block.id }} {
+          margin-top: {{ block.settings.margin_top | default: 0 }}px !important;
+          margin-bottom: {{ block.settings.margin_bottom | default: 12 }}px !important;
+          {%- if block.settings.border_color != blank and block.settings.border_color != 'rgba(0,0,0,0)' -%}
+            border-color: {{ block.settings.border_color }} !important;
+          {%- endif -%}
+          {%- if block.settings.bg_gradient != blank -%}
+            background: {{ block.settings.bg_gradient }} !important;
+          {%- elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' -%}
+            background-color: {{ block.settings.bg_color }} !important;
+          {%- endif -%}
+          transition: all 0.3s ease !important;
+        }
+        @media screen and (max-width: 768px) {
+          #shopify-section-{{ section.id }} .block-{{ block.id }} {
+            margin-top: {{ block.settings.margin_top_mobile | default: 0 }}px !important;
+            margin-bottom: {{ block.settings.margin_bottom_mobile | default: 12 }}px !important;
+          }
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-header {
+          {%- assign q_size = block.settings.font_size | default: 'medium' -%}
+          font-size: {% if q_size == 'x-small' %}0.8rem{% elsif q_size == 'small' %}0.9rem{% elsif q_size == 'large' %}1.15rem{% elsif q_size == 'x-large' %}1.3rem{% elsif q_size == 'xx-large' %}1.5rem{% elsif q_size == 'xxx-large' %}1.8rem{% else %}1.0rem{% endif %} !important;
+          {%- assign q_weight = block.settings.font_weight | default: 'bold' -%}
+          font-weight: {% if q_weight == 'normal' %}400{% elsif q_weight == 'bold' %}700{% else %}{{ q_weight }}{% endif %} !important;
+          font-style: {{ block.settings.font_style | default: 'normal' }} !important;
+          text-transform: {{ block.settings.text_transform | default: 'none' }} !important;
+          letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px !important;
+          line-height: {{ block.settings.line_height | default: 120 }}% !important;
+          {%- if block.settings.question_text_color != blank and block.settings.question_text_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.question_text_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-indicator svg {
+          {%- if block.settings.icon_color != blank and block.settings.icon_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.icon_color }} !important;
+          {%- elsif block.settings.question_text_color != blank and block.settings.question_text_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.question_text_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-indicator {
+          {%- if block.settings.icon_bg_color != blank and block.settings.icon_bg_color != 'rgba(0,0,0,0)' -%}
+            background-color: {{ block.settings.icon_bg_color }} !important;
+            padding: 4px !important;
+            border-radius: var(--radius-sm, 4px) !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-inner,
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-inner p,
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-inner li,
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-inner a,
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-inner span,
+        #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-inner div {
+          {%- assign a_size = block.settings.answer_font_size | default: 'medium' -%}
+          font-size: {% if a_size == 'x-small' %}0.75rem{% elsif a_size == 'small' %}0.85rem{% elsif a_size == 'large' %}1.05rem{% elsif a_size == 'x-large' %}1.2rem{% elsif a_size == 'xx-large' %}1.4rem{% elsif a_size == 'xxx-large' %}1.6rem{% else %}0.95rem{% endif %} !important;
+          {%- assign a_weight = block.settings.answer_font_weight | default: 'normal' -%}
+          font-weight: {% if a_weight == 'normal' %}400{% elsif a_weight == 'bold' %}700{% else %}{{ a_weight }}{% endif %} !important;
+          font-style: {{ block.settings.answer_font_style | default: 'normal' }} !important;
+          text-transform: {{ block.settings.answer_text_transform | default: 'none' }} !important;
+          letter-spacing: {{ block.settings.answer_letter_spacing | default: 0 }}px !important;
+          line-height: {{ block.settings.answer_line_height | default: 160 }}% !important;
+          {%- if block.settings.answer_text_color != blank and block.settings.answer_text_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.answer_text_color }} !important;
+          {%- endif -%}
+        }
+        {%- if block.settings.answer_bg_color != blank and block.settings.answer_bg_color != 'rgba(0,0,0,0)' -%}
+          #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-content {
+            background-color: {{ block.settings.answer_bg_color }} !important;
+          }
+        {%- endif -%}
+        {%- if block.settings.answer_link_color != blank and block.settings.answer_link_color != 'rgba(0,0,0,0)' -%}
+          #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-inner a {
+            color: {{ block.settings.answer_link_color }} !important;
+          }
+        {%- endif -%}
+        #shopify-section-{{ section.id }} .block-{{ block.id }}.active {
+          {%- if block.settings.active_bg_color != blank and block.settings.active_bg_color != 'rgba(0,0,0,0)' -%}
+            background: {{ block.settings.active_bg_color }} !important;
+          {%- endif -%}
+          {%- if block.settings.active_border_color != blank and block.settings.active_border_color != 'rgba(0,0,0,0)' -%}
+            border-color: {{ block.settings.active_border_color }} !important;
+          {%- endif -%}
+        }
+        {%- if block.settings.active_question_text_color != blank and block.settings.active_question_text_color != 'rgba(0,0,0,0)' -%}
+          #shopify-section-{{ section.id }} .block-{{ block.id }}.active .modern-accordion-header {
+            color: {{ block.settings.active_question_text_color }} !important;
+          }
+        {%- endif -%}
+        #shopify-section-{{ section.id }} .block-{{ block.id }}.active .modern-accordion-indicator svg {
+          {%- if block.settings.active_icon_color != blank and block.settings.active_icon_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.active_icon_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }}.active .modern-accordion-indicator {
+          {%- if block.settings.active_icon_bg_color != blank and block.settings.active_icon_bg_color != 'rgba(0,0,0,0)' -%}
+            background-color: {{ block.settings.active_icon_bg_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }}.active .modern-accordion-inner,
+        #shopify-section-{{ section.id }} .block-{{ block.id }}.active .modern-accordion-inner p,
+        #shopify-section-{{ section.id }} .block-{{ block.id }}.active .modern-accordion-inner li,
+        #shopify-section-{{ section.id }} .block-{{ block.id }}.active .modern-accordion-inner a,
+        #shopify-section-{{ section.id }} .block-{{ block.id }}.active .modern-accordion-inner span,
+        #shopify-section-{{ section.id }} .block-{{ block.id }}.active .modern-accordion-inner div {
+          {%- if block.settings.active_answer_text_color != blank and block.settings.active_answer_text_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.active_answer_text_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }}.active .modern-accordion-content {
+          {%- if block.settings.active_answer_bg_color != blank and block.settings.active_answer_bg_color != 'rgba(0,0,0,0)' -%}
+            background-color: {{ block.settings.active_answer_bg_color }} !important;
+          {%- endif -%}
+        }
+        {%- if block.settings.active_answer_link_color != blank and block.settings.active_answer_link_color != 'rgba(0,0,0,0)' -%}
+          #shopify-section-{{ section.id }} .block-{{ block.id }}.active .modern-accordion-inner a {
+            color: {{ block.settings.active_answer_link_color }} !important;
+          }
+        {%- endif -%}
+        #shopify-section-{{ section.id }} .block-{{ block.id }}:hover {
+          {%- if block.settings.hover_bg_color != blank and block.settings.hover_bg_color != 'rgba(0,0,0,0)' -%}
+            background: {{ block.settings.hover_bg_color }} !important;
+          {%- endif -%}
+          {%- if block.settings.hover_border_color != blank and block.settings.hover_border_color != 'rgba(0,0,0,0)' -%}
+            border-color: {{ block.settings.hover_border_color }} !important;
+          {%- endif -%}
+          {%- if block.settings.hover_shadow_color != blank and block.settings.hover_shadow_color != 'rgba(0,0,0,0)' -%}
+            box-shadow: 0 4px 20px {{ block.settings.hover_shadow_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }}:hover .modern-accordion-header {
+          {%- if block.settings.hover_question_text_color != blank and block.settings.hover_question_text_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.hover_question_text_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }}:hover .modern-accordion-indicator {
+          {%- if block.settings.hover_icon_bg_color != blank and block.settings.hover_icon_bg_color != 'rgba(0,0,0,0)' -%}
+            background-color: {{ block.settings.hover_icon_bg_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }}:hover .modern-accordion-indicator svg {
+          {%- if block.settings.hover_icon_color != blank and block.settings.hover_icon_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.hover_icon_color }} !important;
+          {%- endif -%}
+        }
+        #shopify-section-{{ section.id }} .block-{{ block.id }}:hover .modern-accordion-inner,
+        #shopify-section-{{ section.id }} .block-{{ block.id }}:hover .modern-accordion-inner p,
+        #shopify-section-{{ section.id }} .block-{{ block.id }}:hover .modern-accordion-inner li,
+        #shopify-section-{{ section.id }} .block-{{ block.id }}:hover .modern-accordion-inner a,
+        #shopify-section-{{ section.id }} .block-{{ block.id }}:hover .modern-accordion-inner span,
+        #shopify-section-{{ section.id }} .block-{{ block.id }}:hover .modern-accordion-inner div {
+          {%- if block.settings.hover_answer_text_color != blank and block.settings.hover_answer_text_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.hover_answer_text_color }} !important;
+          {%- endif -%}
+        }
+        {%- if block.settings.hover_answer_link_color != blank and block.settings.hover_answer_link_color != 'rgba(0,0,0,0)' -%}
+          #shopify-section-{{ section.id }} .block-{{ block.id }}:hover .modern-accordion-inner a {
+            color: {{ block.settings.hover_answer_link_color }} !important;
+          }
+        {%- endif -%}
+        #shopify-section-{{ section.id }} .block-{{ block.id }}:hover .modern-accordion-indicator svg {
+          {%- if block.settings.hover_indicator_color != blank and block.settings.hover_indicator_color != 'rgba(0,0,0,0)' -%}
+            color: {{ block.settings.hover_indicator_color }} !important;
+          {%- endif -%}
+        }
+        @media screen and (max-width: 768px) {
+          #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-header {
+            {%- assign q_size = block.settings.font_size | default: 'medium' -%}
+            font-size: {% if q_size == 'x-small' %}0.75rem{% elsif q_size == 'small' %}0.85rem{% elsif q_size == 'large' %}1.05rem{% elsif q_size == 'x-large' %}1.2rem{% elsif q_size == 'xx-large' %}1.35rem{% elsif q_size == 'xxx-large' %}1.6rem{% else %}0.95rem{% endif %} !important;
+          }
+          #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-inner,
+          #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-inner p,
+          #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-inner li,
+          #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-inner a,
+          #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-inner span,
+          #shopify-section-{{ section.id }} .block-{{ block.id }} .modern-accordion-inner div {
+            {%- assign a_size = block.settings.answer_font_size | default: 'medium' -%}
+            font-size: {% if a_size == 'x-small' %}0.7rem{% elsif a_size == 'small' %}0.8rem{% elsif a_size == 'large' %}1.0rem{% elsif a_size == 'x-large' %}1.1rem{% elsif a_size == 'xx-large' %}1.25rem{% elsif a_size == 'xxx-large' %}1.4rem{% else %}0.9rem{% endif %} !important;
+          }
+        }
+    {%- endcase -%}
+  {%- endfor -%}
+</style>
+
+{% render 'section-padding',
+  section_id: section.id,
+  padding_top: section.settings.padding_top,
+  padding_bottom: section.settings.padding_bottom,
+  padding_top_mobile: section.settings.padding_top_mobile,
+  padding_bottom_mobile: section.settings.padding_bottom_mobile
+%}
+
+{%- if section.settings.show_section -%}
+<section 
+  class="faq-sidebar-section color-{{ section.settings.color_scheme }} {% unless section.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless section.settings.show_on_mobile %} hidden-mobile{% endunless %}"
+  id="shopify-section-{{ section.id }}"
+>
+  <div class="{% if section.settings.container_width == 'full' %}container-fluid{% elsif section.settings.container_width == 'narrow' %}container-narrow{% else %}container{% endif %}">
+    
+    {%- comment -%}Render structural blocks (header, subtitle, search) outside layout{%- endcomment -%}
+    {%- assign has_search = false -%}
+    {%- for block in section.blocks -%}
+{%- liquid
+  assign b_align_alignment = ''
+  case block.type
+      when 'header'
+        assign b_align_alignment = ''
+      when 'subtitle'
+        assign b_align_alignment = ''
+      when 'results_info'
+        assign b_align_alignment = 'left'
+      when 'sidebar_title'
+        assign b_align_alignment = 'left'
+  endcase
+-%}
+      {%- case block.type -%}
+        {%- when 'header' -%}
+          {%- if block.settings.heading != blank -%}
+            {%- assign heading_tag = block.settings.heading_tag | default: 'h1' -%}
+            {%- assign h_color = block.settings.highlight_color -%}
+            {%- assign h_gradient = block.settings.highlight_gradient -%}
+            {%- assign head_text_align = b_align_alignment -%}
+            {%- if head_text_align == blank -%}
+              {%- if section.settings.blocks_position == 'left' -%}
+                {%- assign head_text_align = 'left' -%}
+              {%- elsif section.settings.blocks_position == 'right' -%}
+                {%- assign head_text_align = 'right' -%}
+              {%- else -%}
+                {%- assign head_text_align = 'center' -%}
+              {%- endif -%}
+            {%- endif -%}
+            <div 
+              class="faq-modern-header block-{{ block.id }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+              {{ block.shopify_attributes }} 
+              style="padding-bottom: 0;"
+            >
+              <{{ heading_tag }} 
+                class="main-title size-{{ block.settings.font_size | default: 'large' }}"
+                style="
+                  font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %};
+                  font-style: {{ block.settings.font_style | default: 'normal' }};
+                  text-transform: {{ block.settings.text_transform | default: 'none' }};
+                  letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px;
+                  line-height: {{ block.settings.line_height | default: 120 }}%;
+                  text-align: {{ head_text_align }};
+                  width: 100% !important;
+                "
+              >
+                {%- if h_gradient != blank and h_gradient != 'rgba(0,0,0,0)' -%}
+                  {%- assign highlight_span = '<span class="highlight-text" style="background: ' | append: h_gradient | append: ' !important; -webkit-background-clip: text !important; background-clip: text !important; -webkit-text-fill-color: transparent !important;color: transparent !important;">' -%}
+                {%- elsif h_color != blank and h_color != 'rgba(0,0,0,0)' -%}
+                  {%- assign highlight_span = '<span class="highlight-text" style="color: ' | append: h_color | append: ' !important;">' -%}
+                {%- else -%}
+                  {%- assign highlight_span = '<span class="highlight-text">' -%}
+                {%- endif -%}
+                {{ block.settings.heading | replace: '[', highlight_span | replace: ']', '</span>' }}
+              </{{ heading_tag }}>
+            </div>
+          {%- endif -%}
+          
+        {%- when 'subtitle' -%}
+          {%- if block.settings.subheading != blank -%}
+            {%- assign subheading_tag = block.settings.subheading_tag | default: 'p' -%}
+            {%- assign sub_text_align = b_align_alignment -%}
+            {%- if sub_text_align == blank -%}
+              {%- if section.settings.blocks_position == 'left' -%}
+                {%- assign sub_text_align = 'left' -%}
+              {%- elsif section.settings.blocks_position == 'right' -%}
+                {%- assign sub_text_align = 'right' -%}
+              {%- else -%}
+                {%- assign sub_text_align = 'center' -%}
+              {%- endif -%}
+            {%- endif -%}
+            <div 
+              class="faq-modern-header block-{{ block.id }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+              {{ block.shopify_attributes }} 
+              style="padding-top: 10px; padding-bottom: 0;"
+            >
+              <{{ subheading_tag }} 
+                class="page-intro-text size-{{ block.settings.font_size | default: 'medium' }}"
+                style="
+                  font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %};
+                  font-style: {{ block.settings.font_style | default: 'normal' }};
+                  text-transform: {{ block.settings.text_transform | default: 'none' }};
+                  letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px;
+                  line-height: {{ block.settings.line_height | default: 160 }}%;
+                  text-align: {{ sub_text_align }};
+                  width: 100% !important;
+                "
+              >
+                {{ block.settings.subheading }}
+              </{{ subheading_tag }}>
+            </div>
+          {%- endif -%}
+
+        {%- when 'search' -%}
+          {%- assign has_search = true -%}
+          <div 
+            class="faq-modern-search block-{{ block.id }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+            {{ block.shopify_attributes }}
+          >
+            <div class="search-input-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input 
+                type="text" 
+                class="faq-search-input" 
+                id="faq-search-{{ section.id }}"
+                placeholder="{{ block.settings.search_placeholder | default: 'Search for a question...' }}"
+              />
+            </div>
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+
+    {%- comment -%}Two-Column Layout{%- endcomment -%}
+    <div class="faq-modern-layout">
+      
+      {%- comment -%}Sidebar{%- endcomment -%}
+      <aside class="faq-sidebar">
+        {%- for block in section.blocks -%}
+{%- liquid
+  assign b_align_alignment = ''
+  case block.type
+      when 'header'
+        assign b_align_alignment = ''
+      when 'subtitle'
+        assign b_align_alignment = ''
+      when 'results_info'
+        assign b_align_alignment = 'left'
+      when 'sidebar_title'
+        assign b_align_alignment = 'left'
+  endcase
+-%}
+          {%- if block.type == 'sidebar_title' -%}
+            <h2 
+              class="sidebar-title block-{{ block.id }} size-{{ block.settings.font_size | default: 'medium' }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.sidebar_title }}
+            </h2>
+          {%- endif -%}
+        {%- endfor -%}
+        <ul class="category-list">
+          {%- for block in section.blocks -%}
+{%- liquid
+  assign b_align_alignment = ''
+  case block.type
+      when 'header'
+        assign b_align_alignment = ''
+      when 'subtitle'
+        assign b_align_alignment = ''
+      when 'results_info'
+        assign b_align_alignment = 'left'
+      when 'sidebar_title'
+        assign b_align_alignment = 'left'
+  endcase
+-%}
+            {%- if block.type == 'category' -%}
+              <li class="category-item block-{{ block.id }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
+                <a href="#" class="category-link{% if forloop.first %} active{% endif %}" data-category="{{ block.settings.category_value }}">
+                  {%- if block.settings.show_icon -%}
+                    {%- if block.settings.custom_icon_svg != blank -%}
+                      {{ block.settings.custom_icon_svg }}
+                    {%- else -%}
+                      {%- case block.settings.icon -%}
+                        {%- when 'laptop' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        {%- when 'shipping' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        {%- when 'support' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                        {%- when 'tools' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        {%- when 'pricing' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        {%- when 'message' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        {%- when 'check' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        {%- when 'heart' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        {%- when 'star' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        {%- when 'shield' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        {%- when 'users' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        {%- when 'file' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                        {%- when 'search' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        {%- else -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                      {%- endcase -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                  {{ block.settings.category_label }}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </aside>
+
+      {%- comment -%}Main FAQ Accordion{%- endcomment -%}
+      <section class="faq-content-area">
+        {%- for block in section.blocks -%}
+{%- liquid
+  assign b_align_alignment = ''
+  case block.type
+      when 'header'
+        assign b_align_alignment = ''
+      when 'subtitle'
+        assign b_align_alignment = ''
+      when 'results_info'
+        assign b_align_alignment = 'left'
+      when 'sidebar_title'
+        assign b_align_alignment = 'left'
+  endcase
+-%}
+          {%- if block.type == 'results_info' -%}
+            {%- assign q_size = section.blocks | where: 'type', 'question' | size -%}
+            {%- capture count_html -%}<strong>{{ q_size }}</strong>{%- endcapture -%}
+            <p 
+              class="results-info block-{{ block.id }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.text | default: 'Showing [count] questions' | replace: '[count]', count_html }}
+            </p>
+          {%- endif -%}
+        {%- endfor -%}
+
+        <div class="modern-accordion" id="faq-accordion-{{ section.id }}">
+          {%- for block in section.blocks -%}
+{%- liquid
+  assign b_align_alignment = ''
+  case block.type
+      when 'header'
+        assign b_align_alignment = ''
+      when 'subtitle'
+        assign b_align_alignment = ''
+      when 'results_info'
+        assign b_align_alignment = 'left'
+      when 'sidebar_title'
+        assign b_align_alignment = 'left'
+  endcase
+-%}
+            {%- if block.type == 'question' -%}
+              <div 
+                class="modern-accordion-item block-{{ block.id }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                data-category="{{ block.settings.category }}" 
+                {{ block.shopify_attributes }}
+              >
+                <button class="modern-accordion-header" type="button" aria-expanded="false">
+                  {{ block.settings.question }}
+                  {%- if block.settings.show_icon -%}
+                    <span class="modern-accordion-indicator" style="display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 16px; height: 16px;">
+                      {%- if block.settings.icon != blank -%}
+                        {%- case block.settings.icon -%}
+                          {%- when 'chevron' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><polyline points="6 9 12 15 18 9"/></svg>
+                          {%- when 'plus' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                          {%- when 'arrow' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                          {%- when 'caret' -%}<svg viewBox="0 0 24 24" fill="currentColor" style="width: 100%; height: 100%;"><path d="M7 10l5 5 5-5H7z"/></svg>
+                        {%- endcase -%}
+                      {%- else -%}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;">
+                          <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                      {%- endif -%}
+                    </span>
+                  {%- endif -%}
+                </button>
+                <div class="modern-accordion-content">
+                  <div class="modern-accordion-inner rte">
+                    {{ block.settings.answer }}
+                  </div>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </section>
+    </div>
+
+  </div>
+</section>
+
+{%- if has_search -%}
+<script>
+(function() {
+  var sectionId = '{{ section.id }}';
+  var searchInput = document.getElementById('faq-search-' + sectionId);
+  var accordionItems = document.querySelectorAll('#shopify-section-' + sectionId + ' .modern-accordion-item');
+  
+  if (searchInput) {
+    searchInput.addEventListener('input', function() {
+      var query = this.value.toLowerCase();
+      accordionItems.forEach(function(item) {
+        var question = item.querySelector('.modern-accordion-header').textContent.toLowerCase();
+        var answer = item.querySelector('.modern-accordion-inner').textContent.toLowerCase();
+        if (question.indexOf(query) > -1 || answer.indexOf(query) > -1) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  }
+})();
+</script>
+{%- endif -%}
+
+<script>
+(function() {
+  var sectionId = '{{ section.id }}';
+  var section = document.getElementById('shopify-section-' + sectionId);
+  if (!section) return;
+  var categoryLinks = section.querySelectorAll('.category-link');
+  var accordionItems = section.querySelectorAll('.modern-accordion-item');
+  var headers = section.querySelectorAll('.modern-accordion-header');
+  
+  // Category filter
+  categoryLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var category = this.getAttribute('data-category');
+      
+      categoryLinks.forEach(function(l) { l.classList.remove('active'); });
+      this.classList.add('active');
+      
+      accordionItems.forEach(function(item) {
+        if (category === 'all' || item.getAttribute('data-category') === category) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+  
+  // Accordion toggle
+  headers.forEach(function(header) {
+    header.addEventListener('click', function() {
+      var item = this.parentElement;
+      var content = this.nextElementSibling;
+      var isActive = item.classList.contains('active');
+      
+      // Close all
+      section.querySelectorAll('.modern-accordion-item').forEach(function(i) {
+        i.classList.remove('active');
+        i.querySelector('.modern-accordion-content').style.maxHeight = null;
+      });
+      
+      // Open clicked if wasn't active
+      if (!isActive) {
+        item.classList.add('active');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    });
+  });
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "FAQ Sidebar",
+  "tag": "section",
+  "class": "section-faq-sidebar",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_desktop",
+      "label": "Show on Desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "Show on Mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "blocks_position",
+      "label": "Blocks Position",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "default": "standard",
+      "options": [
+        { "value": "full", "label": "Full width" },
+        { "value": "standard", "label": "Standard" },
+        { "value": "narrow", "label": "Narrow" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1340
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1",
+      "options": [
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "inverse", "label": "Inverse" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "sidebar_bg_color",
+      "label": "Sidebar Background Color"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "header",
+      "name": "Header",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Frequently Asked [Questions]",
+          "info": "Use [text] to highlight text with accent color"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading Tag",
+          "info": "Specify heading code types for SEO and search engines.",
+          "default": "h1",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" },
+            { "value": "div", "label": "div" },
+            { "value": "span", "label": "span" },
+            { "value": "p", "label": "p" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 400,
+          "max": 1200,
+          "step": 10,
+          "unit": "px",
+          "label": "Maximum width",
+          "default": 800
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "large",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 120
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "highlight_color",
+          "label": "Highlight Text Color"
+        },
+        {
+          "type": "color_background",
+          "id": "highlight_gradient",
+          "label": "Highlight Text Gradient"
+        }
+      ]
+    },
+    {
+      "type": "subtitle",
+      "name": "Intro Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "subheading",
+          "label": "Intro text",
+          "default": "Find answers to common questions about our products, services, and policies."
+        },
+        {
+          "type": "select",
+          "id": "subheading_tag",
+          "label": "Subheading Tag",
+          "default": "p",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" },
+            { "value": "div", "label": "div" },
+            { "value": "span", "label": "span" },
+            { "value": "p", "label": "p" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 400,
+          "max": 1200,
+          "step": 10,
+          "unit": "px",
+          "label": "Maximum width",
+          "default": 800
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 28
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 20
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 160
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        }
+      ]
+    },
+    {
+      "type": "search",
+      "name": "Search Bar",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "search_placeholder",
+          "label": "Search placeholder",
+          "default": "Search for a question..."
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 200,
+          "max": 800,
+          "step": 10,
+          "unit": "px",
+          "label": "Maximum width",
+          "default": 500
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 28
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 20
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "placeholder_color",
+          "label": "Placeholder Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border Color"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon Color"
+        },
+        {
+          "type": "header",
+          "content": "Hover/Focus Colors"
+        },
+        {
+          "type": "color",
+          "id": "hover_border_color",
+          "label": "Hover Border Color"
+        },
+        {
+          "type": "color",
+          "id": "hover_bg_color",
+          "label": "Hover Background Color"
+        },
+        {
+          "type": "color",
+          "id": "hover_shadow_color",
+          "label": "Hover Shadow Color"
+        }
+      ]
+    },
+    {
+      "type": "results_info",
+      "name": "Results Info",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Showing [count] questions",
+          "info": "Use [count] to display the number of question blocks"
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 120
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "count_color",
+          "label": "[count] Color"
+        },
+        {
+          "type": "color_background",
+          "id": "count_gradient",
+          "label": "[count] Gradient"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        }
+      ]
+    },
+    {
+      "type": "sidebar_title",
+      "name": "Sidebar Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "sidebar_title",
+          "label": "Sidebar title",
+          "default": "Categories"
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "uppercase",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 120
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "category_value",
+          "label": "Category value",
+          "info": "Unique identifier (e.g., 'products', 'shipping')",
+          "default": "all"
+        },
+        {
+          "type": "text",
+          "id": "category_label",
+          "label": "Category label",
+          "default": "All Questions"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "",
+          "options": [
+            { "value": "", "label": "Custom (use HTML below)" },
+            { "value": "laptop", "label": "Laptop" },
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "support", "label": "Support" },
+            { "value": "tools", "label": "Tools" },
+            { "value": "pricing", "label": "Pricing" },
+            { "value": "message", "label": "Message" },
+            { "value": "check", "label": "Check" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "star", "label": "Star" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "users", "label": "Users" },
+            { "value": "file", "label": "File" },
+            { "value": "search", "label": "Search" }
+          ],
+          "info": "Select an icon or use custom HTML below"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_icon_svg",
+          "label": "Custom SVG",
+          "info": "Paste custom SVG code here to override the selected icon. Leave empty to use preset icons.",
+          "placeholder": "<svg>...</svg>"
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_icon",
+          "label": "Show icon",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 120
+        },
+        {
+          "type": "header",
+          "content": "Colors (Inactive State)"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "header",
+          "content": "Colors (Active State)"
+        },
+        {
+          "type": "color",
+          "id": "active_text_color",
+          "label": "Active Text Color"
+        },
+        {
+          "type": "color",
+          "id": "active_icon_color",
+          "label": "Active Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "active_bg_color",
+          "label": "Active Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "active_bg_gradient",
+          "label": "Active Background Gradient"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "FAQ Question",
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category",
+          "default": "general",
+          "info": "Must match a Category's 'Category value' (e.g., 'general', 'products', 'all')"
+        },
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What is your question?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Answer goes here...</p>"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Indicator Icon",
+          "default": "chevron",
+          "options": [
+            { "value": "chevron", "label": "Chevron" },
+            { "value": "plus", "label": "Plus / Cross" },
+            { "value": "arrow", "label": "Down Arrow" },
+            { "value": "caret", "label": "Caret Arrow" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_icon",
+          "label": "Show indicator icon",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 12
+        },
+        {
+          "type": "header",
+          "content": "Typography (Question)"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "x-small", "label": "Extra Small" },
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" },
+            { "value": "x-large", "label": "Extra Large" },
+            { "value": "xx-large", "label": "Double Extra Large" },
+            { "value": "xxx-large", "label": "Triple Extra Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "300", "label": "300 - Light" },
+            { "value": "normal", "label": "400 - Normal" },
+            { "value": "500", "label": "500 - Medium" },
+            { "value": "600", "label": "600 - Semibold" },
+            { "value": "bold", "label": "700 - Bold" },
+            { "value": "800", "label": "800 - Extra Bold" },
+            { "value": "900", "label": "900 - Black" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 120
+        },
+        {
+          "type": "header",
+          "content": "Typography (Answer)"
+        },
+        {
+          "type": "select",
+          "id": "answer_font_size",
+          "label": "Answer Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "x-small", "label": "Extra Small" },
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" },
+            { "value": "x-large", "label": "Extra Large" },
+            { "value": "xx-large", "label": "Double Extra Large" },
+            { "value": "xxx-large", "label": "Triple Extra Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "answer_font_weight",
+          "label": "Answer Font Weight",
+          "default": "normal",
+          "options": [
+            { "value": "300", "label": "300 - Light" },
+            { "value": "normal", "label": "400 - Normal" },
+            { "value": "500", "label": "500 - Medium" },
+            { "value": "600", "label": "600 - Semibold" },
+            { "value": "bold", "label": "700 - Bold" },
+            { "value": "800", "label": "800 - Extra Bold" },
+            { "value": "900", "label": "900 - Black" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "answer_font_style",
+          "label": "Answer Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "answer_text_transform",
+          "label": "Answer Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "answer_letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Answer Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "answer_line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Answer Line Height",
+          "default": 160
+        },
+        {
+          "type": "header",
+          "content": "Colors (Inactive)"
+        },
+        {
+          "type": "color",
+          "id": "question_text_color",
+          "label": "Question Text Color"
+        },
+        {
+          "type": "color",
+          "id": "answer_text_color",
+          "label": "Answer Text Color"
+        },
+        {
+          "type": "color",
+          "id": "answer_bg_color",
+          "label": "Answer Background Color"
+        },
+        {
+          "type": "color",
+          "id": "answer_link_color",
+          "label": "Answer Link Color"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "icon_bg_color",
+          "label": "Icon Background Color"
+        },
+        {
+          "type": "color",
+          "id": "indicator_color",
+          "label": "Indicator Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border Color"
+        },
+        {
+          "type": "header",
+          "content": "Colors (Active)"
+        },
+        {
+          "type": "color",
+          "id": "active_question_text_color",
+          "label": "Active Question Text Color"
+        },
+        {
+          "type": "color",
+          "id": "active_icon_color",
+          "label": "Active Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "active_icon_bg_color",
+          "label": "Active Icon Background Color"
+        },
+        {
+          "type": "color",
+          "id": "active_indicator_color",
+          "label": "Active Indicator Color"
+        },
+        {
+          "type": "color",
+          "id": "active_bg_color",
+          "label": "Active Background Color"
+        },
+        {
+          "type": "color",
+          "id": "active_border_color",
+          "label": "Active Border Color"
+        },
+        {
+          "type": "color",
+          "id": "active_answer_text_color",
+          "label": "Active Answer Text Color"
+        },
+        {
+          "type": "color",
+          "id": "active_answer_bg_color",
+          "label": "Active Answer Background Color"
+        },
+        {
+          "type": "color",
+          "id": "active_answer_link_color",
+          "label": "Active Answer Link Color"
+        },
+        {
+          "type": "header",
+          "content": "Colors (Hover)"
+        },
+        {
+          "type": "color",
+          "id": "hover_bg_color",
+          "label": "Hover Background Color"
+        },
+        {
+          "type": "color",
+          "id": "hover_border_color",
+          "label": "Hover Border Color"
+        },
+        {
+          "type": "color",
+          "id": "hover_question_text_color",
+          "label": "Hover Question Text Color"
+        },
+        {
+          "type": "color",
+          "id": "hover_icon_bg_color",
+          "label": "Hover Icon Background Color"
+        },
+        {
+          "type": "color",
+          "id": "hover_icon_color",
+          "label": "Hover Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "hover_indicator_color",
+          "label": "Hover Indicator Color"
+        },
+        {
+          "type": "color",
+          "id": "hover_answer_text_color",
+          "label": "Hover Answer Text Color"
+        },
+        {
+          "type": "color",
+          "id": "hover_answer_link_color",
+          "label": "Hover Answer Link Color"
+        },
+        {
+          "type": "color",
+          "id": "hover_shadow_color",
+          "label": "Hover Shadow Color"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Sidebar",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "category_value": "all",
+            "category_label": "All Questions"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_value": "general",
+            "category_label": "General"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_value": "products",
+            "category_label": "Products"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "category": "products",
+            "question": "What brands of electronics do you carry?",
+            "answer": "<p>We offer a curated selection of premium electronics from industry leaders like Apple, Samsung, Sony, Dell, and Logitech, as well as emerging high-tech innovators.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "category": "products",
+            "question": "Do all products come with a warranty?",
+            "answer": "<p>Yes, every product sold at BoltElectronics includes a minimum 1-year manufacturer warranty. We also offer extended BoltCare protection plans for extra peace of mind.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

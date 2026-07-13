@@ -1,0 +1,83 @@
+{
+  "type": "footer",
+  "name": "t:general.footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "brand_block": {
+          "type": "brand",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "logo_text": "Bolt [Electronics]",
+            "text": "<p>Your premier electronics destination, dedicated to providing the latest technology and gadgets that enhance your daily life.</p>"
+          }
+        },
+        "menu_categories": {
+          "type": "menu",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "heading": "Categories",
+            "menu": "main-menu"
+          }
+        },
+        "menu_pages": {
+          "type": "menu",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "heading": "Pages",
+            "menu": "footer"
+          }
+        },
+        "copyright_block": {
+          "type": "copyright",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "copyright_text": "© 2026 [StoreName]. All rights reserved."
+          }
+        },
+        "payment_icons_block": {
+          "type": "payment_icons",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true
+          }
+        },
+        "socials_block": {
+          "type": "footer_socials",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true
+          }
+        }
+      },
+      "block_order": [
+        "brand_block",
+        "menu_categories",
+        "menu_pages",
+        "copyright_block",
+        "payment_icons_block",
+        "socials_block"
+      ],
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "standard",
+        "max_width": 1340,
+        "color_scheme": "background-2",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 30
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

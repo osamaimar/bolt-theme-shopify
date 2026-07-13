@@ -1,0 +1,841 @@
+{{ 'section-home-ecommerce-minimal.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  .hev-block-spacing {
+    margin-top: var(--m-t, 0px) !important;
+    margin-bottom: var(--m-b, 0px) !important;
+    color: var(--block-text-color, inherit) !important;
+    background: var(--block-bg, transparent) !important;
+  }
+  /* Ensure highlight spans don't get forced to inherit the block text color */
+  .hev-category-title span {
+    background: var(--highlight-gradient, linear-gradient(135deg, var(--color-accent-secondary), var(--color-accent))) !important;
+    -webkit-background-clip: var(--highlight-clip, text) !important;
+    background-clip: var(--highlight-clip, text) !important;
+    -webkit-text-fill-color: var(--highlight-fill, transparent) !important;
+    display: inline-block;
+    color: var(--highlight-color, inherit) !important;
+  }
+  /* Category Name explicitly uses block text color */
+  .hev-category-name {
+    color: inherit !important;
+  }
+  .hev-category-icon {
+    color: var(--icon-color, var(--color-accent-secondary)) !important;
+    border-color: var(--icon-border-color, var(--border-light)) !important;
+    background: var(--icon-bg, var(--bg-glass)) !important;
+  }
+  /* Force the SVG to use the icon color */
+  .hev-category-icon svg {
+    color: inherit !important;
+    stroke: currentColor !important;
+  }
+  .hev-category-item:hover .hev-category-icon {
+    border-color: var(--icon-hover-border, var(--color-accent-secondary)) !important;
+    background: var(--icon-hover-bg, var(--color-accent-secondary-10)) !important;
+    box-shadow: 0 12px 32px var(--icon-hover-shadow, var(--color-accent-secondary-20)) !important;
+  }
+  @media (max-width: 768px) {
+    .hev-block-spacing {
+      margin-top: var(--m-t-m, var(--m-t, 0px)) !important;
+      margin-bottom: var(--m-b-m, var(--m-b, 0px)) !important;
+    }
+  }
+{% endstyle %}
+
+{%- if section.settings.show_section -%}
+{% render 'section-padding',
+  section_id: section.id,
+  padding_top: section.settings.padding_top,
+  padding_bottom: section.settings.padding_bottom,
+  padding_top_mobile: section.settings.padding_top_mobile,
+  padding_bottom_mobile: section.settings.padding_bottom_mobile,
+  padding_left: section.settings.padding_left,
+  padding_right: section.settings.padding_right,
+  padding_left_mobile: section.settings.padding_left_mobile,
+  padding_right_mobile: section.settings.padding_right_mobile
+%}
+<section class="hev-categories color-{{ section.settings.color_scheme }} {% unless section.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless section.settings.show_on_mobile %} hidden-mobile{% endunless %}" id="shopify-section-{{ section.id }}">
+    <div class="{% if section.settings.container_width == 'full' %}container-fluid{% elsif section.settings.container_width == 'narrow' %}container-narrow{% else %}container{% endif %}">
+        <div class="hev-categories-heading">
+            {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                    {%- when 'heading' -%}
+                        {%- assign heading_tag = block.settings.heading_tag | default: 'h2' -%}
+                        {%- assign h_color = block.settings.highlight_color -%}
+                        {%- assign h_gradient = block.settings.highlight_gradient -%}
+                        <{{ heading_tag }} class="hev-category-title hev-block-spacing {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                            style="--m-t: {{ block.settings.margin_top }}px; --m-b: {{ block.settings.margin_bottom }}px; --m-t-m: {{ block.settings.margin_top_mobile }}px; --m-b-m: {{ block.settings.margin_bottom_mobile }}px; text-align: {{ 'center' }}; font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; font-style: {{ block.settings.font_style }}; text-transform: {{ block.settings.text_transform }}; letter-spacing: {{ block.settings.letter_spacing }}px; line-height: {{ block.settings.line_height }}; {% if block.settings.text_color != blank %}--block-text-color: {{ block.settings.text_color }};{% endif %} {% if block.settings.bg_gradient != blank %}--block-bg: {{ block.settings.bg_gradient }};{% elsif block.settings.bg_color != blank %}--block-bg: {{ block.settings.bg_color }};{% endif %}
+                            {% if h_gradient != blank and h_gradient != 'rgba(0,0,0,0)' %}--highlight-gradient: {{ h_gradient }}; --highlight-clip: text; --highlight-fill: transparent;
+                            {% elsif h_color != blank and h_color != 'rgba(0,0,0,0)' %}--highlight-color: {{ h_color }}; --highlight-gradient: none; --highlight-clip: initial; --highlight-fill: {{ h_color }};
+                            {% endif %}" 
+                            {{ block.shopify_attributes }}>
+                            {{ block.settings.heading | replace: '[', '<span>' | replace: ']', '</span>' }}
+                        </{{ heading_tag }}>
+                    {%- when 'subheading' -%}
+                        <p class="hev-category-subtitle hev-block-spacing {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                           style="--m-t: {{ block.settings.margin_top }}px; --m-b: {{ block.settings.margin_bottom }}px; --m-t-m: {{ block.settings.margin_top_mobile }}px; --m-b-m: {{ block.settings.margin_bottom_mobile }}px; text-align: {{ 'center' }}; font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; font-style: {{ block.settings.font_style }}; text-transform: {{ block.settings.text_transform }}; letter-spacing: {{ block.settings.letter_spacing }}px; line-height: {{ block.settings.line_height }}; {% if block.settings.text_color != blank %}--block-text-color: {{ block.settings.text_color }};{% endif %} {% if block.settings.bg_gradient != blank %}--block-bg: {{ block.settings.bg_gradient }};{% elsif block.settings.bg_color != blank %}--block-bg: {{ block.settings.bg_color }};{% endif %}" 
+                           {{ block.shopify_attributes }}>
+                            {{ block.settings.subheading }}
+                        </p>
+                {%- endcase -%}
+            {%- endfor -%}
+        </div>
+
+        <div class="hev-categories-grid" style="gap: {{ section.settings.grid_gap }}px;">
+            {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                    {%- when 'category' -%}
+                        <a href="{{ block.settings.link }}" class="hev-category-item hev-block-spacing {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                           style="--m-t: {{ block.settings.margin_top }}px; --m-b: {{ block.settings.margin_bottom_mobile }}px; --m-t-m: {{ block.settings.margin_top_mobile }}px; --m-b-m: {{ block.settings.margin_bottom_mobile }}px; {% if block.settings.text_color != blank %}--block-text-color: {{ block.settings.text_color }};{% endif %} {% if block.settings.bg_gradient != blank %}--icon-bg: {{ block.settings.bg_gradient }};{% elsif block.settings.bg_color != blank %}--icon-bg: {{ block.settings.bg_color }};{% endif %} {% if block.settings.icon_color != blank %}--icon-color: {{ block.settings.icon_color }};{% endif %} {% if block.settings.border_color != blank %}--icon-border-color: {{ block.settings.border_color }};{% endif %} {% if block.settings.hover_border_color != blank %}--icon-hover-border: {{ block.settings.hover_border_color }};{% endif %} {% if block.settings.hover_bg_color != blank %}--icon-hover-bg: {{ block.settings.hover_bg_color }};{% endif %} {% if block.settings.hover_shadow_color != blank %}--icon-hover-shadow: {{ block.settings.hover_shadow_color }};{% endif %}"
+                           {{ block.shopify_attributes }}>
+                            <div class="hev-category-icon">
+                                {%- case block.settings.icon -%}
+                                    {%- when 'laptop' -%}
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+                                        </svg>
+                                    {%- when 'smartphone' -%}
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                                        </svg>
+                                    {%- when 'audio' -%}
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+                                        </svg>
+                                    {%- when 'camera' -%}
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15a2.25 2.25 0 002.25-2.25V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
+                                        </svg>
+                                    {%- when 'gaming' -%}
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21M6.75 6.75h10.5a.75.75 0 01.75.75v10.5a.75.75 0 01-.75.75H6.75a.75.75 0 01-.75-.75V7.5a.75.75 0 01.75-.75z" />
+                                        </svg>
+                                    {%- when 'wearable' -%}
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    {%- when 'headphones' -%}
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+                                        </svg>
+                                    {%- when 'tablet' -%}
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                            <rect x="4" y="3" width="16" height="18" rx="2" ry="2" stroke="currentColor" />
+                                            <line x1="12" y1="18" x2="12.01" y2="18" stroke="currentColor" />
+                                        </svg>
+                                    {%- when 'tv' -%}
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                            <rect x="2" y="7" width="20" height="15" rx="2" ry="2" stroke="currentColor" />
+                                            <polyline points="17 2 12 7 7 2" stroke="currentColor" />
+                                        </svg>
+                                    {%- when 'home' -%}
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" />
+                                            <polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" />
+                                        </svg>
+                                    {%- when 'custom' -%}
+                                        {%- if block.settings.custom_icon != blank -%}
+                                            {{ block.settings.custom_icon }}
+                                        {%- endif -%}
+                                {%- endcase -%}
+                            </div>
+                            <span class="hev-category-name" 
+                                  style="font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; font-style: {{ block.settings.font_style }}; text-transform: {{ block.settings.text_transform }}; letter-spacing: {{ block.settings.letter_spacing }}px; line-height: {{ block.settings.line_height }};">
+                                {{ block.settings.name }}
+                            </span>
+                        </a>
+                    {%- when '@app' -%}
+                        <div {{ block.shopify_attributes }}>
+                            {% render block %}
+                        </div>
+                {%- endcase -%}
+            {%- endfor -%}
+        </div>
+    </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Category Strip",
+  "tag": "section",
+  "class": "section-category-strip",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_desktop",
+      "label": "Show on Desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "Show on Mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "default": "full",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "full", "label": "Full Width" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Grid Gap",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop by [Category]",
+          "info": "Use [ ] to highlight text with gradient"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading Tag",
+          "info": "Specify heading code types for SEO and search engines for crawling purposes.",
+          "default": "h2",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" },
+            { "value": "div", "label": "div" },
+            { "value": "span", "label": "span" },
+            { "value": "p", "label": "p" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 0.8,
+          "max": 2.0,
+          "step": 0.1,
+          "unit": "em",
+          "label": "Line Height",
+          "default": 1.2
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "highlight_color",
+          "label": "Highlight Text Color"
+        },
+        {
+          "type": "color_background",
+          "id": "highlight_gradient",
+          "label": "Highlight Text Gradient"
+        }
+      ]
+    },
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Find exactly what you're looking for."
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 32
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 24
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 0.8,
+          "max": 2.0,
+          "step": 0.1,
+          "unit": "em",
+          "label": "Line Height",
+          "default": 1.2
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "name": "Category",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "laptop",
+          "options": [
+            { "value": "laptop", "label": "Laptop" },
+            { "value": "smartphone", "label": "Smartphone" },
+            { "value": "audio", "label": "Audio" },
+            { "value": "camera", "label": "Camera" },
+            { "value": "gaming", "label": "Gaming/Components" },
+            { "value": "wearable", "label": "Wearable" },
+            { "value": "headphones", "label": "Headphones" },
+            { "value": "tablet", "label": "Tablet" },
+            { "value": "tv", "label": "TV/Display" },
+            { "value": "home", "label": "Smart Home" },
+            { "value": "custom", "label": "Custom (SVG)" }
+          ]
+        },
+        {
+          "type": "html",
+          "id": "custom_icon",
+          "label": "Custom SVG icon",
+          "info": "Only used when Icon is set to 'Custom'"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Category name",
+          "default": "Category"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 0.8,
+          "max": 2.0,
+          "step": 0.1,
+          "unit": "em",
+          "label": "Line Height",
+          "default": 1.2
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border Color"
+        },
+        {
+          "type": "color",
+          "id": "hover_border_color",
+          "label": "Hover Border Color"
+        },
+        {
+          "type": "color",
+          "id": "hover_bg_color",
+          "label": "Hover Background Color"
+        },
+        {
+          "type": "color",
+          "id": "hover_shadow_color",
+          "label": "Hover Shadow Color"
+        }
+      ]
+    },
+    { "type": "@app" }
+  ],
+  "presets": [
+    {
+      "name": "Category Strip",
+      "blocks": [
+        { "type": "heading" },
+        { "type": "subheading" },
+        { "type": "category", "settings": { "icon": "laptop", "name": "Laptops" } },
+        { "type": "category", "settings": { "icon": "smartphone", "name": "Smartphones" } },
+        { "type": "category", "settings": { "icon": "audio", "name": "Audio" } },
+        { "type": "category", "settings": { "icon": "camera", "name": "Cameras" } },
+        { "type": "category", "settings": { "icon": "gaming", "name": "Gaming" } },
+        { "type": "category", "settings": { "icon": "wearable", "name": "Wearables" } },
+        { "type": "category", "settings": { "icon": "headphones", "name": "Headphones" } },
+        { "type": "category", "settings": { "icon": "tablet", "name": "Tablets" } },
+        { "type": "category", "settings": { "icon": "tv", "name": "Displays" } },
+        { "type": "category", "settings": { "icon": "home", "name": "Smart Home" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

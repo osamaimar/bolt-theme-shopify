@@ -1,0 +1,46 @@
+/* Contact Hero Section */
+.contact-hero-section {
+  /* Padding handled dynamically via section padding settings */
+}
+
+.contact-hero-header {
+  /* Alignment and layouts handled dynamically */
+}
+
+.contact-hero-header .main-title {
+  color: var(--text-inverse);
+}
+
+.contact-hero-header .highlight-text {
+  color: var(--color-accent);
+}
+
+.contact-hero-header .page-intro-text {
+  color: var(--text-muted);
+}
+
+/* Color Scheme Variants */
+.contact-hero-section { background-color: var(--bg-primary); }
+
+/* Background Options */
+.contact-hero-section.color-background-1 { background-color: var(--bg-primary); }
+.contact-hero-section.color-background-2 { background-color: var(--bg-secondary); }
+
+/* Inverse - Light background for contrast */
+.contact-hero-section.color-inverse {
+  background-color: var(--color-white);
+}
+.contact-hero-section.color-inverse .contact-hero-header .main-title {
+  color: rgb(var(--color-black-rgb));
+}
+.contact-hero-section.color-inverse .contact-hero-header .page-intro-text {
+  color: rgba(var(--color-black-rgb), 0.7);
+}
+
+/* Accent colors */
+.contact-hero-section.color-accent-1 { background-color: var(--color-primary); }
+.contact-hero-section.color-accent-2 { background-color: var(--color-accent); }
+.contact-hero-section.color-accent-2 .contact-hero-header .main-title,
+.contact-hero-section.color-accent-2 .contact-hero-header .page-intro-text {
+  color: rgb(var(--color-black-rgb));
+}

@@ -1,0 +1,74 @@
+/* assets/section-rich-text.css — matches .rich-text-* classes in rich-text.liquid */
+/* Color Scheme Mapping */
+.rich-text-section.color-default { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.rich-text-section.color-background-1 { --section-bg: var(--bg-primary); --section-text: var(--text-primary); }
+.rich-text-section.color-background-2 { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.rich-text-section.color-accent-1 { --section-bg: var(--color-primary); --section-text: var(--text-inverse); }
+.rich-text-section.color-accent-2 { --section-bg: var(--color-accent); --section-text: var(--bg-primary); }
+.rich-text-section.color-inverse { --section-bg: var(--bg-primary); --section-text: var(--text-inverse); }
+
+.rich-text-section {
+    padding: var(--spacing-4xl) 0;
+    background: var(--section-bg, var(--bg-secondary));
+    color: var(--section-text, var(--text-primary));
+}
+
+.rich-text-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+.rich-text-heading {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-extra-bold);
+    color: var(--section-text, var(--text-primary));
+    margin-bottom: var(--spacing-md);
+}
+
+.rich-text-heading span {
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-accent, var(--color-secondary)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.rich-text-body {
+    font-size: 1.15rem;
+    color: var(--section-text, var(--text-secondary));
+    opacity: 0.8;
+    line-height: 1.8;
+}
+
+.rich-text-body p {
+    margin-bottom: var(--spacing-lg);
+}
+
+.rich-text-body p:last-child {
+    margin-bottom: 0;
+}
+
+.rich-text-actions {
+    margin-top: var(--spacing-xl);
+}
+
+.rich-text-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rich-text-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+@media (max-width: 768px) {
+    .rich-text-heading {
+        font-size: 2rem;
+    }
+
+    .rich-text-body {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,1090 @@
+{{ 'section-about-mission.css' | asset_url | stylesheet_tag }}
+
+<style>
+  /* Color Scheme overrides for Mission Card & Content */
+  #shopify-section-{{ section.id }} .mission-card .bg-pattern {
+    z-index: 1 !important;
+    filter: none !important;
+    opacity: 1 !important;
+    background: radial-gradient(circle, var(--pattern-color, rgba(255, 255, 255, 0.15)) 0%, transparent 70%) !important;
+  }
+
+  #shopify-section-{{ section.id }} .mission-section.color-background-1 .mission-card {
+    background: linear-gradient(135deg, #062c5c 0%, #0d3b76 100%) !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  #shopify-section-{{ section.id }} .mission-section.color-background-1 .section-title { color: #ffffff !important; }
+  #shopify-section-{{ section.id }} .mission-section.color-background-1 p { color: rgba(255, 255, 255, 0.9) !important; }
+  #shopify-section-{{ section.id }} .mission-section.color-background-1 {
+    --icon-bg: rgba(85, 228, 237, 0.1) !important;
+    --icon-color: #55e4ed !important;
+    --pattern-color: rgba(255, 255, 255, 0.15) !important;
+  }
+
+  #shopify-section-{{ section.id }} .mission-section.color-background-2 .mission-card {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary, #000000) !important;
+    border-color: var(--border-color, rgba(0, 0, 0, 0.1)) !important;
+  }
+  #shopify-section-{{ section.id }} .mission-section.color-background-2 .section-title { color: var(--text-primary, #000000) !important; }
+  #shopify-section-{{ section.id }} .mission-section.color-background-2 p { color: var(--text-muted, #555555) !important; }
+  #shopify-section-{{ section.id }} .mission-section.color-background-2 {
+    --icon-bg: rgba(0, 86, 179, 0.1) !important;
+    --icon-color: #0056b3 !important;
+    --pattern-color: rgba(0, 86, 179, 0.1) !important;
+  }
+
+  #shopify-section-{{ section.id }} .mission-section.color-inverse .mission-card {
+    background: var(--bg-inverse, #1a1a1a) !important;
+    color: var(--text-inverse, #ffffff) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  #shopify-section-{{ section.id }} .mission-section.color-inverse .section-title { color: var(--text-inverse, #ffffff) !important; }
+  #shopify-section-{{ section.id }} .mission-section.color-inverse p { color: var(--text-inverse-muted, rgba(255,255,255,0.8)) !important; }
+  #shopify-section-{{ section.id }} .mission-section.color-inverse {
+    --icon-bg: rgba(85, 228, 237, 0.1) !important;
+    --icon-color: #55e4ed !important;
+    --pattern-color: rgba(255, 255, 255, 0.15) !important;
+  }
+
+  #shopify-section-{{ section.id }} .mission-section.color-accent-1 .mission-card {
+    background: var(--color-primary, #0056b3) !important;
+    color: var(--text-inverse, #ffffff) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+  }
+  #shopify-section-{{ section.id }} .mission-section.color-accent-1 .section-title { color: var(--text-inverse, #ffffff) !important; }
+  #shopify-section-{{ section.id }} .mission-section.color-accent-1 p { color: var(--text-inverse-muted, rgba(255,255,255,0.8)) !important; }
+  #shopify-section-{{ section.id }} .mission-section.color-accent-1 {
+    --icon-bg: rgba(255, 255, 255, 0.2) !important;
+    --icon-color: #ffffff !important;
+    --pattern-color: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  #shopify-section-{{ section.id }} .mission-section.color-accent-2 .mission-card {
+    background: var(--color-accent, #e0a800) !important;
+    color: var(--text-inverse, #ffffff) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+  }
+  #shopify-section-{{ section.id }} .mission-section.color-accent-2 .section-title { color: var(--text-inverse, #ffffff) !important; }
+  #shopify-section-{{ section.id }} .mission-section.color-accent-2 p { color: var(--text-inverse-muted, rgba(255,255,255,0.8)) !important; }
+  #shopify-section-{{ section.id }} .mission-section.color-accent-2 {
+    --icon-bg: rgba(255, 255, 255, 0.2) !important;
+    --icon-color: #ffffff !important;
+    --pattern-color: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* Section Spacing / Visibility overrides */
+  #shopify-section-{{ section.id }} .mission-section {
+    padding-top: {{ section.settings.padding_top }}px !important;
+    padding-bottom: {{ section.settings.padding_bottom }}px !important;
+  }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .mission-section {
+      padding-top: {{ section.settings.padding_top_mobile | default: section.settings.padding_top }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom_mobile | default: section.settings.padding_bottom }}px !important;
+    }
+  }
+
+  /* Container Width overrides */
+  #shopify-section-{{ section.id }} .container-fluid {
+    max-width: 100% !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    margin: 0 auto !important;
+  }
+  #shopify-section-{{ section.id }} .container-narrow {
+    max-width: 800px !important;
+    margin: 0 auto !important;
+  }
+  #shopify-section-{{ section.id }} .container {
+    max-width: {{ section.settings.max_width | default: 1340 }}px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Blocks Position align overrides */
+  #shopify-section-{{ section.id }} .mission-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    {%- if section.settings.blocks_position == 'left' -%}
+      align-items: flex-start !important;
+      text-align: left !important;
+    {%- elsif section.settings.blocks_position == 'right' -%}
+      align-items: flex-end !important;
+      text-align: right !important;
+    {%- else -%}
+      align-items: center !important;
+      text-align: center !important;
+    {%- endif -%}
+  }
+
+  /* Mission icon margin overrides based on Blocks Position */
+  #shopify-section-{{ section.id }} .mission-icon {
+    {%- if section.settings.blocks_position == 'left' -%}
+      margin-left: 0 !important;
+      margin-right: auto !important;
+    {%- elsif section.settings.blocks_position == 'right' -%}
+      margin-left: auto !important;
+      margin-right: 0 !important;
+    {%- else -%}
+      margin-left: auto !important;
+      margin-right: auto !important;
+    {%- endif -%}
+  }
+
+  /* Block Spacing overrides */
+  #shopify-section-{{ section.id }} .section-title {
+    margin-top: var(--m-t, 0px) !important;
+    margin-bottom: var(--m-b, 24px) !important;
+  }
+  #shopify-section-{{ section.id }} .mission-content p {
+    margin-top: var(--sm-t, 0px) !important;
+    margin-bottom: var(--sm-b, 0px) !important;
+  }
+
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .section-title {
+      margin-top: var(--m-t-m, var(--m-t, 0px)) !important;
+      margin-bottom: var(--m-b-m, var(--m-b, 24px)) !important;
+    }
+    #shopify-section-{{ section.id }} .mission-content p {
+      margin-top: var(--sm-t-m, var(--sm-t, 0px)) !important;
+      margin-bottom: var(--sm-b-m, var(--sm-b, 0px)) !important;
+    }
+  }
+
+  /* Responsive Font Sizing */
+  #shopify-section-{{ section.id }} .section-title.size-small { font-size: 2rem !important; }
+  #shopify-section-{{ section.id }} .section-title.size-medium { font-size: 2.5rem !important; }
+  #shopify-section-{{ section.id }} .section-title.size-large { font-size: 3rem !important; }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .section-title.size-small { font-size: 1.6rem !important; }
+    #shopify-section-{{ section.id }} .section-title.size-medium { font-size: 2rem !important; }
+    #shopify-section-{{ section.id }} .section-title.size-large { font-size: 2.25rem !important; }
+  }
+
+  #shopify-section-{{ section.id }} .mission-content p.size-small { font-size: 1rem !important; }
+  #shopify-section-{{ section.id }} .mission-content p.size-medium { font-size: 1.25rem !important; }
+  #shopify-section-{{ section.id }} .mission-content p.size-large { font-size: 1.5rem !important; }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .mission-content p.size-small { font-size: 0.9rem !important; }
+    #shopify-section-{{ section.id }} .mission-content p.size-medium { font-size: 1.125rem !important; }
+    #shopify-section-{{ section.id }} .mission-content p.size-large { font-size: 1.25rem !important; }
+  }
+
+  /* Icon block dynamic styling */
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'icon' -%}
+      #shopify-section-{{ section.id }} .block-{{ block.id }} {
+        width: {{ block.settings.icon_size | default: 60 }}px !important;
+        height: {{ block.settings.icon_size | default: 60 }}px !important;
+        margin-top: {{ block.settings.margin_top | default: 0 }}px !important;
+        margin-bottom: {{ block.settings.margin_bottom | default: 24 }}px !important;
+        display: inline-flex;
+        align-items: center !important;
+        justify-content: center !important;
+        {%- if block.settings.bg_gradient != blank -%}
+          background: {{ block.settings.bg_gradient }} !important;
+          border-radius: 50% !important;
+        {%- elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' -%}
+          background-color: {{ block.settings.bg_color }} !important;
+          border-radius: 50% !important;
+        {%- else -%}
+          background: var(--icon-bg, rgba(85, 228, 237, 0.1)) !important;
+          border-radius: 50% !important;
+        {%- endif -%}
+        {%- if block.settings.icon_color != blank and block.settings.icon_color != 'rgba(0,0,0,0)' -%}
+          color: {{ block.settings.icon_color }} !important;
+        {%- else -%}
+          color: var(--icon-color, #55e4ed) !important;
+        {%- endif -%}
+      }
+      #shopify-section-{{ section.id }} .block-{{ block.id }} svg {
+        width: calc({{ block.settings.icon_size | default: 60 }}px * 0.4375) !important;
+        height: calc({{ block.settings.icon_size | default: 60 }}px * 0.4375) !important;
+      }
+      @media screen and (max-width: 768px) {
+        #shopify-section-{{ section.id }} .block-{{ block.id }} {
+          margin-top: {{ block.settings.margin_top_mobile | default: 0 }}px !important;
+          margin-bottom: {{ block.settings.margin_bottom_mobile | default: 16 }}px !important;
+        }
+      }
+    {%- endif -%}
+  {%- endfor -%}
+</style>
+
+{% render 'section-padding',
+  section_id: section.id,
+  padding_top: section.settings.padding_top,
+  padding_bottom: section.settings.padding_bottom,
+  padding_top_mobile: section.settings.padding_top_mobile,
+  padding_bottom_mobile: section.settings.padding_bottom_mobile,
+  padding_left: 20,
+  padding_right: 20,
+  padding_left_mobile: 15,
+  padding_right_mobile: 15
+%}
+
+{%- if section.settings.show_section -%}
+<section 
+  class="mission-section color-{{ section.settings.color_scheme }}{% unless section.settings.show_on_desktop %} hidden-desktop{% endunless %}{% unless section.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+  id="AboutMission-{{ section.id }}"
+>
+  <div class="{% if section.settings.container_width == 'full' %}container-fluid{% elsif section.settings.container_width == 'narrow' %}container-narrow{% else %}container{% endif %}">
+    <div class="mission-card" style="border-radius: {{ section.settings.card_border_radius }}px;">
+      {%- if section.settings.show_background_pattern -%}
+        <div class="bg-pattern pattern-top-left"></div>
+        <div class="bg-pattern pattern-bottom-right"></div>
+      {%- endif -%}
+
+      <!-- Content -->
+      <div class="mission-content">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when '@app' -%}
+              <div class="mission-app-block" {{ block.shopify_attributes }}>
+                {% render block %}
+              </div>
+            {%- when 'icon' -%}
+              {%- if block.settings.custom_icon_svg != blank or block.settings.icon != blank -%}
+                <div class="mission-icon block-{{ block.id }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
+                  {%- if block.settings.custom_icon_svg != blank -%}
+                    {{ block.settings.custom_icon_svg }}
+                  {%- else -%}
+                    {%- case block.settings.icon -%}
+                      {%- when 'laptop' -%}{% render 'icon-laptop' %}
+                      {%- when 'phone' -%}{% render 'icon-phone' %}
+                      {%- when 'headphones' -%}{% render 'icon-headphones' %}
+                      {%- when 'tools' -%}{% render 'icon-tools' %}
+                      {%- when 'gamepad' -%}{% render 'icon-gamepad' %}
+                      {%- when 'watch' -%}{% render 'icon-watch' %}
+                      {%- when 'shipping' -%}{% render 'icon-shipping' %}
+                      {%- when 'support' -%}{% render 'icon-support' %}
+                      {%- when 'secure' -%}{% render 'icon-secure' %}
+                      {%- when 'returns' -%}{% render 'icon-returns' %}
+                      {%- when 'check' -%}{% render 'icon-check' %}
+                      {%- when 'heart' -%}{% render 'icon-heart' %}
+                      {%- when 'star' -%}{% render 'icon-star' %}
+                      {%- when 'award' -%}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                      {%- when 'target' -%}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                      {%- when 'zap' -%}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    {%- endcase -%}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+            {%- when 'header' -%}
+              {%- if block.settings.heading != blank -%}
+                {%- assign heading_tag = block.settings.heading_tag | default: 'h2' -%}
+                {%- assign h_color = block.settings.highlight_color -%}
+                {%- assign h_gradient = block.settings.highlight_gradient -%}
+                {%- assign head_text_align = '' -%}
+                {%- if head_text_align == blank -%}
+                  {%- if section.settings.blocks_position == 'left' -%}
+                    {%- assign head_text_align = 'left' -%}
+                  {%- elsif section.settings.blocks_position == 'right' -%}
+                    {%- assign head_text_align = 'right' -%}
+                  {%- else -%}
+                    {%- assign head_text_align = 'center' -%}
+                  {%- endif -%}
+                {%- endif -%}
+                
+                <{{ heading_tag }} 
+                  class="section-title size-{{ block.settings.font_size | default: 'medium' }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                  {{ block.shopify_attributes }}
+                  style="
+                    --m-t: {{ block.settings.margin_top | default: 0 }}px;
+                    --m-b: {{ block.settings.margin_bottom | default: 24 }}px;
+                    --m-t-m: {{ block.settings.margin_top_mobile | default: 0 }}px;
+                    --m-b-m: {{ block.settings.margin_bottom_mobile | default: 16 }}px;
+                    font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %};
+                    font-style: {{ block.settings.font_style | default: 'normal' }};
+                    text-transform: {{ block.settings.text_transform | default: 'none' }};
+                    letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px;
+                    line-height: {{ block.settings.line_height | default: 120 }}%;
+                    text-align: {{ head_text_align }};
+                    width: 100% !important;
+                    max-width: {{ block.settings.max_width | default: 800 }}px !important;
+                    {%- if section.settings.blocks_position == 'left' -%}
+                      margin-left: 0 !important;
+                      margin-right: auto !important;
+                    {%- elsif section.settings.blocks_position == 'right' -%}
+                      margin-left: auto !important;
+                      margin-right: 0 !important;
+                    {%- else -%}
+                      margin-left: auto !important;
+                      margin-right: auto !important;
+                    {%- endif -%}
+                    {% if block.settings.text_color != blank and block.settings.text_color != 'rgba(0,0,0,0)' %}color: {{ block.settings.text_color }} !important;{% endif %}
+                    {% if block.settings.bg_gradient != blank %}background: {{ block.settings.bg_gradient }} !important;{% elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' %}background: {{ block.settings.bg_color }} !important;{% endif %}
+                  "
+                >
+                  {%- if h_gradient != blank and h_gradient != 'rgba(0,0,0,0)' -%}
+                    {%- assign highlight_span = '<span class="highlight-text" style="background: ' | append: h_gradient | append: '; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">' -%}
+                  {%- elsif h_color != blank and h_color != 'rgba(0,0,0,0)' -%}
+                    {%- assign highlight_span = '<span class="highlight-text" style="color: ' | append: h_color | append: ';">' -%}
+                  {%- else -%}
+                    {%- assign highlight_span = '<span class="highlight-text">' -%}
+                  {%- endif -%}
+                  {{ block.settings.heading | replace: '[', highlight_span | replace: ']', '</span>' }}
+                </{{ heading_tag }}>
+              {%- endif -%}
+
+            {%- when 'subtitle' -%}
+              {%- if block.settings.subheading != blank -%}
+                {%- assign subheading_tag = block.settings.subheading_tag | default: 'p' -%}
+                {%- assign sub_text_align = '' -%}
+                {%- if sub_text_align == blank -%}
+                  {%- if section.settings.blocks_position == 'left' -%}
+                    {%- assign sub_text_align = 'left' -%}
+                  {%- elsif section.settings.blocks_position == 'right' -%}
+                    {%- assign sub_text_align = 'right' -%}
+                  {%- else -%}
+                    {%- assign sub_text_align = 'center' -%}
+                  {%- endif -%}
+                {%- endif -%}
+
+                <{{ subheading_tag }} 
+                  class="size-{{ block.settings.font_size | default: 'medium' }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                  {{ block.shopify_attributes }}
+                  style="
+                    --sm-t: {{ block.settings.margin_top | default: 0 }}px;
+                    --sm-b: {{ block.settings.margin_bottom | default: 0 }}px;
+                    --sm-t-m: {{ block.settings.margin_top_mobile | default: 0 }}px;
+                    --sm-b-m: {{ block.settings.margin_bottom_mobile | default: 0 }}px;
+                    font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %};
+                    font-style: {{ block.settings.font_style | default: 'normal' }};
+                    text-transform: {{ block.settings.text_transform | default: 'none' }};
+                    letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px;
+                    line-height: {{ block.settings.line_height | default: 180 }}%;
+                    text-align: {{ sub_text_align }};
+                    width: 100% !important;
+                    max-width: {{ block.settings.max_width | default: 800 }}px !important;
+                    {%- if section.settings.blocks_position == 'left' -%}
+                      margin-left: 0 !important;
+                      margin-right: auto !important;
+                    {%- elsif section.settings.blocks_position == 'right' -%}
+                      margin-left: auto !important;
+                      margin-right: 0 !important;
+                    {%- else -%}
+                      margin-left: auto !important;
+                      margin-right: auto !important;
+                    {%- endif -%}
+                    {% if block.settings.text_color != blank and block.settings.text_color != 'rgba(0,0,0,0)' %}color: {{ block.settings.text_color }} !important;{% endif %}
+                    {% if block.settings.bg_gradient != blank %}background: {{ block.settings.bg_gradient }} !important;{% elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' %}background: {{ block.settings.bg_color }} !important;{% endif %}
+                  "
+                >
+                  {{ block.settings.subheading }}
+                </{{ subheading_tag }}>
+              {%- endif -%}
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "About Mission",
+  "tag": "section",
+  "class": "section-about-mission",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_desktop",
+      "label": "Show on Desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "Show on Mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "blocks_position",
+      "label": "Blocks Position",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "default": "standard",
+      "options": [
+        { "value": "full", "label": "Full width" },
+        { "value": "standard", "label": "Standard" },
+        { "value": "narrow", "label": "Narrow" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Card border radius",
+      "default": 30
+    },
+    {
+      "type": "checkbox",
+      "id": "show_background_pattern",
+      "label": "Show background pattern",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1",
+      "options": [
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "inverse", "label": "Inverse" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "icon",
+      "name": "Icon",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon Preset",
+          "default": "target",
+          "options": [
+            { "value": "", "label": "Custom SVG (HTML setting below)" },
+            { "value": "laptop", "label": "Laptop" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "headphones", "label": "Headphones" },
+            { "value": "tools", "label": "Tools" },
+            { "value": "gamepad", "label": "Gamepad" },
+            { "value": "watch", "label": "Watch" },
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "support", "label": "Support" },
+            { "value": "secure", "label": "Secure" },
+            { "value": "returns", "label": "Returns" },
+            { "value": "check", "label": "Check" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "star", "label": "Star" },
+            { "value": "award", "label": "Award" },
+            { "value": "target", "label": "Target" },
+            { "value": "zap", "label": "Zap" }
+          ]
+        },
+        {
+          "type": "html",
+          "id": "custom_icon_svg",
+          "label": "Custom Icon SVG",
+          "info": "Paste custom SVG HTML code here. Only works when 'Icon Preset' is set to Custom SVG."
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "min": 24,
+          "max": 120,
+          "step": 4,
+          "unit": "px",
+          "label": "Icon Size",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "name": "Header",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Our Mission",
+          "info": "Use [text] to highlight text with accent color"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading Tag",
+          "info": "Specify heading code types for SEO and search engines.",
+          "default": "h2",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" },
+            { "value": "div", "label": "div" },
+            { "value": "span", "label": "span" },
+            { "value": "p", "label": "p" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 400,
+          "max": 1200,
+          "step": 10,
+          "unit": "px",
+          "label": "Maximum width",
+          "default": 800
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 120
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "highlight_color",
+          "label": "Highlight Text Color"
+        },
+        {
+          "type": "color_background",
+          "id": "highlight_gradient",
+          "label": "Highlight Text Gradient"
+        }
+      ]
+    },
+    {
+      "type": "subtitle",
+      "name": "Subtitle",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "To democratize access to high-performance technology by providing a curated selection of premium electronics..."
+        },
+        {
+          "type": "select",
+          "id": "subheading_tag",
+          "label": "Subheading Tag",
+          "default": "p",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" },
+            { "value": "div", "label": "div" },
+            { "value": "span", "label": "span" },
+            { "value": "p", "label": "p" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 400,
+          "max": 1200,
+          "step": 10,
+          "unit": "px",
+          "label": "Maximum width",
+          "default": 800
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 180
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Mission",
+      "blocks": [
+        {
+          "type": "icon",
+          "settings": {
+            "icon": "target"
+          }
+        },
+        {
+          "type": "header",
+          "settings": {
+            "heading": "Our Mission"
+          }
+        },
+        {
+          "type": "subtitle",
+          "settings": {
+            "subheading": "To democratize access to high-performance technology by providing a curated selection of premium electronics, backed by expert technical support and a commitment to customer success in the digital age."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

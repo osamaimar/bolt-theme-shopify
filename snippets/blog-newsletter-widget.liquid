@@ -1,0 +1,33 @@
+{%- comment -%}Newsletter Widget Block{%- endcomment -%}
+<div class="blog-sidebar-widget blog-sidebar-widget--newsletter block-{{ block.id }}{% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %}{% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
+  {%- if block.settings.show_title != false -%}
+    {%- assign heading_tag = block.settings.heading_tag | default: 'h3' -%}
+    <{{ heading_tag }} class="blog-sidebar-widget-title size-{{ block.settings.font_size | default: 'medium' }}">
+      {%- if block.settings.show_icon != false -%}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+          <polyline points="22,6 12,13 2,6" />
+        </svg>
+      {%- endif -%}
+      {{ block.settings.heading | default: 'Newsletter' }}
+    </{{ heading_tag }}>
+  {%- endif -%}
+  {%- if block.settings.show_description != false and block.settings.description != blank -%}
+    <p class="blog-sidebar-nl-text">{{ block.settings.description }}</p>
+  {%- endif -%}
+  {%- capture form_id -%}sidebar-nl-form-{{ block.id }}{%- endcapture -%}
+  {%- form 'customer', id: form_id, class: 'blog-sidebar-nl-form' -%}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+    {%- if form.posted_successfully? -%}
+      <p class="form-success">{{ 'newsletter.success' | t | default: 'Thanks for subscribing!' }}</p>
+    {%- else -%}
+      {%- assign default_placeholder_val = 'sections.footer.newsletter.placeholder' | t -%}{%- assign placeholder_val = block.settings.placeholder | default: default_placeholder_val -%}
+      {%- assign default_btn_text_val = 'sections.footer.newsletter.submit' | t -%}{%- assign btn_text_val = block.settings.button_text | default: default_btn_text_val -%}
+      <input type="email" name="contact[email]" class="blog-sidebar-nl-input" placeholder="{{ placeholder_val }}" required aria-required="true">
+      <button type="submit" class="blog-sidebar-nl-btn">{{ btn_text_val }}</button>
+      {%- if form.errors -%}
+        <p class="form-error">{{ form.errors.messages.email }}</p>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endform -%}
+</div>

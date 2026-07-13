@@ -1,0 +1,136 @@
+{
+  "sections": {
+    "hero": {
+      "type": "legal-masonry",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "standard",
+        "max_width": 1200,
+        "blocks_position": "center",
+        "columns": "3",
+        "grid_gap": 30,
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "header-1": {
+          "type": "header",
+          "settings": {
+            "heading": "[Privacy] Policy"
+          }
+        },
+        "subtitle-1": {
+          "type": "subtitle",
+          "settings": {
+            "subheading": "Effective date: March 2026 | Last updated: March 2026"
+          }
+        },
+        "button-1": {
+          "type": "button",
+          "settings": {
+            "download_text": "Download PDF Version",
+            "alignment": "center"
+          }
+        },
+        "card-1": {
+          "type": "card",
+          "settings": {
+            "icon": "search",
+            "heading": "1. Introduction",
+            "content": "<p>This Privacy Policy describes how BoltElectronics collects, uses, and discloses your personal information. We are committed to transparency and ensuring your information is handled with the highest level of digital security.</p>"
+          }
+        },
+        "card-2": {
+          "type": "card",
+          "settings": {
+            "icon": "file",
+            "heading": "2. Information We Collect",
+            "content": "<p><strong>Personal Information:</strong> Name, email, phone number for your BoltElectronics profile.<br><strong>Transaction Details:</strong> Information to process payments and fulfill orders.<br><strong>Customer Support:</strong> Details for technical help or warranty inquiries.<br><strong>Technical Logs:</strong> IP addresses and browser configurations.<br><strong>Site Security:</strong> Data to monitor for fraudulent access.</p>"
+          }
+        },
+        "card-3": {
+          "type": "card",
+          "settings": {
+            "icon": "settings",
+            "heading": "3. How We Use Your Information",
+            "content": "<p>We use your information to power your shopping journey:</p><ul><li>Fulfilling and tracking your tech shipments</li><li>Managing secure account authentication</li><li>Providing expert technical support</li><li>Sending newsletters on latest releases</li></ul>"
+          }
+        },
+        "card-4": {
+          "type": "card",
+          "settings": {
+            "icon": "globe",
+            "heading": "4. Specific Data Usage",
+            "content": "<p><strong>Marketing & Communication:</strong> Profile management, order history for warranty tracking, email preferences.<br><strong>Device & Usage Data:</strong> Operating system, browser type, shopping activity, cookie data for saved wishlists.</p>"
+          }
+        },
+        "card-5": {
+          "type": "card",
+          "settings": {
+            "icon": "shield",
+            "heading": "5. Data Security and Retention",
+            "content": "<p>We implement high-grade encryption and secure database architecture to protect your personal and financial information. Our team continuously reviews processes to prevent unauthorized access.</p><p>We retain your data for the duration of your active account or as required by law.</p>"
+          }
+        },
+        "card-6": {
+          "type": "card",
+          "settings": {
+            "icon": "users",
+            "heading": "6. Your Rights and Choices",
+            "content": "<p>You have the right to request access to your data, correct inaccuracies, or request deletion of your account. We provide user-friendly tools in your profile settings.</p><p><strong>Cookie Management:</strong> You can disable tracking cookies through your browser.</p>"
+          }
+        },
+        "card-7": {
+          "type": "card",
+          "settings": {
+            "icon": "heart",
+            "heading": "7. Children's Privacy",
+            "content": "<p>BoltElectronics is intended for adult shoppers and we do not knowingly collect data from children. If you believe we have accidentally gathered info from a minor, please contact our support team immediately.</p>"
+          }
+        },
+        "card-8": {
+          "type": "card",
+          "settings": {
+            "icon": "star",
+            "heading": "8. Updates to This Policy",
+            "content": "<p>We may update this policy periodically to align with new data laws and store improvements. Significant updates will be highlighted on our homepage and sent to your registered email.</p>"
+          }
+        },
+        "card-9": {
+          "type": "card",
+          "settings": {
+            "icon": "award",
+            "heading": "9. Dispute Resolution",
+            "content": "<p>Any disputes arising from this Privacy Policy shall be resolved through binding arbitration in accordance with applicable laws.</p>"
+          }
+        },
+        "divider-1": {
+          "type": "divider"
+        }
+      },
+      "block_order": [
+        "header-1",
+        "subtitle-1",
+        "card-1",
+        "card-2",
+        "card-3",
+        "card-4",
+        "card-5",
+        "card-6",
+        "card-7",
+        "card-8",
+        "card-9",
+        "divider-1",
+        "button-1"
+      ]
+    }
+  },
+  "order": [
+    "hero"
+  ]
+}

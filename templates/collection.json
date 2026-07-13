@@ -1,0 +1,116 @@
+{
+  "sections": {
+    "header": {
+      "type": "catalog-full-header",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Full Width [Tech Grid]"
+          }
+        },
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "A compact, high-density display of our premium tech gear using advanced performance components designed for enthusiasts and professionals."
+          }
+        },
+        "search": {
+          "type": "search_bar",
+          "settings": {
+            "search_placeholder": "Quick find product..."
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "subheading",
+        "search"
+      ],
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "grid": {
+      "type": "catalog-full-grid",
+      "blocks": {
+        "toolbar": {
+          "type": "toolbar",
+          "settings": {
+            "show_results_count": true,
+            "show_sort": true
+          }
+        },
+        "grid": {
+          "type": "product_grid",
+          "settings": {
+            "columns_desktop": "4",
+            "columns_tablet": "3",
+            "columns_mobile": "2",
+            "grid_gap": 30,
+            "show_vendor": false,
+            "show_price": true,
+            "show_quick_view": true,
+            "show_add_to_cart": true
+          }
+        },
+        "pagination": {
+          "type": "pagination",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "center",
+            "margin_top": 60,
+            "margin_bottom": 0,
+            "margin_top_mobile": 40,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": "",
+            "hover_border_color": "",
+            "hover_bg_color": "",
+            "hover_shadow_color": "",
+            "active_text_color": "",
+            "active_bg_color": "",
+            "active_bg_gradient": "",
+            "active_border_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "toolbar",
+        "grid",
+        "pagination"
+      ],
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+        "products_per_page": 12,
+
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 80,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "header",
+    "grid"
+  ]
+}

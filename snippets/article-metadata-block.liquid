@@ -1,0 +1,16 @@
+{%- comment -%}Article Metadata Block{%- endcomment -%}
+<div class="article-metadata" {{ block.shopify_attributes }}>
+  {%- assign date = article.published_at | time_tag: format: block.settings.date_format -%}
+  {%- if block.settings.show_author and block.settings.show_date -%}
+    <p>{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
+  {%- elsif block.settings.show_author -%}
+    <p>{{ article.author }}</p>
+  {%- elsif block.settings.show_date -%}
+    <p>{{ date }}</p>
+  {%- endif -%}
+  {%- if block.settings.show_read_time and article.content -%}
+    {%- assign word_count = article.content | strip_html | split: ' ' | size -%}
+    {%- assign read_time = word_count | divided_by: 200 | at_least: 1 -%}
+    <p class="article-read-time">{{ 'blogs.article.read_time' | t: count: read_time }}</p>
+  {%- endif -%}
+</div>

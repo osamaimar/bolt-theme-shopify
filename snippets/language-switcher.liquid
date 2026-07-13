@@ -1,0 +1,58 @@
+{%- comment -%}
+  Floating Language Switcher Snippet - BoltTheme
+  Uses URL-based locale switching (compatible with Shopify CLI dev server)
+{%- endcomment -%}
+
+{%- if localization.available_languages.size > 1 -%}
+  {{ 'component-language-switcher.css' | asset_url | stylesheet_tag }}
+
+  {%- liquid
+    assign current_path = request.path
+    if localization.language.primary == false
+      assign locale_prefix = localization.language.iso_code | prepend: '/'
+      assign current_path = current_path | remove_first: locale_prefix
+    endif
+    if current_path == '/' or current_path == blank
+      assign current_path = ''
+    endif
+  -%}
+
+  <div class="language-switcher" id="lang-switcher">
+    <button type="button" class="lang-toggle" 
+            aria-label="Select Language" 
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="bolt-lang-menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+      </svg>
+      <span class="lang-text">{{ localization.language.iso_code | upcase }}</span>
+      <span class="dropdown-arrow">▾</span>
+    </button>
+    <ul class="lang-dropdown" id="bolt-lang-menu" role="menu">
+      {%- for language in localization.available_languages -%}
+        <li role="none">
+          {%- liquid
+            if language.primary
+              assign target_url = current_path | default: '/'
+            else
+              assign target_url = language.iso_code | prepend: '/' | append: current_path
+            endif
+          -%}
+          <a href="{{ target_url }}"
+             class="lang-option {% if language.iso_code == localization.language.iso_code %}active{% endif %}"
+             role="menuitem"
+             hreflang="{{ language.iso_code }}">
+            {{ language.endonym_name | capitalize }} <span class="lang-check">✓</span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+
+  <style>
+    .hidden { display: none !important; }
+  </style>
+{%- endif -%}

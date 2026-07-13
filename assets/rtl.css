@@ -1,0 +1,344 @@
+/* assets/rtl.css */
+/* These rules only apply when the website is in RTL (Right-to-Left) mode */
+
+[dir="rtl"] {
+  /* ========================================= */
+  /* Global Text Direction                     */
+  /* ========================================= */
+  text-align: right;
+}
+
+[dir="rtl"] body {
+  direction: rtl;
+  unicode-bidi: embed;
+}
+
+/* ========================================= */
+/* Layout & Grid Overrides                   */
+/* ========================================= */
+
+/* Fix absolute positioning that doesn't use logical properties */
+[dir="rtl"] .dropdown-menu {
+  left: auto;
+  right: 50%;
+  transform: translateX(50%) translateY(8px);
+}
+
+[dir="rtl"] .nav-item:hover > .dropdown-menu,
+[dir="rtl"] .nav-item:focus-within > .dropdown-menu {
+  transform: translateX(50%) translateY(0);
+}
+
+[dir="rtl"] .dropdown-menu::before {
+  left: auto;
+  right: 50%;
+  transform: translateX(50%) rotate(45deg);
+}
+
+/* Sub-dropdowns positioning (Desktop) */
+[dir="rtl"] .sub-dropdown-menu {
+  left: auto;
+  right: calc(100% + 8px);
+  transform: translateX(8px);
+}
+
+[dir="rtl"] .dropdown-item:hover > .sub-dropdown-menu,
+[dir="rtl"] .dropdown-item:focus-within > .sub-dropdown-menu {
+  transform: translateX(0);
+}
+
+[dir="rtl"] .sub-dropdown-menu::before {
+  left: auto;
+  right: -12px;
+}
+
+/* Fix mobile menu nested dropdowns */
+[dir="rtl"] .mobile-sub-dropdown-menu {
+  border-inline-start: none;
+  border-inline-end: 2px solid var(--color-secondary);
+}
+
+/* ========================================= */
+/* Icons & Images Flipping                   */
+/* ========================================= */
+
+/* Mirror common icons that are directional */
+[dir="rtl"] .dropdown-icon,
+[dir="rtl"] .sub-dropdown-icon,
+[dir="rtl"] .hero-button svg,
+[dir="rtl"] .carousel-control svg,
+[dir="rtl"] .pagination svg,
+[dir="rtl"] .hec-hero-btn-primary svg,
+[dir="rtl"] .hec-section-link svg,
+[dir="rtl"] .hev-deal-btn svg,
+[dir="rtl"] .hec-promo-btn svg,
+[dir="rtl"] .hev-cta-btn-primary svg,
+[dir="rtl"] .hec-deal-btn svg,
+[dir="rtl"] .hev-hero-cta-primary svg,
+[dir="rtl"] .hev-section-link svg,
+[dir="rtl"] .blog-read-more svg,
+[dir="rtl"] .hec-product-quick-add svg,
+[dir="rtl"] .catalog-sidebar-title svg,
+[dir="rtl"] .blog-header-back svg,
+[dir="rtl"] .icon-arrow,
+[dir="rtl"] .icon-chevron,
+[dir="rtl"] svg:has(polyline[points*="9 18 15 12 9 6"]),
+[dir="rtl"] svg:has(polyline[points*="15 18 9 12 15 6"]),
+[dir="rtl"] svg:has(polyline[points*="12 5 19 12 12 19"]) {
+  transform: scaleX(-1);
+}
+
+/* Fix specific arrow hover animations */
+[dir="rtl"] .dropdown-item:hover > .dropdown-link .sub-dropdown-icon {
+  transform: scaleX(-1) translateX(-2px);
+}
+
+/* ========================================= */
+/* Hover & Animation Direction Reversals     */
+/* ========================================= */
+
+/* Reverse translateX values for all directional hover actions */
+[dir="rtl"] .nav-item:nth-last-child(-n+3) > .dropdown-menu {
+  transform: translateX(0) translateY(8px);
+}
+[dir="rtl"] .nav-item:nth-last-child(-n+3):hover > .dropdown-menu,
+[dir="rtl"] .nav-item:nth-last-child(-n+3):focus-within > .dropdown-menu {
+  transform: translateX(0) translateY(0);
+}
+[dir="rtl"] .nav-item:nth-last-child(-n+3) .sub-dropdown-menu {
+  transform: translateX(-8px);
+}
+
+/* Primary buttons hover */
+[dir="rtl"] .primary-button:hover svg {
+  transform: scaleX(-1) translateX(-4px); 
+}
+[dir="rtl"] .hec-hero-btn-primary:hover svg,
+[dir="rtl"] .hec-section-link:hover svg,
+[dir="rtl"] .hev-deal-btn:hover svg,
+[dir="rtl"] .hec-promo-btn:hover svg,
+[dir="rtl"] .hev-cta-btn-primary:hover svg,
+[dir="rtl"] .hec-deal-btn:hover svg,
+[dir="rtl"] .hev-hero-cta-primary:hover svg,
+[dir="rtl"] .hev-section-link:hover svg,
+[dir="rtl"] .blog-read-more:hover svg {
+  transform: scaleX(-1) translateX(-4px);
+}
+
+/* Footer link hover animation for RTL */
+[dir="rtl"] .footer-menu a:hover {
+  transform: translateX(-5px);
+}
+
+/* Toast Notifications */
+[dir="rtl"] .toast {
+  animation-name: toast-in-rtl;
+}
+
+[dir="rtl"] .toast.toast-out {
+  animation-name: toast-out-rtl;
+}
+
+@keyframes toast-in-rtl {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toast-out-rtl {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* ========================================= */
+/* Component Fixes                           */
+/* ========================================= */
+
+/* Hero dashboard positioning */
+[dir="rtl"] .hero-grid {
+  direction: rtl;
+}
+
+[dir="rtl"] .dashboard-wrapper {
+  margin-inline-start: 0;
+  margin-inline-end: 20px;
+}
+
+/* Mobile menu toggle button positioning in header */
+[dir="rtl"] .mobile-menu-toggle {
+  margin-inline-start: auto;
+}
+
+/* Footer layout */
+[dir="rtl"] .footer-grid {
+  text-align: right;
+}
+
+[dir="rtl"] .social-links {
+  justify-content: flex-start;
+}
+
+/* ================================================= */
+/*  RTL Automatic Alignment Flipping                 */
+/*  Overrides inline style="text-align: left/right"  */
+/* ================================================= */
+
+/* --- text-align flipping --- */
+[dir="rtl"] [style*="text-align: left"],
+[dir="rtl"] [style*="text-align:left"] {
+  text-align: right !important;
+}
+
+[dir="rtl"] [style*="text-align: right"],
+[dir="rtl"] [style*="text-align:right"] {
+  text-align: left !important;
+}
+
+/* --- margin-based alignment flipping --- */
+[dir="rtl"] [style*="margin-left: 0"][style*="margin-right: auto"],
+[dir="rtl"] [style*="margin-left:0"][style*="margin-right:auto"] {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+
+[dir="rtl"] [style*="margin-left: auto"][style*="margin-right: 0"],
+[dir="rtl"] [style*="margin-left:auto"][style*="margin-right:0"] {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+/* ================================================= */
+/*  Additional BoltTheme Targeted RTL Overrides      */
+/* ================================================= */
+
+/* --- Breadcrumbs --- */
+[dir="rtl"] .pd-breadcrumb svg {
+  transform: scaleX(-1);
+}
+
+/* --- Homepage CTA Banner --- */
+[dir="rtl"] .hev-cta-body--left {
+  text-align: right !important;
+  margin-right: 0 !important;
+  margin-left: auto !important;
+}
+[dir="rtl"] .hev-cta-body--right {
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+[dir="rtl"] .hev-cta-bg::after {
+  background: linear-gradient(225deg,
+          rgba(var(--bg-primary-rgb, 4, 38, 80), 0.95) 30%,
+          var(--color-black-50) 70%,
+          transparent 100%) !important;
+}
+[dir="rtl"] .hev-cta-btn-primary svg,
+[dir="rtl"] .hev-cta-btn-outline svg {
+  transform: scaleX(-1);
+}
+
+/* --- Contact Page Info Block & List --- */
+[dir="rtl"] .contact-info-block[style*="text-align: left"],
+[dir="rtl"] .contact-info-block .section-title[style*="text-align: left"],
+[dir="rtl"] .contact-info-block .support-desc[style*="text-align: left"],
+[dir="rtl"] .contact-info-block .benefits-title[style*="text-align: left"] {
+  text-align: right !important;
+}
+[dir="rtl"] .contact-info-block[style*="text-align: right"],
+[dir="rtl"] .contact-info-block .section-title[style*="text-align: right"],
+[dir="rtl"] .contact-info-block .support-desc[style*="text-align: right"],
+[dir="rtl"] .contact-info-block .benefits-title[style*="text-align: right"] {
+  text-align: left !important;
+}
+[dir="rtl"] .feature-list li[style*="text-align: left"] {
+  text-align: right !important;
+}
+[dir="rtl"] .feature-list li[style*="text-align: right"] {
+  text-align: left !important;
+}
+
+/* --- Collection List / Unified Toolbar --- */
+[dir="rtl"] .ccg-search-wrap {
+  margin-right: auto !important;
+  margin-left: 0 !important;
+}
+[dir="rtl"] .ccg-search-wrap input {
+  padding-left: 20px !important;
+  padding-right: 44px !important;
+}
+[dir="rtl"] .ccg-search-icon {
+  right: 16px !important;
+  left: auto !important;
+}
+
+/* --- Search & Sort Dropdowns --- */
+[dir="rtl"] .ccg-dropdown-trigger {
+  text-align: right !important;
+}
+[dir="rtl"] .search-bar .search-icon {
+  right: 20px !important;
+  left: auto !important;
+}
+[dir="rtl"] .search-bar input {
+  padding: 18px 56px 18px 60px !important;
+}
+[dir="rtl"] .cpd-search-bar .cpd-search-icon {
+  right: 18px !important;
+  left: auto !important;
+}
+[dir="rtl"] .cpd-search-bar input {
+  padding: 12px 48px 12px 18px !important;
+}
+[dir="rtl"] .cpd-sort-trigger {
+  padding: 10px var(--spacing-md) 10px 40px !important;
+}
+[dir="rtl"] .cpd-sort-arrow {
+  left: 14px !important;
+  right: auto !important;
+}
+[dir="rtl"] .cpd-search-icon {
+  right: 20px !important;
+  left: auto !important;
+}
+[dir="rtl"] #cpd-search {
+  padding: 16px 52px 16px 24px !important;
+}
+
+/* --- Default Blog Post Featured Card --- */
+[dir="rtl"] .blog-featured-content[style*="text-align: left"] {
+  text-align: right !important;
+}
+[dir="rtl"] .blog-featured-content[style*="text-align: right"] {
+  text-align: left !important;
+}
+[dir="rtl"] .blog-read-more svg {
+  transform: scaleX(-1) !important;
+}
+[dir="rtl"] .blog-read-more:hover svg {
+  transform: scaleX(-1) translateX(4px) !important;
+}
+
+/* --- Cart Page Related Products Subtitle --- */
+[dir="rtl"] .cart-subheading-title {
+  text-align: right !important;
+}
+[dir="rtl"] .cart-subheading-title[style*="margin-left: 0"] {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+[dir="rtl"] .cart-subheading-title[style*="margin-right: 0"] {
+  margin-right: auto !important;
+  margin-left: 0 !important;
+}

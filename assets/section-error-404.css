@@ -1,0 +1,397 @@
+/* Error 404 Section Styles */
+
+/* =========================================
+   Error 404 Section
+   Typography-first, centered layout
+   ========================================= */
+
+/* ---- Section ---- */
+.error-404-section {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* ---- Container ---- */
+.error-404-section .container,
+.error-404-section .container-fluid,
+.error-404-section .container-narrow {
+  width: 100%;
+}
+
+.error-404-container {
+  max-width: 680px;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* ---- Large Error Code ---- */
+.error-404-code {
+  font-weight: 900;
+  line-height: 0.9;
+  color: var(--color-accent, #ff6a3c);
+  letter-spacing: -0.02em;
+  filter: drop-shadow(0 15px 35px var(--color-accent-20, rgba(255, 106, 60, 0.2)));
+}
+
+/* ---- Responsive Code Sizing ---- */
+.error-404-code.size-small { font-size: clamp(6rem, 18vw, 10rem); }
+.error-404-code.size-medium { font-size: clamp(8rem, 22vw, 14rem); }
+.error-404-code.size-large { font-size: clamp(10rem, 28vw, 18rem); }
+
+/* ---- Top Divider ---- */
+.error-404-divider {
+  border: none;
+  background: var(--color-accent);
+  border-radius: var(--radius-xs, 2px);
+}
+
+/* ---- Title ---- */
+.error-404-title {
+  color: var(--text-inverse, #ffffff);
+}
+
+/* ---- Responsive Title Sizing ---- */
+.error-404-title.size-small { font-size: clamp(1.2rem, 3.5vw, 1.5rem); }
+.error-404-title.size-medium { font-size: clamp(1.5rem, 4vw, 1.75rem); }
+.error-404-title.size-large { font-size: clamp(1.6rem, 5vw, 2rem); }
+
+/* ---- Description ---- */
+.error-404-description {
+  color: var(--text-secondary, #a0a0a0);
+  line-height: 1.7;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---- Responsive Description Sizing ---- */
+.error-404-description.size-small { font-size: 0.95rem; }
+.error-404-description.size-medium { font-size: clamp(1rem, 3vw, 1.1rem); }
+.error-404-description.size-large { font-size: clamp(1.1rem, 4vw, 1.25rem); }
+
+/* ---- Action Buttons ---- */
+.error-404-actions {
+  display: flex;
+  gap: var(--spacing-md, 16px);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.error-404-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.875em 1.75em;
+  border-radius: 2em;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.error-404-btn svg {
+  width: 1.125em;
+  height: 1.125em;
+}
+
+.error-404-btn--primary {
+  background: var(--color-accent);
+  color: var(--bg-primary, #050505);
+  box-shadow: 0 4px 15px var(--color-accent-30);
+}
+
+.error-404-btn--primary:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px var(--color-accent-40);
+  background: var(--color-accent);
+}
+
+.error-404-btn--secondary {
+  background: transparent;
+  color: var(--text-primary, #ffffff);
+  border: 2px solid var(--color-accent-secondary);
+}
+
+.error-404-btn--secondary:hover {
+  color: var(--color-accent-secondary);
+  border-color: var(--color-accent);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px var(--color-accent-secondary-20);
+}
+
+.error-404-btn--outline {
+  background: var(--color-white-2, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--border-medium, #3a3a3a);
+  color: var(--text-lighter, #a0a0a0);
+}
+
+.error-404-btn--outline:hover {
+  color: var(--text-inverse, #ffffff);
+  border-color: var(--color-accent, #ff6a3c);
+  background: var(--color-accent-10, rgba(255, 106, 60, 0.1));
+}
+
+/* ---- Navigation Links Grid ---- */
+.error-404-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.error-404-nav-item {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-lg, 24px) var(--spacing-md, 16px);
+  border: 1px solid var(--border-primary, #3a3a3a);
+  border-radius: var(--radius-md, 12px);
+  background: var(--bg-glass, rgba(255, 255, 255, 0.03));
+  text-align: center;
+  text-decoration: none;
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+.error-404-nav-item:hover {
+  border-color: var(--color-accent-40, rgba(255, 106, 60, 0.4));
+  background: var(--bg-glass-hover, rgba(255, 255, 255, 0.05));
+  transform: translateY(-2px);
+}
+
+.error-404-nav-label {
+  display: block;
+  font-size: var(--font-size-base, 1rem);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--text-inverse, #ffffff);
+  margin-bottom: 6px;
+}
+
+.error-404-nav-hint {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-lighter, #808080);
+  line-height: 1.4;
+}
+
+/* ---- Footer Note ---- */
+.error-404-note {
+  color: var(--text-lighter, #808080);
+  line-height: 1.5;
+}
+
+.error-404-note.size-small { font-size: 0.85rem; }
+.error-404-note.size-medium { font-size: 0.95rem; }
+.error-404-note.size-large { font-size: 1.1rem; }
+
+.error-404-note a {
+  color: var(--color-accent, #ff6a3c);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.3s ease;
+}
+
+.error-404-note a:hover {
+  color: var(--color-accent-secondary, #ff8a5c);
+}
+
+/* ---- Visibility Helpers ---- */
+.hidden-desktop {
+  display: none !important;
+}
+.hidden-mobile {
+  display: flex !important;
+}
+
+/* =========================================
+   Responsive
+   ========================================= */
+@media (max-width: 768px) {
+  .error-404-section {
+    padding: 60px 16px;
+    min-height: calc(100vh - 150px);
+  }
+
+  .error-404-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .error-404-btn {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+
+  .error-404-nav {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .error-404-nav-item {
+    padding: 20px 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .error-404-section {
+    padding: 60px var(--spacing-md, 16px);
+  }
+}
+
+@media (min-width: 769px) {
+  .hidden-desktop {
+    display: none !important;
+  }
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+
+/* =========================================
+   Color Scheme Variants
+   ========================================= */
+.error-404-section { 
+  background-color: var(--bg-primary, #0a0a0a); 
+}
+
+.error-404-section.color-background-1 { 
+  background-color: var(--bg-primary, #0a0a0a); 
+}
+
+.error-404-section.color-background-2 { 
+  background-color: var(--bg-secondary, #050505); 
+}
+
+.error-404-section.color-inverse {
+  background-color: var(--color-white, #ffffff);
+}
+
+.error-404-section.color-inverse .error-404-code {
+  filter: drop-shadow(0 10px 25px rgba(255, 106, 60, 0.3));
+}
+
+.error-404-section.color-inverse .error-404-title,
+.error-404-section.color-inverse .error-404-nav-label {
+  color: var(--color-black, #000000);
+}
+
+.error-404-section.color-inverse .error-404-description {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.error-404-section.color-inverse .error-404-nav-item {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.error-404-section.color-inverse .error-404-nav-item:hover {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: var(--color-accent, #ff6a3c);
+}
+
+.error-404-section.color-inverse .error-404-nav-hint {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.error-404-section.color-inverse .error-404-note {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.error-404-section.color-inverse .error-404-btn--secondary,
+.error-404-section.color-inverse .error-404-btn--outline {
+  color: var(--color-black, #000000);
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+.error-404-section.color-inverse .error-404-btn--secondary:hover,
+.error-404-section.color-inverse .error-404-btn--outline:hover {
+  border-color: var(--color-accent, #ff6a3c);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.error-404-section.color-accent-1 { 
+  background-color: var(--color-primary, #1a1a2e); 
+}
+
+.error-404-section.color-accent-2 { 
+  background-color: var(--color-accent, #ff6a3c); 
+}
+
+.error-404-section.color-accent-2 .error-404-code {
+  color: var(--color-white, #ffffff);
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.2));
+}
+
+.error-404-section.color-accent-2 .error-404-title {
+  color: var(--color-white, #ffffff);
+}
+
+.error-404-section.color-accent-2 .error-404-description {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.error-404-section.color-accent-2 .error-404-nav-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.error-404-section.color-accent-2 .error-404-nav-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.error-404-section.color-accent-2 .error-404-nav-label {
+  color: var(--color-white, #ffffff);
+}
+
+.error-404-section.color-accent-2 .error-404-nav-hint {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.error-404-section.color-accent-2 .error-404-btn--primary {
+  background: var(--color-white, #ffffff);
+  color: var(--color-accent, #ff6a3c);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.error-404-section.color-accent-2 .error-404-btn--primary:hover {
+  background: #f0f0f0;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.error-404-section.color-accent-2 .error-404-btn--secondary,
+.error-404-section.color-accent-2 .error-404-btn--outline {
+  color: var(--color-white, #ffffff);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.error-404-section.color-accent-2 .error-404-btn--secondary:hover,
+.error-404-section.color-accent-2 .error-404-btn--outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.error-404-section.color-accent-2 .error-404-divider {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
+}
+
+.error-404-section.color-accent-2 .error-404-note {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.error-404-section.color-accent-2 .error-404-note a {
+  color: var(--color-white, #ffffff);
+}
+
+.error-404-section.color-accent-2 .error-404-note a:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* RTL Support */
+[dir="rtl"] .error-404-btn svg {
+  transform: scaleX(-1);
+}

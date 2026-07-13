@@ -1,0 +1,179 @@
+{
+  "sections": {
+    "cart-main": {
+      "type": "cart-main",
+      "blocks": {
+        "header": {
+          "type": "header",
+          "settings": {
+            "title": "Your [Shopping Cart]",
+            "show_cart_count": true,
+            "margin_top": 40,
+            "margin_top_mobile": 32
+          }
+        },
+        "cart-table": {
+          "type": "cart_table",
+          "settings": {
+            "show_product_column": true,
+            "show_price_column": true,
+            "show_quantity_column": true,
+            "show_total_column": true,
+            "show_remove_column": true,
+            "product_label": "Product",
+            "price_label": "Price",
+            "quantity_label": "Quantity",
+            "total_label": "Total",
+            "show_update_button": true,
+            "update_button_text": "Update Cart",
+            "show_clear_button": true,
+            "clear_button_text": "Clear Cart"
+          }
+        },
+        "cart-totals": {
+          "type": "cart_totals",
+          "settings": {
+            "show_cart_totals": true,
+            "cart_totals_title": "Cart Totals",
+            "show_subtotal": true,
+            "subtotal_label": "Subtotal",
+            "show_tax": true,
+            "tax_label": "Tax",
+            "tax_included_label": "Included",
+            "show_shipping": true,
+            "shipping_label": "Shipping",
+            "shipping_note": "Calculated at checkout",
+            "show_total": true,
+            "total_label": "Total",
+            "checkout_button_text": "Proceed to Checkout",
+            "show_additional_checkout_buttons": true
+          }
+        },
+        "empty_icon": {
+          "type": "empty_icon"
+        },
+        "empty_heading": {
+          "type": "empty_heading",
+          "settings": {
+            "heading": "Your cart is empty"
+          }
+        },
+        "empty_text": {
+          "type": "empty_text",
+          "settings": {
+            "text": "Looks like you have not added anything to your cart yet."
+          }
+        },
+        "empty_button": {
+          "type": "empty_button",
+          "settings": {
+            "button_label": "Continue Shopping",
+            "button_link": "shopify:\/\/collections\/all"
+          }
+        }
+      },
+      "block_order": [
+        "header",
+        "cart-table",
+        "cart-totals",
+        "empty_icon",
+        "empty_heading",
+        "empty_text",
+        "empty_button"
+      ],
+      "settings": {
+        "show_section": true,
+        "show_additional_checkout_buttons": true,
+        "container_width": "standard",
+
+        "color_scheme": "background-1",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 80,
+        "padding_bottom_mobile": 60
+      }
+    },
+    "cart-you-may-also-like": {
+      "type": "cart-you-may-also-like",
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+        "color_scheme": "background-1",
+        "padding_top": 60,
+        "padding_bottom": 80
+      },
+      "blocks": {
+        "header-1": {
+          "type": "header",
+          "settings": {
+            "title": "You May Also Like"
+          }
+        },
+        "product-1": {
+          "type": "product_card",
+          "settings": {
+            "icon": "gamepad",
+            "heading": "Next-Gen Gaming Console",
+            "description": "Experience ultra-high-speed loading, deeper immersion with 8K support, and a whole new generation of incredible games."
+          }
+        },
+        "product-2": {
+          "type": "product_card",
+          "settings": {
+            "icon": "share",
+            "heading": "Ultra HD Smart TV 65\"",
+            "description": "Brings vibrant colors and sharp detail to your home theater: 4K resolution and integrated streaming apps."
+          }
+        },
+        "product-3": {
+          "type": "product_card",
+          "settings": {
+            "icon": "battery",
+            "heading": "Portable Solar Power Bank",
+            "description": "High-capacity battery with solar charging for outdoor adventures, ensuring your devices never run out of juice."
+          }
+        }
+      },
+      "block_order": ["header-1", "product-1", "product-2", "product-3"]
+    },
+    "cart-related-products": {
+      "type": "cart-related-products",
+      "blocks": {
+        "header-1": {
+          "type": "header",
+          "settings": {
+            "title": "Related Products"
+          }
+        },
+        "subtitle-1": {
+          "type": "subtitle",
+          "settings": {
+            "subheading": "Complete your setup with these recommended items"
+          }
+        },
+        "collection-1": {
+          "type": "collection",
+          "settings": {
+            "products_to_show": 4
+          }
+        }
+      },
+      "block_order": ["header-1", "subtitle-1", "collection-1"],
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+
+        "color_scheme": "background-1",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 80,
+        "padding_bottom_mobile": 60
+      }
+    }
+  },
+  "order": [
+    "cart-main",
+    "cart-related-products",
+    "cart-you-may-also-like"
+  ]
+}

@@ -1,0 +1,37 @@
+{%- comment -%}Table of Contents Widget Block{%- endcomment -%}
+<div class="blog-sidebar-widget block-{{ block.id }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.show_title == nil or block.settings.show_title -%}
+    {%- assign heading_tag = block.settings.heading_tag | default: 'h3' -%}
+    <{{ heading_tag }} class="blog-sidebar-widget-title">
+      {%- if block.settings.show_icon == nil or block.settings.show_icon -%}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="8" y1="6" x2="21" y2="6" />
+          <line x1="8" y1="12" x2="21" y2="12" />
+          <line x1="8" y1="18" x2="21" y2="18" />
+          <line x1="3" y1="6" x2="3.01" y2="6" />
+          <line x1="3" y1="12" x2="3.01" y2="12" />
+          <line x1="3" y1="18" x2="3.01" y2="18" />
+        </svg>
+      {%- endif -%}
+      {{ block.settings.heading | default: 'Table of Contents' }}
+    </{{ heading_tag }}>
+  {%- endif -%}
+  <nav class="blog-sidebar-toc-list" id="blog-toc-{{ section.id }}-{{ block.id }}">
+    {%- if block.settings.auto_generate -%}
+      {%- assign headings = article.content | split: '<h2' -%}
+      {%- for heading in headings offset: 1 -%}
+        {%- assign heading_text = heading | split: '>' | slice: 1 | first | split: '</h2' | first | strip_html -%}
+        {%- assign heading_id = heading_text | handleize -%}
+        <a href="#{{ heading_id }}" class="blog-sidebar-toc-link">{{ heading_text }}</a>
+      {%- endfor -%}
+    {%- else -%}
+      {%- assign manual_links = block.settings.manual_links | newline_to_br | split: '<br />' -%}
+      {%- for link in manual_links -%}
+        {%- assign link_parts = link | split: '|' -%}
+        {%- if link_parts.size > 1 -%}
+          <a href="{{ link_parts[1] | strip }}" class="blog-sidebar-toc-link">{{ link_parts[0] | strip }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </nav>
+</div>

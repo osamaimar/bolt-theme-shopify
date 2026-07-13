@@ -1,0 +1,6 @@
+{%- comment -%}Article Title Block{%- endcomment -%}
+{%- if article.title -%}
+  <{{ block.settings.heading_tag }} class="article-title" {{ block.shopify_attributes }}>
+    {{ article.title }}
+  </{{ block.settings.heading_tag }}>
+{%- endif -%}

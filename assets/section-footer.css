@@ -1,0 +1,327 @@
+/* assets/section-footer.css */
+
+/* ─── Footer Container ─── */
+.apex-footer {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 0;
+  border: none;
+}
+
+/* Color Scheme Classes */
+.apex-footer.color-background-1 {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+.apex-footer.color-background-2 {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+.apex-footer.color-inverse {
+  background-color: var(--bg-secondary);
+  color: var(--text-inverse);
+}
+.apex-footer.color-accent-1 {
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+}
+.apex-footer.color-accent-2 {
+  background-color: var(--color-accent);
+  color: var(--bg-primary);
+}
+
+/* ─── Footer Grid ─── */
+.footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+  padding-bottom: 60px;
+}
+
+.footer-col {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.footer-col--wide {
+  flex: 2 1 400px;
+}
+
+/* ─── Logo ─── */
+.apex-footer .footer-logo {
+  display: flex;
+  align-items: center;
+  color: var(--text-primary);
+  margin-bottom: 25px;
+}
+
+.apex-footer .logo-section {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.apex-footer .logo-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--color-secondary);
+  margin-inline-end: 10px;
+}
+
+.apex-footer .logo-text {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.apex-footer .logo-highlight {
+  color: var(--color-accent);
+}
+
+.apex-footer .logo-image {
+  max-height: 40px;
+  width: auto;
+}
+
+/* ─── Footer Text ─── */
+.footer-desc {
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+  max-width: 400px;
+}
+
+.footer-desc p {
+  margin: 0;
+}
+
+.footer-desc strong {
+  color: var(--text-primary);
+}
+
+/* ─── Footer Headings ─── */
+.footer-heading,
+.footer-col h3 {
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  font-weight: var(--font-weight-bold);
+}
+
+/* ─── Footer Menu ─── */
+.footer-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-menu li {
+  margin-bottom: 15px;
+}
+
+.footer-menu a {
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  display: inline-block;
+  text-decoration: none;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.footer-menu a:hover {
+  color: var(--color-accent-secondary);
+  transform: translateX(5px);
+}
+
+/* ─── Divider ─── */
+.footer-divider {
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--color-white-10),
+    transparent);
+  margin: 0 0 30px;
+}
+
+/* ─── Footer Bottom ─── */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.footer-bottom > * {
+  max-width: 100%;
+}
+
+.footer-copy {
+  color: var(--text-primary-60);
+  font-size: var(--font-size-sm);
+}
+
+.footer-copy p {
+  margin: 0;
+}
+
+/* ─── Payment Icons ─── */
+.footer-payment-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+}
+
+.footer-payment-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.payment-icon {
+  height: 24px;
+  width: auto;
+}
+
+/* ─── Social Links ─── */
+.footer-social-links,
+.social-links {
+  display: flex;
+  gap: 16px;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.social-link:hover {
+  background: var(--color-accent);
+  color: var(--bg-primary);
+  transform: translateY(-2px);
+}
+
+.icon-social {
+  width: 24px;
+  height: 24px;
+  font-size: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Newsletter ─── */
+.footer-newsletter-subheading {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  margin: 0 0 10px;
+}
+
+.footer-newsletter-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.footer-newsletter-input {
+  flex-grow: 1;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(var(--color-accent-rgb), 0.2);
+  background: rgba(var(--bg-primary-rgb), 0.5);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  transition: border-color 0.3s ease;
+}
+
+.footer-newsletter-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.footer-newsletter-input::placeholder {
+  color: var(--text-muted);
+}
+
+.footer-newsletter-btn {
+  background: var(--color-accent);
+  color: var(--bg-primary);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.footer-newsletter-btn:hover {
+  background: var(--color-secondary);
+  transform: translateY(-1px);
+}
+
+.footer-newsletter-error {
+  display: block;
+  color: var(--error);
+  font-size: var(--font-size-xs, 0.75rem);
+  margin-top: 8px;
+}
+
+.footer-newsletter-success {
+  color: var(--success);
+  font-size: var(--font-size-sm);
+  margin-top: 8px;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .footer-grid {
+    gap: 40px;
+  }
+  .footer-col {
+    flex: 1 1 100%;
+  }
+  .footer-col--mobile-half {
+    flex: 0 0 calc(50% - 20px) !important;
+    max-width: calc(50% - 20px) !important;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .footer-social-links,
+  .social-links {
+    justify-content: center;
+  }
+
+  .footer-payment-list {
+    justify-content: center;
+  }
+
+}
+
+/* Viewport Visibility Helper Rules */
+@media screen and (min-width: 769px) {
+  .apex-footer .hidden-desktop { display: none !important; }
+}
+@media screen and (max-width: 768px) {
+  .apex-footer .hidden-mobile { display: none !important; }
+}
+

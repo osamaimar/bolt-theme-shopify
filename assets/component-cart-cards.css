@@ -1,0 +1,75 @@
+/* assets/component-cart-cards.css */
+.cart-card-section {
+    padding: 60px 0 0;
+}
+
+.cart-card-section .section-title {
+    font-size: 1.85rem;
+    font-weight: var(--font-weight-bold);
+}
+
+.cart-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    margin-top: 30px;
+}
+
+.cart-card {
+    background: rgba(var(--text-primary-rgb), 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 28px var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.cart-card:hover {
+    border-color: rgba(var(--color-accent-rgb), 0.25);
+    background: rgba(var(--text-primary-rgb), 0.08);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.cart-card-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(var(--color-secondary-rgb), 0.1);
+    border: 1px solid rgba(var(--color-secondary-rgb), 0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-secondary);
+    margin-bottom: 18px;
+}
+
+.cart-card-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.cart-card p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.cart-card p strong {
+    color: var(--text-primary);
+}
+
+@media (max-width: 1024px) {
+    .cart-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .cart-card-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,59 @@
+/* assets/component-pagination.css */
+
+.cpd-pagination,
+.catalog-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 60px;
+    padding: 30px 0;
+    border-top: 1px solid var(--border-light);
+}
+
+.cpd-page-link,
+.page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 var(--spacing-sm);
+    background: var(--color-white-5);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cpd-page-link:hover,
+.page-link:hover:not(.active) {
+    color: var(--text-inverse);
+    background: var(--color-white-10);
+    border-color: var(--color-accent-secondary-40);
+    transform: translateY(-2px);
+}
+
+.cpd-page-link.active,
+.page-link.active {
+    background: var(--color-accent-secondary);
+    border-color: var(--color-accent-secondary);
+    color: var(--bg-secondary);
+    box-shadow: 0 8px 20px var(--color-accent-secondary-20);
+}
+
+.cpd-page-dots {
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 2px;
+    margin: 0 var(--spacing-sm);
+}
+
+.cpd-page-link svg,
+.page-link svg {
+    width: 16px;
+    height: 16px;
+}

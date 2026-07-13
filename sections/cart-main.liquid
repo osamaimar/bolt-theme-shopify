@@ -1,0 +1,1798 @@
+{{ 'section-cart-main.css' | asset_url | stylesheet_tag }}
+{% render 'section-padding',
+  section_id: section.id,
+  padding_top: section.settings.padding_top,
+  padding_bottom: section.settings.padding_bottom,
+  padding_top_mobile: section.settings.padding_top_mobile,
+  padding_bottom_mobile: section.settings.padding_bottom_mobile
+%}
+
+{%- if section.settings.show_section -%}
+  {%- assign cart_table_block = nil -%}
+  {%- assign cart_totals_block = nil -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'cart_table' -%}
+      {%- assign cart_table_block = block -%}
+    {%- endif -%}
+    {%- if block.type == 'cart_totals' -%}
+      {%- assign cart_totals_block = block -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- assign grid_cols = 0 -%}
+  {%- if cart_table_block -%}
+    {%- if cart_table_block.settings.show_product_column -%}{%- assign grid_cols = grid_cols | plus: 3 -%}{%- endif -%}
+    {%- if cart_table_block.settings.show_price_column -%}{%- assign grid_cols = grid_cols | plus: 1 -%}{%- endif -%}
+    {%- if cart_table_block.settings.show_quantity_column -%}{%- assign grid_cols = grid_cols | plus: 1.5 -%}{%- endif -%}
+    {%- if cart_table_block.settings.show_total_column -%}{%- assign grid_cols = grid_cols | plus: 1 -%}{%- endif -%}
+    {%- if cart_table_block.settings.show_remove_column -%}{%- assign grid_cols = grid_cols | plus: 0.5 -%}{%- endif -%}
+  {%- endif -%}
+
+<section 
+  class="cart-main-section color-{{ section.settings.color_scheme }} section-{{ section.id }}{% unless section.settings.show_on_desktop %} hidden-desktop{% endunless %}{% unless section.settings.show_on_mobile %} hidden-mobile{% endunless %}"
+  style="--section-bg: {% if section.settings.color_scheme == 'background-1' %}var(--bg-primary){% elsif section.settings.color_scheme == 'background-2' %}var(--bg-secondary){% elsif section.settings.color_scheme == 'accent-1' %}var(--color-primary){% elsif section.settings.color_scheme == 'accent-2' %}var(--color-accent){% else %}var(--bg-primary){% endif %}; --section-text: {% if section.settings.color_scheme == 'accent-1' %}var(--text-inverse){% elsif section.settings.color_scheme == 'accent-2' %}var(--bg-primary){% elsif section.settings.color_scheme == 'inverse' %}var(--text-inverse){% else %}var(--text-primary){% endif %}; --grid-template: {% if cart_table_block %}{% if cart_table_block.settings.show_product_column %}3fr {% endif %}{% if cart_table_block.settings.show_price_column %}1fr {% endif %}{% if cart_table_block.settings.show_quantity_column %}1.5fr {% endif %}{% if cart_table_block.settings.show_total_column %}1fr {% endif %}{% if cart_table_block.settings.show_remove_column %}40px{% endif %}{% else %}3fr 1fr 1.5fr 1fr 40px{% endif %};"
+>
+  <div class="cart-container {% if section.settings.container_width == 'full' %}container-fluid{% elsif section.settings.container_width == 'narrow' %}container-narrow{% endif %}"
+       style="{% if section.settings.container_width != 'full' %}max-width: {{ section.settings.max_width | default: 1200 }}px;{% endif %} margin: 0 auto;">
+    
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+
+        {%- when 'header' -%}
+          {%- assign heading_tag = block.settings.heading_tag | default: 'h1' -%}
+          {%- assign h_color = block.settings.highlight_color -%}
+          {%- assign h_gradient = block.settings.highlight_gradient -%}
+          <div class="cart-header-title {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+               {{ block.shopify_attributes }}
+               style="
+                 --m-t: {{ block.settings.margin_top | default: 0 }}px; 
+                 --m-b: {{ block.settings.margin_bottom | default: 24 }}px; 
+                 --m-t-m: {{ block.settings.margin_top_mobile | default: 0 }}px; 
+                 --m-b-m: {{ block.settings.margin_bottom_mobile | default: 16 }}px; 
+                 margin-top: var(--m-t) !important;
+                 margin-bottom: var(--m-b) !important;
+                 text-align: {{ 'center' | default: 'left' }};
+                 {% if block.settings.text_color != blank %}color: {{ block.settings.text_color }} !important;{% endif %}
+                 {% if block.settings.bg_gradient != blank %}background: {{ block.settings.bg_gradient }} !important;{% elsif block.settings.bg_color != blank %}background-color: {{ block.settings.bg_color }} !important;{% endif %}
+                 {% if h_gradient != blank and h_gradient != 'rgba(0,0,0,0)' %}--highlight-gradient: {{ h_gradient }}; --highlight-clip: text; --highlight-fill: transparent; --highlight-color: transparent;
+                 {% elsif h_color != blank and h_color != 'rgba(0,0,0,0)' %}--highlight-color: {{ h_color }}; --highlight-gradient: none; --highlight-clip: initial; --highlight-fill: {{ h_color }};
+                 {% endif %}
+               ">
+            <{{ heading_tag }}
+               style="
+                 margin: 0 !important;
+                 font-size: {% if block.settings.font_size == 'small' %}24px{% elsif block.settings.font_size == 'large' %}48px{% else %}36px{% endif %} !important;
+                 font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %} !important; 
+                 font-style: {{ block.settings.font_style | default: 'normal' }}; 
+                 text-transform: {{ block.settings.text_transform | default: 'none' }}; 
+                 letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px; 
+                 line-height: {{ block.settings.line_height | default: 120 }}% !important;
+               "
+            >
+              {{ block.settings.title | replace: '[', '<span>' | replace: ']', '</span>' }}
+              {%- if block.settings.show_cart_count and cart.item_count > 0 -%}
+                <span> ({{ cart.item_count }})</span>
+              {%- endif -%}
+            </{{ heading_tag }}>
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+
+    {%- if cart.item_count > 0 -%}
+      {%- if cart_table_block or cart_totals_block -%}
+      <form action="{{ routes.cart_url }}" method="post" id="cart-form">
+      <div class="cart-grid">
+        {%- if cart_table_block -%}
+        {%- comment -%}Left Column: Cart Items{%- endcomment -%}
+        <div class="cart-items-column" {{ cart_table_block.shopify_attributes }}>
+            <div class="cart-list-wrapper">
+              {%- comment -%}Table Header{%- endcomment -%}
+              <div class="cart-row cart-heading-row">
+                {%- assign default_product_label = 'cart.table_product' | t -%}{%- assign product_label = cart_table_block.settings.product_label | default: default_product_label -%}
+                {%- assign default_price_label = 'cart.table_price' | t -%}{%- assign price_label = cart_table_block.settings.price_label | default: default_price_label -%}
+                {%- assign default_quantity_label = 'cart.table_qty' | t -%}{%- assign quantity_label = cart_table_block.settings.quantity_label | default: default_quantity_label -%}
+                {%- assign default_total_label = 'cart.table_total' | t -%}{%- assign total_label = cart_table_block.settings.total_label | default: default_total_label -%}
+                <div class="cart-col{% unless cart_table_block.settings.show_product_column %} hidden{% endunless %}">{{ product_label }}</div>
+                <div class="cart-col{% unless cart_table_block.settings.show_price_column %} hidden{% endunless %}">{{ price_label }}</div>
+                <div class="cart-col{% unless cart_table_block.settings.show_quantity_column %} hidden{% endunless %}">{{ quantity_label }}</div>
+                <div class="cart-col{% unless cart_table_block.settings.show_total_column %} hidden{% endunless %}">{{ total_label }}</div>
+                <div class="cart-col cart-remove-col{% unless cart_table_block.settings.show_remove_column %} hidden{% endunless %}"></div>
+              </div>
+
+              {%- for item in cart.items -%}
+                <div class="cart-row" data-cart-item data-line="{{ forloop.index }}">
+                  {%- comment -%}Product Cell{%- endcomment -%}
+                  <div class="cart-product-cell{% unless cart_table_block.settings.show_product_column %} hidden{% endunless %}">
+                    <div class="cart-icon" aria-hidden="true">
+                      {%- if item.image -%}
+                        {{ item.image | image_url: width: 48 | image_tag: loading: 'lazy', alt: item.product.title, class: 'cart-item-image' }}
+                      {%- else -%}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                          <circle cx="8.5" cy="8.5" r="1.5"/>
+                          <polyline points="21 15 16 10 5 21"/>
+                        </svg>
+                      {%- endif -%}
+                    </div>
+                    <div class="cart-product-info">
+                      <h4>
+                        <a href="{{ item.url }}" class="cart-product-link">{{ item.product.title }}</a>
+                      </h4>
+                      {%- if item.variant.title != 'Default Title' -%}
+                        <p>{{ item.variant.title }}</p>
+                      {%- endif -%}
+                      {%- for property in item.properties -%}
+                        {%- unless property.last == blank -%}
+                          <p class="cart-item-property">{{ property.first }}: {{ property.last }}</p>
+                        {%- endunless -%}
+                      {%- endfor -%}
+                    </div>
+                  </div>
+
+                  {%- comment -%}Price Cell{%- endcomment -%}
+                  <div class="cart-price-cell{% unless cart_table_block.settings.show_price_column %} hidden{% endunless %}">
+                    {%- if item.original_price != item.final_price -%}
+                      <span class="cart-price-original">{{ item.original_price | money }}</span>
+                      <span class="cart-price-final">{{ item.final_price | money }}</span>
+                    {%- else -%}
+                      {{ item.original_price | money }}
+                    {%- endif -%}
+                  </div>
+
+                  {%- comment -%}Quantity Cell{%- endcomment -%}
+                  <div class="cart-qty-cell{% unless cart_table_block.settings.show_quantity_column %} hidden{% endunless %}">
+                    <div class="cart-qty-ctrl">
+                      <button
+                        type="button"
+                        class="qty-btn qty-decrease"
+                        data-line="{{ forloop.index }}"
+                        data-item-key="{{ item.key }}"
+                        aria-label="{{ 'cart.decrease_quantity' | t }}"
+                      >−</button>
+                      <input
+                        type="number"
+                        name="updates[]"
+                        id="Quantity-{{ forloop.index }}"
+                        value="{{ item.quantity }}"
+                        min="0"
+                        max="999"
+                        class="qty-value"
+                        data-line="{{ forloop.index }}"
+                        data-item-key="{{ item.key }}"
+                        aria-label="{{ 'cart.quantity' | t }}"
+                      >
+                      <button
+                        type="button"
+                        class="qty-btn qty-increase"
+                        data-line="{{ forloop.index }}"
+                        data-item-key="{{ item.key }}"
+                        aria-label="{{ 'cart.increase_quantity' | t }}"
+                      >+</button>
+                    </div>
+                  </div>
+
+                  {%- comment -%}Total Cell{%- endcomment -%}
+                  <div class="cart-total-cell{% unless cart_table_block.settings.show_total_column %} hidden{% endunless %}">
+                    {%- if item.original_line_price != item.final_line_price -%}
+                      <span class="cart-price-original">{{ item.original_line_price | money }}</span>
+                      <span class="cart-price-final">{{ item.final_line_price | money }}</span>
+                    {%- else -%}
+                      {{ item.original_line_price | money }}
+                    {%- endif -%}
+                  </div>
+
+                  {%- comment -%}Remove Cell{%- endcomment -%}
+                  <div class="cart-remove-cell{% unless cart_table_block.settings.show_remove_column %} hidden{% endunless %}">
+                    <a
+                      href="{{ item.url_to_remove }}"
+                      class="cart-remove-btn"
+                      aria-label="{{ 'cart.remove' | t | default: 'Remove' }} {{ item.product.title }}"
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+
+            {%- comment -%}Action Buttons{%- endcomment -%}
+            <div class="cart-actions">
+              {%- assign default_update_text = 'cart.update' | t -%}{%- assign update_text = cart_table_block.settings.update_button_text | default: default_update_text -%}
+              <button type="button" class="btn-outline{% unless cart_table_block.settings.show_update_button %} hidden{% endunless %}" id="cart-update-btn">
+                {{ update_text }}
+              </button>
+              {%- assign default_clear_text = 'cart.clear' | t -%}{%- assign clear_text = cart_table_block.settings.clear_button_text | default: default_clear_text -%}
+              <a href="{{ routes.cart_clear_url }}" class="btn-outline btn-clear{% unless cart_table_block.settings.show_clear_button %} hidden{% endunless %}">
+                {{ clear_text }}
+              </a>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if cart_totals_block -%}
+        {%- comment -%}Right Column: Cart Totals{%- endcomment -%}
+        <div class="cart-totals-column{% unless cart_totals_block.settings.show_cart_totals %} hidden{% endunless %}" {{ cart_totals_block.shopify_attributes }}>
+            <div class="cart-totals-box">
+              {%- assign default_cart_totals_title = 'cart.cart_totals' | t -%}{%- assign cart_totals_title = cart_totals_block.settings.cart_totals_title | default: default_cart_totals_title -%}
+              <h3>{{ cart_totals_title }}</h3>
+
+              {%- comment -%}Totals items (subtotal, discounts, tax, shipping, total){%- endcomment -%}
+              {%- if cart_totals_block.settings.show_subtotal -%}
+                <div class="summary-row">
+                  {%- assign default_subtotal_label = 'cart.subtotal' | t -%}{%- assign subtotal_label = cart_totals_block.settings.subtotal_label | default: default_subtotal_label -%}
+                  <span>{{ subtotal_label }}</span>
+                  <span>{{ cart.items_subtotal_price | money }}</span>
+                </div>
+              {%- endif -%}
+
+              {%- if cart_totals_block.settings.show_tax -%}
+                <div class="summary-row">
+                  {%- assign default_tax_label = 'cart.tax' | t -%}{%- assign tax_label = cart_totals_block.settings.tax_label | default: default_tax_label -%}
+                  <span>{{ tax_label }}</span>
+                  <span>
+                    {%- if cart.taxes_included -%}
+                      {%- assign default_tax_included_label = 'cart.included' | t -%}{%- assign tax_included_label = cart_totals_block.settings.tax_included_label | default: default_tax_included_label -%}
+                      {{ tax_included_label }}
+                    {%- else -%}
+                      {{ cart.total_tax | money }}
+                    {%- endif -%}
+                  </span>
+                </div>
+              {%- endif -%}
+
+              {%- if cart_totals_block.settings.show_shipping -%}
+                <div class="summary-row">
+                  {%- assign default_shipping_label = 'cart.shipping' | t -%}{%- assign shipping_label = cart_totals_block.settings.shipping_label | default: default_shipping_label -%}
+                  <span>{{ shipping_label }}</span>
+                  {%- assign default_shipping_note = 'cart.calculated_at_checkout' | t -%}{%- assign shipping_note = cart_totals_block.settings.shipping_note | default: default_shipping_note -%}
+                  <span class="shipping-note">{{ shipping_note }}</span>
+                </div>
+              {%- endif -%}
+
+              {%- if cart_totals_block.settings.show_total -%}
+                <div class="summary-row final-total">
+                  {%- assign default_total_label = 'cart.total' | t -%}{%- assign total_label = cart_totals_block.settings.total_label | default: default_total_label -%}
+                  <span>{{ total_label }}</span>
+                  <span>{{ cart.total_price | money }}</span>
+                </div>
+              {%- endif -%}
+
+              {%- assign default_checkout_text = 'cart.checkout' | t -%}{%- assign checkout_text = cart_totals_block.settings.checkout_button_text | default: default_checkout_text -%}
+              <button type="submit" name="checkout" class="btn-checkout">
+                {{ checkout_text }}
+              </button>
+
+              {%- if cart_totals_block.settings.show_additional_checkout_buttons -%}
+                {{ content_for_additional_checkout_buttons }}
+              {%- endif -%}
+            </div>
+          </div>
+          {%- endif -%}
+      </div>
+      </form>
+      {%- endif -%}
+    {%- else -%}
+      {%- comment -%}Empty Cart{%- endcomment -%}
+      <div class="cart-empty">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'empty_icon' -%}
+              <div class="cart-empty-icon {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                   {{ block.shopify_attributes }}
+                   style="
+                     --m-t: {{ block.settings.margin_top | default: 20 }}px; 
+                     --m-b: {{ block.settings.margin_bottom | default: 20 }}px; 
+                     --m-t-m: {{ block.settings.margin_top_mobile | default: 15 }}px; 
+                     --m-b-m: {{ block.settings.margin_bottom_mobile | default: 15 }}px; 
+                     margin-top: var(--m-t) !important;
+                     margin-bottom: var(--m-b) !important;
+                     text-align: {{ 'center' | default: 'center' }};
+                     {% if block.settings.bg_gradient != blank %}background: {{ block.settings.bg_gradient }} !important;{% elsif block.settings.bg_color != blank %}background-color: {{ block.settings.bg_color }} !important;{% endif %}
+                   ">
+                <div class="icon-wrapper"
+                     style="
+                       display: inline-flex;
+                       align-items: center;
+                       justify-content: center;
+                       width: {{ block.settings.icon_size | default: 64 }}px !important;
+                       height: {{ block.settings.icon_size | default: 64 }}px !important;
+                       {% if block.settings.icon_color != blank %}color: {{ block.settings.icon_color }} !important;{% endif %}
+                     ">
+                  <style>
+                    .icon-wrapper svg { width: 100%; height: 100%; display: block; }
+                  </style>
+                  {%- if block.settings.icon != blank -%}
+                    {%- case block.settings.icon -%}
+                      {%- when 'laptop' -%}{% render 'icon-laptop' %}
+                      {%- when 'phone' -%}{% render 'icon-phone' %}
+                      {%- when 'headphones' -%}{% render 'icon-headphones' %}
+                      {%- when 'tools' -%}{% render 'icon-tools' %}
+                      {%- when 'gamepad' -%}{% render 'icon-gamepad' %}
+                      {%- when 'watch' -%}{% render 'icon-watch' %}
+                      {%- when 'shipping' -%}{% render 'icon-shipping' %}
+                      {%- when 'support' -%}{% render 'icon-support' %}
+                      {%- when 'secure' -%}{% render 'icon-secure' %}
+                      {%- when 'returns' -%}{% render 'icon-returns' %}
+                      {%- when 'check' -%}{% render 'icon-check' %}
+                      {%- when 'heart' -%}{% render 'icon-heart' %}
+                      {%- when 'star' -%}{% render 'icon-star' %}
+                      {%- when 'cart' -%}{% render 'icon-cart' %}
+                      {%- else -%}{% render 'icon-cart' %}
+                    {%- endcase -%}
+                  {%- elsif block.settings.custom_icon_svg != blank -%}
+                    {{ block.settings.custom_icon_svg }}
+                  {%- elsif block.settings.icon_svg != blank -%}
+                    {{ block.settings.icon_svg }}
+                  {%- else -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="9" cy="21" r="1"/>
+                      <circle cx="20" cy="21" r="1"/>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- when 'empty_heading' -%}
+              {%- if block.settings.heading != blank -%}
+                {%- assign heading_tag = block.settings.heading_tag | default: 'h2' -%}
+                {%- assign h_color = block.settings.highlight_color -%}
+                {%- assign h_gradient = block.settings.highlight_gradient -%}
+                <div class="cart-header-title {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                     {{ block.shopify_attributes }}
+                     style="
+                       --m-t: {{ block.settings.margin_top | default: 0 }}px; 
+                       --m-b: {{ block.settings.margin_bottom | default: 24 }}px; 
+                       --m-t-m: {{ block.settings.margin_top_mobile | default: 0 }}px; 
+                       --m-b-m: {{ block.settings.margin_bottom_mobile | default: 16 }}px; 
+                       margin-top: var(--m-t) !important;
+                       margin-bottom: var(--m-b) !important;
+                       text-align: {{ 'center' | default: 'center' }};
+                       {% if block.settings.text_color != blank %}color: {{ block.settings.text_color }} !important;{% endif %}
+                       {% if block.settings.bg_gradient != blank %}background: {{ block.settings.bg_gradient }} !important;{% elsif block.settings.bg_color != blank %}background-color: {{ block.settings.bg_color }} !important;{% endif %}
+                       {% if h_gradient != blank and h_gradient != 'rgba(0,0,0,0)' %}--highlight-gradient: {{ h_gradient }}; --highlight-clip: text; --highlight-fill: transparent; --highlight-color: transparent;
+                       {% elsif h_color != blank and h_color != 'rgba(0,0,0,0)' %}--highlight-color: {{ h_color }}; --highlight-gradient: none; --highlight-clip: initial; --highlight-fill: {{ h_color }};
+                       {% endif %}
+                     ">
+                  <{{ heading_tag }}
+                     style="
+                       margin: 0 !important;
+                       font-size: {% if block.settings.font_size == 'small' %}24px{% elsif block.settings.font_size == 'large' %}48px{% else %}36px{% endif %} !important;
+                       font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %} !important; 
+                       font-style: {{ block.settings.font_style | default: 'normal' }}; 
+                       text-transform: {{ block.settings.text_transform | default: 'none' }}; 
+                       letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px; 
+                       line-height: {{ block.settings.line_height | default: 120 }}% !important;
+                     "
+                  >
+                    {{ block.settings.heading | replace: '[', '<span>' | replace: ']', '</span>' }}
+                  </{{ heading_tag }}>
+                </div>
+              {%- endif -%}
+            {%- when 'empty_text' -%}
+              {%- if block.settings.text != blank -%}
+                {%- assign subheading_tag = block.settings.subheading_tag | default: 'p' -%}
+                <div class="cart-empty-text {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                     {{ block.shopify_attributes }}
+                     style="
+                       --m-t: {{ block.settings.margin_top | default: 0 }}px; 
+                       --m-b: {{ block.settings.margin_bottom | default: 20 }}px; 
+                       --m-t-m: {{ block.settings.margin_top_mobile | default: 0 }}px; 
+                       --m-b-m: {{ block.settings.margin_bottom_mobile | default: 16 }}px; 
+                       margin-top: var(--m-t) !important;
+                       margin-bottom: var(--m-b) !important;
+                       text-align: {{ 'center' | default: 'center' }};
+                       width: 100% !important; max-width: {{ block.settings.max_width | default: 800 }}px !important;
+                       margin-left: {% if 'center' == 'left' %}0{% elsif 'center' == 'right' %}auto{% else %}auto{% endif %} !important;
+                       margin-right: {% if 'center' == 'right' %}0{% elsif 'center' == 'left' %}auto{% else %}auto{% endif %} !important;
+                       {% if block.settings.bg_gradient != blank %}background: {{ block.settings.bg_gradient }} !important;{% elsif block.settings.bg_color != blank %}background-color: {{ block.settings.bg_color }} !important;{% endif %}
+                     ">
+                  <{{ subheading_tag }}
+                     class="section-subheading"
+                     style="
+                       margin: 0 !important;
+                       font-size: {% if block.settings.font_size == 'small' %}14px{% elsif block.settings.font_size == 'large' %}20px{% else %}16px{% endif %} !important;
+                       font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %} !important; 
+                       font-style: {{ block.settings.font_style | default: 'normal' }}; 
+                       text-transform: {{ block.settings.text_transform | default: 'none' }}; 
+                       letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px; 
+                       line-height: {{ block.settings.line_height | default: 160 }}% !important;
+                       {% if block.settings.text_color != blank %}color: {{ block.settings.text_color }} !important;{% endif %}
+                     "
+                  >
+                    {{ block.settings.text }}
+                  </{{ subheading_tag }}>
+                </div>
+              {%- endif -%}
+            {%- when 'empty_button' -%}
+              {%- if block.settings.show_button -%}
+                <div class="cart-empty-button {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                     {{ block.shopify_attributes }}
+                     style="
+                       --m-t: {{ block.settings.margin_top | default: 20 }}px; 
+                       --m-b: {{ block.settings.margin_bottom | default: 20 }}px; 
+                       --m-t-m: {{ block.settings.margin_top_mobile | default: 16 }}px; 
+                       --m-b-m: {{ block.settings.margin_bottom_mobile | default: 16 }}px; 
+                       margin-top: var(--m-t) !important;
+                       margin-bottom: var(--m-b) !important;
+                       text-align: {{ 'center' | default: 'center' }};
+                     ">
+                  <a href="{{ block.settings.url | default: routes.all_products_collection_url }}" 
+                     class="btn-checkout" 
+                     {% if block.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+                     style="
+                       display: inline-flex;
+                       align-items: center;
+                       justify-content: center;
+                       gap: 8px;
+                       font-size: {% if block.settings.font_size == 'small' %}14px{% elsif block.settings.font_size == 'large' %}20px{% else %}16px{% endif %} !important;
+                       font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %} !important; 
+                       font-style: {{ block.settings.font_style | default: 'normal' }}; 
+                       text-transform: {{ block.settings.text_transform | default: 'none' }}; 
+                       letter-spacing: {{ block.settings.letter_spacing | default: 0 }}px; 
+                       line-height: {{ block.settings.line_height | default: 115 }}% !important;
+                       {% if block.settings.text_color != blank and block.settings.text_color != 'rgba(0,0,0,0)' %}color: {{ block.settings.text_color }} !important;{% endif %}
+                       {% if block.settings.bg_gradient != blank and block.settings.bg_gradient != 'rgba(0,0,0,0)' %}background: {{ block.settings.bg_gradient }} !important;{% elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' %}background-color: {{ block.settings.bg_color }} !important;{% endif %}
+                       {% if block.settings.border_color != blank and block.settings.border_color != 'rgba(0,0,0,0)' %}border: 1px solid {{ block.settings.border_color }} !important;{% endif %}
+                     ">
+                    {{ block.settings.label | default: 'Continue Shopping' }}
+                    {%- if block.settings.show_icon -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    {%- endif -%}
+                  </a>
+                </div>
+              {%- endif -%}
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+{%- endif -%}
+
+<script>
+  (function() {
+    var updateBtn = document.getElementById('cart-update-btn');
+    var cartForm = document.getElementById('cart-form');
+
+    // Function to check if update button is hidden
+    function isUpdateButtonHidden() {
+      return updateBtn && updateBtn.classList.contains('hidden');
+    }
+
+    // Function to highlight update button when quantity changes
+    function highlightUpdateButton() {
+      if (updateBtn && !isUpdateButtonHidden()) {
+        updateBtn.classList.add('needs-update');
+      }
+    }
+
+    // Function to remove highlight from update button
+    function removeHighlight() {
+      if (updateBtn) {
+        updateBtn.classList.remove('needs-update');
+      }
+    }
+
+    // Function to submit form (for auto-refresh when update button is hidden)
+    function submitForm() {
+      if (cartForm) {
+        cartForm.submit();
+      }
+    }
+
+    // Quantity button handlers
+    document.querySelectorAll('.qty-decrease').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var input = this.parentElement.querySelector('.qty-value');
+        var val = parseInt(input.value, 10);
+        if (val > 0) {
+          input.value = val - 1;
+          if (isUpdateButtonHidden()) {
+            submitForm();
+          } else {
+            highlightUpdateButton();
+          }
+        }
+      });
+    });
+
+    document.querySelectorAll('.qty-increase').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var input = this.parentElement.querySelector('.qty-value');
+        var val = parseInt(input.value, 10);
+        if (val < 999) {
+          input.value = val + 1;
+          if (isUpdateButtonHidden()) {
+            submitForm();
+          } else {
+            highlightUpdateButton();
+          }
+        }
+      });
+    });
+
+    // Handle quantity input changes
+    document.querySelectorAll('.qty-value').forEach(function(input) {
+      input.addEventListener('change', function() {
+        if (isUpdateButtonHidden()) {
+          submitForm();
+        } else {
+          highlightUpdateButton();
+        }
+      });
+    });
+
+    // Native form submission handles the update button via this click handler
+    if (updateBtn) {
+      updateBtn.addEventListener('click', function() {
+        removeHighlight();
+        var form = document.getElementById('cart-form');
+        if (form) {
+          // Add a temporary hidden input to trigger the 'update' action in Shopify
+          var updateInput = document.createElement('input');
+          updateInput.type = 'hidden';
+          updateInput.name = 'update';
+          updateInput.value = 'update';
+          form.appendChild(updateInput);
+          form.submit();
+        }
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Cart Main",
+  "tag": "section",
+  "class": "section-cart-main",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_desktop",
+      "label": "Show on Desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "Show on Mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "default": "standard",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "full", "label": "Full width" },
+        { "value": "narrow", "label": "Narrow" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 400,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "label": "Max Width",
+      "default": 1200
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "header",
+      "name": "Header",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Your [Shopping Cart]",
+          "info": "Use [text] to highlight with accent color"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_cart_count",
+          "label": "Show cart count in title",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading Tag",
+          "info": "Specify heading code types for SEO and search engines.",
+          "default": "h1",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" },
+            { "value": "div", "label": "div" },
+            { "value": "span", "label": "span" },
+            { "value": "p", "label": "p" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 120
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "highlight_color",
+          "label": "Highlight Text Color"
+        },
+        {
+          "type": "color_background",
+          "id": "highlight_gradient",
+          "label": "Highlight Text Gradient"
+        }
+      ]
+    },
+    {
+      "type": "cart_table",
+      "name": "Cart Table",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Table Columns"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product_column",
+          "label": "Show product column",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_price_column",
+          "label": "Show price column",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_quantity_column",
+          "label": "Show quantity column",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_total_column",
+          "label": "Show total column",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_remove_column",
+          "label": "Show remove column",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Column Labels"
+        },
+        {
+          "type": "text",
+          "id": "product_label",
+          "label": "Product column label",
+          "default": "Product"
+        },
+        {
+          "type": "text",
+          "id": "price_label",
+          "label": "Price column label",
+          "default": "Price"
+        },
+        {
+          "type": "text",
+          "id": "quantity_label",
+          "label": "Quantity column label",
+          "default": "Quantity"
+        },
+        {
+          "type": "text",
+          "id": "total_label",
+          "label": "Total column label",
+          "default": "Total"
+        },
+        {
+          "type": "header",
+          "content": "Action Buttons"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_update_button",
+          "label": "Show update button",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "update_button_text",
+          "label": "Update button text",
+          "default": "Update Cart"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_clear_button",
+          "label": "Show clear button",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "clear_button_text",
+          "label": "Clear button text",
+          "default": "Clear Cart"
+        }
+      ]
+    },
+    {
+      "type": "cart_totals",
+      "name": "Cart Totals",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_cart_totals",
+          "label": "Show cart totals section",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "cart_totals_title",
+          "label": "Cart totals heading",
+          "default": "Cart Totals"
+        },
+        {
+          "type": "header",
+          "content": "Totals Items"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_subtotal",
+          "label": "Show subtotal",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "subtotal_label",
+          "label": "Subtotal label",
+          "default": "Subtotal"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_tax",
+          "label": "Show tax",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "tax_label",
+          "label": "Tax label",
+          "default": "Tax"
+        },
+        {
+          "type": "text",
+          "id": "tax_included_label",
+          "label": "Tax included label",
+          "default": "Included"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_shipping",
+          "label": "Show shipping",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "shipping_label",
+          "label": "Shipping label",
+          "default": "Shipping"
+        },
+        {
+          "type": "text",
+          "id": "shipping_note",
+          "label": "Shipping note",
+          "default": "Calculated at checkout"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_total",
+          "label": "Show total",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "total_label",
+          "label": "Total label",
+          "default": "Total"
+        },
+        {
+          "type": "header",
+          "content": "Checkout Button"
+        },
+        {
+          "type": "text",
+          "id": "checkout_button_text",
+          "label": "Checkout button text",
+          "default": "Proceed to Checkout"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_additional_checkout_buttons",
+          "label": "Show additional checkout buttons",
+          "default": true,
+          "info": "Display express checkout buttons like PayPal, Apple Pay, etc."
+        }
+      ]
+    },
+    {
+      "type": "empty_icon",
+      "name": "Empty Cart Icon",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "cart",
+          "options": [
+            { "value": "", "label": "None / Custom" },
+            { "value": "laptop", "label": "Laptop" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "headphones", "label": "Headphones" },
+            { "value": "tools", "label": "Tools" },
+            { "value": "gamepad", "label": "Gamepad" },
+            { "value": "watch", "label": "Watch" },
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "support", "label": "Support" },
+            { "value": "secure", "label": "Secure" },
+            { "value": "returns", "label": "Returns" },
+            { "value": "check", "label": "Check" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "star", "label": "Star" },
+            { "value": "cart", "label": "Cart" }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "custom_icon_svg",
+          "label": "Custom SVG/HTML",
+          "info": "Paste custom SVG/HTML markup code here when icon is set to None / Custom."
+        },
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Legacy Icon SVG"
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "icon_size",
+          "min": 24,
+          "max": 120,
+          "step": 4,
+          "unit": "px",
+          "label": "Icon Size",
+          "default": 64
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        }
+      ]
+    },
+    {
+      "type": "empty_heading",
+      "name": "Empty Cart Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Your cart is empty"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading Tag",
+          "info": "Specify heading code types for SEO and search engines.",
+          "default": "h2",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" },
+            { "value": "div", "label": "div" },
+            { "value": "span", "label": "span" },
+            { "value": "p", "label": "p" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 120
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "highlight_color",
+          "label": "Highlight Text Color"
+        },
+        {
+          "type": "color_background",
+          "id": "highlight_gradient",
+          "label": "Highlight Text Gradient"
+        }
+      ]
+    },
+    {
+      "type": "empty_text",
+      "name": "Empty Cart Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Looks like you have not added anything to your cart yet."
+        },
+        {
+          "type": "select",
+          "id": "subheading_tag",
+          "label": "Subheading Tag",
+          "info": "Specify tag type for SEO.",
+          "default": "p",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" },
+            { "value": "div", "label": "div" },
+            { "value": "span", "label": "span" },
+            { "value": "p", "label": "p" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 400,
+          "max": 1200,
+          "step": 10,
+          "unit": "px",
+          "label": "Max Width",
+          "default": 800
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 160
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        }
+      ]
+    },
+    {
+      "type": "empty_button",
+      "name": "Empty Cart Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Button Label",
+          "default": "Continue Shopping"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Button Link"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "default": "primary",
+          "options": [
+            { "value": "primary", "label": "Primary" },
+            { "value": "outline", "label": "Outline" },
+            { "value": "secondary", "label": "Secondary" }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "open_in_new_tab",
+          "label": "Open in new tab",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_button",
+          "label": "Show button",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_icon",
+          "label": "Show arrow icon",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "uppercase",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 115
+        },
+        {
+          "type": "header",
+          "content": "Color & Border Settings"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border Color"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cart Main",
+      "blocks": [
+        { "type": "header" },
+        { "type": "cart_table" },
+        { "type": "cart_totals" },
+        { "type": "empty_icon" },
+        { "type": "empty_heading" },
+        { "type": "empty_text" },
+        { "type": "empty_button" }
+      ]
+    }
+  ]
+}
+{% endschema %}

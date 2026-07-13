@@ -1,0 +1,232 @@
+{
+  "sections": {
+    "header": {
+      "name": "Header",
+      "settings": {
+        "logo_header": "Logo",
+        "logo": {
+          "label": "Logo image"
+        },
+        "logo_width": {
+          "label": "Custom logo width"
+        },
+        "logo_text": {
+          "label": "Logo text",
+          "info": "Shown when no logo image is uploaded"
+        },
+        "logo_highlight": {
+          "label": "Logo highlight text"
+        },
+        "navigation_header": "Navigation",
+        "menu": {
+          "label": "Menu"
+        },
+        "sticky_header": {
+          "label": "Sticky header",
+          "info": "Choose how the header behaves on scroll",
+          "options": {
+            "none": "Disabled",
+            "on_scroll_up": "On scroll up",
+            "always": "Always visible"
+          }
+        },
+        "icons_header": "Header icons",
+        "show_search": {
+          "label": "Show search icon"
+        },
+        "show_cart_icon": {
+          "label": "Show cart icon"
+        },
+        "show_locale_selector": {
+          "label": "Show language selector",
+          "info": "To add a language, go to Settings > Languages"
+        },
+        "cta_header": "Call to action",
+        "cta_label": {
+          "label": "Button label"
+        },
+        "cta_link": {
+          "label": "Button link"
+        },
+        "color_header": "Colors",
+        "color_scheme": {
+          "label": "Color scheme",
+          "options": {
+            "background_1": "Background 1",
+            "background_2": "Background 2",
+            "inverse": "Inverse",
+            "accent_1": "Accent 1",
+            "accent_2": "Accent 2"
+          }
+        },
+        "padding_header": "Section padding",
+        "padding_top": {
+          "label": "Top padding"
+        },
+        "padding_bottom": {
+          "label": "Bottom padding"
+        }
+      }
+    },
+    "footer": {
+      "name": "Footer",
+      "settings": {
+        "display_header": "Display",
+        "show_social_icons": {
+          "label": "Show social media icons",
+          "info": "To add social links, go to Theme settings > Social media"
+        },
+        "show_payment_icons": {
+          "label": "Show payment icons",
+          "info": "Payment icons are based on your store payment provider settings"
+        },
+        "color_header": "Colors",
+        "color_scheme": {
+          "label": "Color scheme",
+          "options": {
+            "background_1": "Background 1",
+            "background_2": "Background 2",
+            "inverse": "Inverse",
+            "accent_1": "Accent 1",
+            "accent_2": "Accent 2"
+          }
+        },
+        "padding_header": "Section padding",
+        "padding_top": {
+          "label": "Top padding"
+        },
+        "padding_bottom": {
+          "label": "Bottom padding"
+        }
+      },
+      "blocks": {
+        "brand": {
+          "name": "Brand",
+          "settings": {
+            "logo": {
+              "label": "Logo image"
+            },
+            "logo_text": {
+              "label": "Logo text"
+            },
+            "logo_highlight": {
+              "label": "Logo highlight text"
+            },
+            "text": {
+              "label": "Description"
+            }
+          }
+        },
+        "menu": {
+          "name": "Menu column",
+          "settings": {
+            "heading": {
+              "label": "Heading"
+            },
+            "menu": {
+              "label": "Menu",
+              "info": "Create menus under Online Store > Navigation"
+            }
+          }
+        },
+        "text": {
+          "name": "Text column",
+          "settings": {
+            "heading": {
+              "label": "Heading"
+            },
+            "text": {
+              "label": "Text"
+            }
+          }
+        },
+        "newsletter": {
+          "name": "Email signup",
+          "settings": {
+            "heading": {
+              "label": "Heading"
+            },
+            "subheading": {
+              "label": "Subheading"
+            }
+          }
+        }
+      }
+    }
+  },
+  "general": {
+    "404": "Not found",
+    "article": "Article",
+    "block": "Block",
+    "blog": "Blog",
+    "cart": "Cart",
+    "collection": "Collection",
+    "collections": "Collections",
+    "collection_card": "Collection card",
+    "collections_grid": "Collections grid",
+    "colors": "Colors",
+    "column": "Column",
+    "content": "Content",
+    "custom_section": "Custom section",
+    "fonts": "Fonts",
+    "footer": "Footer",
+    "group": "Group",
+    "header": "Header",
+    "layout": "Layout",
+    "main": "Main",
+    "page": "Page",
+    "password": "Password",
+    "primary": "Primary",
+    "product": "Product",
+    "row": "Row",
+    "search": "Search",
+    "secondary": "Secondary",
+    "section": "Section",
+    "settings": "Settings",
+    "sidebar": "Sidebar",
+    "text": "Text",
+    "theme": "Theme",
+    "typography": "Typography"
+  },
+  "labels": {
+    "alignment": "Alignment",
+    "background": "Background",
+    "foreground": "Foreground",
+    "grid_gap": "Grid spacing",
+    "grid_item_width": "Grid item width",
+    "input_corner_radius": "Input corner radius",
+    "layout_direction": "Layout direction",
+    "menu": "Menu",
+    "customer_account_menu": "Customer account menu",
+    "padding": "Padding",
+    "page_margin": "Page margin",
+    "page_width": "Page width",
+    "show_payment_icons": "Show payment icons",
+    "text_style": "Text style",
+    "text": "Text"
+  },
+  "options": {
+    "alignment": {
+      "left": "Left",
+      "center": "Center",
+      "right": "Right"
+    },
+    "direction": {
+      "horizontal": "Horizontal",
+      "vertical": "Vertical"
+    },
+    "page_width": {
+      "narrow": "Narrow",
+      "wide": "Wide"
+    },
+    "size": {
+      "large": "Large",
+      "small": "Small"
+    },
+    "text_style": {
+      "title": "Title",
+      "subtitle": "Subtitle",
+      "normal": "Normal text"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+/* assets/component-social-icons.css */
+.social-links {
+  display: flex;
+  gap: 20px;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--text-primary-rgb), 0.05);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  color: var(--color-accent);
+  font-weight: var(--font-weight-semibold);
+}
+
+.social-link:hover {
+  background: var(--color-accent);
+  color: var(--bg-primary);
+  transform: translateY(-2px);
+}
+
+.icon-social {
+  width: 20px;
+  height: 20px;
+}

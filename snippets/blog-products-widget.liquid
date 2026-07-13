@@ -1,0 +1,31 @@
+{%- comment -%}Featured Products Widget Block{%- endcomment -%}
+<div class="blog-sidebar-widget block-{{ block.id }}{% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %}{% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
+  {%- assign default_widget_title = 'blog.featured_products' | t -%}{%- assign widget_title = block.settings.heading | default: default_widget_title -%}
+  {%- assign heading_tag = block.settings.heading_tag | default: 'h3' -%}
+<{{ heading_tag }} class="blog-sidebar-widget-title size-{{ block.settings.font_size | default: 'medium' }}">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <path d="M16 10a4 4 0 0 1-8 0"/>
+    </svg>
+    {{ widget_title }}
+  </{{ heading_tag }}>
+  <div class="blog-sidebar-products">
+    {%- assign collection = collections[block.settings.collection] -%}
+    {%- if collection and collection.products.size > 0 -%}
+      {%- for product in collection.products limit: block.settings.show_count -%}
+        <a href="{{ product.url }}" class="blog-sidebar-product-item">
+          {%- if product.featured_image -%}
+            {{ product.featured_image | image_url: width: 144 | image_tag: loading: 'lazy', alt: product.title, class: 'blog-sidebar-product-thumb' }}
+          {%- endif -%}
+          <div class="blog-sidebar-product-info">
+            <span class="blog-sidebar-product-title">{{ product.title }}</span>
+            <span class="blog-sidebar-product-price">{{ product.price | money }}</span>
+          </div>
+        </a>
+      {%- endfor -%}
+    {%- else -%}
+      <p>{{ 'products.product.no_products_available' | t }}</p>
+    {%- endif -%}
+  </div>
+</div>

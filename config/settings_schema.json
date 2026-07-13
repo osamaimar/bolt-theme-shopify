@@ -1,0 +1,342 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "BoltTheme",
+    "theme_version": "1.0.0",
+    "theme_author": "Antigravity",
+    "theme_documentation_url": "https://github.com/osamaimar/BoltTheme",
+    "theme_support_url": "https://github.com/osamaimar/BoltTheme/issues"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary Color",
+        "default": "#174d8e"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color",
+        "default": "#85bbff"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary Color",
+        "default": "#55e4ed"
+      },
+      {
+        "type": "header",
+        "content": "Backgrounds"
+      },
+      {
+        "type": "color",
+        "id": "bg_primary",
+        "label": "Primary Background",
+        "default": "#042650"
+      },
+      {
+        "type": "color",
+        "id": "bg_secondary",
+        "label": "Secondary Background",
+        "default": "#021833"
+      },
+      {
+        "type": "color",
+        "id": "bg_card",
+        "label": "Card Background",
+        "default": "#061a33"
+      },
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "type": "color",
+        "id": "text_primary",
+        "label": "Primary Text",
+        "default": "#e2e8f0"
+      },
+      {
+        "type": "color",
+        "id": "text_secondary",
+        "label": "Secondary Text",
+        "default": "#cbd5e1"
+      },
+      {
+        "type": "color",
+        "id": "text_muted",
+        "label": "Muted Text",
+        "default": "#cbd5e0"
+      },
+      {
+        "type": "header",
+        "content": "Borders & States"
+      },
+      {
+        "type": "color",
+        "id": "border_color",
+        "label": "Border Color",
+        "default": "#85bbff"
+      },
+      {
+        "type": "color",
+        "id": "success_color",
+        "label": "Success Color",
+        "default": "#4ade80"
+      },
+      {
+        "type": "color",
+        "id": "warning_color",
+        "label": "Warning Color",
+        "default": "#facc15"
+      },
+      {
+        "type": "color",
+        "id": "error_color",
+        "label": "Error Color",
+        "default": "#ef4444"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Heading Font",
+        "default": "inter_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "body_font",
+        "label": "Body Font",
+        "default": "inter_n4"
+      },
+      {
+        "type": "range",
+        "id": "font_scale",
+        "min": 80,
+        "max": 150,
+        "step": 5,
+        "unit": "%",
+        "label": "Font Scale",
+        "default": 100
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "min": 1000,
+        "max": 1600,
+        "step": 50,
+        "unit": "px",
+        "label": "Page Width",
+        "default": 1200
+      },
+      {
+        "type": "range",
+        "id": "spacing_scale",
+        "min": 80,
+        "max": 150,
+        "step": 5,
+        "unit": "%",
+        "label": "Spacing Scale",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "border_radius",
+        "min": 0,
+        "max": 24,
+        "step": 2,
+        "unit": "px",
+        "label": "Corner Radius",
+        "default": 8
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook",
+        "info": "https://facebook.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "info": "https://instagram.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter/X",
+        "info": "https://twitter.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "YouTube",
+        "info": "https://youtube.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "TikTok",
+        "info": "https://tiktok.com/@shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest",
+        "info": "https://pinterest.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_linkedin_link",
+        "label": "LinkedIn",
+        "info": "https://linkedin.com/company/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_snapchat_link",
+        "label": "Snapchat",
+        "info": "https://snapchat.com/add/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr_link",
+        "label": "Tumblr",
+        "info": "https://tumblr.com/blog/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_vimeo_link",
+        "label": "Vimeo",
+        "info": "https://vimeo.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_discord_link",
+        "label": "Discord",
+        "info": "Discord server invite link"
+      },
+      {
+        "type": "text",
+        "id": "social_threads_link",
+        "label": "Threads",
+        "info": "https://threads.net/@shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_whatsapp_link",
+        "label": "WhatsApp",
+        "info": "WhatsApp link (e.g. https://wa.me/number)"
+      },
+      {
+        "type": "text",
+        "id": "social_telegram_link",
+        "label": "Telegram",
+        "info": "Telegram chat or channel link"
+      },
+      {
+        "type": "text",
+        "id": "social_reddit_link",
+        "label": "Reddit",
+        "info": "Reddit profile or community link"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon Image",
+        "info": "Will be scaled down to 32x32px"
+      }
+    ]
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo_ltr",
+        "label": "Logo (LTR Layout)"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_rtl",
+        "label": "Logo (RTL Layout)"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart Type",
+        "default": "drawer",
+        "options": [
+          {
+            "value": "drawer",
+            "label": "Drawer"
+          },
+          {
+            "value": "page",
+            "label": "Page"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_free_shipping_threshold",
+        "label": "Enable free shipping threshold",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free shipping threshold",
+        "default": 100,
+        "info": "Amount is in the store's currency."
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Search"
+      },
+      {
+        "type": "text",
+        "id": "popular_searches",
+        "label": "Popular searches",
+        "default": "Laptop, Phone, Watch, Headphones",
+        "info": "Comma-separated list of popular search terms to display in the search popup."
+      }
+    ]
+  }
+]

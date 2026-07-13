@@ -1,0 +1,1042 @@
+{{ 'section-product-immersive.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.show_section -%}
+{% render 'section-padding',
+  section_id: section.id,
+  padding_top: section.settings.padding_top,
+  padding_bottom: section.settings.padding_bottom,
+  padding_top_mobile: section.settings.padding_top_mobile,
+  padding_bottom_mobile: section.settings.padding_bottom_mobile
+%}
+
+<style>
+  #shopify-section-{{ section.id }} { padding: 0 !important; }
+  #shopify-section-{{ section.id }} .pdi-main-outer {
+    padding-top: {{ section.settings.padding_top }}px !important;
+    padding-bottom: {{ section.settings.padding_bottom }}px !important;
+  }
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .pdi-main-outer {
+      padding-top: {{ section.settings.padding_top_mobile }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px !important;
+    }
+  }
+
+  {%- for block in section.blocks -%}
+    {%- if block.type != '@app' -%}
+      #block-{{ block.id }} {
+        margin-top: {{ block.settings.margin_top | default: 0 }}px !important;
+        margin-bottom: {{ block.settings.margin_bottom | default: 0 }}px !important;
+        {% if block.settings.text_color != blank %}--block-text-color: {{ block.settings.text_color }};{% endif %}
+        {% if block.settings.bg_color != blank %}--block-bg: {{ block.settings.bg_color }};{% endif %}
+        {% if block.settings.bg_gradient != blank %}--block-gradient: {{ block.settings.bg_gradient }};{% endif %}
+      }
+      #block-{{ block.id }} {
+        color: var(--block-text-color, inherit) !important;
+        {% if block.type != 'price' and block.type != 'highlights' and block.type != 'rating' and block.type != 'divider' %}
+          background: var(--block-gradient, var(--block-bg, transparent)) !important;
+        {% endif %}
+      }
+      @media screen and (max-width: 768px) {
+        #block-{{ block.id }} {
+          margin-top: {{ block.settings.margin_top_mobile | default: 0 }}px !important;
+          margin-bottom: {{ block.settings.margin_bottom_mobile | default: 0 }}px !important;
+        }
+      }
+      {%- if block.type == 'title' or block.type == 'price' or block.type == 'description' -%}
+        #block-{{ block.id }} {
+          font-size: {{ block.settings.font_size }}rem;
+          font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %};
+          font-style: {{ block.settings.font_style }};
+          text-transform: {{ block.settings.text_transform }};
+          letter-spacing: {{ block.settings.letter_spacing }}px;
+          line-height: {{ block.settings.line_height }};
+        }
+      {%- endif -%}
+      {%- if block.type contains 'accordion' -%}
+        #block-{{ block.id }} {
+          {% if block.settings.title_color != blank %}--acc-title-color: {{ block.settings.title_color }};{% endif %}
+          {% if block.settings.text_color != blank %}--acc-text-color: {{ block.settings.text_color }};{% endif %}
+          {% if block.settings.bg_color != blank %}--acc-bg: {{ block.settings.bg_color }};{% endif %}
+          {% if block.settings.bg_gradient != blank %}--acc-gradient: {{ block.settings.bg_gradient }};{% endif %}
+          {% if block.settings.border_color != blank %}--acc-border-color: {{ block.settings.border_color }};{% endif %}
+          {% if block.settings.arrow_color != blank %}--acc-arrow-color: {{ block.settings.arrow_color }};{% endif %}
+          {% if block.settings.arrow_bg_color != blank %}--acc-arrow-bg: {{ block.settings.arrow_bg_color }};{% endif %}
+          {% if block.settings.arrow_border_color != blank %}--acc-arrow-border-color: {{ block.settings.arrow_border_color }};{% endif %}
+          {% if block.settings.hover_border_color != blank %}--acc-hover-border-color: {{ block.settings.hover_border_color }};{% endif %}
+          {% if block.settings.hover_title_color != blank %}--acc-hover-title-color: {{ block.settings.hover_title_color }};{% endif %}
+          {% if block.settings.hover_arrow_color != blank %}--acc-hover-arrow-color: {{ block.settings.hover_arrow_color }};{% endif %}
+          {% if block.settings.hover_arrow_bg_color != blank %}--acc-hover-arrow-bg: {{ block.settings.hover_arrow_bg_color }};{% endif %}
+          {% if block.settings.hover_arrow_border_color != blank %}--acc-hover-arrow-border-color: {{ block.settings.hover_arrow_border_color }};{% endif %}
+        }
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+</style>
+
+<div class="pdi-main-outer color-{{ section.settings.color_scheme }} {% unless section.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless section.settings.show_on_mobile %} hidden-mobile{% endunless %}">
+  <div class="pdi-page {% if section.settings.container_width == 'full' %}pdi-page--full{% elsif section.settings.container_width == 'narrow' %}pdi-page--narrow{% endif %}">
+    <div class="pdi-split">
+      
+      <!-- Left: Sticky Gallery -->
+      <div class="pdi-gallery">
+        <div class="pdi-gallery-main" id="pdi-gallery-main-{{ section.id }}">
+          <button class="pdi-gallery-nav pdi-gallery-prev" id="pdi-prev-{{ section.id }}" aria-label="Previous media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6" /></svg>
+          </button>
+          <button class="pdi-gallery-nav pdi-gallery-next" id="pdi-next-{{ section.id }}" aria-label="Next media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6" /></svg>
+          </button>
+          
+          {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+          <div class="pdi-gallery-viewer" id="pdi-gallery-viewer-{{ section.id }}">
+            {%- if featured_media -%}
+              {%- for media in product.media -%}
+                <div class="pdi-media-item {% if media == featured_media %}active{% endif %}" data-media-id="{{ media.id }}" data-media-type="{{ media.media_type }}">
+                  {%- case media.media_type -%}
+                    {%- when 'image' -%}
+                      <img src="{{ media | image_url: width: 1200 }}" alt="{{ media.alt | escape }}" width="{{ media.width }}" height="{{ media.height }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" />
+                    {%- when 'external_video' -%}
+                      <div class="pdi-external-video-wrapper">
+                        {{ media | external_video_tag: class: 'pdi-video-external' }}
+                      </div>
+                    {%- when 'video' -%}
+                      {{ media | video_tag: controls: true, class: 'pdi-video-native' }}
+                    {%- when 'model' -%}
+                      {{ media | model_viewer_tag: interaction_prompt: 'always', class: 'pdi-model-viewer' }}
+                  {%- endcase -%}
+                </div>
+              {%- endfor -%}
+            {%- else -%}
+              <div class="pdi-media-item active">
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <div class="pdi-thumbs-wrapper">
+          <button class="pdi-thumb-nav pdi-thumb-prev" id="pdi-thumb-prev-{{ section.id }}" aria-label="Previous thumbnails">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          
+          <div class="pdi-thumbs" id="pdi-thumbs-{{ section.id }}">
+            <div class="pdi-thumbs-track">
+              {%- for media in product.media -%}
+                <div class="pdi-thumb {% if media == featured_media %}active{% endif %}" data-index="{{ forloop.index0 }}" data-media-id="{{ media.id }}">
+                  <img src="{{ media | image_url: width: 150, height: 150, crop: 'center' }}" alt="{{ media.alt | escape }}" width="150" height="150" loading="lazy" />
+                  {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                    <div class="pdi-thumb-icon">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3" /></svg>
+                    </div>
+                  {%- elsif media.media_type == 'model' -%}
+                    <div class="pdi-thumb-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="21 8 21 16 12 21 3 16 3 8 12 3 21 8" />
+                        <polyline points="3 8 12 13 21 8" />
+                        <line x1="12" y1="13" x2="12" y2="21" />
+                      </svg>
+                    </div>
+                  {%- endif -%}
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+
+          <button class="pdi-thumb-nav pdi-thumb-next" id="pdi-thumb-next-{{ section.id }}" aria-label="Next thumbnails">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: Content -->
+      <div class="pdi-info">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            
+            {%- when 'title' -%}
+              {%- assign title_tag = block.settings.heading_tag | default: 'h1' -%}
+              <{{ title_tag }} id="block-{{ block.id }}" class="pdi-title pdi-title--{{ block.settings.font_size }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" style="text-align: {{ 'left' }}; color: var(--block-text-color, inherit);" {{ block.shopify_attributes }}>
+                {%- if block.settings.highlight_first_word or block.settings.highlight_last_word -%}
+                  {%- assign words = product.title | split: ' ' -%}
+                  {%- for word in words -%}
+                    {%- assign should_highlight = false -%}
+                    {%- if forloop.first and block.settings.highlight_first_word -%}
+                      {%- assign should_highlight = true -%}
+                    {%- elsif forloop.last and block.settings.highlight_last_word -%}
+                      {%- assign should_highlight = true -%}
+                    {%- endif -%}
+
+                    {%- if should_highlight -%}
+                      <span style="
+                        {%- if block.settings.highlight_gradient != blank -%}
+                          background: {{ block.settings.highlight_gradient }};
+                          -webkit-background-clip: text;
+                          -webkit-text-fill-color: transparent;
+                          background-clip: text;
+                        {%- elsif block.settings.highlight_color != blank -%}
+                          color: {{ block.settings.highlight_color }} !important;
+                          background: none !important;
+                          -webkit-text-fill-color: {{ block.settings.highlight_color }} !important;
+                        {%- endif -%}">{{ word }}</span>
+                    {%- else -%}
+                      {{ word }}
+                    {%- endif -%}
+                    {% unless forloop.last %} {% endunless %}
+                  {%- endfor -%}
+                {%- endif -%}
+              </{{ title_tag }}>
+
+            {%- when 'rating' -%}
+              {%- assign rating_value = product.metafields.reviews.rating.value | default: block.settings.rating_value -%}
+              {%- assign review_count = product.metafields.reviews.rating_count | default: block.settings.review_count -%}
+              <div id="block-{{ block.id }}" class="pdi-rating-row {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" style="justify-content: {% if 'left' == 'center' %}center{% elsif 'left' == 'right' %}flex-end{% else %}flex-start{% endif %}; {% if block.settings.bg_gradient != blank %}background: {{ block.settings.bg_gradient }};{% elsif block.settings.bg_color != blank %}background: {{ block.settings.bg_color }};{% endif %} {% if block.settings.bg_color != blank or block.settings.bg_gradient != blank %}padding: 10px 16px; border-radius: 50px;{% endif %}" {{ block.shopify_attributes }}>
+                {%- if block.settings.show_stars or block.settings.show_rating_value -%}
+                  <div class="pdi-stars">
+                    {%- if block.settings.show_stars -%}
+                      {%- assign stars_active = block.settings.stars_active | default: rating_value | floor -%}
+                      {%- for i in (1..5) -%}
+                        <svg viewBox="0 0 24 24" class="{% if i > stars_active %}empty{% endif %}" style="{% if i <= stars_active and block.settings.star_color != blank %}fill: {{ block.settings.star_color }} !important; color: {{ block.settings.star_color }} !important;{% elsif block.settings.star_color != blank %}stroke: {{ block.settings.star_color }} !important;{% endif %}"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                      {%- endfor -%}
+                    {%- endif -%}
+                    {%- if block.settings.show_rating_value -%}
+                      <span class="pdi-rating-value pdi-rating-value--{{ block.settings.font_size }}" style="font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; font-style: {{ block.settings.font_style }}; text-transform: {{ block.settings.text_transform }}; letter-spacing: {{ block.settings.letter_spacing }}px; line-height: {{ block.settings.line_height }}; {% if block.settings.rating_value_color != blank %}color: {{ block.settings.rating_value_color }} !important;{% endif %}">{{ rating_value }}</span>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.show_review_count -%}
+                  <span class="pdi-rating-count pdi-rating-count--{{ block.settings.font_size }}" style="font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; font-style: {{ block.settings.font_style }}; text-transform: {{ block.settings.text_transform }}; letter-spacing: {{ block.settings.letter_spacing }}px; line-height: {{ block.settings.line_height }}; {% if block.settings.review_count_color != blank %}color: {{ block.settings.review_count_color }} !important;{% endif %}">{{ review_count }} {{ 'products.product.reviews' | t }}</span>
+                {%- endif -%}
+              </div>
+
+            {%- when 'price' -%}
+              <div id="block-{{ block.id }}" class="pdi-price-block {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" style="margin: 0; align-items: {% if 'left' == 'center' %}center{% elsif 'left' == 'right' %}flex-end{% else %}flex-start{% endif %}; background: var(--block-gradient, var(--block-bg, transparent)); border: {% if block.settings.bg_color != blank or block.settings.bg_gradient != blank %}none{% else %}none{% endif %};" {{ block.shopify_attributes }}>
+                <div class="pdi-price-main" style="justify-content: {% if 'left' == 'center' %}center{% elsif 'left' == 'right' %}flex-end{% else %}flex-start{% endif %};">
+                  <span class="pdi-price pdi-price--{{ block.settings.font_size }}" style="font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; font-style: {{ block.settings.font_style }}; text-transform: {{ block.settings.text_transform }}; letter-spacing: {{ block.settings.letter_spacing }}px; line-height: {{ block.settings.line_height }}; color: var(--block-text-color, var(--color-accent-secondary));">{{ product.price | money_without_trailing_zeros }}</span>
+                  {%- if product.compare_at_price > product.price -%}
+                    <span class="pdi-old-price">{{ product.compare_at_price | money_without_trailing_zeros }}</span>
+                    {%- if block.settings.show_savings -%}
+                      {%- assign savings = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+                      <span class="pdi-discount">-{{ savings }}%</span>
+                    {%- endif -%}
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.show_shipping_note -%}
+                  {%- if block.settings.shipping_note == blank or block.settings.shipping_note == 'Free Express Shipping · 2-Year Warranty' -%}
+                    {%- assign shipping_note_val = 'products.product.shipping_note' | t -%}
+                  {%- else -%}
+                    {%- assign shipping_note_val = block.settings.shipping_note -%}
+                  {%- endif -%}
+                  <span class="pdi-price-note" style="{% if block.settings.shipping_note_color != blank %}color: {{ block.settings.shipping_note_color }} !important;{% endif %}">{{ shipping_note_val }}</span>
+                {%- endif -%}
+              </div>
+
+            {%- when 'description' -%}
+              <div id="block-{{ block.id }}" class="pdi-description pdi-description--{{ block.settings.font_size }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" style="text-align: {{ 'left' }}; font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; font-style: {{ block.settings.font_style }}; text-transform: {{ block.settings.text_transform }}; letter-spacing: {{ block.settings.letter_spacing }}px; line-height: {{ block.settings.line_height }}; color: var(--block-text-color, inherit); {% if block.settings.bg_color != blank or block.settings.bg_gradient != blank %}padding: 16px 20px; border-radius: var(--radius-lg);{% endif %}" {{ block.shopify_attributes }}>
+                {{ product.description | strip_html | truncatewords: block.settings.word_count }}
+              </div>
+
+            {%- when 'highlights' -%}
+              <div id="block-{{ block.id }}" class="pdi-highlights pdi-highlights--{{ block.settings.columns }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" style="justify-content: {% if 'left' == 'center' %}center{% elsif 'left' == 'right' %}flex-end{% else %}flex-start{% endif %};" {{ block.shopify_attributes }}>
+                {%- for i in (1..4) -%}
+                  {%- capture icon_select_id -%}h{{ i }}_icon_select{%- endcapture -%}
+                  {%- capture icon_custom_id -%}h{{ i }}_icon_custom{%- endcapture -%}
+                  {%- capture text_id -%}h{{ i }}_text{%- endcapture -%}
+                  {%- if block.settings[text_id] != blank -%}
+                    <div class="pdi-highlight-item pdi-highlight-item--{{ block.settings.font_size }}" style="font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; font-style: {{ block.settings.font_style }}; text-transform: {{ block.settings.text_transform }}; letter-spacing: {{ block.settings.letter_spacing }}px; line-height: {{ block.settings.line_height }}; {% if block.settings.bg_color != blank %}background: {{ block.settings.bg_color }} !important; padding: 10px 16px; border-radius: 50px;{% endif %}">
+                      {%- if block.settings.show_icons -%}
+                      <div class="pdi-highlight-icon" style="{% if block.settings.icon_color != blank %}color: {{ block.settings.icon_color }} !important; fill: {{ block.settings.icon_color }} !important;{% endif %} {% if block.settings.icon_bg_color != blank %}background: {{ block.settings.icon_bg_color }} !important;{% endif %}">
+                        {%- case block.settings[icon_select_id] -%}
+                          {%- when 'check' -%}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                          {%- when 'shield' -%}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                          {%- when 'battery' -%}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"/><line x1="23" y1="13" x2="23" y2="11"/></svg>
+                          {%- when 'headphones' -%}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                          {%- when 'star' -%}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                          {%- when 'truck' -%}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                          {%- when 'zap' -%}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                          {%- when 'heart' -%}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                          {%- when 'clock' -%}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                          {%- when 'compass' -%}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                          {%- when 'wireless' -%}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.85a11 11 0 0 1 14 0"/><path d="M8.5 16.85a6 6 0 0 1 7 0"/></svg>
+                          {%- when 'custom' -%}
+                            {{ block.settings[icon_custom_id] }}
+                        {%- endcase -%}
+                      </div>
+                      {%- endif -%}
+                      <span class="pdi-highlight-text" style="{% if block.settings.text_color != blank %}color: {{ block.settings.text_color }} !important;{% endif %}">{{ block.settings[text_id] }}</span>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+
+            {%- when 'buy_buttons' -%}
+              <div id="block-{{ block.id }}" class="pdi-cart-section {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
+                <div class="pdi-cart-row" style="justify-content: {% if 'left' == 'center' %}center{% elsif 'left' == 'right' %}flex-end{% else %}flex-start{% endif %};">
+                  {%- if block.settings.show_qty -%}
+                    <div class="pdi-qty pdi-qty--{{ block.settings.font_size }}" style="{% if block.settings.qty_bg_color != blank %}background: {{ block.settings.qty_bg_color }} !important; border-color: {{ block.settings.qty_bg_color }} !important;{% endif %} {% if block.settings.qty_text_color != blank %}color: {{ block.settings.qty_text_color }} !important;{% endif %}">
+                      <button class="pdi-qty-btn" id="pdi-qty-minus" aria-label="Decrease quantity" style="color: inherit;">−</button>
+                      <span class="pdi-qty-val" id="pdi-qty-val" style="color: inherit;">1</span>
+                      <button class="pdi-qty-btn" id="pdi-qty-plus" aria-label="Increase quantity" style="color: inherit;">+</button>
+                    </div>
+                  {%- endif -%}
+                  
+                  {%- assign product_form_id = 'product-form-' | append: section.id -%}
+                  {%- form 'product', product, class: 'product-form pdi-form', id: product_form_id -%}
+                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                    <input type="hidden" name="quantity" class="pdi-qty-hidden" value="1">
+                    <button type="submit" class="pdi-cart-btn pdi-cart-btn--{{ block.settings.font_size }}" id="pdi-cart-btn" style="{% if block.settings.atc_bg_color != blank %}background: {{ block.settings.atc_bg_color }} !important; border-color: {{ block.settings.atc_bg_color }} !important;{% elsif block.settings.bg_color != blank %}background: {{ block.settings.bg_color }} !important;{% endif %} {% if block.settings.atc_text_color != blank %}color: {{ block.settings.atc_text_color }} !important;{% elsif block.settings.text_color != blank %}color: {{ block.settings.text_color }} !important;{% endif %}">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1" />
+                        <circle cx="20" cy="21" r="1" />
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                      </svg>
+                      {%- if block.settings.button_label == blank or block.settings.button_label == 'Add to Cart' -%}
+                        {%- assign button_label_val = 'products.product.add_to_cart' | t -%}
+                      {%- else -%}
+                        {%- assign button_label_val = block.settings.button_label -%}
+                      {%- endif -%}
+                      <span>{{ button_label_val }}</span>
+                    </button>
+                  {%- endform -%}
+
+                </div>
+              </div>
+
+            {%- when 'divider' -%}
+              <div id="block-{{ block.id }}" class="pdi-divider {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                   style="--m-t: {{ block.settings.margin_top }}px; --m-b: {{ block.settings.margin_bottom }}px; --m-t-m: {{ block.settings.margin_top_mobile }}px; --m-b-m: {{ block.settings.margin_bottom_mobile }}px; 
+                          {% if block.settings.border_color != blank %}background-color: {{ block.settings.border_color }} !important;{% endif %} 
+                          height: {{ block.settings.thickness }}px !important; 
+                          max-width: {{ block.settings.max_width }}px; 
+                          margin-left: {% if 'left' == 'center' %}auto{% elsif 'left' == 'right' %}auto{% else %}0{% endif %}; 
+                          margin-right: {% if 'left' == 'center' %}auto{% elsif 'left' == 'left' %}auto{% else %}0{% endif %};"
+                   {{ block.shopify_attributes }}></div>
+
+            {%- when 'description_accordion' -%}
+              <div id="block-{{ block.id }}" class="pdi-accordion-item {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
+                <button class="pdi-accordion-trigger" aria-expanded="false">
+                  {%- if block.settings.title == blank or block.settings.title == 'Description' -%}{%- assign acc_title = 'products.product.tab_description' | t -%}{%- else -%}{%- assign acc_title = block.settings.title -%}{%- endif -%}
+                  <span class="pdi-acc-title">{{ acc_title }}</span>
+                  <div class="pdi-acc-icon-wrapper">
+                    <svg class="pdi-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </div>
+                </button>
+                <div class="pdi-accordion-content">
+                  <div class="pdi-accordion-inner" style="text-align: {{ 'left' }}; color: var(--block-text-color, inherit);">
+                    {%- if block.settings.heading != blank -%}
+                      <h3 class="pdi-acc-inner-heading">{{ block.settings.heading }}</h3>
+                    {%- endif -%}
+                    <div class="pdi-rte">
+                      {{ product.description }}
+                    </div>
+                    {%- if block.settings.custom_content != blank -%}
+                      <div class="pdi-acc-custom-content pdi-rte">
+                        {{ block.settings.custom_content }}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+
+            {%- when 'specifications_accordion' -%}
+              <div id="block-{{ block.id }}" class="pdi-accordion-item {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
+                <button class="pdi-accordion-trigger" aria-expanded="false">
+                  {%- if block.settings.title == blank or block.settings.title == 'Specifications' -%}{%- assign acc_title = 'products.product.tab_specifications' | t -%}{%- else -%}{%- assign acc_title = block.settings.title -%}{%- endif -%}
+                  <span class="pdi-acc-title">{{ acc_title }}</span>
+                  <div class="pdi-acc-icon-wrapper">
+                    <svg class="pdi-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </div>
+                </button>
+                <div class="pdi-accordion-content">
+                  <div class="pdi-accordion-inner" style="color: var(--block-text-color, inherit);">
+                    <table class="pdi-specs-table">
+                      {%- if block.settings.show_product_options -%}
+                        {%- for option in product.options_with_values -%}
+                          <tr>
+                            <td>{{ option.name }}</td>
+                            <td>
+                              {%- for value in option.values -%}
+                                {{ value }}{% unless forloop.last %}, {% endunless %}
+                              {%- endfor -%}
+                            </td>
+                          </tr>
+                        {%- endfor -%}
+                      {%- endif -%}
+                      
+                      {%- if block.settings.show_metafields and block.settings.metafield_namespace != blank -%}
+                        {%- assign namespace = block.settings.metafield_namespace -%}
+                        {%- for metafield in product.metafields[namespace] -%}
+                          <tr>
+                            <td>{{ metafield | first | replace: '_', ' ' | capitalize }}</td>
+                            <td>{{ metafield | last }}</td>
+                          </tr>
+                        {%- endfor -%}
+                      {%- endif -%}
+
+                      {%- for i in (1..6) -%}
+                        {%- capture label_id -%}spec_{{ i }}_label{%- endcapture -%}
+                        {%- capture val_id -%}spec_{{ i }}_val{%- endcapture -%}
+                        {%- if block.settings[label_id] != blank -%}
+                          <tr>
+                            <td>{{ block.settings[label_id] }}</td>
+                            <td>{{ block.settings[val_id] }}</td>
+                          </tr>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            {%- when 'general_accordion' -%}
+              <div id="block-{{ block.id }}" class="pdi-accordion-item {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
+                <button class="pdi-accordion-trigger" aria-expanded="false">
+                  {%- if block.settings.title == blank or block.settings.title == 'Custom Content' -%}{%- assign acc_title = 'products.product.tab_custom_content' | t -%}{%- else -%}{%- assign acc_title = block.settings.title -%}{%- endif -%}
+                  <span class="pdi-acc-title">{{ acc_title }}</span>
+                  <div class="pdi-acc-icon-wrapper">
+                    <svg class="pdi-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </div>
+                </button>
+                <div class="pdi-accordion-content">
+                  <div class="pdi-accordion-inner" style="color: var(--block-text-color, inherit);">
+                    {%- if block.settings.content_type == 'features' -%}
+                       <div class="pdi-feat-grid">
+                         {%- for i in (1..4) -%}
+                            {%- capture text_id -%}feat_{{ i }}_text{%- endcapture -%}
+                            {%- capture icon_select_id -%}feat_{{ i }}_icon_select{%- endcapture -%}
+                            {%- capture icon_custom_id -%}feat_{{ i }}_icon_custom{%- endcapture -%}
+                            {%- if block.settings[text_id] != blank -%}
+                              <div class="pdi-feat" style="{% if block.settings.icon_color != blank %}--feat-icon-color: {{ block.settings.icon_color }};{% endif %}">
+                                {%- case block.settings[icon_select_id] -%}
+                                  {%- when 'check' -%}
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                                  {%- when 'shield' -%}
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                  {%- when 'battery' -%}
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"/><line x1="23" y1="13" x2="23" y2="11"/></svg>
+                                  {%- when 'headphones' -%}
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                                  {%- when 'star' -%}
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                  {%- when 'truck' -%}
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="14" x="1" y="3" rx="2"/><path d="M17 16h2l2-2V9a2 2 0 0 0-2-2H4"/><path d="M7 16H4a2 2 0 0 1-2-2V9"/><circle cx="6" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
+                                  {%- when 'zap' -%}
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                  {%- when 'heart' -%}
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                                  {%- when 'clock' -%}
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                                  {%- when 'compass' -%}
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                                  {%- when 'wireless' -%}
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.85a11 11 0 0 1 14 0"/><path d="M8.5 16.85a6 6 0 0 1 7 0"/></svg>
+                                  {%- when 'custom' -%}
+                                    {{ block.settings[icon_custom_id] }}
+                                {%- endcase -%}
+                                <span>{{ block.settings[text_id] }}</span>
+                              </div>
+                            {%- endif -%}
+                         {%- endfor -%}
+                       </div>
+                    {%- else -%}
+                      {{ block.settings.content }}
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+
+            {%- when 'custom' -%}
+              <div id="block-{{ block.id }}" class="pdi-accordion-item {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
+                <button class="pdi-accordion-trigger" aria-expanded="false">
+                  <span class="pdi-acc-title">{{ block.settings.title }}</span>
+                  <div class="pdi-acc-icon-wrapper">
+                    <svg class="pdi-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </div>
+                </button>
+                <div class="pdi-accordion-content">
+                  <div class="pdi-accordion-inner" style="color: var(--block-text-color, inherit);">
+                    {{ block.settings.content }}
+                  </div>
+                </div>
+              </div>
+
+            {%- when 'reviews_accordion' -%}
+              <div id="block-{{ block.id }}" class="pdi-accordion-item {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
+                <button class="pdi-accordion-trigger" aria-expanded="false">
+                  {%- if block.settings.title == blank or block.settings.title == 'Reviews' -%}{%- assign acc_title = 'products.product.reviews' | t -%}{%- else -%}{%- assign acc_title = block.settings.title -%}{%- endif -%}
+                  <span class="pdi-acc-title">{{ acc_title }}{% if block.settings.review_count != blank %} ({{ block.settings.review_count }}){% endif %}</span>
+                  <div class="pdi-acc-icon-wrapper">
+                    <svg class="pdi-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </div>
+                </button>
+                <div class="pdi-accordion-content">
+                  <div class="pdi-accordion-inner" style="color: var(--block-text-color, inherit);">
+                    <div class="pdi-reviews-summary-mini">
+                       <div class="pdi-rt-top">
+                          <span class="pdi-rt-author">{{ block.settings.author_1 }}</span>
+                          <div class="pdi-rt-stars">
+                             {%- for i in (1..5) -%}
+                                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                             {%- endfor -%}
+                          </div>
+                       </div>
+                       <p>"{{ block.settings.text_1 }}"</p>
+                    </div>
+                    {%- if block.settings.text_2 != blank -%}
+                    <div class="pdi-reviews-summary-mini">
+                       <div class="pdi-rt-top">
+                          <span class="pdi-rt-author">{{ block.settings.author_2 }}</span>
+                          <div class="pdi-rt-stars">
+                             {%- for i in (1..5) -%}
+                                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                             {%- endfor -%}
+                          </div>
+                       </div>
+                       <p>"{{ block.settings.text_2 }}"</p>
+                    </div>
+                    {%- endif -%}
+
+                    {%- if block.settings.app_snippet != blank -%}
+                      <div class="pdi-app-reviews">
+                        {{ block.settings.app_snippet }}
+                      </div>
+                    {%- else -%}
+                      <div class="pdi-reviews-full-summary">
+                        <div class="pdi-rev-avg-box">
+                          <span class="pdi-rev-avg-num">{{ block.settings.rating_avg }}</span>
+                          <div class="pdi-rev-avg-stars">
+                            {%- for i in (1..5) -%}
+                              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            {%- endfor -%}
+                          </div>
+                          <span class="pdi-rev-count-text">{{ 'products.product.based_on_reviews_html' | t: count: block.settings.review_count }}</span>
+                        </div>
+                        <div class="pdi-rev-bars">
+                          {%- for i in (1..5) reversed -%}
+                            {%- capture bar_pct -%}bar_{{ i }}_pct{%- endcapture -%}
+                            <div class="pdi-rev-bar-row">
+                              <span class="pdi-rev-bar-label">{{ i }}★</span>
+                              <div class="pdi-rev-bar-track"><div class="pdi-rev-bar-fill" style="width:{{ block.settings[bar_pct] }}%"></div></div>
+                              <span class="pdi-rev-bar-val">{{ block.settings[bar_pct] }}%</span>
+                            </div>
+                          {%- endfor -%}
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+
+            {%- when '@app' -%}
+              {% render block %}
+
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+<script src="{{ 'section-product-immersive.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Immersive Main Info",
+  "settings": [
+    { "type": "header", "content": "General Settings" },
+    { "type": "checkbox", "id": "show_section", "label": "Show section", "default": true },
+    { "type": "header", "content": "Visibility" },
+    { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+    { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "container_width", "label": "Container width", "default": "standard", "options": [{ "value": "standard", "label": "Standard" }, { "value": "narrow", "label": "Narrow" }, { "value": "full", "label": "Full Width" }] },
+    { "type": "header", "content": "Section Padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top Desktop", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom Desktop", "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top Mobile", "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom Mobile", "default": 40 },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "select", "id": "color_scheme", "label": "Color scheme", "default": "background-1", "options": [{ "value": "background-1", "label": "Background 1" }, { "value": "background-2", "label": "Background 2" }, { "value": "accent-1", "label": "Accent 1" }, { "value": "accent-2", "label": "Accent 2" }, { "value": "inverse", "label": "Inverse" }] }
+  ],
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "checkbox", "id": "highlight_first_word", "label": "Highlight first word", "default": false },
+        { "type": "checkbox", "id": "highlight_last_word", "label": "Highlight last word", "default": true },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading Tag",
+          "info": "Specify heading code types for SEO purposes.",
+          "default": "h1",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" },
+            { "value": "div", "label": "div" },
+            { "value": "span", "label": "span" },
+            { "value": "p", "label": "p" }
+          ]
+        },
+        
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 20 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 0 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 20 },
+        { "type": "header", "content": "Typography" },
+        { "type": "select", "id": "font_size", "label": "Font size", "default": "medium", "options": [{ "value": "small", "label": "Small" }, { "value": "medium", "label": "Medium" }, { "value": "large", "label": "Large" }] },
+        { "type": "select", "id": "font_weight", "label": "Font Weight", "default": "bold", "options": [{ "value": "normal", "label": "Normal" }, { "value": "bold", "label": "Bold" }] },
+        { "type": "select", "id": "font_style", "label": "Font Style", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }] },
+        { "type": "select", "id": "text_transform", "label": "Text Transform", "default": "none", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "Uppercase" }, { "value": "lowercase", "label": "Lowercase" }, { "value": "capitalize", "label": "Capitalize" }] },
+        { "type": "range", "id": "letter_spacing", "min": -5, "max": 10, "step": 0.5, "unit": "px", "label": "Letter Spacing", "default": 0 },
+        { "type": "range", "id": "line_height", "min": 0.8, "max": 2.0, "step": 0.1, "unit": "em", "label": "Line Height", "default": 1.2 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "text_color", "label": "Text Color" },
+        { "type": "color", "id": "bg_color", "label": "Background Color" },
+        { "type": "color_background", "id": "bg_gradient", "label": "Background Gradient" },
+        { "type": "color", "id": "highlight_color", "label": "Highlight Color" },
+        { "type": "color_background", "id": "highlight_gradient", "label": "Highlight Gradient" }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "Rating",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "text", "id": "rating_value", "label": "Rating Value", "default": "4.9" },
+        { "type": "text", "id": "review_count", "label": "Review Count", "default": "156" },
+        { "type": "range", "id": "stars_active", "min": 1, "max": 5, "step": 1, "label": "Number of active stars", "default": 5 },
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "checkbox", "id": "show_stars", "label": "Show stars", "default": true },
+        { "type": "checkbox", "id": "show_rating_value", "label": "Show rating value", "default": true },
+        { "type": "checkbox", "id": "show_review_count", "label": "Show review count", "default": true },
+        { "type": "header", "content": "Layout" },
+        
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 12 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 0 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 12 },
+        { "type": "header", "content": "Typography" },
+        { "type": "select", "id": "font_size", "label": "Font size", "default": "medium", "options": [{ "value": "small", "label": "Small" }, { "value": "medium", "label": "Medium" }, { "value": "large", "label": "Large" }] },
+        { "type": "select", "id": "font_weight", "label": "Font Weight", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "bold", "label": "Bold" }] },
+        { "type": "select", "id": "font_style", "label": "Font Style", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }] },
+        { "type": "select", "id": "text_transform", "label": "Text Transform", "default": "none", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "Uppercase" }, { "value": "lowercase", "label": "Lowercase" }, { "value": "capitalize", "label": "Capitalize" }] },
+        { "type": "range", "id": "letter_spacing", "min": -5, "max": 10, "step": 0.5, "unit": "px", "label": "Letter Spacing", "default": 0 },
+        { "type": "range", "id": "line_height", "min": 0.8, "max": 2.0, "step": 0.1, "unit": "em", "label": "Line Height", "default": 1.2 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "rating_value_color", "label": "Rating Value Color" },
+        { "type": "color", "id": "review_count_color", "label": "Review Count Color" },
+        { "type": "color", "id": "bg_color", "label": "Background Color" },
+        { "type": "color_background", "id": "bg_gradient", "label": "Background Gradient" },
+        { "type": "color", "id": "star_color", "label": "Star Color" }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "checkbox", "id": "show_savings", "label": "Show savings percentage", "default": true },
+        { "type": "checkbox", "id": "show_shipping_note", "label": "Show shipping note", "default": true },
+        { "type": "text", "id": "shipping_note", "label": "Shipping note", "default": "Free Express Shipping · 2-Year Warranty" },
+        
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 20 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 0 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 20 },
+        { "type": "header", "content": "Typography" },
+        { "type": "select", "id": "font_size", "label": "Font size", "default": "medium", "options": [{ "value": "small", "label": "Small" }, { "value": "medium", "label": "Medium" }, { "value": "large", "label": "Large" }] },
+        { "type": "select", "id": "font_weight", "label": "Font Weight", "default": "bold", "options": [{ "value": "normal", "label": "Normal" }, { "value": "bold", "label": "Bold" }] },
+        { "type": "select", "id": "font_style", "label": "Font Style", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }] },
+        { "type": "select", "id": "text_transform", "label": "Text Transform", "default": "none", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "Uppercase" }, { "value": "lowercase", "label": "Lowercase" }, { "value": "capitalize", "label": "Capitalize" }] },
+        { "type": "range", "id": "letter_spacing", "min": -5, "max": 10, "step": 0.5, "unit": "px", "label": "Letter Spacing", "default": 0 },
+        { "type": "range", "id": "line_height", "min": 0.8, "max": 2.0, "step": 0.1, "unit": "em", "label": "Line Height", "default": 1.2 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "text_color", "label": "Price Color" },
+        { "type": "color", "id": "shipping_note_color", "label": "Shipping Note Color" },
+        { "type": "color", "id": "bg_color", "label": "Background Color" },
+        { "type": "color_background", "id": "bg_gradient", "label": "Background Gradient" }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Short Description",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "range", "id": "word_count", "min": 10, "max": 100, "step": 5, "label": "Word count", "default": 35 },
+        
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 20 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 0 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 20 },
+        { "type": "header", "content": "Typography" },
+        { "type": "select", "id": "font_size", "label": "Font size", "default": "medium", "options": [{ "value": "small", "label": "Small" }, { "value": "medium", "label": "Medium" }, { "value": "large", "label": "Large" }] },
+        { "type": "select", "id": "font_weight", "label": "Font Weight", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "bold", "label": "Bold" }] },
+        { "type": "select", "id": "font_style", "label": "Font Style", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }] },
+        { "type": "select", "id": "text_transform", "label": "Text Transform", "default": "none", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "Uppercase" }, { "value": "lowercase", "label": "Lowercase" }, { "value": "capitalize", "label": "Capitalize" }] },
+        { "type": "range", "id": "letter_spacing", "min": -5, "max": 10, "step": 0.5, "unit": "px", "label": "Letter Spacing", "default": 0 },
+        { "type": "range", "id": "line_height", "min": 0.8, "max": 2.0, "step": 0.1, "unit": "em", "label": "Line Height", "default": 1.4 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "text_color", "label": "Text Color" },
+        { "type": "color", "id": "bg_color", "label": "Background Color" },
+        { "type": "color_background", "id": "bg_gradient", "label": "Background Gradient" }
+      ]
+    },
+    {
+      "type": "highlights",
+      "name": "Feature Highlights",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "select", "id": "columns", "label": "Columns", "default": "2", "options": [{ "value": "1", "label": "1" }, { "value": "2", "label": "2" }] },
+        { "type": "checkbox", "id": "show_icons", "label": "Show icons", "default": true },
+        
+        { "type": "header", "content": "Typography" },
+        { "type": "select", "id": "font_size", "label": "Font size", "default": "small", "options": [{ "value": "small", "label": "Small" }, { "value": "medium", "label": "Medium" }, { "value": "large", "label": "Large" }] },
+        { "type": "select", "id": "font_weight", "label": "Font Weight", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "bold", "label": "Bold" }] },
+        { "type": "select", "id": "font_style", "label": "Font Style", "default": "normal", "options": [{ "value": "normal", "label": "Normal" }, { "value": "italic", "label": "Italic" }] },
+        { "type": "select", "id": "text_transform", "label": "Text Transform", "default": "none", "options": [{ "value": "none", "label": "None" }, { "value": "uppercase", "label": "Uppercase" }, { "value": "lowercase", "label": "Lowercase" }, { "value": "capitalize", "label": "Capitalize" }] },
+        { "type": "range", "id": "letter_spacing", "min": -5, "max": 10, "step": 0.5, "unit": "px", "label": "Letter Spacing", "default": 0 },
+        { "type": "range", "id": "line_height", "min": 0.8, "max": 2.0, "step": 0.1, "unit": "em", "label": "Line Height", "default": 1.2 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "text_color", "label": "Text Color" },
+        { "type": "color", "id": "bg_color", "label": "Background Color" },
+        { "type": "color", "id": "icon_color", "label": "Icon Color" },
+        { "type": "color", "id": "icon_bg_color", "label": "Icon Background Color" },
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 20 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 0 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 20 },
+        { "type": "header", "content": "Highlight 1" },
+        { "type": "select", "id": "h1_icon_select", "label": "Icon 1", "default": "zap", "options": [{ "value": "none", "label": "None" }, { "value": "check", "label": "Check" }, { "value": "shield", "label": "Shield" }, { "value": "battery", "label": "Battery" }, { "value": "headphones", "label": "Headphones" }, { "value": "star", "label": "Star" }, { "value": "truck", "label": "Truck" }, { "value": "zap", "label": "Zap" }, { "value": "heart", "label": "Heart" }, { "value": "clock", "label": "Clock" }, { "value": "compass", "label": "Compass" }, { "value": "wireless", "label": "Wireless" }, { "value": "custom", "label": "Custom" }] },
+        { "type": "textarea", "id": "h1_icon_custom", "label": "Custom SVG 1" },
+        { "type": "text", "id": "h1_text", "label": "Text 1", "default": "Active Noise Cancelling" },
+        { "type": "header", "content": "Highlight 2" },
+        { "type": "select", "id": "h2_icon_select", "label": "Icon 2", "default": "star", "options": [{ "value": "none", "label": "None" }, { "value": "check", "label": "Check" }, { "value": "shield", "label": "Shield" }, { "value": "battery", "label": "Battery" }, { "value": "headphones", "label": "Headphones" }, { "value": "star", "label": "Star" }, { "value": "truck", "label": "Truck" }, { "value": "zap", "label": "Zap" }, { "value": "heart", "label": "Heart" }, { "value": "clock", "label": "Clock" }, { "value": "compass", "label": "Compass" }, { "value": "wireless", "label": "Wireless" }, { "value": "custom", "label": "Custom" }] },
+        { "type": "textarea", "id": "h2_icon_custom", "label": "Custom SVG 2" },
+        { "type": "text", "id": "h2_text", "label": "Text 2", "default": "Hi-Res Audio Cert." },
+        { "type": "header", "content": "Highlight 3" },
+        { "type": "select", "id": "h3_icon_select", "label": "Icon 3", "default": "shield", "options": [{ "value": "none", "label": "None" }, { "value": "check", "label": "Check" }, { "value": "shield", "label": "Shield" }, { "value": "battery", "label": "Battery" }, { "value": "headphones", "label": "Headphones" }, { "value": "star", "label": "Star" }, { "value": "truck", "label": "Truck" }, { "value": "zap", "label": "Zap" }, { "value": "heart", "label": "Heart" }, { "value": "clock", "label": "Clock" }, { "value": "compass", "label": "Compass" }, { "value": "wireless", "label": "Wireless" }, { "value": "custom", "label": "Custom" }] },
+        { "type": "textarea", "id": "h3_icon_custom", "label": "Custom SVG 3" },
+        { "type": "text", "id": "h3_text", "label": "Text 3", "default": "24-Month Warranty" },
+        { "type": "header", "content": "Highlight 4" },
+        { "type": "select", "id": "h4_icon_select", "label": "Icon 4", "default": "battery", "options": [{ "value": "none", "label": "None" }, { "value": "check", "label": "Check" }, { "value": "shield", "label": "Shield" }, { "value": "battery", "label": "Battery" }, { "value": "headphones", "label": "Headphones" }, { "value": "star", "label": "Star" }, { "value": "truck", "label": "Truck" }, { "value": "zap", "label": "Zap" }, { "value": "heart", "label": "Heart" }, { "value": "clock", "label": "Clock" }, { "value": "compass", "label": "Compass" }, { "value": "wireless", "label": "Wireless" }, { "value": "custom", "label": "Custom" }] },
+        { "type": "textarea", "id": "h4_icon_custom", "label": "Custom SVG 4" },
+        { "type": "text", "id": "h4_text", "label": "Text 4", "default": "40h Battery Life" }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy Buttons",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "text", "id": "button_label", "label": "Label", "default": "Add to Cart" },
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "checkbox", "id": "show_qty", "label": "Show qty", "default": true },
+        { "type": "header", "content": "Layout" },
+        
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 20 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 0 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 12 },
+        { "type": "header", "content": "Typography" },
+        { "type": "select", "id": "font_size", "label": "Font size", "default": "medium", "options": [{ "value": "small", "label": "Small" }, { "value": "medium", "label": "Medium" }, { "value": "large", "label": "Large" }] },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "bg_color", "label": "Block Background Color" },
+        { "type": "header", "content": "Quantity Selector Colors" },
+        { "type": "color", "id": "qty_bg_color", "label": "Qty Background Color" },
+        { "type": "color", "id": "qty_text_color", "label": "Qty Text Color" },
+        { "type": "header", "content": "Add to Cart Colors" },
+        { "type": "color", "id": "atc_bg_color", "label": "ATC Background Color" },
+        { "type": "color", "id": "atc_text_color", "label": "ATC Text Color" }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Divider",
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "range", "id": "thickness", "min": 1, "max": 10, "step": 1, "unit": "px", "label": "Line Thickness", "default": 1 },
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "header", "content": "Layout" },
+        
+        { "type": "range", "id": "max_width", "min": 50, "max": 1000, "step": 10, "unit": "px", "label": "Max Width", "default": 1000 },
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 12 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 12 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 8 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 8 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "border_color", "label": "Line Color" }
+      ]
+    },
+    {
+      "type": "description_accordion",
+      "name": "Description",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Description" },
+        { "type": "text", "id": "heading", "label": "Internal Heading" },
+        
+        { "type": "richtext", "id": "custom_content", "label": "Additional Content" },
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 0 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "title_color", "label": "Title Color" },
+        { "type": "color", "id": "text_color", "label": "Text Color" },
+        { "type": "color", "id": "bg_color", "label": "Background Color" },
+        { "type": "color_background", "id": "bg_gradient", "label": "Background Gradient" },
+        { "type": "color", "id": "border_color", "label": "Border Color" },
+        { "type": "color", "id": "arrow_color", "label": "Arrow Color" },
+        { "type": "color", "id": "arrow_bg_color", "label": "Arrow Background Color" },
+        { "type": "color", "id": "arrow_border_color", "label": "Arrow Border Color" },
+        { "type": "header", "content": "Hover Colors" },
+        { "type": "color", "id": "hover_border_color", "label": "Hover Border Color" },
+        { "type": "color", "id": "hover_title_color", "label": "Hover Title Color" },
+        { "type": "color", "id": "hover_arrow_color", "label": "Hover Arrow Color" },
+        { "type": "color", "id": "hover_arrow_bg_color", "label": "Hover Arrow Background Color" },
+        { "type": "color", "id": "hover_arrow_border_color", "label": "Hover Arrow Border Color" }
+      ]
+    },
+    {
+      "type": "specifications_accordion",
+      "name": "Specifications",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Specifications" },
+        { "type": "checkbox", "id": "show_product_options", "label": "Auto-include product options", "default": true },
+        { "type": "checkbox", "id": "show_metafields", "label": "Auto-include metafields", "default": false },
+        { "type": "text", "id": "metafield_namespace", "label": "Metafield Namespace", "default": "custom" },
+        { "type": "header", "content": "Manual Specifications" },
+        { "type": "text", "id": "spec_1_label", "label": "Spec 1 Label" }, { "type": "text", "id": "spec_1_val", "label": "Spec 1 Value" },
+        { "type": "text", "id": "spec_2_label", "label": "Spec 2 Label" }, { "type": "text", "id": "spec_2_val", "label": "Spec 2 Value" },
+        { "type": "text", "id": "spec_3_label", "label": "Spec 3 Label" }, { "type": "text", "id": "spec_3_val", "label": "Spec 3 Value" },
+        { "type": "text", "id": "spec_4_label", "label": "Spec 4 Label" }, { "type": "text", "id": "spec_4_val", "label": "Spec 4 Value" },
+        { "type": "text", "id": "spec_5_label", "label": "Spec 5 Label" }, { "type": "text", "id": "spec_5_val", "label": "Spec 5 Value" },
+        { "type": "text", "id": "spec_6_label", "label": "Spec 6 Label" }, { "type": "text", "id": "spec_6_val", "label": "Spec 6 Value" },
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 0 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 0 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 0 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "title_color", "label": "Title Color" },
+        { "type": "color", "id": "text_color", "label": "Text Color" },
+        { "type": "color", "id": "bg_color", "label": "Background Color" },
+        { "type": "color_background", "id": "bg_gradient", "label": "Background Gradient" },
+        { "type": "color", "id": "border_color", "label": "Border Color" },
+        { "type": "color", "id": "arrow_color", "label": "Arrow Color" },
+        { "type": "color", "id": "arrow_bg_color", "label": "Arrow Background Color" },
+        { "type": "color", "id": "arrow_border_color", "label": "Arrow Border Color" },
+        { "type": "header", "content": "Hover Colors" },
+        { "type": "color", "id": "hover_border_color", "label": "Hover Border Color" },
+        { "type": "color", "id": "hover_title_color", "label": "Hover Title Color" },
+        { "type": "color", "id": "hover_arrow_color", "label": "Hover Arrow Color" },
+        { "type": "color", "id": "hover_arrow_bg_color", "label": "Hover Arrow Background Color" },
+        { "type": "color", "id": "hover_arrow_border_color", "label": "Hover Arrow Border Color" }
+      ]
+    },
+    {
+      "type": "general_accordion",
+      "name": "General Accordion",
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Custom Content" },
+        { "type": "select", "id": "content_type", "label": "Content Type", "default": "text", "options": [{ "value": "text", "label": "Custom Text" }, { "value": "features", "label": "Features Grid" }] },
+        { "type": "richtext", "id": "content", "label": "Custom Content" },
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 0 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 0 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 0 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "title_color", "label": "Title Color" },
+        { "type": "color", "id": "text_color", "label": "Text Color" },
+        { "type": "color", "id": "icon_color", "label": "Icon Color" },
+        { "type": "color", "id": "bg_color", "label": "Background Color" },
+        { "type": "color_background", "id": "bg_gradient", "label": "Background Gradient" },
+        { "type": "color", "id": "border_color", "label": "Border Color" },
+        { "type": "color", "id": "arrow_color", "label": "Arrow Color" },
+        { "type": "color", "id": "arrow_bg_color", "label": "Arrow Background Color" },
+        { "type": "color", "id": "arrow_border_color", "label": "Arrow Border Color" },
+        { "type": "header", "content": "Hover Colors" },
+        { "type": "color", "id": "hover_border_color", "label": "Hover Border Color" },
+        { "type": "color", "id": "hover_title_color", "label": "Hover Title Color" },
+        { "type": "color", "id": "hover_arrow_color", "label": "Hover Arrow Color" },
+        { "type": "color", "id": "hover_arrow_bg_color", "label": "Hover Arrow Background Color" },
+        { "type": "color", "id": "hover_arrow_border_color", "label": "Hover Arrow Border Color" },
+        { "type": "header", "content": "Features Grid" },
+        { "type": "select", "id": "feat_1_icon_select", "label": "Icon 1", "default": "zap", "options": [{ "value": "none", "label": "None" }, { "value": "check", "label": "Check" }, { "value": "shield", "label": "Shield" }, { "value": "battery", "label": "Battery" }, { "value": "headphones", "label": "Headphones" }, { "value": "star", "label": "Star" }, { "value": "truck", "label": "Truck" }, { "value": "zap", "label": "Zap" }, { "value": "heart", "label": "Heart" }, { "value": "clock", "label": "Clock" }, { "value": "compass", "label": "Compass" }, { "value": "wireless", "label": "Wireless" }, { "value": "custom", "label": "Custom" }] },
+        { "type": "textarea", "id": "feat_1_icon_custom", "label": "Custom SVG 1" },
+        { "type": "text", "id": "feat_1_text", "label": "Feat 1 Text" },
+        { "type": "select", "id": "feat_2_icon_select", "label": "Icon 2", "default": "star", "options": [{ "value": "none", "label": "None" }, { "value": "check", "label": "Check" }, { "value": "shield", "label": "Shield" }, { "value": "battery", "label": "Battery" }, { "value": "headphones", "label": "Headphones" }, { "value": "star", "label": "Star" }, { "value": "truck", "label": "Truck" }, { "value": "zap", "label": "Zap" }, { "value": "heart", "label": "Heart" }, { "value": "clock", "label": "Clock" }, { "value": "compass", "label": "Compass" }, { "value": "wireless", "label": "Wireless" }, { "value": "custom", "label": "Custom" }] },
+        { "type": "textarea", "id": "feat_2_icon_custom", "label": "Custom SVG 2" },
+        { "type": "text", "id": "feat_2_text", "label": "Feat 2 Text" },
+        { "type": "select", "id": "feat_3_icon_select", "label": "Icon 3", "default": "shield", "options": [{ "value": "none", "label": "None" }, { "value": "check", "label": "Check" }, { "value": "shield", "label": "Shield" }, { "value": "battery", "label": "Battery" }, { "value": "headphones", "label": "Headphones" }, { "value": "star", "label": "Star" }, { "value": "truck", "label": "Truck" }, { "value": "zap", "label": "Zap" }, { "value": "heart", "label": "Heart" }, { "value": "clock", "label": "Clock" }, { "value": "compass", "label": "Compass" }, { "value": "wireless", "label": "Wireless" }, { "value": "custom", "label": "Custom" }] },
+        { "type": "textarea", "id": "feat_3_icon_custom", "label": "Custom SVG 3" },
+        { "type": "text", "id": "feat_3_text", "label": "Feat 3 Text" },
+        { "type": "select", "id": "feat_4_icon_select", "label": "Icon 4", "default": "battery", "options": [{ "value": "none", "label": "None" }, { "value": "check", "label": "Check" }, { "value": "shield", "label": "Shield" }, { "value": "battery", "label": "Battery" }, { "value": "headphones", "label": "Headphones" }, { "value": "star", "label": "Star" }, { "value": "truck", "label": "Truck" }, { "value": "zap", "label": "Zap" }, { "value": "heart", "label": "Heart" }, { "value": "clock", "label": "Clock" }, { "value": "compass", "label": "Compass" }, { "value": "wireless", "label": "Wireless" }, { "value": "custom", "label": "Custom" }] },
+        { "type": "textarea", "id": "feat_4_icon_custom", "label": "Custom SVG 4" },
+        { "type": "text", "id": "feat_4_text", "label": "Feat 4 Text" }
+      ]
+    },
+    {
+      "type": "custom",
+      "name": "Custom Content",
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Custom Content" },
+        { "type": "richtext", "id": "content", "label": "Content" },
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 0 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 0 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 0 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "text_color", "label": "Text Color" }
+      ]
+    },
+    {
+      "type": "reviews_accordion",
+      "name": "Reviews",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Reviews" },
+        { "type": "text", "id": "review_count", "label": "Review Count", "default": "156" },
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 0 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 0 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 0 },
+        { "type": "header", "content": "Summary Details" },
+        { "type": "text", "id": "rating_avg", "label": "Average Rating", "default": "4.9" },
+        { "type": "text", "id": "bar_5_pct", "label": "5 Stars %", "default": "82" },
+        { "type": "text", "id": "bar_4_pct", "label": "4 Stars %", "default": "12" },
+        { "type": "text", "id": "bar_3_pct", "label": "3 Stars %", "default": "4" },
+        { "type": "text", "id": "bar_2_pct", "label": "2 Stars %", "default": "1" },
+        { "type": "text", "id": "bar_1_pct", "label": "1 Star %", "default": "1" },
+        { "type": "header", "content": "Sample Reviews" },
+        { "type": "text", "id": "author_1", "label": "Author 1", "default": "Alex G." },
+        { "type": "textarea", "id": "text_1", "label": "Text 1", "default": "The tracking is insane. My aim in Valorant has never been more consistent." },
+        { "type": "header", "content": "Review 2" },
+        { "type": "text", "id": "author_2", "label": "Author 2", "default": "David K." },
+        { "type": "textarea", "id": "text_2", "label": "Text 2", "default": "The latency is zero. Fast as wired but with total freedom. Best gaming mouse I've owned." },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "title_color", "label": "Title Color" },
+        { "type": "color", "id": "text_color", "label": "Text Color" },
+        { "type": "color", "id": "bg_color", "label": "Background Color" },
+        { "type": "color_background", "id": "bg_gradient", "label": "Background Gradient" },
+        { "type": "color", "id": "border_color", "label": "Border Color" },
+        { "type": "color", "id": "arrow_color", "label": "Arrow Color" },
+        { "type": "color", "id": "arrow_bg_color", "label": "Arrow Background Color" },
+        { "type": "color", "id": "arrow_border_color", "label": "Arrow Border Color" },
+        { "type": "header", "content": "Hover Colors" },
+        { "type": "color", "id": "hover_border_color", "label": "Hover Border Color" },
+        { "type": "color", "id": "hover_title_color", "label": "Hover Title Color" },
+        { "type": "color", "id": "hover_arrow_color", "label": "Hover Arrow Color" },
+        { "type": "color", "id": "hover_arrow_bg_color", "label": "Hover Arrow Background Color" },
+        { "type": "color", "id": "hover_arrow_border_color", "label": "Hover Arrow Border Color" },
+        { "type": "header", "content": "App Integration" },
+        { "type": "liquid", "id": "app_snippet", "label": "App Snippet" }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Immersive Main Info",
+      "blocks": [
+        { "type": "title" },
+        { "type": "rating" },
+        { "type": "price" },
+        { "type": "description" },
+        { "type": "buy_buttons" },
+        { "type": "divider" },
+        { "type": "description_accordion" },
+        { "type": "specifications_accordion" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

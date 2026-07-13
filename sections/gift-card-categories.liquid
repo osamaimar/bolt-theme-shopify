@@ -1,0 +1,262 @@
+{{ 'section-gift-card.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.show_section -%}
+{% render 'section-padding',
+  section_id: section.id,
+  padding_left: section.settings.padding_left,
+  padding_right: section.settings.padding_right,
+  padding_left_mobile: section.settings.padding_left_mobile,
+  padding_right_mobile: section.settings.padding_right_mobile
+%}
+<div class="gc-featured-section color-{{ section.settings.color_scheme }}" id="section-{{ section.id }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="{% if section.settings.container_width == 'wide' %}container-fluid{% elsif section.settings.container_width == 'narrow' %}container-narrow{% else %}container{% endif %}">
+    {% if section.settings.title != blank %}
+      <div class="gc-featured-header">
+        <h2 class="gc-featured-title">{{ section.settings.title }}</h2>
+      </div>
+    {% endif %}
+
+    <div class="gc-services-grid">
+    {% for block in section.blocks %}
+      <div class="gc-service-card" {{ block.shopify_attributes }}>
+        <div class="gc-service-icon">
+          {%- if block.settings.custom_icon_svg != blank -%}
+            {{ block.settings.custom_icon_svg }}
+          {%- else -%}
+            {%- case block.settings.icon -%}
+              {%- when 'laptop' -%}{% render 'icon-laptop' %}
+              {%- when 'phone' -%}{% render 'icon-phone' %}
+              {%- when 'headphones' -%}{% render 'icon-headphones' %}
+              {%- when 'tools' -%}{% render 'icon-tools' %}
+              {%- when 'gamepad' -%}{% render 'icon-gamepad' %}
+              {%- when 'watch' -%}{% render 'icon-watch' %}
+              {%- when 'shipping' -%}{% render 'icon-shipping' %}
+              {%- when 'returns' -%}{% render 'icon-returns' %}
+              {%- when 'secure' -%}{% render 'icon-secure' %}
+              {%- when 'support' -%}{% render 'icon-support' %}
+              {%- when 'check' -%}{% render 'icon-check' %}
+              {%- when 'heart' -%}{% render 'icon-heart' %}
+              {%- when 'star' -%}{% render 'icon-star' %}
+              {%- when 'gift' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+              {%- when 'monitor' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            {%- endcase -%}
+          {%- endif -%}
+        </div>
+        <h3 class="gc-service-title">{{ block.settings.title | replace: '[', '<br>' | replace: ']', '' }}</h3>
+        <p class="gc-service-desc">
+          {{ block.settings.description | replace: '[', '<span class="gc-desc-highlight">' | replace: ']', '</span>' }}
+        </p>
+      </div>
+    {% endfor %}
+  </div>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Gift Card Categories",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Featured Categories"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "options": [
+        {
+          "value": "narrow",
+          "label": "Narrow"
+        },
+        {
+          "value": "standard",
+          "label": "Standard"
+        },
+        {
+          "value": "wide",
+          "label": "Wide"
+        }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "inverse", "label": "Inverse" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" }
+      ],
+      "default": "background-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    },
+
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "laptop",
+          "options": [
+            { "value": "", "label": "Custom (use HTML below)" },
+            { "value": "laptop", "label": "Laptop" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "headphones", "label": "Headphones" },
+            { "value": "tools", "label": "Tools / Repair" },
+            { "value": "gamepad", "label": "Gaming" },
+            { "value": "watch", "label": "Smart Watch" },
+            { "value": "monitor", "label": "Monitor / Display" },
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "returns", "label": "Returns" },
+            { "value": "secure", "label": "Secure" },
+            { "value": "support", "label": "Support" },
+            { "value": "check", "label": "Check" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "star", "label": "Star" },
+            { "value": "gift", "label": "Gift" }
+          ],
+          "info": "Select an icon or use custom HTML below"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_icon_svg",
+          "label": "Custom SVG",
+          "info": "Paste custom SVG code here to override the selected icon. Leave empty to use preset icons.",
+          "placeholder": "<svg>...</svg>"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Premium Computing[Laptops & Workstations]",
+          "info": "Use [ ] for subtitle/break"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "High-performance machines optimized for creativity, gaming, and professional work — featuring the latest processors and [stunning high-res displays].",
+          "info": "Use [ ] to highlight text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gift Card Categories",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Premium Computing[Laptops & Workstations]",
+            "description": "High-performance machines optimized for creativity, gaming, and professional work — featuring the latest processors and [stunning high-res displays]."
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Smart Home Ecosystems",
+            "description": "Seamlessly connect your home with [intelligent devices], from automated security to voice-controlled lighting — creating a [truly responsive living space] tailored to you."
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Professional Audio & Visuals",
+            "description": "Immerse yourself in crystal-clear sound and vibrant 8K visuals — our premium gear ensures your [entertainment and connectivity] are always at the cutting edge of innovation."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

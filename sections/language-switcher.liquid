@@ -1,0 +1,182 @@
+{%- if section.settings.enable_language_switcher -%}
+  <style>
+
+    {%- if section.settings.button_shape == 'rounded' -%}
+      .lang-toggle {
+        border-radius: var(--radius-md, 8px) !important;
+      }
+    {%- elsif section.settings.button_shape == 'square' -%}
+      .lang-toggle {
+        border-radius: 0px !important;
+      }
+    {%- endif -%}
+
+    /* Custom Toggle Colors */
+    {%- if section.settings.toggle_bg_color != blank -%}
+      .lang-toggle {
+        background: {{ section.settings.toggle_bg_color }} !important;
+      }
+    {%- endif -%}
+    {%- if section.settings.toggle_text_color != blank -%}
+      .lang-toggle {
+        color: {{ section.settings.toggle_text_color }} !important;
+      }
+    {%- endif -%}
+    {%- if section.settings.toggle_border_color != blank -%}
+      .lang-toggle {
+        border-color: {{ section.settings.toggle_border_color }} !important;
+      }
+      .lang-toggle .lang-text {
+        border-color: {{ section.settings.toggle_border_color }} !important;
+      }
+    {%- endif -%}
+
+    /* Toggle Hover Colors */
+    {%- if section.settings.toggle_hover_bg_color != blank -%}
+      .lang-toggle:hover {
+        background: {{ section.settings.toggle_hover_bg_color }} !important;
+      }
+    {%- endif -%}
+    {%- if section.settings.toggle_hover_text_color != blank -%}
+      .lang-toggle:hover {
+        color: {{ section.settings.toggle_hover_text_color }} !important;
+      }
+    {%- endif -%}
+    {%- if section.settings.toggle_hover_border_color != blank -%}
+      .lang-toggle:hover {
+        border-color: {{ section.settings.toggle_hover_border_color }} !important;
+      }
+      .lang-toggle:hover .lang-text {
+        border-color: {{ section.settings.toggle_hover_border_color }} !important;
+      }
+    {%- endif -%}
+
+    /* Dropdown custom styling */
+    {%- if section.settings.dropdown_bg_color != blank -%}
+      .lang-dropdown {
+        background: {{ section.settings.dropdown_bg_color }} !important;
+      }
+    {%- endif -%}
+    {%- if section.settings.dropdown_border_color != blank -%}
+      .lang-dropdown {
+        border-color: {{ section.settings.dropdown_border_color }} !important;
+      }
+    {%- endif -%}
+    {%- if section.settings.link_text_color != blank -%}
+      .lang-option {
+        color: {{ section.settings.link_text_color }} !important;
+      }
+    {%- endif -%}
+
+    /* Dropdown link hover & active styling */
+    {%- if section.settings.link_hover_bg_color != blank -%}
+      .lang-option:hover,
+      .lang-option.active {
+        background: {{ section.settings.link_hover_bg_color }} !important;
+      }
+    {%- endif -%}
+    {%- if section.settings.link_hover_text_color != blank -%}
+      .lang-option:hover,
+      .lang-option.active,
+      .lang-option.active .lang-check {
+        color: {{ section.settings.link_hover_text_color }} !important;
+      }
+    {%- endif -%}
+  </style>
+  {% render 'language-switcher' %}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Language Switcher",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_language_switcher",
+      "label": "Enable language selector",
+      "default": true,
+      "info": "Requires multiple languages to be published in your Shopify settings."
+    },
+
+    {
+      "type": "select",
+      "id": "button_shape",
+      "label": "Button Shape",
+      "default": "pill",
+      "options": [
+        { "value": "pill", "label": "Pill" },
+        { "value": "rounded", "label": "Rounded" },
+        { "value": "square", "label": "Square" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Toggle Button Colors"
+    },
+    {
+      "type": "color",
+      "id": "toggle_bg_color",
+      "label": "Background Color"
+    },
+    {
+      "type": "color",
+      "id": "toggle_text_color",
+      "label": "Text & Icon Color"
+    },
+    {
+      "type": "color",
+      "id": "toggle_border_color",
+      "label": "Border Color"
+    },
+    {
+      "type": "color",
+      "id": "toggle_hover_bg_color",
+      "label": "Hover Background Color"
+    },
+    {
+      "type": "color",
+      "id": "toggle_hover_text_color",
+      "label": "Hover Text & Icon Color"
+    },
+    {
+      "type": "color",
+      "id": "toggle_hover_border_color",
+      "label": "Hover Border Color"
+    },
+    {
+      "type": "header",
+      "content": "Dropdown Menu Colors"
+    },
+    {
+      "type": "color",
+      "id": "dropdown_bg_color",
+      "label": "Dropdown Background Color"
+    },
+    {
+      "type": "color",
+      "id": "dropdown_border_color",
+      "label": "Dropdown Border Color"
+    },
+    {
+      "type": "color",
+      "id": "link_text_color",
+      "label": "Dropdown Text Color"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_bg_color",
+      "label": "Option Hover/Active Background"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_text_color",
+      "label": "Option Hover/Active Text Color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Language Switcher"
+    }
+  ]
+}
+{% endschema %}

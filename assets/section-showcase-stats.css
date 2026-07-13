@@ -1,0 +1,84 @@
+/* section-showcase-stats.css */
+.csh-stats-section {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.csh-stats-section.color-background-1 { background-color: var(--bg-primary); }
+.csh-stats-section.color-background-2 { background-color: var(--bg-secondary); }
+.csh-stats-section.color-accent-1 { background-color: var(--color-primary); }
+.csh-stats-section.color-accent-2 { background-color: var(--color-accent); }
+.csh-stats-section.color-inverse { background-color: var(--color-white); color: rgb(var(--color-black-rgb)); }
+
+.csh-stats-section.color-inverse .csh-stat-value,
+.csh-stats-section.color-inverse .csh-stat-label {
+    color: rgb(var(--color-black-rgb));
+}
+
+.csh-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.csh-stat-card {
+    text-align: center;
+    padding: var(--spacing-xl) 20px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.csh-stat-card:hover {
+    border-color: var(--color-accent-secondary-20);
+    background: var(--color-white-4);
+}
+
+.csh-stat-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--spacing-md);
+    background: var(--color-accent-secondary-10);
+    border: 1px solid var(--color-accent-secondary-20);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent-secondary);
+}
+
+.csh-stat-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.csh-stat-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-inverse);
+    margin-bottom: var(--spacing-xs);
+}
+
+.csh-stat-label {
+    font-size: 0.82rem;
+    color: var(--text-lighter);
+    font-weight: var(--font-weight-medium);
+}
+
+@media (max-width: 1100px) {
+    .csh-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .csh-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .csh-stats {
+        grid-template-columns: 1fr;
+    }
+}

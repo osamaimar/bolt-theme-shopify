@@ -1,0 +1,94 @@
+/* About Story Section */
+/* Color Scheme Mappings */
+.story-section.color-background-1 { background-color: var(--bg-primary); }
+.story-section.color-background-2 { background-color: var(--bg-secondary); }
+.story-section.color-inverse { background-color: var(--bg-primary); }
+.story-section.color-accent-1 { background-color: var(--color-primary); }
+.story-section.color-accent-2 { background-color: var(--color-accent); }
+
+/* Container widths */
+.container-fluid {
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.story-grid--reversed .story-content {
+  order: 2;
+}
+
+.story-grid--reversed .story-image-wrapper {
+  order: 1;
+}
+
+.story-section .section-title {
+  font-size: clamp(1.875rem, 4vw, 2.25rem);
+  font-weight: 700;
+  margin-bottom: var(--spacing-xl, 32px);
+  color: var(--text-inverse, #fff);
+}
+
+.story-text p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: var(--text-primary, #e2e8f0);
+  line-height: 1.7;
+}
+
+.about-story-img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 450px;
+  object-fit: cover;
+  border-radius: 24px;
+  border: 4px solid var(--border-primary, rgba(133, 187, 255, 0.2));
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.about-story-img:hover {
+  transform: translateY(-5px);
+  border-color: rgba(85, 228, 237, 0.4);
+}
+
+@media (max-width: 900px) {
+  .story-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .story-grid--reversed .story-content,
+  .story-grid--reversed .story-image-wrapper {
+    order: unset;
+  }
+
+  .about-story-img {
+    min-height: 350px;
+    order: -1;
+  }
+
+  .story-section .section-title {
+    font-size: 1.5rem;
+  }
+
+  .story-text p {
+    font-size: 1rem;
+  }
+}

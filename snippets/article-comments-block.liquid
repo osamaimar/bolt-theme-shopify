@@ -1,0 +1,26 @@
+{%- comment -%}Article Comments Block{%- endcomment -%}
+{%- if blog.comments_enabled? -%}
+  <div class="article-comments" {{ block.shopify_attributes }}>
+    <h{{ block.settings.heading_level }}>{{ 'blog.article_comments' | t }}</h{{ block.settings.heading_level }}>
+    
+    <div id="comments">
+      {% paginate article.comments by block.settings.comments_per_page %}
+        {%- if article.comments.size > 0 -%}
+          {%- for comment in article.comments -%}
+            <div class="article-comment">
+              <p class="article-comment-author">{{ comment.author }}</p>
+              <p class="article-comment-date">
+                {{- comment.created_at | time_tag: format: 'date' -}}
+              </p>
+              <p class="article-comment-content">{{ comment.content }}</p>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <p class="article-no-comments">{{ 'blog.no_comments_yet' | t }}</p>
+        {%- endif -%}
+        
+        {{ paginate | default_pagination: anchor: 'comments' }}
+      {% endpaginate %}
+    </div>
+  </div>
+{%- endif -%}

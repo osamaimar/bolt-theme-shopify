@@ -1,0 +1,94 @@
+/* assets/section-services.css */
+/* Color Scheme Mappings */
+.services-section.color-background-1 { --section-bg: var(--bg-primary); --section-text: var(--text-primary); }
+.services-section.color-background-2 { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
+.services-section.color-inverse { --section-bg: var(--bg-primary); --section-text: var(--text-inverse); }
+.services-section.color-accent-1 { --section-bg: var(--color-primary); --section-text: var(--text-inverse); }
+.services-section.color-accent-2 { --section-bg: var(--color-accent); --section-text: var(--bg-primary); }
+
+.services-section {
+  background-color: var(--section-bg, var(--bg-primary));
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-16 {
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-lg);
+}
+
+.section-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
+@media (min-width: 640px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.apex-service-card {
+  background: var(--bg-glass, rgba(var(--text-primary-rgb), 0.05));
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  transition: all 0.3s ease;
+}
+
+.apex-service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px var(--color-black-15);
+  border-color: var(--color-accent-40);
+}
+
+.apex-service-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--color-accent-10);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-accent);
+}
+
+.apex-service-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.card-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.service-desc {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}

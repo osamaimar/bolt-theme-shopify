@@ -1,0 +1,447 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-minimal",
+      "settings": {
+        "show_section": true,
+        "container_width": "full",
+        "show_stats_bar": true,
+        "full_height": true,
+        "min_height": 700,
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 100,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 80
+      },
+      "blocks": {
+        "heading": {
+          "type": "hero_heading",
+          "settings": {
+            "heading": "Future Tech [Latest Gadgets]"
+          }
+        },
+        "subheading": {
+          "type": "hero_subheading",
+          "settings": {
+            "subheading": "Premium electronics from world-class innovators. High-performance gear for your next-gen lifestyle."
+          }
+        },
+        "button-1": {
+          "type": "hero_button",
+          "settings": {
+            "label": "Shop Collections",
+            "link": "/collections/all",
+            "style": "primary"
+          }
+        },
+        "button-2": {
+          "type": "hero_button",
+          "settings": {
+            "label": "New Arrivals",
+            "link": "/collections/all",
+            "style": "outline"
+          }
+        },
+        "stat-0": {
+          "type": "stat",
+          "settings": {
+            "value": "12K+",
+            "label": "Happy Customers"
+          }
+        },
+        "stat-1": {
+          "type": "stat",
+          "settings": {
+            "value": "500+",
+            "label": "Premium Products"
+          }
+        },
+        "stat-2": {
+          "type": "stat",
+          "settings": {
+            "value": "50+",
+            "label": "Global Brands"
+          }
+        },
+        "stat-3": {
+          "type": "stat",
+          "settings": {
+            "value": "4.9★",
+            "label": "Average Rating"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "subheading",
+        "button-1",
+        "button-2",
+        "stat-0",
+        "stat-1",
+        "stat-2",
+        "stat-3"
+      ]
+    },
+    "categories": {
+      "type": "category-strip",
+      "settings": {
+        "show_section": true,
+        "container_width": "full",
+        "color_scheme": "background-1",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Shop by [Category]"
+          }
+        },
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Find exactly what you're looking for."
+          }
+        },
+        "category-0": {
+          "type": "category",
+          "settings": {
+            "icon": "laptop",
+            "name": "Laptops"
+          }
+        },
+        "category-1": {
+          "type": "category",
+          "settings": {
+            "icon": "smartphone",
+            "name": "Smartphones"
+          }
+        },
+        "category-2": {
+          "type": "category",
+          "settings": {
+            "icon": "audio",
+            "name": "Audio"
+          }
+        },
+        "category-3": {
+          "type": "category",
+          "settings": {
+            "icon": "camera",
+            "name": "Cameras"
+          }
+        },
+        "category-4": {
+          "type": "category",
+          "settings": {
+            "icon": "gaming",
+            "name": "Components"
+          }
+        },
+        "category-5": {
+          "type": "category",
+          "settings": {
+            "icon": "wearable",
+            "name": "Wearables"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "subheading",
+        "category-0",
+        "category-1",
+        "category-2",
+        "category-3",
+        "category-4",
+        "category-5"
+      ]
+    },
+    "deal": {
+      "type": "deal-of-the-day",
+      "settings": {
+        "show_section": true,
+        "container_width": "full",
+        "color_scheme": "background-2",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "image": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/product-1.jpg"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "title": "Premium [Wireless Headphones] — Studio Edition"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "description": "Immersive sound with active noise cancellation, 40-hour battery life, and ultra-comfortable over-ear design."
+          }
+        },
+        "countdown": {
+          "type": "countdown",
+          "settings": {
+            "end_date": "2025-12-31 23:59"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "current_price": "$149",
+            "original_price": "$269",
+            "savings_text": "Save $120"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "label": "Grab This Deal"
+          }
+        }
+      },
+      "block_order": [
+        "image",
+        "title",
+        "description",
+        "countdown",
+        "price",
+        "button"
+      ]
+    },
+    "bestsellers": {
+      "type": "bestsellers-asymmetric",
+      "settings": {
+        "show_section": true,
+        "container_width": "full",
+        "color_scheme": "background-1",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "heading": {
+          "type": "bs_heading",
+          "settings": {
+            "heading": "Best [Sellers]"
+          }
+        },
+        "subheading": {
+          "type": "bs_subheading",
+          "settings": {
+            "subheading": "Our most loved products — chosen by thousands of customers."
+          }
+        },
+        "view_all": {
+          "type": "bs_view_all",
+          "settings": {
+            "label": "View All",
+            "link": "/collections/all",
+            "show_on_mobile": false
+          }
+        },
+        "product-0": {
+          "type": "product_card",
+          "settings": {
+            "category": "Gaming Gear",
+            "show_rating": true
+          }
+        },
+        "product-1": {
+          "type": "product_card",
+          "settings": {
+            "category": "Wearables",
+            "show_rating": true
+          }
+        },
+        "product-2": {
+          "type": "product_card",
+          "settings": {
+            "category": "Accessories",
+            "show_rating": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "subheading",
+        "view_all",
+        "product-0",
+        "product-1",
+        "product-2"
+      ]
+    },
+    "trending": {
+      "type": "trending-horizontal",
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "heading": {
+          "type": "trending_heading",
+          "settings": {
+            "heading": "Trending [Now]"
+          }
+        },
+        "subheading": {
+          "type": "trending_subheading",
+          "settings": {
+            "subheading": "This week's most wanted — shop before they're gone."
+          }
+        },
+        "collection": {
+          "type": "collection_strip",
+          "settings": {
+            "collection": "accessories",
+            "products_to_show": 5
+          }
+        },
+        "view_all": {
+          "type": "view_all",
+          "settings": {
+            "label": "View All",
+            "link": "/collections/all",
+            "show_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "subheading",
+        "view_all",
+        "collection"
+      ]
+    },
+    "reviews": {
+      "type": "customer-reviews",
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+        "color_scheme": "background-2",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "heading": {
+          "type": "review_heading",
+          "settings": {
+            "heading": "What Customers [Say]"
+          }
+        },
+        "subheading": {
+          "type": "review_subheading",
+          "settings": {
+            "subheading": "Real reviews from verified buyers who love our products."
+          }
+        },
+        "review-0": {
+          "type": "review",
+          "settings": {
+            "author_name": "Sarah J.",
+            "review_text": "Absolutely love this product! The quality is outstanding and it exceeded my expectations in every way."
+          }
+        },
+        "review-1": {
+          "type": "review",
+          "settings": {
+            "author_name": "Michael R.",
+            "review_text": "Great value for the price. The customer service was also very helpful with my questions."
+          }
+        },
+        "review-2": {
+          "type": "review",
+          "settings": {
+            "author_name": "Emily D.",
+            "review_text": "One of the best purchases I've made this year. I've already recommended it to all my friends!"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "subheading",
+        "review-0",
+        "review-1",
+        "review-2"
+      ]
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+        "show_divider": false,
+        "color_scheme": "background-1",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "heading": {
+          "type": "cta_heading",
+          "settings": {
+            "heading": "Join the Club & Get [20% Off]"
+          }
+        },
+        "description": {
+          "type": "cta_text",
+          "settings": {
+            "text": "Sign up for free and unlock exclusive tech deals, early access to gadget drops, and personalized recommendations."
+          }
+        },
+        "button_1": {
+          "type": "cta_button",
+          "settings": {
+            "label": "Join Free",
+            "style": "primary",
+            "show_arrow": true
+          }
+        },
+        "button_2": {
+          "type": "cta_button",
+          "settings": {
+            "label": "Learn More",
+            "style": "outline",
+            "show_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "description",
+        "button_1",
+        "button_2"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "categories",
+    "deal",
+    "bestsellers",
+    "trending",
+    "reviews",
+    "cta"
+  ]
+}
