@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initImmersiveGallery(section);
     initImmersiveQuantity(section);
     initImmersiveAccordions(section);
+    initImmersiveVariants(section);
   });
   
   initImmersiveSpotlight();
@@ -158,4 +159,160 @@ function initImmersiveSpotlight() {
       card.style.setProperty('--mouse-y', `${y}%`);
     });
   });
+}
+
+function initImmersiveVariants(container) {
+  const variantsBlock = container.querySelector('.pdi-variants');
+  if (!variantsBlock) return;
+
+  const sectionId = container.closest('[id^="shopify-section-"]').id.replace('shopify-section-', '');
+  const variantsData = window['__pdiVariants_' + sectionId];
+  if (!variantsData) return;
+
+  const syncGallery = variantsBlock.dataset.gallerySync === 'true';
+  const soldOutHandling = variantsBlock.dataset.soldOutHandling;
+
+  const buttons = variantsBlock.querySelectorAll('.pdi-variant-btn, .pdi-variant-swatch');
+  const idInput = variantsBlock.querySelector('.pdi-variant-id-input');
+  const formIdInput = container.querySelector('form.pdi-form input[name="id"]');
+  const atcButton = container.querySelector('.pdi-cart-btn');
+
+  // Detect currency symbol dynamically from existing price markup
+  let currencySymbol = '$';
+  const priceEl = container.querySelector('.pdi-price');
+  if (priceEl) {
+    const symbolMatch = priceEl.textContent.trim().match(/^([^\d\s,.]+)/);
+    if (symbolMatch) {
+      currencySymbol = symbolMatch[1];
+    }
+  }
+
+  function formatMoney(cents) {
+    const dollars = (cents / 100).toFixed(2);
+    return currencySymbol + dollars.replace(/\.00$/, '');
+  }
+
+  // Parse current active options
+  let currentOptions = [];
+  function updateOptionsState() {
+    currentOptions = [];
+    const optionContainers = variantsBlock.querySelectorAll('.pdi-variant-options');
+    optionContainers.forEach(optContainer => {
+      const activeBtn = optContainer.querySelector('.active');
+      if (activeBtn) {
+        currentOptions.push(activeBtn.dataset.value);
+      } else {
+        currentOptions.push(null);
+      }
+    });
+  }
+
+  function checkAvailabilityState() {
+    const optionContainers = variantsBlock.querySelectorAll('.pdi-variant-options');
+    optionContainers.forEach((optContainer, optIdx) => {
+      const btns = optContainer.querySelectorAll('.pdi-variant-btn, .pdi-variant-swatch');
+      btns.forEach(btn => {
+        const val = btn.dataset.value;
+        const testComb = [...currentOptions];
+        testComb[optIdx] = val;
+        
+        const matchingVariant = variantsData.find(v => {
+          return v.options.every((optVal, idx) => optVal === testComb[idx]);
+        });
+
+        const isAvailable = matchingVariant && matchingVariant.available;
+
+        if (soldOutHandling === 'hide') {
+          btn.style.display = isAvailable ? '' : 'none';
+        } else {
+          if (isAvailable) {
+            btn.removeAttribute('disabled');
+          } else {
+            btn.setAttribute('disabled', 'disabled');
+          }
+        }
+      });
+    });
+  }
+
+  function handleVariantChange() {
+    updateOptionsState();
+    checkAvailabilityState();
+
+    const matchedVariant = variantsData.find(v => {
+      return v.options.every((optVal, idx) => optVal === currentOptions[idx]);
+    });
+
+    if (matchedVariant) {
+      // Update form values
+      if (idInput) idInput.value = matchedVariant.id;
+      if (formIdInput) formIdInput.value = matchedVariant.id;
+
+      // Update ATC button
+      if (atcButton) {
+        const span = atcButton.querySelector('span');
+        if (matchedVariant.available) {
+          atcButton.removeAttribute('disabled');
+          if (span) span.textContent = 'Add to Cart';
+        } else {
+          atcButton.setAttribute('disabled', 'disabled');
+          if (span) span.textContent = 'Sold Out';
+        }
+      }
+
+      // Update Price display
+      const priceValEl = container.querySelector('.pdi-price');
+      if (priceValEl) {
+        priceValEl.textContent = formatMoney(matchedVariant.price);
+      }
+      const oldPriceEl = container.querySelector('.pdi-old-price');
+      if (oldPriceEl) {
+        if (matchedVariant.compare_at_price > matchedVariant.price) {
+          oldPriceEl.textContent = formatMoney(matchedVariant.compare_at_price);
+          oldPriceEl.style.display = '';
+        } else {
+          oldPriceEl.style.display = 'none';
+        }
+      }
+      const savingsLabel = container.querySelector('.pdi-discount');
+      if (savingsLabel) {
+        if (matchedVariant.compare_at_price > matchedVariant.price) {
+          const savings = Math.round((matchedVariant.compare_at_price - matchedVariant.price) * 100 / matchedVariant.compare_at_price);
+          savingsLabel.textContent = `-${savings}%`;
+          savingsLabel.style.display = '';
+        } else {
+          savingsLabel.style.display = 'none';
+        }
+      }
+
+      // Sync Gallery if enabled
+      if (syncGallery && matchedVariant.featured_media) {
+        const mediaId = matchedVariant.featured_media.id;
+        const matchingThumb = container.querySelector(`.pdi-thumb[data-media-id="${mediaId}"]`);
+        if (matchingThumb) {
+          matchingThumb.click();
+        }
+      }
+    }
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const parent = btn.closest('.pdi-variant-options');
+      parent.querySelectorAll('.pdi-variant-btn, .pdi-variant-swatch').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const labelVal = btn.closest('.pdi-variant-group').querySelector('.pdi-variant-selected-val');
+      if (labelVal) {
+        labelVal.textContent = btn.dataset.value;
+      }
+
+      handleVariantChange();
+    });
+  });
+
+  // Run once on load to verify options availability
+  updateOptionsState();
+  checkAvailabilityState();
 }

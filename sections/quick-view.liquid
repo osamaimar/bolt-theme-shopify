@@ -16,8 +16,7 @@
     {% if image_block.settings.image_position == 'right' %}
       @media (min-width: 769px) {
         #qv-overlay .qv-modal { grid-template-columns: 1fr 1fr; }
-        #qv-overlay .qv-image-panel { order: 2; }
-        #qv-overlay .qv-details { order: 1; }
+        #qv-overlay .qv-image-panel { grid-column: 2; }
       }
     {% endif %}
   {%- else -%}
@@ -44,6 +43,13 @@
   }
   .qv-image-panel.aspect-landscape {
     aspect-ratio: 4 / 3 !important;
+  }
+  .qv-image-panel.aspect-adapt {
+    aspect-ratio: auto !important;
+  }
+  .qv-image-panel.aspect-adapt img {
+    height: auto !important;
+    object-fit: contain !important;
   }
   
   .qv-image-panel {
@@ -87,7 +93,7 @@
 {%- if section.settings.enable_quick_view -%}
 <div class="qv-overlay color-{{ section.settings.color_scheme }}" id="qv-overlay" role="dialog" aria-modal="true" aria-label="Quick product view">
     <div class="qv-backdrop" id="qv-backdrop"></div>
-    <div class="qv-modal">
+    <div class="qv-modal {% if image_block and image_block.settings.image_position == 'right' %}image-right{% endif %}">
         <button class="qv-close" id="qv-close" aria-label="Close quick view">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"/>
@@ -353,11 +359,12 @@
           "type": "select",
           "id": "image_aspect_ratio",
           "label": "Image Aspect Ratio",
-          "default": "square",
+          "default": "adapt",
           "options": [
             { "value": "square", "label": "Square" },
             { "value": "portrait", "label": "Portrait" },
-            { "value": "landscape", "label": "Landscape" }
+            { "value": "landscape", "label": "Landscape" },
+            { "value": "adapt", "label": "Adapt to Image" }
           ]
         },
         {

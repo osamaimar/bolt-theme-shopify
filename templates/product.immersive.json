@@ -41,6 +41,15 @@
         "price": {
           "type": "price"
         },
+        "variants": {
+          "type": "variants",
+          "settings": {
+            "show_label": true,
+            "color_style": "swatches",
+            "enable_gallery_sync": true,
+            "sold_out_handling": "disabled"
+          }
+        },
         "description": {
           "type": "description",
           "settings": {
@@ -92,6 +101,7 @@
         "title",
         "rating",
         "price",
+        "variants",
         "description",
         "buy_buttons",
         "divider",
