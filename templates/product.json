@@ -288,8 +288,8 @@
           "type": "specifications",
           "settings": {
             "title": "Specifications",
-            "show_product_options": true,
-            "show_metafields": true,
+            "show_product_options": false,
+            "show_metafields": false,
             "metafield_namespace": "custom",
             "spec_1_label": "Weight",
             "spec_1_value": "{{ product.metafields.custom.spec_weight.value }}",
