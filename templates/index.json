@@ -21,8 +21,7 @@
         "padding_top": 0,
         "padding_bottom": 100,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 80,
-        "image": "shopify:\/\/shop_images\/bolt-hero-bg.jpg"
+        "padding_bottom_mobile": 80
       },
       "blocks": {
         "heading": {
@@ -120,49 +119,43 @@
         "category-0": {
           "type": "category",
           "settings": {
-            "icon": "tv",
-            "name": "Gaming Monitors",
-            "link": "\/collections\/gaming-monitors"
+            "icon": "laptop",
+            "name": "Laptops"
           }
         },
         "category-1": {
           "type": "category",
           "settings": {
-            "icon": "home",
-            "name": "Smart Robotics",
-            "link": "\/collections\/smart-robotics"
+            "icon": "smartphone",
+            "name": "Smartphones"
           }
         },
         "category-2": {
           "type": "category",
           "settings": {
-            "icon": "gaming",
-            "name": "Retro Gaming",
-            "link": "\/collections\/retro-gaming"
+            "icon": "audio",
+            "name": "Audio"
           }
         },
         "category-3": {
           "type": "category",
           "settings": {
-            "icon": "wearable",
-            "name": "VR & AR Computing",
-            "link": "\/collections\/vr-ar-computing"
+            "icon": "camera",
+            "name": "Cameras"
           }
         },
         "category-4": {
           "type": "category",
           "settings": {
-            "icon": "camera",
-            "name": "Camera Filters",
-            "link": "\/collections\/camera-filters"
+            "icon": "gaming",
+            "name": "Components"
           }
         },
         "category-5": {
           "type": "category",
           "settings": {
-            "icon": "smartphone",
-            "name": "Mobile Controllers",
-            "link": "\/collections\/mobile-controllers"
+            "icon": "wearable",
+            "name": "Wearables"
           }
         }
       },
@@ -192,7 +185,7 @@
         "image": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/bolt-deal-headphone.jpg"
+            "image": "shopify:\/\/shop_images\/product-1.jpg"
           }
         },
         "title": {
@@ -273,27 +266,21 @@
           "type": "product_card",
           "settings": {
             "category": "Gaming Gear",
-            "show_rating": true,
-            "image": "shopify:\/\/shop_images\/bolt-bestseller-keyboard.jpg",
-            "title": "Apex Mechanical Keyboard"
+            "show_rating": true
           }
         },
         "product-1": {
           "type": "product_card",
           "settings": {
             "category": "Wearables",
-            "show_rating": true,
-            "image": "shopify:\/\/shop_images\/bolt-bestseller-watch.jpg",
-            "title": "Horizon Smartwatch v2"
+            "show_rating": true
           }
         },
         "product-2": {
           "type": "product_card",
           "settings": {
             "category": "Accessories",
-            "show_rating": true,
-            "image": "shopify:\/\/shop_images\/bolt-bestseller-hub.jpg",
-            "title": "Sleek 8-in-1 Hub"
+            "show_rating": true
           }
         }
       },
@@ -381,24 +368,21 @@
           "type": "review",
           "settings": {
             "author_name": "Sarah J.",
-            "review_text": "Absolutely love this product! The quality is outstanding and it exceeded my expectations in every way.",
-            "avatar": "shopify:\/\/shop_images\/bolt-reviewer-sarah.jpg"
+            "review_text": "Absolutely love this product! The quality is outstanding and it exceeded my expectations in every way."
           }
         },
         "review-1": {
           "type": "review",
           "settings": {
             "author_name": "Michael R.",
-            "review_text": "Great value for the price. The customer service was also very helpful with my questions.",
-            "avatar": "shopify:\/\/shop_images\/bolt-reviewer-michael.jpg"
+            "review_text": "Great value for the price. The customer service was also very helpful with my questions."
           }
         },
         "review-2": {
           "type": "review",
           "settings": {
             "author_name": "Emily D.",
-            "review_text": "One of the best purchases I've made this year. I've already recommended it to all my friends!",
-            "avatar": "shopify:\/\/shop_images\/bolt-reviewer-emily.jpg"
+            "review_text": "One of the best purchases I've made this year. I've already recommended it to all my friends!"
           }
         }
       },
@@ -420,8 +404,7 @@
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40,
-        "background_image": "shopify:\/\/shop_images\/bolt-cta-bg.jpg"
+        "padding_bottom_mobile": 40
       },
       "blocks": {
         "heading": {
