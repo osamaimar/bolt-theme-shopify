@@ -241,7 +241,7 @@
             "text_color": "",
             "bg_color": "",
             "bg_gradient": "",
-            "highlight_color": "#76A8E8",
+            "highlight_color": "#76a8e8",
             "highlight_gradient": ""
           }
         },
@@ -1218,7 +1218,7 @@
           "type": "cta_button",
           "settings": {
             "label": "Join Free",
-            "link": "",
+            "link": "shopify://pages/contact",
             "open_in_new_tab": false,
             "show_on_desktop": true,
             "show_on_mobile": true,
