@@ -577,9 +577,9 @@
           "type": "button",
           "settings": {
             "label": "Grab This Deal",
-            "link": "",
+            "link": "/products/stereo-y08-headset-5-3-bluetooth-headset-folding-wireless-sports-earphone-gaming-headsets-over-ear-headphones-for-android-ios",
             "button_style": "primary",
-            "open_in_new_tab": false,
+            "open_in_new_tab": true,
             "show_on_desktop": true,
             "show_on_mobile": true,
             "margin_top": 0,
