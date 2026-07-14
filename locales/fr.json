@@ -1,0 +1,20 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "hello_world": {
+    "key_concepts_link": "En savoir plus sur les concepts clés",
+    "liquid_title": "Liquide",
+    "liquid_desc": "Le langage de template Liquid est la colonne vertéale des thèmes Shopify, et est utilisé pour charger du contenu dynamique sur les vitrines des boutiques. Étendez les objets Liquid pour stocker et présenter des données personnalisées à l'aide de méta-champs.",
+    "liquid_link": "Consulter la référence Liquid",
+    "best_practices_title": "Bonnes Pratiques",
+    "best_practices_desc": "Pour optimiser votre expérience de développement de thèmes, Shopify a établi un ensemble de bonnes pratiques auxquelles vous pouvez vous référer lors du développement de votre thème et de la configuration de vos chaînes d'outils et processus.",
+    "best_practices_link": "Suivez les meilleures pratiques"
+  }
+}
