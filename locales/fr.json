@@ -124,5 +124,155 @@
     "home": "Accueil",
     "return-to-main-page": "Retour à la page principale",
     "need-help-a-href-pages-contact-get-in-touch-a-with-our-team": "Besoin d'aide ? <a href=\"/pages/contact\">Contactez</a> notre équipe."
+  },
+  "sections": {
+    "header": {
+      "navigation": "Navigation principale",
+      "announcement": "Annonce",
+      "popular_searches": "Recherches populaires",
+      "cart_count": "éléments"
+    },
+    "footer": {
+      "all_rights_reserved": "Tous droits réservés.",
+      "payment_methods": "Moyens de paiement",
+      "newsletter": {
+        "placeholder": "Votre adresse e-mail",
+        "submit": "S'abonner",
+        "success": "Merci de vous être abonné !"
+      }
+    },
+    "cart": {
+      "cart_error": "Une erreur est survenue lors de la mise à jour de votre panier.",
+      "cart_quantity_error_html": "Vous ne pouvez ajouter que {{ quantity }} de cet article à votre panier.",
+      "buttons": {
+        "clear": "Clair"
+      }
+    },
+    "collection_list": {
+      "items_count": "{{ count }} articles",
+      "explore": "Explorer"
+    },
+    "slideshow": {
+      "pause_slideshow": "Mettre le diaporama en pause",
+      "play_slideshow": "Lancer le diaporama"
+    },
+    "featured_collection": {
+      "view_all": "Tout afficher"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Aller au contenu",
+    "close_menu": "Fermer le menu",
+    "open_menu": "Ouvrir le menu",
+    "toggle_submenu": "Afficher/masquer le sous-menu",
+    "refresh_page": "Page actualisée",
+    "unit_price_separator": "par",
+    "back_to_top": "Retour en haut",
+    "account": "Compte",
+    "link_messages": {
+      "new_window": "S'ouvre dans une nouvelle fenêtre"
+    }
+  },
+  "search": {
+    "placeholder": "Rechercher dans notre boutique...",
+    "submit": "Rechercher",
+    "title": "Rechercher",
+    "no_results_html": "Aucun résultat trouvé pour «{{ terms }}»",
+    "results_for_html": "{{ count }} résultats pour « {{ terms }} »"
+  },
+  "newsletter": {
+    "success": "Merci de vous être abonné !"
+  },
+  "general": {
+    "breadcrumb": {
+      "home": "Accueil",
+      "products": "Produits"
+    },
+    "home": "Accueil",
+    "share_link_copied": "Lien copié dans le presse-papiers !",
+    "pagination": {
+      "previous": "Page précédente",
+      "next": "Page suivante"
+    },
+    "share": {
+      "copy_to_clipboard_confirmation": "Lien copié dans le presse-papiers"
+    },
+    "search": {
+      "all": "Tous les produits",
+      "submit": "Rechercher",
+      "title": "Rechercher",
+      "placeholder": "Rechercher dans notre boutique...",
+      "recent": "Recherches récentes",
+      "clear_all": "Tout effacer",
+      "esc_key": "ÉCHAP",
+      "to_search": "chercher",
+      "to_close": "fermer",
+      "to_toggle": "activer/désactiver",
+      "no_results_html": "Aucun résultat trouvé pour «{{ terms }}»",
+      "results_for_html": "{{ count }} résultats pour « {{ terms }} »",
+      "no_results": "Aucun résultat trouvé pour «{{ terms }}»",
+      "results_with_count": "{{ count }} produits trouvés pour « {{ terms }} »",
+      "results_count": "produits trouvés",
+      "no_results_help": "Essayez un autre terme de recherche ou parcourez nos catégories.",
+      "start_searching_title": "Prêt à trouver quelque chose ?",
+      "start_searching_text": "Saisissez vos mots-clés ci-dessus pour parcourir notre collection d'appareils électroniques haut de gamme."
+    },
+    "newsletter_form": {
+      "email_placeholder": "Votre e-mail",
+      "submit": "S'abonner",
+      "confirmation": "Merci de vous être abonné !"
+    },
+    "coming_soon": {
+      "show_subscribe": "Afficher le formulaire d'abonnement"
+    },
+    "countdown": {
+      "years": "Ans",
+      "months": "Mois",
+      "weeks": "Semaines",
+      "days": "Jours",
+      "hours": "Heures",
+      "minutes": "Procès-verbal",
+      "seconds": "secondes"
+    },
+    "faq": {
+      "no_results_html": "Aucune question ne correspond à votre recherche. Essayez un autre mot-clé ou <span class=\"highlight-text\">parcourez toutes les catégories</span>."
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Ajouter au panier",
+      "sold_out": "Épuisé",
+      "unavailable": "Indisponible",
+      "on_sale": "Soldes",
+      "quick_view": "Aperçu rapide",
+      "select_options": "Sélectionner les options",
+      "view_details": "Voir les détails",
+      "view_grid": "Affichage en grille",
+      "view_list": "Affichage Liste",
+      "vendor": "Fournisseur",
+      "price": {
+        "from_price_html": "À partir de {{ price }}",
+        "regular_price": "Prix normal",
+        "sale_price": "Prix de vente",
+        "unit_price": "Prix unitaire"
+      },
+      "media": {
+        "image_available": "Image {{ index }} disponible"
+      },
+      "value_unavailable": "{{ option_value }} est actuellement indisponible",
+      "in_stock": "En stock",
+      "free_express_shipping": "Livraison express gratuite",
+      "warranty_included": "Garantie de 2 ans incluse",
+      "easy_returns": "Retours faciles sous 30 jours",
+      "view_all_products": "Voir tous les produits",
+      "no_products_available": "Aucun produit disponible",
+      "no_products_found": "Aucun produit trouvé dans cette collection.",
+      "no_products_found_short": "Aucun produit trouvé.",
+      "reviews": "Avis",
+      "stars": "Étoiles",
+      "based_on_reviews_html": "Basé sur {{ count }} avis",
+      "review_app_placeholder": "Le contenu de l'avis serait affiché ici. Veuillez coller l'extrait de votre application d'avis dans les paramètres du bloc.",
+      "category": "Catégorie"
+    }
   }
 }
