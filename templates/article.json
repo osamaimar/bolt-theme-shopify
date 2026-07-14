@@ -256,7 +256,7 @@
       "type": "article-related-posts",
       "settings": {
         "show_section": true,
-        "container_width": "narrow",
+        "container_width": "standard",
         "color_scheme": "background-1",
         "padding_top": 64,
         "padding_bottom": 80,
@@ -264,7 +264,7 @@
         "padding_bottom_mobile": 40,
         "show_on_desktop": true,
         "show_on_mobile": true,
-        "max_width": 1200,
+        "max_width": 1100,
         "blocks_position": "center"
       },
       "blocks": {

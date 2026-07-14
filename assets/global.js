@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isOpen = open !== undefined ? open : !mobileMenu.classList.contains('active');
             mobileMenu.classList.toggle('active', isOpen);
             body.classList.toggle('no-scroll', isOpen);
+            document.documentElement.classList.toggle('no-scroll', isOpen);
             mobileToggle.setAttribute('aria-expanded', isOpen);
         };
 
@@ -100,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isOpen = open !== undefined ? open : !searchOverlay.classList.contains('active');
         searchOverlay.classList.toggle('active', isOpen);
         body.classList.toggle('no-scroll', isOpen);
+        document.documentElement.classList.toggle('no-scroll', isOpen);
         
         if (isOpen) {
             const mobileMenu = document.getElementById('mobile-menu');
@@ -142,6 +144,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Search Popup Submission logic (wildcard terms matching search bar)
+    const searchPopupForm = document.querySelector('.search-input-wrapper');
+    const searchPopupInput = document.getElementById('search-popup-input');
+    if (searchPopupForm && searchPopupInput) {
+        searchPopupForm.addEventListener('submit', () => {
+            let query = searchPopupInput.value.trim();
+            if (query.length > 0) {
+                const words = query.split(/\s+/).map(word => {
+                    if (word && !word.endsWith('*') && !word.includes(':')) {
+                        return word + '*';
+                    }
+                    return word;
+                });
+                const modifiedQuery = words.join(' ');
+
+                // Submit with hidden input so visual input stays clean
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'q';
+                hiddenInput.value = modifiedQuery;
+                searchPopupForm.appendChild(hiddenInput);
+
+                // Strip name from visible field
+                searchPopupInput.removeAttribute('name');
+            }
+        });
+    }
+
     // ─── Cart Drawer Logic ───
     const toggleCart = (open) => {
         const cdOverlay = document.getElementById('cd-overlay');
@@ -149,12 +179,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const isOpen = open !== undefined ? open : !cdOverlay.classList.contains('active');
         cdOverlay.classList.toggle('active', isOpen);
         body.classList.toggle('cd-open', isOpen);
+        document.documentElement.classList.toggle('cd-open', isOpen);
 
         if (isOpen) {
             const mobileMenu = document.getElementById('mobile-menu');
             if (mobileMenu && mobileMenu.classList.contains('active')) {
                 mobileMenu.classList.remove('active');
                 body.classList.remove('no-scroll');
+                document.documentElement.classList.remove('no-scroll');
                 const mobileToggle = document.getElementById('mobile-toggle');
                 if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
             }

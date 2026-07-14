@@ -12,6 +12,9 @@
   data-price="{{ product.price | divided_by: 100.0 }}"
   data-category="{{ product.collections.first.title | default: product.type | escape }}"
 >
+  {%- if product.variants.first.id -%}
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+  {%- endif -%}
   <div class="card-v2-image-box">
     <a href="{{ product.url }}" class="full-unstyled-link">
       {%- if product.featured_media -%}

@@ -295,6 +295,8 @@
 .blog-post-body {
   line-height: 1.8;
   margin-bottom: var(--spacing-3xl);
+  max-width: 100%;
+  width: 100%;
 }
 
 /* Text sizes */

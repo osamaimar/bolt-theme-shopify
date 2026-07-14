@@ -163,6 +163,7 @@
         flex-wrap: wrap !important;
         gap: {{ block.settings.grid_gap | default: 30 }}px !important;
         justify-content: {% if b_align_alignment == 'center' %}center{% elsif b_align_alignment == 'right' %}flex-end{% else %}flex-start{% endif %} !important;
+        width: 100% !important;
       }
       #shopify-section-{{ section.id }} .block-{{ block.id }}.related-posts-grid .blog-card {
         flex: 0 0 auto !important;
@@ -693,7 +694,7 @@ document.addEventListener('shopify:section:load', (event) => {
       "step": 10,
       "unit": "px",
       "label": "Maximum Width",
-      "default": 1200
+      "default": 1100
     },
     {
       "type": "select",

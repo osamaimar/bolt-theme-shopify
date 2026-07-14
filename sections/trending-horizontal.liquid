@@ -352,7 +352,7 @@
                                                 {%- endif -%}
                                                 {%- if block.settings.show_add_to_cart -%}
                                                      <button type="button" class="hes-trend-cart-btn" title="{{ 'products.product.add_to_cart' | t }}"
-                                                         onclick="const cdOverlay = document.getElementById('cd-overlay'); if(cdOverlay) { cdOverlay.classList.add('active'); document.body.classList.add('cd-open'); }"
+                                                         onclick="const cdOverlay = document.getElementById('cd-overlay'); if(cdOverlay) { cdOverlay.classList.add('active'); document.body.classList.add('cd-open'); document.documentElement.classList.add('cd-open'); }"
                                                      >
                                                          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                                              <path stroke-linecap="round" stroke-linejoin="round"
@@ -1363,7 +1363,14 @@
   }
 
   @media (max-width: 768px) {
-    .hes-nav-arrow { display: none; }
+    .hes-nav-arrow {
+      width: 40px;
+      height: 40px;
+    }
+    .hes-nav-arrow svg {
+      width: 16px;
+      height: 16px;
+    }
   }
 {% endstylesheet %}
 

@@ -493,6 +493,8 @@
   font-size: 0.85rem;
   font-weight: var(--font-weight-semibold);
   transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .blog-card-read-more svg {

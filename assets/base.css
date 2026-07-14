@@ -27,8 +27,11 @@ body {
   background-color: var(--bg-secondary);
 }
 
-body.no-scroll {
-  overflow: hidden;
+body.no-scroll,
+body.cd-open,
+html.no-scroll,
+html.cd-open {
+  overflow: hidden !important;
 }
 
 a {
@@ -541,6 +544,35 @@ h1, h2, h3, h4, h5, h6,
 
 .rte p:last-child {
   margin-bottom: 0;
+}
+
+.rte {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.rte img,
+.rte iframe,
+.rte video,
+.rte embed,
+.rte object {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+.rte table {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rte pre,
+.rte code {
+  max-width: 100% !important;
+  overflow-x: auto;
+  white-space: pre-wrap;
 }
 
 .visually-hidden {
