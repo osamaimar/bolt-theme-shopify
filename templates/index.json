@@ -691,13 +691,14 @@
             "bg_color": "",
             "bg_gradient": "",
             "hover_text_color": "",
-            "hover_bg_color": ""
+            "hover_bg_color": "#042650"
           }
         },
         "product-0": {
           "type": "product_card",
           "settings": {
-            "product": "",
+            "product": "baseus-bass-ep10-nc-43db-noise-cancelling-anc-true-wireless-earbuds-bluetooth-6-0-in-ear-wireless-earphones-4-mics-enc-ear-buds",
+            "image": "shopify://shop_images/an_airpods_with_two_headsets_attached_to_it.jpg",
             "category": "Gaming Gear",
             "title": "",
             "price": "",
@@ -737,7 +738,7 @@
         "product-1": {
           "type": "product_card",
           "settings": {
-            "product": "",
+            "product": "xreal-1s-ar-glasses-500-virtual-screen-52-fov-native-3dof-3d-mode-x1-chip-smart-glasses-support-iphone-17-16-15-usb-c-dp-device-1",
             "category": "Wearables",
             "title": "",
             "price": "",
@@ -749,7 +750,7 @@
             "show_price": true,
             "show_rating": true,
             "rating": 5,
-            "rating_count": "124",
+            "rating_count": "94",
             "image_ratio": "adapt",
             "margin_top": 0,
             "margin_bottom": 0,
@@ -777,7 +778,7 @@
         "product-2": {
           "type": "product_card",
           "settings": {
-            "product": "",
+            "product": "all-in-one-4k-72hz-90hz-6dof-105-fov-spatial-4-glasses-vr-ar-mr-device-with-3d-video-glasses-2",
             "category": "Accessories",
             "title": "",
             "price": "",
@@ -789,7 +790,7 @@
             "show_price": true,
             "show_rating": true,
             "rating": 5,
-            "rating_count": "124",
+            "rating_count": "52",
             "image_ratio": "adapt",
             "margin_top": 0,
             "margin_bottom": 0,
@@ -888,7 +889,7 @@
           "type": "view_all",
           "settings": {
             "label": "View All",
-            "link": "/collections/all",
+            "link": "shopify://collections/top-picks",
             "open_in_new_tab": false,
             "show_on_desktop": true,
             "show_on_mobile": false,
@@ -905,13 +906,13 @@
             "bg_color": "",
             "bg_gradient": "",
             "hover_text_color": "",
-            "hover_bg_color": ""
+            "hover_bg_color": "#042650"
           }
         },
         "collection": {
           "type": "collection_strip",
           "settings": {
-            "collection": "smartphones",
+            "collection": "top-picks",
             "columns_desktop": "4",
             "columns_tablet": "3",
             "columns_mobile": "2",
@@ -1012,6 +1013,7 @@
         "review-0": {
           "type": "review",
           "settings": {
+            "avatar": "shopify://shop_images/bolt-reviewer-emily_6df86fd6-cdc1-462d-8614-34da69fea5f6.jpg",
             "author_name": "Sarah J.",
             "review_text": "Absolutely love this product! The quality is outstanding and it exceeded my expectations in every way.",
             "date": "",
@@ -1056,6 +1058,7 @@
         "review-1": {
           "type": "review",
           "settings": {
+            "avatar": "shopify://shop_images/bolt-reviewer-michael_783dedd8-f015-4e26-98ae-be9e1ef7fcf6.jpg",
             "author_name": "Michael R.",
             "review_text": "Great value for the price. The customer service was also very helpful with my questions.",
             "date": "",
@@ -1100,6 +1103,7 @@
         "review-2": {
           "type": "review",
           "settings": {
+            "avatar": "shopify://shop_images/bolt-reviewer-sarah_e9d51845-3f0c-497b-8f38-55b319e7fd0b.jpg",
             "author_name": "Emily D.",
             "review_text": "One of the best purchases I've made this year. I've already recommended it to all my friends!",
             "date": "",
