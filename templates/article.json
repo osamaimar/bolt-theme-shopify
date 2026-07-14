@@ -1,21 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "article-main": {
       "type": "article-main",
-      "settings": {
-        "show_section": true,
-        "show_reading_progress": true,
-        "container_width": "standard",
-        "color_scheme": "background-1",
-        "padding_top": 40,
-        "padding_bottom": 80,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 48,
-        "show_on_desktop": true,
-        "show_on_mobile": true,
-        "max_width": 1200,
-        "blocks_position": "left"
-      },
       "blocks": {
         "breadcrumb": {
           "type": "breadcrumb",
@@ -41,21 +36,20 @@
         "post_header": {
           "type": "post_header",
           "settings": {
+            "author_role": "Tech Reviewer",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
             "show_category": true,
             "show_author": true,
             "show_author_avatar": true,
             "show_author_name": true,
             "show_author_role": true,
-            "author_role": "Tech Reviewer",
             "show_date": true,
             "show_date_icon": true,
             "show_read_time": true,
             "show_read_time_icon": true,
             "show_meta_dividers": true,
             "date_format": "medium",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "alignment": "left",
             "margin_top": 0,
             "margin_bottom": 48,
             "margin_top_mobile": 0,
@@ -78,7 +72,6 @@
             "image_border_radius": 24,
             "image_aspect_ratio": "adapt",
             "hover_effect": "lift",
-            "alignment": "center",
             "max_width": 100,
             "border_width": 0,
             "border_color": "",
@@ -100,15 +93,15 @@
             "margin_bottom": 64,
             "margin_top_mobile": 0,
             "margin_bottom_mobile": 40,
+            "block_padding": 0,
+            "block_padding_mobile": 0,
+            "block_border_radius": 8,
             "font_size": "medium",
             "letter_spacing": 0,
             "line_height": 120,
             "text_color": "",
             "bg_color": "",
-            "bg_gradient": "",
-            "block_padding": 0,
-            "block_padding_mobile": 0,
-            "block_border_radius": 8
+            "bg_gradient": ""
           }
         },
         "tags": {
@@ -116,7 +109,6 @@
           "settings": {
             "show_on_desktop": true,
             "show_on_mobile": true,
-            "alignment": "left",
             "margin_top": 0,
             "margin_bottom": 48,
             "margin_top_mobile": 0,
@@ -141,6 +133,8 @@
           "type": "share",
           "settings": {
             "show_share": true,
+            "show_on_desktop": true,
+            "show_on_mobile": true,
             "share_facebook": true,
             "share_twitter": true,
             "share_linkedin": true,
@@ -150,8 +144,6 @@
             "share_telegram": true,
             "share_email": true,
             "share_copy": true,
-            "show_on_desktop": true,
-            "show_on_mobile": true,
             "margin_top": 0,
             "margin_bottom": 64,
             "margin_top_mobile": 0,
@@ -184,7 +176,6 @@
             "show_avatar": true,
             "show_bio": true,
             "show_label": true,
-            "alignment": "left",
             "margin_top": 0,
             "margin_bottom": 64,
             "margin_top_mobile": 0,
@@ -219,7 +210,6 @@
             "margin_bottom": 64,
             "margin_top_mobile": 0,
             "margin_bottom_mobile": 64,
-            "alignment": "space-between",
             "cards_width": "full",
             "font_size": "medium",
             "font_weight": "normal",
@@ -250,23 +240,24 @@
         "share",
         "author_card",
         "post_navigation"
-      ]
+      ],
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "padding_top": 40,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 48,
+        "show_reading_progress": true,
+        "max_width": 1200,
+        "blocks_position": "left",
+        "container_width": "standard",
+        "color_scheme": "background-1"
+      }
     },
     "article-related-posts": {
       "type": "article-related-posts",
-      "settings": {
-        "show_section": true,
-        "container_width": "standard",
-        "color_scheme": "background-1",
-        "padding_top": 64,
-        "padding_bottom": 80,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40,
-        "show_on_desktop": true,
-        "show_on_mobile": true,
-        "max_width": 1100,
-        "blocks_position": "center"
-      },
       "blocks": {
         "heading-1": {
           "type": "heading",
@@ -275,7 +266,6 @@
             "title": "Related Articles",
             "show_on_desktop": true,
             "show_on_mobile": true,
-            "alignment": "center",
             "margin_top": 0,
             "margin_bottom": 16,
             "margin_top_mobile": 0,
@@ -300,7 +290,6 @@
             "show_on_desktop": true,
             "show_on_mobile": true,
             "max_width": 500,
-            "alignment": "center",
             "margin_top": 0,
             "margin_bottom": 48,
             "margin_top_mobile": 0,
@@ -319,9 +308,24 @@
         "article_list": {
           "type": "article_list",
           "settings": {
+            "read_more_label": "Read More",
+            "excerpt_length": 120,
             "show_on_desktop": true,
             "show_on_mobile": true,
-            "alignment": "left",
+            "show_category": true,
+            "show_date": true,
+            "show_date_icon": true,
+            "show_read_time": true,
+            "show_read_time_icon": true,
+            "show_excerpt": true,
+            "show_author": true,
+            "show_author_avatar": true,
+            "show_read_more": true,
+            "show_button_arrow": true,
+            "show_divider": true,
+            "enable_card_spotlight": true,
+            "show_hover_effect": true,
+            "show_border": true,
             "posts_to_show": 3,
             "columns_desktop": "3",
             "columns_tablet": "2",
@@ -333,22 +337,6 @@
             "margin_bottom": 0,
             "margin_top_mobile": 0,
             "margin_bottom_mobile": 0,
-            "show_category": true,
-            "show_date": true,
-            "show_date_icon": true,
-            "show_read_time": true,
-            "show_read_time_icon": true,
-            "show_excerpt": true,
-            "excerpt_length": 120,
-            "show_author": true,
-            "show_author_avatar": true,
-            "show_read_more": true,
-            "show_button_arrow": true,
-            "show_divider": true,
-            "enable_card_spotlight": true,
-            "show_hover_effect": true,
-            "show_border": true,
-            "read_more_label": "Read More",
             "font_size": "medium",
             "font_weight": "normal",
             "font_style": "normal",
@@ -385,23 +373,23 @@
         "heading-1",
         "subheading-1",
         "article_list"
-      ]
-    },
-    "blog-sidebar-cta": {
-      "type": "blog-sidebar-cta",
+      ],
       "settings": {
         "show_section": true,
-        "container_width": "narrow",
-        "color_scheme": "background-1",
-        "padding_top": 60,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "padding_top": 64,
         "padding_bottom": 80,
         "padding_top_mobile": 40,
         "padding_bottom_mobile": 40,
-        "show_on_desktop": true,
-        "show_on_mobile": true,
-        "max_width": 1200,
-        "blocks_position": "center"
-      },
+        "max_width": 1100,
+        "blocks_position": "center",
+        "container_width": "standard",
+        "color_scheme": "background-1"
+      }
+    },
+    "blog-sidebar-cta": {
+      "type": "blog-sidebar-cta",
       "blocks": {
         "icon-1": {
           "type": "icon",
@@ -427,7 +415,6 @@
             "title": "Want to write for us?",
             "show_on_desktop": true,
             "show_on_mobile": true,
-            "alignment": "center",
             "margin_top": 0,
             "margin_bottom": 8,
             "margin_top_mobile": 0,
@@ -452,7 +439,6 @@
             "show_on_desktop": true,
             "show_on_mobile": true,
             "max_width": 500,
-            "alignment": "center",
             "margin_top": 0,
             "margin_bottom": 16,
             "margin_top_mobile": 0,
@@ -499,7 +485,20 @@
         "heading-1",
         "subheading-1",
         "button-1"
-      ]
+      ],
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "padding_top": 60,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "max_width": 1200,
+        "blocks_position": "center",
+        "container_width": "narrow",
+        "color_scheme": "background-1"
+      }
     }
   },
   "order": [
