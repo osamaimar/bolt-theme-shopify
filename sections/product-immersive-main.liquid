@@ -649,7 +649,8 @@
 {%- endif -%}
 
 <script>
-  window.__pdiVariants_{{ section.id }} = {{ product.variants | json }};
+  window.ProductVariants = window.ProductVariants || {};
+  window.ProductVariants["{{ section.id }}"] = {{ product.variants | json }};
 </script>
 <script src="{{ 'section-product-immersive.js' | asset_url }}" defer></script>
 

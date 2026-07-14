@@ -364,7 +364,8 @@
 {%- endif -%}
 
 <script>
-  window.__pdVariants_{{ section.id }} = {{ product.variants | json }};
+  window.ProductVariants = window.ProductVariants || {};
+  window.ProductVariants["{{ section.id }}"] = {{ product.variants | json }};
 </script>
 <script src="{{ 'section-product.js' | asset_url }}" defer></script>
 

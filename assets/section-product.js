@@ -170,7 +170,7 @@ function initProductVariants(container) {
   if (!variantsBlock) return;
 
   const sectionId = container.closest('[id^="shopify-section-"]').id.replace('shopify-section-', '');
-  const variantsData = window['__pdVariants_' + sectionId];
+  const variantsData = window.ProductVariants ? window.ProductVariants[sectionId] : null;
   if (!variantsData) return;
 
   const syncGallery = variantsBlock.dataset.gallerySync === 'true';
