@@ -1218,7 +1218,7 @@
           "type": "cta_button",
           "settings": {
             "label": "Join Free",
-            "link": "shopify://pages/contact",
+            "link": "shopify://pages/contact-1",
             "open_in_new_tab": false,
             "show_on_desktop": true,
             "show_on_mobile": true,
