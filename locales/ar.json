@@ -10,7 +10,8 @@
 {
   "shopify": {
     "sentence": {
-      "words_connector": "،"
+      "words_connector": "،",
+      "two_words_connector": "و"
     },
     "checkout": {
       "general": {
@@ -29,12 +30,25 @@
           "months": {
             "may": "مايو/أيار",
             "june": "يونيو",
-            "july": "يوليو"
+            "july": "يوليو",
+            "march": "مارس",
+            "april": "أبريل"
           }
-        }
+        },
+        "error_page_title": "خطأ",
+        "print_policies_link_label": "طباعة",
+        "close_modal_label": "إغلاق",
+        "close_notice_label": "إغلاق"
       },
       "contact": {
-        "city_label": "مدينة"
+        "city_label": "مدينة",
+        "email_label": "بريد إلكتروني",
+        "email_placeholder": "بريد إلكتروني",
+        "field_saved_label": "تم الحفظ",
+        "state_label": "ولاية",
+        "state_placeholder": "ولاية",
+        "phone_label": "هاتف",
+        "phone_placeholder": "هاتف"
       },
       "delivery_options": {
         "free_total_label": "مجاني",
@@ -64,7 +78,13 @@
         "alternative_payment_currency_total_disclosure": "يعالج %{shop_name} المدفوعات بعملة %{shop_currency} (%{amount_due}).",
         "settlement_currency_note": "يعالج %{shop_name} المدفوعات بعملة %{processing_currency}. لقد تسوقت بعملة %{original_currency}.",
         "settlement_currency_note_wallet": "يقوم %{shop_name} بمعالجة الدفعات بالعملة %{processing_currency}. لقد تسوّقت بالعملة %{original_currency} ودفعت باستخدام %{wallet} باليوان الصيني. تحقق من تطبيق %{wallet_app} الخاص بك للاطلاع على المبلغ النهائي.",
-        "settlement_currency_note_wallet_no_conversion": "لقد دفعت باستخدام %{wallet} باليوان الصيني. تحقق من تطبيق %{wallet_app} الخاص بك للاطلاع على المبلغ النهائي."
+        "settlement_currency_note_wallet_no_conversion": "لقد دفعت باستخدام %{wallet} باليوان الصيني. تحقق من تطبيق %{wallet_app} الخاص بك للاطلاع على المبلغ النهائي.",
+        "apply_discount_button_label": "تقديم",
+        "taxes_label": "الضرائب",
+        "total_label": "الإجمالي",
+        "partial_total_label": "الإجمالي",
+        "cost_table_value_column_header": "قيمة",
+        "price_label": "السعر"
       },
       "shipping": {
         "free_rate_label": "مجاني",
@@ -92,7 +112,36 @@
         "wechat_app_label": "وي شات",
         "oxxo_label": "أوكسو",
         "alternative_payment_currency_total_notice_disclosure": "يعالج %{shop_name} المدفوعات بعملة %{shop_currency} (%{amount_due}).",
-        "alternative_payment_currency_total_manual_payment_notice_disclosure": "تدفع %{shop_name} بـ %{shop_currency} (%{amount_due})."
+        "alternative_payment_currency_total_manual_payment_notice_disclosure": "تدفع %{shop_name} بـ %{shop_currency} (%{amount_due}).",
+        "apply_gift_card_button_label": "تقديم",
+        "crypto_modal": {
+          "error": {
+            "close": "إغلاق"
+          }
+        },
+        "bank_picker_label": "البنك",
+        "blik_label": "بليك",
+        "twint_label": "توينت",
+        "swish_label": "سويش",
+        "vipps_label": "فيبس",
+        "clear": "واضح",
+        "saved_credit_card_actions": {
+          "edit": "تعديل"
+        },
+        "saved_credit_cards_modal": {
+          "done": "تم"
+        },
+        "add_credit_card_modal": {
+          "save": "حفظ"
+        },
+        "edit_credit_card_modal": {
+          "done": "تم"
+        },
+        "order_edit_banner_items_added": {
+          "one": "تمت الإضافة"
+        },
+        "order_edit_banner_single_item_added": "تمت الإضافة",
+        "order_edit_banner_no_taxes_label": "لا يوجد"
       },
       "alternative_payment_method_banner": {
         "or": "أو"
@@ -101,12 +150,22 @@
         "recurring_total_intervals": {
           "day": {
             "one": "يوم"
+          },
+          "week": {
+            "one": "أسبوع"
+          },
+          "month": {
+            "one": "شهر"
+          },
+          "year": {
+            "one": "عام"
           }
         }
       },
       "pickup_point": {
         "or": "أو",
-        "selector_tab_map": "خريطة"
+        "selector_tab_map": "خريطة",
+        "selector_tab_list": "قائمة"
       },
       "local_pickup": {
         "or": "أو",
@@ -140,7 +199,9 @@
         "inch": "في",
         "foot": "قدم",
         "yard": "يا",
-        "square_foot": "قدم مربع"
+        "square_foot": "قدم مربع",
+        "fluid_ounce": "أونصة سائلة",
+        "item": "صنف"
       },
       "ucp": {
         "standard_errors": {
@@ -150,7 +211,48 @@
       "review": {
         "blocks": {
           "no_purchase_order_number_long": "لا يوجد رقم أمر شراء"
+        },
+        "item_header": {
+          "value": "قيمة"
         }
+      },
+      "stock": {
+        "price_column_header": "السعر"
+      },
+      "billing": {
+        "edit": "تعديل",
+        "address_form": {
+          "save": "حفظ"
+        }
+      },
+      "payment_summary": {
+        "free_label": "مجاني"
+      },
+      "post_purchase": {
+        "components": {
+          "close": "إغلاق"
+        }
+      },
+      "thank_you": {
+        "announcement": {
+          "close": "إغلاق"
+        }
+      },
+      "order_payment_collection": {
+        "changes_summary": {
+          "added": {
+            "one": "تمت الإضافة"
+          }
+        }
+      },
+      "tips": {
+        "no_tip_label": "لا يوجد"
+      },
+      "throttle": {
+        "title": "طابور"
+      },
+      "notice_banner": {
+        "all_violations_email_link": "بريد إلكتروني"
       }
     },
     "filters": {
@@ -158,19 +260,51 @@
         "true_label": "نعم",
         "false_label": "لا"
       }
+    },
+    "pagination": {
+      "next": "التالي"
+    },
+    "feed": {
+      "more": "المزيد"
+    },
+    "attributes": {
+      "body": "الجسم"
+    },
+    "notices": {
+      "order": {
+        "financial_status": {
+          "paid": "مدفوع"
+        }
+      }
     }
   },
   "customer_accounts": {
     "account_information": {
-      "add_button": "أضِف"
+      "add_button": "أضِف",
+      "profile_card": {
+        "edit": "تعديل",
+        "save": "حفظ"
+      },
+      "verify_current_email_modal": {
+        "verify_button": "التالي"
+      }
     },
     "orders": {
       "order_list": {
         "payment_status": {
           "list_view": {
-            "due_without_date": "مستحقة"
+            "due_without_date": "مستحقة",
+            "paid": "مدفوع"
           }
-        }
+        },
+        "carousel": {
+          "next": "التالي"
+        },
+        "pagination": {
+          "next": "التالي",
+          "previous": "السابق"
+        },
+        "sort_title": "فرز"
       }
     },
     "order_details": {
@@ -178,10 +312,25 @@
       "tip": "نصيحة",
       "vat_invoices": {
         "label": "ضريبة القيمة المضافة"
+      },
+      "view_controls": {
+        "list": "قائمة"
+      },
+      "no_data": "لا يوجد",
+      "paid_amount": "مدفوع",
+      "payment": {
+        "emv_details": {
+          "aid": "المساعدة:"
+        }
+      },
+      "shipping": {
+        "free": "مجاني"
       }
     },
     "addresses": {
-      "add_button_text": "أضِف"
+      "add_button_text": "أضِف",
+      "back_button": "الظهر",
+      "edit_button": "تعديل"
     },
     "account_menu": {
       "signed_out_state": {
@@ -192,18 +341,46 @@
       "locations": {
         "own_role_contact_name": "أنت",
         "multiple_tax_exemptions_and": "و",
-        "tax_exemption_not_applicable": "غير متوفر"
+        "tax_exemption_not_applicable": "غير متوفر",
+        "contact_name": "الاسم",
+        "taxes_none": "لا يوجد"
+      },
+      "draft_order_details": {
+        "payment_status": {
+          "paid": {
+            "title": "مدفوع"
+          }
+        }
+      },
+      "purchase_order_number": {
+        "save": "حفظ"
       }
     },
     "payment_methods": {
       "or": "أو",
       "add_payment_method": {
         "button_title": "أضِف"
+      },
+      "back_button": "الظهر",
+      "generic_card": "بطاقة",
+      "store_credit": {
+        "details_modal": {
+          "date_label": "تاريخ",
+          "expirable_amounts_button": "عرض"
+        }
+      },
+      "payment_details": {
+        "edit_payment_method_button": "تعديل"
+      },
+      "edit_payment_method": {
+        "save_payment_method_button": "حفظ"
       }
     },
     "payment_method_brands": {
       "jcb": "جيه سي بي",
-      "elo": "إيلو"
+      "elo": "إيلو",
+      "visa": "تأشيرة",
+      "blik": "بليك"
     },
     "ui_components": {
       "may": "مايو/أيار",
@@ -213,7 +390,10 @@
       "thursdayAbbreviation": "الخميس",
       "fridayAbbreviation": "موافق",
       "saturdayAbbreviation": "سا",
-      "sundayAbbreviation": "سو"
+      "sundayAbbreviation": "سو",
+      "june": "يونيو",
+      "july": "يوليو",
+      "moneyLinesHeaderItem": "بند"
     },
     "sign_in": {
       "step_one": {
@@ -229,7 +409,27 @@
       "badge_traffic": "{{percentage}} من الزيارات",
       "exit_preview": "الخروج من المعاينة",
       "hide_bar_action": "إخفاء الشريط",
-      "rollout_label": "طرح"
+      "rollout_label": "طرح",
+      "edit": "تعديل"
+    },
+    "navigation_and_structure": {
+      "back_button_accessibility_label": "الظهر"
+    },
+    "address_form": {
+      "save": "حفظ"
+    },
+    "shop_ads": {
+      "next_button": "التالي"
+    },
+    "subscriptions": {
+      "update_payment_instrument": {
+        "save": "حفظ"
+      }
+    },
+    "intents": {
+      "subscription_replace_payment_method": {
+        "save_button": "حفظ"
+      }
     }
   },
   "accessibility": {
@@ -238,13 +438,22 @@
   "general": {
     "search": {
       "esc_key": "زر هروب"
+    },
+    "breadcrumb": {
+      "home": "الرئيسية"
+    },
+    "home": "الرئيسية",
+    "countdown": {
+      "days": "أيام"
     }
   },
   "products": {
     "product": {
       "off": "إيقاف التشغيل",
       "badge_new": "جديد",
-      "badge_hot": "حار"
+      "badge_hot": "حار",
+      "on_sale": "مبيع",
+      "spec_bluetooth_val": "الإصدار 5.2"
     }
   },
   "cart": {
@@ -259,6 +468,10 @@
     "currency_short": "دولار أمريكي"
   },
   "custom_labels": {
-    "tax": "ضريبة"
+    "tax": "ضريبة",
+    "home": "الرئيسية"
+  },
+  "blog": {
+    "comment_form_name": "الاسم"
   }
 }
