@@ -70,7 +70,7 @@
                         {%- if image_block.settings.image != blank -%}
                             {{ image_block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: image_block.settings.image.alt | default: 'Product image' | escape }}
                         {%- else -%}
-                            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                            <img src="{{ 'deal-headphones.png' | asset_url }}" loading="lazy" alt="Premium Wireless Headphones — Studio Edition" width="1200" height="auto">
                         {%- endif -%}
                     </div>
                 {%- else -%}
