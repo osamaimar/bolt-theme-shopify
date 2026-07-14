@@ -38,7 +38,8 @@
       },
       "delivery_options": {
         "free_total_label": "مجاني",
-        "ship": "سفينة"
+        "ship": "سفينة",
+        "pickup_store": "الاستلام من المتجر"
       },
       "order_summary": {
         "tip_label": "نصيحة",
@@ -58,7 +59,12 @@
         "total_already_paid_label": "مدفوع",
         "unit_price": {
           "accessible_separator": "لكل"
-        }
+        },
+        "alternative_payment_currency_chinese_yuan": "تأكد من المبلغ الإجمالي باليوان الصيني في تطبيق %{wallet}.",
+        "alternative_payment_currency_total_disclosure": "يعالج %{shop_name} المدفوعات بعملة %{shop_currency} (%{amount_due}).",
+        "settlement_currency_note": "يعالج %{shop_name} المدفوعات بعملة %{processing_currency}. لقد تسوقت بعملة %{original_currency}.",
+        "settlement_currency_note_wallet": "يقوم %{shop_name} بمعالجة الدفعات بالعملة %{processing_currency}. لقد تسوّقت بالعملة %{original_currency} ودفعت باستخدام %{wallet} باليوان الصيني. تحقق من تطبيق %{wallet_app} الخاص بك للاطلاع على المبلغ النهائي.",
+        "settlement_currency_note_wallet_no_conversion": "لقد دفعت باستخدام %{wallet} باليوان الصيني. تحقق من تطبيق %{wallet_app} الخاص بك للاطلاع على المبلغ النهائي."
       },
       "shipping": {
         "free_rate_label": "مجاني",
@@ -79,7 +85,14 @@
       "payment": {
         "preview_not_available": {
           "button": "تمام"
-        }
+        },
+        "bogus_test_checkout": {
+          "support_link": "احصل على الدعم"
+        },
+        "wechat_app_label": "وي شات",
+        "oxxo_label": "أوكسو",
+        "alternative_payment_currency_total_notice_disclosure": "يعالج %{shop_name} المدفوعات بعملة %{shop_currency} (%{amount_due}).",
+        "alternative_payment_currency_total_manual_payment_notice_disclosure": "تدفع %{shop_name} بـ %{shop_currency} (%{amount_due})."
       },
       "alternative_payment_method_banner": {
         "or": "أو"
@@ -96,7 +109,19 @@
         "selector_tab_map": "خريطة"
       },
       "local_pickup": {
-        "or": "أو"
+        "or": "أو",
+        "all_stores_far_away": {
+          "title_with_location": "الموقع الأقرب يبعد أكثر من %{distance} عن %{location}",
+          "description_with_location": "%{change_location_link} أو %{ship_to_address_link}"
+        },
+        "no_pickup_locations_found": "لم يتم العثور على مواقع للاستلام",
+        "pickup_unavailable_banner_body": {
+          "try_different_location": "جرب موقعًا مختلفًا",
+          "there_are_no_stores": "لا توجد متاجر بالقرب من عنوانك، أو أن منتجاتك غير متاحة للاستلام."
+        },
+        "geolocation": {
+          "permission_not_allowed": "اسمح بمشاركة الموقع أو ابحث بدلاً من ذلك."
+        }
       },
       "units": {
         "milligram": "ملغم",
@@ -116,6 +141,16 @@
         "foot": "قدم",
         "yard": "يا",
         "square_foot": "قدم مربع"
+      },
+      "ucp": {
+        "standard_errors": {
+          "item_unavailable": "لا يمكن شراء العنصر"
+        }
+      },
+      "review": {
+        "blocks": {
+          "no_purchase_order_number_long": "لا يوجد رقم أمر شراء"
+        }
       }
     },
     "filters": {
@@ -184,6 +219,17 @@
       "step_one": {
         "or": "أو"
       }
+    },
+    "profile_preview_bar": {
+      "badge_active": "نشط",
+      "badge_draft": "مسودة",
+      "badge_launches": "إطلاق في {{date}}",
+      "badge_paused": "متوقف مؤقتًا",
+      "badge_scheduled": "مجدولة",
+      "badge_traffic": "{{percentage}} من الزيارات",
+      "exit_preview": "الخروج من المعاينة",
+      "hide_bar_action": "إخفاء الشريط",
+      "rollout_label": "طرح"
     }
   },
   "accessibility": {
