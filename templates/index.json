@@ -463,6 +463,7 @@
         "image": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/bolt-deal-headphone.jpg",
             "show_on_desktop": true,
             "show_on_mobile": true,
             "margin_top": 0,
@@ -518,7 +519,7 @@
         "countdown": {
           "type": "countdown",
           "settings": {
-            "end_date": "2025-12-31 23:59",
+            "end_date": "2026-8-31 23:59",
             "show_years": false,
             "show_months": false,
             "show_weeks": false,
@@ -546,9 +547,9 @@
         "price": {
           "type": "price",
           "settings": {
-            "current_price": "$149",
-            "original_price": "$269",
-            "savings_text": "Save $120",
+            "current_price": "$7.2",
+            "original_price": "$10",
+            "savings_text": "Save $2.8",
             "show_current_price": true,
             "show_original_price": true,
             "show_savings": true,
@@ -576,9 +577,9 @@
           "type": "button",
           "settings": {
             "label": "Grab This Deal",
-            "link": "",
+            "link": "/products/stereo-y08-headset-5-3-bluetooth-headset-folding-wireless-sports-earphone-gaming-headsets-over-ear-headphones-for-android-ios",
             "button_style": "primary",
-            "open_in_new_tab": false,
+            "open_in_new_tab": true,
             "show_on_desktop": true,
             "show_on_mobile": true,
             "margin_top": 0,
@@ -1286,6 +1287,7 @@
         "padding_top_mobile": 40,
         "padding_bottom_mobile": 40,
         "color_scheme": "background-1",
+        "background_image": "shopify://shop_images/RVQBYRC.jpg",
         "enable_overlay": true
       }
     }
