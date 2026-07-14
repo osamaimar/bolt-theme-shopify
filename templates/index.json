@@ -268,10 +268,10 @@
         "category-0": {
           "type": "category",
           "settings": {
-            "icon": "laptop",
-            "custom_icon": "",
-            "name": "Laptops",
-            "link": "",
+            "icon": "custom",
+            "custom_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewbox=\"0 0 14 14\" id=\"Battery-Charging--Streamline-Core\">\n  <desc>\n    Battery Charging Streamline Icon: https://streamlinehq.com\n  </desc>\n  <g id=\"battery-charging--phone-mobile-charge-device-electricity-power-battery-charging\">\n    <path id=\"Vector\" stroke=\"#25d4e3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M13.5 5.5c0 -0.13261 -0.0527 -0.25979 -0.1464 -0.35355C13.2598 5.05268 13.1326 5 13 5h-0.5V3.5c0 -0.26522 -0.1054 -0.51957 -0.2929 -0.70711C12.0196 2.60536 11.7652 2.5 11.5 2.5h-10c-0.26522 0 -0.51957 0.10536 -0.707107 0.29289C0.605357 2.98043 0.5 3.23478 0.5 3.5v7c0 0.2652 0.105357 0.5196 0.292893 0.7071 0.187537 0.1875 0.441887 0.2929 0.707107 0.2929h10c0.2652 0 0.5196 -0.1054 0.7071 -0.2929s0.2929 -0.4419 0.2929 -0.7071V9h0.5c0.1326 0 0.2598 -0.05268 0.3536 -0.14645 0.0937 -0.09376 0.1464 -0.22094 0.1464 -0.35355v-3Z\" stroke-width=\"1\"></path>\n    <path id=\"Vector_2\" stroke=\"#25d4e3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M7.177 4.6582 5.51929 6.8979H7.6875L6.50467 9.02834\" stroke-width=\"1\"></path>\n  </g>\n</svg>",
+            "name": "Batteries",
+            "link": "shopify://collections/power-batteries",
             "show_on_desktop": true,
             "show_on_mobile": true,
             "margin_top": 0,
@@ -298,8 +298,8 @@
           "settings": {
             "icon": "smartphone",
             "custom_icon": "",
-            "name": "Smartphones",
-            "link": "",
+            "name": "Phones",
+            "link": "shopify://collections/mini-phones-remotes",
             "show_on_desktop": true,
             "show_on_mobile": true,
             "margin_top": 0,
@@ -324,10 +324,10 @@
         "category-2": {
           "type": "category",
           "settings": {
-            "icon": "audio",
+            "icon": "laptop",
             "custom_icon": "",
-            "name": "Audio",
-            "link": "",
+            "name": "Monitors",
+            "link": "shopify://collections/gaming-monitors",
             "show_on_desktop": true,
             "show_on_mobile": true,
             "margin_top": 0,
@@ -354,8 +354,8 @@
           "settings": {
             "icon": "camera",
             "custom_icon": "",
-            "name": "Cameras",
-            "link": "",
+            "name": "Camera Filters",
+            "link": "shopify://collections/camera-filters",
             "show_on_desktop": true,
             "show_on_mobile": true,
             "margin_top": 0,
@@ -380,10 +380,10 @@
         "category-4": {
           "type": "category",
           "settings": {
-            "icon": "gaming",
-            "custom_icon": "",
-            "name": "Components",
-            "link": "",
+            "icon": "custom",
+            "custom_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewbox=\"0 0 14 14\" id=\"Vr-Headset-2--Streamline-Core\" height=\"14\" width=\"14\">\n  <desc>\n    Vr Headset 2 Streamline Icon: https://streamlinehq.com\n  </desc>\n  <g id=\"vr-headset-2--entertainment-gaming-vr-headset\">\n    <path id=\"Rectangle 338\" stroke=\"#25d4e3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M0.5 6.99242c0 -1.02137 0.83147 -1.84935 1.85714 -1.84935h9.28576c1.0256 0 1.8571 0.82798 1.8571 1.84935v3.66368c0 1.2031 -1.1377 2.096 -2.327 1.8844C9.91572 12.3168 8.34898 12.1 7 12.1s-2.91572 0.2168 -4.17297 0.4405C1.63765 12.7521 0.5 11.8592 0.5 10.6561V6.99242Z\" stroke-width=\"1\"></path>\n    <path id=\"Vector 788\" stroke=\"#25d4e3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m4.67859 5.143 0.46428 -3.71429h3.71429L9.32145 5.143\" stroke-width=\"1\"></path>\n    <path id=\"Vector 789\" stroke=\"#25d4e3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M4.21423 7.92871h5.57143\" stroke-width=\"1\"></path>\n  </g>\n</svg>",
+            "name": "VR & AR",
+            "link": "shopify://collections/vr-ar-computing",
             "show_on_desktop": true,
             "show_on_mobile": true,
             "margin_top": 0,
@@ -408,10 +408,10 @@
         "category-5": {
           "type": "category",
           "settings": {
-            "icon": "wearable",
-            "custom_icon": "",
-            "name": "Wearables",
-            "link": "",
+            "icon": "custom",
+            "custom_icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewbox=\"0 0 14 14\" id=\"Snow-Flake--Streamline-Core\">\n  <desc>\n    Snow Flake Streamline Icon: https://streamlinehq.com\n  </desc>\n  <g id=\"snow-flake--winter-freeze-snow-freezing-ice-cold-weather-snowflake\">\n    <path id=\"Vector\" stroke=\"#25d4e3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m5 0.5 2 2 2 -2\" stroke-width=\"1\"></path>\n    <path id=\"Vector_2\" stroke=\"#25d4e3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m0.5 9 2 -2 -2 -2\" stroke-width=\"1\"></path>\n    <path id=\"Vector_3\" stroke=\"#25d4e3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m9 13.5 -2 -2 -2 2\" stroke-width=\"1\"></path>\n    <path id=\"Vector_4\" stroke=\"#25d4e3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m13.5 5 -2 2 2 2\" stroke-width=\"1\"></path>\n    <path id=\"Vector_5\" stroke=\"#25d4e3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M3.5 3.5 5 5\" stroke-width=\"1\"></path>\n    <path id=\"Vector_6\" stroke=\"#25d4e3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m5 9 -1.5 1.5\" stroke-width=\"1\"></path>\n    <path id=\"Vector_7\" stroke=\"#25d4e3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M10.5 3.5 9 5\" stroke-width=\"1\"></path>\n    <path id=\"Vector_8\" stroke=\"#25d4e3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m9 9 1.5 1.5\" stroke-width=\"1\"></path>\n    <path id=\"Vector_9\" stroke=\"#25d4e3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M7 2.5v9\" stroke-width=\"1\"></path>\n    <path id=\"Vector_10\" stroke=\"#25d4e3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M2.5 7h9\" stroke-width=\"1\"></path>\n  </g>\n</svg>",
+            "name": "Cooling",
+            "link": "shopify://collections/cooling-fans",
             "show_on_desktop": true,
             "show_on_mobile": true,
             "margin_top": 0,
