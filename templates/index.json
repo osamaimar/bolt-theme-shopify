@@ -547,9 +547,9 @@
         "price": {
           "type": "price",
           "settings": {
-            "current_price": "$149",
-            "original_price": "$269",
-            "savings_text": "Save $120",
+            "current_price": "$7.2",
+            "original_price": "$10",
+            "savings_text": "Save $2.8",
             "show_current_price": true,
             "show_original_price": true,
             "show_savings": true,
