@@ -697,7 +697,8 @@
         "product-0": {
           "type": "product_card",
           "settings": {
-            "product": "",
+            "product": "baseus-bass-ep10-nc-43db-noise-cancelling-anc-true-wireless-earbuds-bluetooth-6-0-in-ear-wireless-earphones-4-mics-enc-ear-buds",
+            "image": "shopify://shop_images/an_airpods_with_two_headsets_attached_to_it.jpg",
             "category": "Gaming Gear",
             "title": "",
             "price": "",
@@ -737,7 +738,7 @@
         "product-1": {
           "type": "product_card",
           "settings": {
-            "product": "",
+            "product": "smartphone-game-joystick-rocker-touch-screen-mobile-game-fling-mini-joysticks-support-any-system",
             "category": "Wearables",
             "title": "",
             "price": "",
