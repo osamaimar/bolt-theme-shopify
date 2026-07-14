@@ -93,7 +93,7 @@
             "margin_top": 0,
             "margin_bottom": 0,
             "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
+            "margin_bottom_mobile": 100,
             "font_weight": "bold",
             "font_style": "normal",
             "text_transform": "none",

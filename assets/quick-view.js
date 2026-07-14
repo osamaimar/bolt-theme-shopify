@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show modal
         overlay.classList.add('active');
         document.body.classList.add('qv-active');
-        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
         
         // Focus management: Wait for transition
         setTimeout(() => {
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeQuickView() {
         overlay.classList.remove('active');
         document.body.classList.remove('qv-active');
-        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
         
         // Restore focus
         if (lastFocusedElement) {

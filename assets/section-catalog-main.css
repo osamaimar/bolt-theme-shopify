@@ -1151,3 +1151,9 @@
         padding: 18px;
     }
 }
+
+/* Make product name font size on the collection page Product Grid match Trending Now (1.05rem) */
+.cpd-product-grid .cpd-product-name,
+.theme-v2-grid .cpd-product-name {
+    font-size: 1.05rem !important;
+}

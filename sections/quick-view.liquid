@@ -12,17 +12,6 @@
     background-color: {{ section.settings.overlay_color }};
     opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
   }
-  {%- if image_block -%}
-    {% if image_block.settings.image_position == 'right' %}
-      @media (min-width: 769px) {
-        #qv-overlay .qv-modal { grid-template-columns: 1fr 1fr; }
-        #qv-overlay .qv-image-panel { grid-column: 2; }
-      }
-    {% endif %}
-  {%- else -%}
-    #qv-overlay .qv-modal { grid-template-columns: 1fr; }
-    #qv-overlay .qv-image-panel { display: none; }
-  {%- endif -%}
 
   .qv-image-panel {
     border-radius: var(--image-radius, 0);
@@ -33,42 +22,6 @@
   }
   .qv-image-panel.zoom-enabled:hover img {
     transform: scale(1.08) !important;
-  }
-
-  .qv-image-panel.aspect-square {
-    aspect-ratio: 1 / 1 !important;
-  }
-  .qv-image-panel.aspect-portrait {
-    aspect-ratio: 3 / 4 !important;
-  }
-  .qv-image-panel.aspect-landscape {
-    aspect-ratio: 4 / 3 !important;
-  }
-  .qv-image-panel.aspect-adapt {
-    aspect-ratio: auto !important;
-  }
-  .qv-image-panel.aspect-adapt img {
-    height: auto !important;
-    object-fit: contain !important;
-  }
-  
-  .qv-image-panel {
-    height: auto !important;
-    min-height: 0 !important;
-    align-self: center;
-    width: 100%;
-  }
-  .qv-image-panel img {
-    position: relative !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-  }
-
-  @media (max-width: 768px) {
-    .qv-image-panel {
-      max-height: 320px !important;
-    }
   }
 
   .qv-availability[style*="--avail-bullet-color"]::before {
@@ -93,7 +46,7 @@
 {%- if section.settings.enable_quick_view -%}
 <div class="qv-overlay color-{{ section.settings.color_scheme }}" id="qv-overlay" role="dialog" aria-modal="true" aria-label="Quick product view">
     <div class="qv-backdrop" id="qv-backdrop"></div>
-    <div class="qv-modal {% if image_block and image_block.settings.image_position == 'right' %}image-right{% endif %}">
+    <div class="qv-modal {% if image_block %}has-image{% else %}no-image{% endif %}{% if image_block and image_block.settings.image_position == 'right' %} image-right{% endif %}">
         <button class="qv-close" id="qv-close" aria-label="Close quick view">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"/>

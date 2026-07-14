@@ -452,3 +452,8 @@
     transform: scale(1.05);
 }
 
+/* Make product name font size on the sidebar collection page Product Grid match Trending Now (1.05rem) */
+.theme-v2-grid .card-v2-title {
+    font-size: 1.05rem !important;
+}
+

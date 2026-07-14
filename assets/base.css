@@ -13,10 +13,10 @@
 html {
   scroll-behavior: smooth;
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
-  overflow-x: hidden;
   margin: 0;
   font-family: var(--font-body-family);
   font-style: var(--font-body-style);
