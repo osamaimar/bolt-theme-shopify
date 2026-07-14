@@ -1,9 +1,50 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "t:general.header",
   "sections": {
     "header": {
       "type": "header",
+      "blocks": {
+        "logo_block": {
+          "type": "logo",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true
+          }
+        },
+        "nav_block": {
+          "type": "navigation",
+          "settings": {
+            "menu": "main-menu",
+            "show_on_desktop": true,
+            "show_on_mobile": false
+          }
+        },
+        "icons_block": {
+          "type": "icons",
+          "settings": {
+            "show_search": true,
+            "show_cart_icon": true,
+            "show_account_icon": true,
+            "show_on_desktop": true,
+            "show_on_mobile": true
+          }
+        }
+      },
+      "block_order": [
+        "logo_block",
+        "nav_block",
+        "icons_block"
+      ],
       "settings": {
         "show_section": true,
         "show_on_desktop": true,
@@ -13,40 +54,7 @@
         "logo_position": "middle-left",
         "sticky_header": "on-scroll",
         "color_scheme": "background-1"
-      },
-      "blocks": {
-        "logo_block": {
-          "type": "logo",
-          "settings": {
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "logo_text": "Bolt [Electronics]"
-          }
-        },
-        "nav_block": {
-          "type": "navigation",
-          "settings": {
-            "show_on_desktop": true,
-            "show_on_mobile": false,
-            "menu": "main-menu"
-          }
-        },
-        "icons_block": {
-          "type": "icons",
-          "settings": {
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "show_search": true,
-            "show_cart_icon": true,
-            "show_account_icon": true
-          }
-        }
-      },
-      "block_order": [
-        "logo_block",
-        "nav_block",
-        "icons_block"
-      ]
+      }
     }
   },
   "order": [
