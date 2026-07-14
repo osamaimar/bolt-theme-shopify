@@ -691,7 +691,7 @@
             "bg_color": "",
             "bg_gradient": "",
             "hover_text_color": "",
-            "hover_bg_color": ""
+            "hover_bg_color": "#042650"
           }
         },
         "product-0": {
@@ -750,7 +750,7 @@
             "show_price": true,
             "show_rating": true,
             "rating": 5,
-            "rating_count": "124",
+            "rating_count": "94",
             "image_ratio": "adapt",
             "margin_top": 0,
             "margin_bottom": 0,
@@ -790,7 +790,7 @@
             "show_price": true,
             "show_rating": true,
             "rating": 5,
-            "rating_count": "124",
+            "rating_count": "52",
             "image_ratio": "adapt",
             "margin_top": 0,
             "margin_bottom": 0,
@@ -889,7 +889,7 @@
           "type": "view_all",
           "settings": {
             "label": "View All",
-            "link": "/collections/all",
+            "link": "shopify://collections/top-picks",
             "open_in_new_tab": false,
             "show_on_desktop": true,
             "show_on_mobile": false,
@@ -906,7 +906,7 @@
             "bg_color": "",
             "bg_gradient": "",
             "hover_text_color": "",
-            "hover_bg_color": ""
+            "hover_bg_color": "#042650"
           }
         },
         "collection": {
