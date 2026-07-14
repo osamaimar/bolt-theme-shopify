@@ -24,6 +24,7 @@
     style="--grid-gap: {{ section.settings.grid_gap }}px"
   >
     {% for collection in collections %}
+      {% if collection.metafields.custom.hide_from_list == true or collection.metafields.custom.hide_from_list.value == true %}{% continue %}{% endif %}
       <a class="collection-card" href="{{ collection.url }}">
         {% if collection.featured_image %}
           {% render 'image',

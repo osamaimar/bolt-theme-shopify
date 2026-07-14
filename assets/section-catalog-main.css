@@ -1,13 +1,38 @@
 /* src/css/pages/catalog-products.css */
 
 /* Color Scheme Mapping */
-.cpd-header-outer.color-background-1, .cpd-content-outer.color-background-1 { --section-bg: var(--bg-primary); --section-text: var(--text-primary); }
-.cpd-header-outer.color-background-2, .cpd-content-outer.color-background-2 { --section-bg: var(--bg-secondary); --section-text: var(--text-primary); }
-.cpd-header-outer.color-accent-1, .cpd-content-outer.color-accent-1 { --section-bg: var(--color-primary); --section-text: var(--text-inverse); }
-.cpd-header-outer.color-accent-2, .cpd-content-outer.color-accent-2 { --section-bg: var(--color-accent); --section-text: var(--bg-primary); }
-.cpd-header-outer.color-inverse, .cpd-content-outer.color-inverse { --section-bg: var(--bg-primary); --section-text: var(--text-inverse); }
+.cpd-header-outer.color-background-1,
+.cpd-content-outer.color-background-1 {
+    --section-bg: var(--bg-primary);
+    --section-text: var(--text-primary);
+}
 
-.cpd-header-outer, .cpd-content-outer {
+.cpd-header-outer.color-background-2,
+.cpd-content-outer.color-background-2 {
+    --section-bg: var(--bg-secondary);
+    --section-text: var(--text-primary);
+}
+
+.cpd-header-outer.color-accent-1,
+.cpd-content-outer.color-accent-1 {
+    --section-bg: var(--color-primary);
+    --section-text: var(--text-inverse);
+}
+
+.cpd-header-outer.color-accent-2,
+.cpd-content-outer.color-accent-2 {
+    --section-bg: var(--color-accent);
+    --section-text: var(--bg-primary);
+}
+
+.cpd-header-outer.color-inverse,
+.cpd-content-outer.color-inverse {
+    --section-bg: var(--bg-primary);
+    --section-text: var(--text-inverse);
+}
+
+.cpd-header-outer,
+.cpd-content-outer {
     background: var(--section-bg, transparent);
     color: var(--section-text, var(--text-primary));
 }
@@ -449,105 +474,105 @@
 
 /* Custom Sorting Dropdown */
 .cpd-sort-box {
-  position: relative;
-  user-select: none;
-  min-width: 220px;
+    position: relative;
+    user-select: none;
+    min-width: 220px;
 }
 
 .cpd-sort-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 10px 18px;
-  background: var(--bg-glass);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
-  color: var(--text-secondary);
-  font-size: 0.88rem;
-  font-weight: var(--font-weight-medium);
-  font-family: inherit;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.3s ease;
-  text-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 18px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    font-weight: var(--font-weight-medium);
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    text-align: start;
 }
 
 .cpd-sort-trigger:hover {
-  border-color: var(--color-accent-secondary-40);
-  background: var(--color-white-5);
-  color: var(--text-inverse);
+    border-color: var(--color-accent-secondary-40);
+    background: var(--color-white-5);
+    color: var(--text-inverse);
 }
 
 .cpd-sort-current-value {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-inline-end: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-inline-end: 12px;
 }
 
 .cpd-sort-arrow {
-  width: 14px;
-  height: 14px;
-  color: var(--text-lighter);
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    color: var(--text-lighter);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
 }
 
 .cpd-sort-box.active .cpd-sort-arrow {
-  transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
 .cpd-sort-dropdown {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  right: 0;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-xl);
-  box-shadow: 0 15px 35px var(--color-black-50);
-  z-index: 100;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(12px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(12px);
-  padding: 8px;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 15px 35px var(--color-black-50);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(12px);
+    padding: 8px;
 }
 
 .cpd-sort-box.active .cpd-sort-dropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 .cpd-sort-option {
-  padding: 10px 14px;
-  border-radius: 10px;
-  color: var(--text-secondary);
-  font-size: 0.88rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    padding: 10px 14px;
+    border-radius: 10px;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .cpd-sort-option:hover {
-  background: var(--color-white-5);
-  color: var(--text-inverse);
+    background: var(--color-white-5);
+    color: var(--text-inverse);
 }
 
 .cpd-sort-option.active {
-  background: var(--color-accent-secondary-10);
-  color: var(--color-accent-secondary);
-  font-weight: 600;
+    background: var(--color-accent-secondary-10);
+    color: var(--color-accent-secondary);
+    font-weight: 600;
 }
 
 @media (max-width: 768px) {
-  .cpd-sort-box {
-    width: 100%;
-    min-width: 0;
-  }
+    .cpd-sort-box {
+        width: 100%;
+        min-width: 0;
+    }
 }
 
 /* View Toggle */
@@ -1039,9 +1064,10 @@
         z-index: 1000002 !important;
         padding: 30px;
         transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        display: flex !important; /* Force flex when shown */
+        display: flex !important;
+        /* Force flex when shown */
         overflow-y: auto;
-        box-shadow: 20px 0 50px rgba(0,0,0,0.5);
+        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
     }
 
     .cpd-sidebar.open {
@@ -1051,7 +1077,7 @@
     .cpd-sidebar-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(0,0,0,0.6);
+        background: rgba(0, 0, 0, 0.6);
         backdrop-filter: blur(4px);
         z-index: 1000001 !important;
         opacity: 0;

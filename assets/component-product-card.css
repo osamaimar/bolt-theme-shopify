@@ -102,7 +102,8 @@
 
 
 
-.cpd-product-overlay { /* Quick view overlay */
+.cpd-product-overlay {
+    /* Quick view overlay */
     position: absolute;
     bottom: 0;
     inset-inline-start: 0;
@@ -122,7 +123,8 @@
     transform: translateY(0);
 }
 
-.cpd-quick-view-btn, .cpd-product-cta {
+.cpd-quick-view-btn,
+.cpd-product-cta {
     padding: 10px var(--spacing-lg);
     background: var(--color-secondary);
     color: var(--bg-secondary);
@@ -140,16 +142,19 @@
     position: relative;
 }
 
-.cpd-quick-view-btn.loading, .cpd-product-cta.loading {
+.cpd-quick-view-btn.loading,
+.cpd-product-cta.loading {
     pointer-events: none;
     color: transparent !important;
 }
 
-.cpd-quick-view-btn.loading svg, .cpd-product-cta.loading svg {
+.cpd-quick-view-btn.loading svg,
+.cpd-product-cta.loading svg {
     visibility: hidden;
 }
 
-.cpd-quick-view-btn.loading::after, .cpd-product-cta.loading::after {
+.cpd-quick-view-btn.loading::after,
+.cpd-product-cta.loading::after {
     content: "";
     position: absolute;
     width: 20px;
@@ -163,15 +168,19 @@
 }
 
 @keyframes cpdSpinner {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-.cpd-quick-view-btn:hover, .cpd-product-cta:hover {
+.cpd-quick-view-btn:hover,
+.cpd-product-cta:hover {
     box-shadow: 0 8px 24px rgba(var(--color-secondary-rgb), 0.3);
     background: var(--color-secondary);
 }
 
-.cpd-quick-view-btn svg, .cpd-product-cta svg {
+.cpd-quick-view-btn svg,
+.cpd-product-cta svg {
     width: 16px;
     height: 16px;
 }
@@ -213,7 +222,8 @@
 }
 
 .cpd-product-desc {
-    display: none; /* Hide snippet description on grid view */
+    display: none;
+    /* Hide snippet description on grid view */
 }
 
 .cpd-product-rating {
@@ -287,6 +297,7 @@
     padding: 3px var(--spacing-sm);
     border-radius: 6px;
 }
+
 /* ─── Minimal Product Card Style ─── */
 .cpd-product-card--minimal {
     background: transparent;
@@ -351,7 +362,7 @@
         gap: 12px;
     }
 
-    .cpd-product-cta-form, 
+    .cpd-product-cta-form,
     .cpd-product-cta {
         width: 100%;
     }

@@ -227,6 +227,7 @@
           <div class="ccg-gallery {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" id="ccg-gallery" data-no-results-text="{{ 'collections.no_collections_found' | t }}" {{ block.shopify_attributes }}>
               {%- if collections.size > 0 -%}
                 {%- for collection in collections -%}
+                  {%- if collection.metafields.custom.hide_from_list == true or collection.metafields.custom.hide_from_list.value == true -%}{%- continue -%}{%- endif -%}
                   <article class="ccg-card ccg-card--{{ block.settings.card_style | default: 'default' }}" 
                     data-title="{{ collection.title | escape }}"
                     data-count="{{ collection.all_products_count }}"

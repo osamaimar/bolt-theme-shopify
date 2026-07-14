@@ -253,6 +253,94 @@
 
                 </div>
 
+              {%- when 'variants' -%}
+                <div class="pd-variants" id="block-{{ block.id }}" 
+                     data-gallery-sync="{{ block.settings.enable_gallery_sync }}" 
+                     data-sold-out-handling="{{ block.settings.sold_out_handling }}"
+                     style="
+                       {% if block.settings.btn_bg_color != blank %}--btn-bg: {{ block.settings.btn_bg_color }};{% endif %}
+                       {% if block.settings.btn_text_color != blank %}--btn-text: {{ block.settings.btn_text_color }};{% endif %}
+                       {% if block.settings.btn_border_color != blank %}--btn-border: {{ block.settings.btn_border_color }};{% endif %}
+                       {% if block.settings.btn_hover_bg_color != blank %}--btn-hover-bg: {{ block.settings.btn_hover_bg_color }};{% endif %}
+                       {% if block.settings.btn_hover_text_color != blank %}--btn-hover-text: {{ block.settings.btn_hover_text_color }};{% endif %}
+                       {% if block.settings.btn_hover_border_color != blank %}--btn-hover-border: {{ block.settings.btn_hover_border_color }};{% endif %}
+                       {% if block.settings.active_bg_color != blank %}--active-bg: {{ block.settings.active_bg_color }};{% endif %}
+                       {% if block.settings.active_text_color != blank %}--active-text: {{ block.settings.active_text_color }};{% endif %}
+                       {% if block.settings.active_border_color != blank %}--active-border: {{ block.settings.active_border_color }};{% endif %}
+                       {% if block.settings.swatch_border_color != blank %}--swatch-border: {{ block.settings.swatch_border_color }};{% endif %}
+                       {% if block.settings.swatch_hover_border_color != blank %}--swatch-hover-border: {{ block.settings.swatch_hover_border_color }};{% endif %}
+                       {% if block.settings.swatch_active_border_color != blank %}--swatch-active-border: {{ block.settings.swatch_active_border_color }};{% endif %}
+                       {% if block.settings.label_color != blank %}--label-color: {{ block.settings.label_color }};{% endif %}
+                       {% if block.settings.selected_value_color != blank %}--selected-val-color: {{ block.settings.selected_value_color }};{% endif %}
+                     "
+                     {{ block.shopify_attributes }}>
+                  {%- for option in product.options_with_values -%}
+                    {%- assign is_color = false -%}
+                    {%- assign downcased_name = option.name | downcase -%}
+                    {%- if downcased_name contains 'color' or downcased_name contains 'colour' -%}
+                      {%- assign is_color = true -%}
+                    {%- endif -%}
+                    
+                    <div class="pd-variant-group" data-option-name="{{ option.name | escape }}">
+                      {%- if block.settings.show_label -%}
+                        <div class="pd-variant-label">
+                          <span class="pd-variant-option-name">{{ option.name }}:</span>
+                          <span class="pd-variant-selected-val" data-option-index="{{ forloop.index0 }}">
+                            {{ product.selected_or_first_available_variant.options[forloop.index0] }}
+                          </span>
+                        </div>
+                      {%- endif -%}
+                      
+                      <div class="pd-variant-options {% if block.settings.sold_out_handling == 'hide' %}sold-out-hide{% endif %}" data-option-index="{{ forloop.index0 }}">
+                        {%- for value in option.values -%}
+                          {%- assign option_active = false -%}
+                          {%- if product.selected_or_first_available_variant.options[forloop.parentloop.index0] == value -%}
+                            {%- assign option_active = true -%}
+                          {%- endif -%}
+                          
+                          {%- if is_color and block.settings.color_style == 'swatches' -%}
+                            {%- assign color_name = value | downcase | strip -%}
+                            {%- assign swatch_color = color_name -%}
+                            {%- if color_name == 'rose gold' -%}{%- assign swatch_color = '#e0a899' -%}
+                            {%- elsif color_name == 'gold' -%}{%- assign swatch_color = '#e5c158' -%}
+                            {%- elsif color_name == 'matte black' -%}{%- assign swatch_color = '#1c1c1c' -%}
+                            {%- elsif color_name == 'space gray' or color_name == 'space grey' -%}{%- assign swatch_color = '#555559' -%}
+                            {%- elsif color_name == 'midnight' -%}{%- assign swatch_color = '#1a1f2c' -%}
+                            {%- elsif color_name == 'silver' -%}{%- assign swatch_color = '#d1d1d6' -%}
+                            {%- elsif color_name == 'white' -%}{%- assign swatch_color = '#ffffff' -%}
+                            {%- elsif color_name == 'cream' or color_name == 'off white' -%}{%- assign swatch_color = '#faf6ee' -%}
+                            {%- elsif color_name == 'charcoal' -%}{%- assign swatch_color = '#36454f' -%}
+                            {%- elsif color_name == 'navy' or color_name == 'navy blue' -%}{%- assign swatch_color = '#1b263b' -%}
+                            {%- elsif color_name == 'olive' or color_name == 'forest green' -%}{%- assign swatch_color = '#2e3d30' -%}
+                            {%- elsif color_name == 'burgundy' -%}{%- assign swatch_color = '#800020' -%}
+                            {%- elsif color_name == 'starlight' -%}{%- assign swatch_color = '#f0eae0' -%}
+                            {%- elsif color_name == 'graphite' -%}{%- assign swatch_color = '#4b4c4d' -%}
+                            {%- elsif color_name == 'titanium' -%}{%- assign swatch_color = '#8a8b8c' -%}
+                            {%- endif -%}
+                            <button
+                              type="button"
+                              class="pd-variant-swatch {% if option_active %}active{% endif %}"
+                              data-value="{{ value | escape }}"
+                              data-option-index="{{ forloop.parentloop.index0 }}"
+                              style="background-color: {{ swatch_color }};"
+                              aria-label="{{ value | escape }}"
+                              title="{{ value | escape }}"
+                            ></button>
+                          {%- else -%}
+                            <button
+                              type="button"
+                              class="pd-variant-btn {% if option_active %}active{% endif %}"
+                              data-value="{{ value | escape }}"
+                              data-option-index="{{ forloop.parentloop.index0 }}"
+                            >{{ value }}</button>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                  <input type="hidden" name="id" class="pd-variant-id-input" value="{{ product.selected_or_first_available_variant.id }}">
+                </div>
+
               {%- when 'divider' -%}
                 <div class="pd-divider {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
                      style="--m-t: {{ block.settings.margin_top }}px; --m-b: {{ block.settings.margin_bottom }}px; --m-t-m: {{ block.settings.margin_top_mobile }}px; --m-b-m: {{ block.settings.margin_bottom_mobile }}px; 
@@ -275,6 +363,10 @@
 </div>
 {%- endif -%}
 
+<script>
+  window.ProductVariants = window.ProductVariants || {};
+  window.ProductVariants["{{ section.id }}"] = {{ product.variants | json }};
+</script>
 <script src="{{ 'section-product.js' | asset_url }}" defer></script>
 
 {% schema %}
@@ -571,6 +663,65 @@
         { "type": "color", "id": "border_color", "label": "Line Color" }
       ]
     },
+    {
+      "type": "variants",
+      "name": "Variants",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        {
+          "type": "select",
+          "id": "color_style",
+          "label": "Color Options Style",
+          "default": "swatches",
+          "options": [
+            { "value": "pills", "label": "Pills / Text buttons" },
+            { "value": "swatches", "label": "Color Swatches" }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_gallery_sync",
+          "label": "Sync gallery with variant image",
+          "default": true,
+          "info": "When a variant is selected, automatically update the media gallery to show the variant's featured image."
+        },
+        {
+          "type": "select",
+          "id": "sold_out_handling",
+          "label": "Sold-out / Unavailable variants",
+          "default": "disabled",
+          "options": [
+            { "value": "disabled", "label": "Disabled (Greyed out)" },
+            { "value": "hide", "label": "Hide option value" }
+          ]
+        },
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "checkbox", "id": "show_label", "label": "Show option label", "default": true },
+        { "type": "header", "content": "Margin" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 20 },
+        { "type": "range", "id": "margin_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top (Mobile)", "default": 0 },
+        { "type": "range", "id": "margin_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom (Mobile)", "default": 12 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "label_color", "label": "Option Label Color" },
+        { "type": "color", "id": "selected_value_color", "label": "Selected Value Color" },
+        { "type": "color", "id": "btn_bg_color", "label": "Pill Background Color" },
+        { "type": "color", "id": "btn_text_color", "label": "Pill Text Color" },
+        { "type": "color", "id": "btn_border_color", "label": "Pill Border Color" },
+        { "type": "color", "id": "btn_hover_bg_color", "label": "Pill Hover Background" },
+        { "type": "color", "id": "btn_hover_text_color", "label": "Pill Hover Text" },
+        { "type": "color", "id": "btn_hover_border_color", "label": "Pill Hover Border" },
+        { "type": "color", "id": "active_bg_color", "label": "Active Pill Background" },
+        { "type": "color", "id": "active_text_color", "label": "Active Pill Text" },
+        { "type": "color", "id": "active_border_color", "label": "Active Pill Border" },
+        { "type": "color", "id": "swatch_border_color", "label": "Swatch Inactive Outline" },
+        { "type": "color", "id": "swatch_hover_border_color", "label": "Swatch Hover Ring Color" },
+        { "type": "color", "id": "swatch_active_border_color", "label": "Swatch Active Ring Color" }
+      ]
+    },
     { 
       "type": "@app"
     }
@@ -582,6 +733,7 @@
         { "type": "title" },
         { "type": "rating" },
         { "type": "price" },
+        { "type": "variants" },
         { "type": "description" },
         { "type": "divider" },
         { "type": "highlights" },
