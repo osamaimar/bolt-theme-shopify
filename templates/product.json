@@ -113,7 +113,9 @@
         "specs": {
           "type": "specifications",
           "settings": {
-            "title": "Specifications"
+            "title": "Specifications",
+            "show_metafields": true,
+            "metafield_namespace": "custom"
           }
         },
         "reviews": {

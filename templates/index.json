@@ -518,7 +518,7 @@
         "countdown": {
           "type": "countdown",
           "settings": {
-            "end_date": "2026-8-31 23:59",
+            "end_date": "2025-12-31 23:59",
             "show_years": false,
             "show_months": false,
             "show_weeks": false,
