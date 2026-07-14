@@ -911,7 +911,7 @@
         "collection": {
           "type": "collection_strip",
           "settings": {
-            "collection": "accessories",
+            "collection": "top-picks",
             "columns_desktop": "4",
             "columns_tablet": "3",
             "columns_mobile": "2",
