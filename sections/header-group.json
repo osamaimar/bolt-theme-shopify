@@ -8,7 +8,7 @@
         "show_section": true,
         "show_on_desktop": true,
         "show_on_mobile": true,
-        "container_width": "full",
+        "container_width": "standard",
         "max_width": 1340,
         "logo_position": "middle-left",
         "sticky_header": "on-scroll",

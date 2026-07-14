@@ -19,12 +19,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: {% if 'center' == 'center' %}center{% elsif 'center' == 'right' %}flex-end{% else %}flex-start{% endif %};
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
   #hev-hero-{{ section.id }} .hev-hero-inner {
     max-width: {{ section.settings.max_width }}px;
     width: 100%;
     margin: 0 auto;
     text-align: {{ 'center' }};
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
   .hev-hero-block {
     margin-top: var(--m-t, 0px) !important;
@@ -42,7 +46,13 @@
     }
   }
   #hev-hero-{{ section.id }} .hev-hero-stat {
-    padding: 28px var(--spacing-lg);
+    padding: 28px 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  #hev-hero-{{ section.id }} .hev-hero-stats-inner {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
   .hev-hero-title span {
     background: var(--highlight-gradient, var(--color-accent)) !important;
@@ -65,12 +75,12 @@
   }
   @media (max-width: 1024px) {
     #hev-hero-{{ section.id }} .hev-hero-stat {
-      padding: 20px var(--spacing-md);
+      padding: 20px 0 !important;
     }
   }
   @media (max-width: 768px) {
     #hev-hero-{{ section.id }} .hev-hero-stat {
-      padding: 16px var(--spacing-sm);
+      padding: 16px 0 !important;
     }
   }
 </style>
