@@ -525,7 +525,7 @@
             "show_days": true,
             "show_hours": true,
             "show_minutes": true,
-            "show_seconds": true,
+            "show_seconds": false,
             "show_on_desktop": true,
             "show_on_mobile": true,
             "margin_top": 0,
