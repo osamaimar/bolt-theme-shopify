@@ -35,39 +35,90 @@
         "blocks": {
           "image": {
             "type": "image",
-            "settings": {}
+            "settings": {
+              "image_position": "left",
+              "image_aspect_ratio": "portrait",
+              "image_border_radius": 0,
+              "enable_zoom": true
+            }
           },
           "category": {
             "type": "category",
-            "settings": {}
+            "settings": {
+              "text_case": "uppercase",
+              "badge_color": "",
+              "badge_bg": ""
+            }
           },
           "title": {
             "type": "title",
-            "settings": {}
+            "settings": {
+              "title_font_size": 1.6,
+              "font_weight": "bold",
+              "title_color": ""
+            }
           },
           "price": {
             "type": "price",
-            "settings": {}
+            "settings": {
+              "in_stock_label": "In Stock",
+              "price_font_size": 1.6,
+              "price_color": "",
+              "availability_color": ""
+            }
           },
           "divider": {
             "type": "divider",
-            "settings": {}
+            "settings": {
+              "thickness": 1,
+              "margin_top": 20,
+              "margin_bottom": 20,
+              "divider_color": ""
+            }
           },
           "description": {
             "type": "description",
-            "settings": {}
+            "settings": {
+              "description_max_height": 200,
+              "desc_font_size": 0.9,
+              "desc_color": ""
+            }
           },
           "features": {
             "type": "features",
-            "settings": {}
+            "settings": {
+              "feature_1_icon": "warranty",
+              "feature_1_custom_svg": "",
+              "feature_1_text": "2-Year Warranty Included",
+              "feature_2_icon": "shipping",
+              "feature_2_custom_svg": "",
+              "feature_2_text": "Free Express Shipping",
+              "feature_3_icon": "returns",
+              "feature_3_custom_svg": "",
+              "feature_3_text": "30-Day Easy Returns",
+              "icon_color": "",
+              "icon_bg_color": "",
+              "text_color": ""
+            }
           },
           "quantity_selector": {
             "type": "quantity_selector",
-            "settings": {}
+            "settings": {
+              "quantity_label": "Quantity",
+              "qty_bg_color": "",
+              "qty_text_color": ""
+            }
           },
           "actions": {
             "type": "actions",
-            "settings": {}
+            "settings": {
+              "add_to_cart_label": "Add to Cart",
+              "view_details_label": "View Details",
+              "atc_bg_color": "",
+              "atc_text_color": "",
+              "details_bg_color": "",
+              "details_text_color": ""
+            }
           }
         },
         "block_order": [
@@ -82,10 +133,48 @@
           "actions"
         ],
         "settings": {
-          "overlay_color": "#000000"
+          "enable_quick_view": true,
+          "color_scheme": "background-1",
+          "modal_max_width": 920,
+          "modal_border_radius": 28,
+          "overlay_color": "#000000",
+          "overlay_opacity": 70
+        }
+      },
+      "back-to-top": {
+        "type": "back-to-top",
+        "settings": {
+          "enable_back_to_top": true,
+          "bg_color": "",
+          "text_color": "",
+          "hover_bg_color": "",
+          "hover_text_color": ""
+        }
+      },
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {}
+      },
+      "language-switcher": {
+        "type": "language-switcher",
+        "settings": {
+          "enable_language_switcher": true,
+          "button_shape": "pill",
+          "toggle_bg_color": "",
+          "toggle_text_color": "",
+          "toggle_border_color": "",
+          "toggle_hover_bg_color": "",
+          "toggle_hover_text_color": "",
+          "toggle_hover_border_color": "",
+          "dropdown_bg_color": "",
+          "dropdown_border_color": "",
+          "link_text_color": "",
+          "link_hover_bg_color": "",
+          "link_hover_text_color": ""
         }
       }
-    }
+    },
+    "content_for_index": []
   },
   "presets": {
     "Default": {
