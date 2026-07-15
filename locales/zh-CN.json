@@ -197,21 +197,21 @@
     "add_to_apple_wallet": "添加到苹果钱包"
   },
   "hello_world": {
-    "title": "Hello, World!",
-    "desc_1": "The Skeleton theme is a minimal, carefully structured Shopify theme designed to help you quickly get started. Designed with modularity, maintainability, and Shopify's best practices in mind.",
-    "desc_2": "Themes shape the online store experience for merchants and their customers. Build fast, flexible themes at scale using Liquid, Shopify's theme templating language, along with HTML, CSS, JavaScript, and JSON.",
-    "key_concepts_title": "Key Concepts",
-    "key_concepts_desc": "Shopify themes are a package of template files, building blocks, and supporting assets. Use these building blocks to create modular, customizable themes.",
-    "key_concepts_link": "Learn more about key concepts",
-    "liquid_title": "Liquid",
-    "liquid_desc": "The Liquid templating language is the backbone of Shopify themes, and is used to load dynamic content on storefronts. Extend Liquid objects to store and present custom data using metafields.",
-    "liquid_link": "View the Liquid reference",
-    "best_practices_title": "Best Practices",
-    "best_practices_desc": "To optimize your theme development experience, Shopify has established a set of best practices that you can refer to when developing your theme and setting up your toolchains and processes.",
-    "best_practices_link": "Follow best practices"
+    "title": "你好世界！",
+    "desc_1": "Skeleton 主题是一个简约、结构严谨的 Shopify 主题，旨在帮助您快速入门。设计时考虑了模块化、可维护性和 Shopify 的最佳实践。",
+    "desc_2": "主题塑造了商家及其客户的在线商店体验。使用 Shopify 的主题模板语言 Liquid 以及 HTML、CSS、JavaScript 和 JSON 大规模构建快速、灵活的主题。",
+    "key_concepts_title": "关键概念",
+    "key_concepts_desc": "Shopify 主题是模板文件、构建块和支持资产的包。使用这些构建块来创建模块化、可定制的主题。",
+    "key_concepts_link": "了解有关关键概念的更多信息",
+    "liquid_title": "液体",
+    "liquid_desc": "Liquid 模板语言是 Shopify 主题的支柱，用于在店面加载动态内容。扩展 Liquid 对象以使用元字段存储和呈现自定义数据。",
+    "liquid_link": "查看液体参考",
+    "best_practices_title": "最佳实践",
+    "best_practices_desc": "为了优化您的主题开发体验，Shopify 建立了一套最佳实践，您可以在开发主题以及设置工具链和流程时参考。",
+    "best_practices_link": "遵循最佳实践"
   },
   "newsletter": {
-    "success": "Thanks for subscribing!"
+    "success": "感谢您的订阅！"
   },
   "password": {
     "title": "Opening Soon",
