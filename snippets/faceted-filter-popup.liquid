@@ -1,0 +1,230 @@
+{%- comment -%}
+  Renders a faceted search filter trigger button and popup overlay.
+  Accepts:
+  - filter_context: 'collection' or 'search' (default: 'collection')
+{%- endcomment -%}
+
+{%- liquid
+  assign context = filter_context | default: 'collection'
+  if context == 'collection'
+    assign filters = collection.filters
+    assign results_url = collection.url
+  else
+    assign filters = search.filters
+    assign results_url = routes.search_url
+  endif
+
+  # Calculate active filters count
+  assign active_filter_count = 0
+  for filter in filters
+    if filter.type == 'price_range'
+      if filter.min_value.value != nil or filter.max_value.value != nil
+        assign active_filter_count = active_filter_count | plus: 1
+      endif
+    else
+      for value in filter.active_values
+        assign active_filter_count = active_filter_count | plus: 1
+      endfor
+    endif
+  endfor
+-%}
+
+<div class="ffp-trigger-wrapper">
+  <button 
+    type="button" 
+    class="ffp-trigger-btn" 
+    id="ffp-trigger-{{ context }}"
+    aria-haspopup="dialog" 
+    aria-expanded="false"
+    aria-controls="ffp-overlay-{{ context }}"
+    data-ffp-trigger
+  >
+    {%- if show_filter_icon != false -%}
+      <!-- Funnel / Filter SVG Icon -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-filter">
+        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+      </svg>
+    {%- endif -%}
+    {%- if show_filter_label != false -%}
+      <span>{{ settings.filter_btn_label | default: 'Filters' }}</span>
+    {%- endif -%}
+    {%- if active_filter_count > 0 -%}
+      <span class="ffp-badge" data-ffp-active-count>{{ active_filter_count }}</span>
+    {%- endif -%}
+  </button>
+</div>
+
+<!-- Faceted Filter Popup Overlay -->
+<div 
+  class="ffp-overlay" 
+  id="ffp-overlay-{{ context }}" 
+  role="dialog" 
+  aria-modal="true" 
+  aria-labelledby="ffp-title-{{ context }}"
+  data-ffp-overlay
+>
+  <div class="ffp-popup">
+    <!-- Close Button -->
+    <button type="button" class="ffp-close-btn" data-ffp-close aria-label="{{ 'accessibility.close_menu' | t | default: 'Close filters' }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Header -->
+    <div class="ffp-header">
+      <h2 class="ffp-title" id="ffp-title-{{ context }}">
+        {{ 'collections.filters' | t | default: 'Filters' }} <span>{{ 'collections.options' | t | default: 'Options' }}</span>
+      </h2>
+    </div>
+
+    <!-- Filter Form -->
+    <form class="ffp-form" id="ffp-form-{{ context }}" action="{{ results_url }}" method="get">
+      {%- if context == 'search' -%}
+        <input type="hidden" name="q" value="{{ search.terms | escape }}">
+        <input type="hidden" name="type" value="product">
+      {%- endif -%}
+
+      {%- assign sort_value = collection.sort_by | default: collection.default_sort_by | default: search.sort_by -%}
+      {%- if sort_value != blank -%}
+        <input type="hidden" name="sort_by" value="{{ sort_value | escape }}">
+      {%- endif -%}
+
+      <!-- Filter Groups Container -->
+      <div class="ffp-groups-container">
+        {%- if filters.size > 0 -%}
+          {%- for filter in filters -%}
+            {%- assign start_collapsed = settings.filter_popup_collapse_by_default -%}
+            <div class="ffp-group{% if start_collapsed %} collapsed{% endif %}" data-index="{{ forloop.index }}">
+              <button 
+                type="button" 
+                class="ffp-group-header"
+                aria-expanded="{% if start_collapsed %}false{% else %}true{% endif %}"
+                data-ffp-group-toggle
+              >
+                <span class="ffp-group-title">
+                  {{ filter.label }}
+                  {%- assign active_values_size = filter.active_values.size -%}
+                  {%- if active_values_size > 0 -%}
+                    <span class="ffp-group-active-count">({{ active_values_size }})</span>
+                  {%- endif -%}
+                </span>
+                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <div class="ffp-group-content">
+                {%- case filter.type -%}
+                  {%- when 'list' -%}
+                    <div class="ffp-filter-list">
+                      {%- for value in filter.values -%}
+                        <label class="ffp-checkbox-label" for="Filter-{{ filter.label | handle }}-{{ forloop.index }}">
+                          <input 
+                            type="checkbox" 
+                            name="{{ value.param_name }}" 
+                            value="{{ value.value | escape }}"
+                            id="Filter-{{ filter.label | handle }}-{{ forloop.index }}"
+                            {% if value.active %}checked{% endif %}
+                            {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                            data-ffp-input
+                          >
+                          <span>{{ value.label }}</span>
+                          <span class="ffp-count">{{ value.count }}</span>
+                        </label>
+                      {%- endfor -%}
+                    </div>
+
+                  {%- when 'price_range' -%}
+                    <div class="ffp-price-range">
+                      <div class="ffp-price-inputs">
+                        {%- liquid
+                          assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CUP,CVE,CZK,DKK,DOP,EEK,EGP,ESP,GRD,GTQ,HRK,HUF,IDR,ISK,LTL,LVL,LYD,MAD,MXN,MZN,NIO,NOK,PLN,PYG,RON,RSD,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+                          assign uses_comma_decimals = false
+                          if currencies_using_comma_decimals contains cart.currency.iso_code
+                            assign uses_comma_decimals = true
+                          endif
+                        -%}
+                        <div class="ffp-price-field">
+                          <label for="Filter-{{ filter.label | handle }}-GTE">{{ 'collections.price_min_label' | t | default: 'Min' }} ({{ cart.currency.symbol }})</label>
+                          <input 
+                            name="{{ filter.min_value.param_name }}"
+                            id="Filter-{{ filter.label | handle }}-GTE"
+                            {%- if filter.min_value.value -%}
+                              {%- if uses_comma_decimals -%}
+                                value="{{ filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' }}"
+                              {%- else -%}
+                                value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                              {%- endif -%}
+                            {%- endif -%}
+                            type="number"
+                            placeholder="0"
+                            min="0"
+                            {%- if uses_comma_decimals -%}
+                              max="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' }}"
+                            {%- else -%}
+                              max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                            {%- endif -%}
+                            data-ffp-input
+                          >
+                        </div>
+                        <span class="ffp-price-separator">—</span>
+                        <div class="ffp-price-field">
+                          <label for="Filter-{{ filter.label | handle }}-LTE">{{ 'collections.price_max_label' | t | default: 'Max' }} ({{ cart.currency.symbol }})</label>
+                          <input 
+                            name="{{ filter.max_value.param_name }}"
+                            id="Filter-{{ filter.label | handle }}-LTE"
+                            {%- if filter.max_value.value -%}
+                              {%- if uses_comma_decimals -%}
+                                value="{{ filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' }}"
+                              {%- else -%}
+                                value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                              {%- endif -%}
+                            {%- endif -%}
+                            type="number"
+                            {%- if uses_comma_decimals -%}
+                              placeholder="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' }}"
+                              max="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' }}"
+                            {%- else -%}
+                              placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                              max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                            {%- endif -%}
+                            min="0"
+                            data-ffp-input
+                          >
+                        </div>
+                      </div>
+                    </div>
+                {%- endcase -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <!-- Fallback when no filters are defined or search hasn't been performed -->
+          <div style="padding: var(--spacing-lg, 24px) 0; text-align: center; color: var(--text-secondary); font-size: 14px; line-height: 1.5;">
+            {%- if context == 'search' and search.performed == false or search.terms == blank -%}
+              <p>{{ settings.filter_search_help_text | default: 'Please enter a search query to view and apply filters.' }}</p>
+            {%- elsif context == 'search' and search.results_count == 0 -%}
+              <p>{{ 'general.search.no_results_help' | t | default: 'No filters are available for this search.' }}</p>
+            {%- elsif context == 'collection' and collection.all_products_count == 0 -%}
+              <p>{{ settings.filter_collection_empty_text | default: 'No filters are available because this collection has no products.' }}</p>
+            {%- else -%}
+              <p>{{ 'collections.no_filters_available' | t | default: 'No filters are currently set up. Please enable storefront filtering in Shopify Search & Discovery App.' }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Action Footer -->
+      <div class="ffp-footer">
+        <button type="button" class="ffp-clear-all-btn" data-ffp-clear-all>
+          {{ 'collections.clear_all' | t | default: 'Clear All' }}
+        </button>
+        <button type="submit" class="ffp-apply-btn">
+          {{ 'collections.apply' | t | default: 'Apply Filters' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

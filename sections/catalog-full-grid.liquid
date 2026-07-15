@@ -335,6 +335,36 @@
                         </div>
                       </div>
                     {%- endif -%}
+
+                    {%- if block.settings.show_filter_popup -%}
+                      {{ 'component-faceted-filter-popup.css' | asset_url | stylesheet_tag }}
+                      <script src="{{ 'component-faceted-filter-popup.js' | asset_url }}" defer></script>
+                      <style>
+                        {%- if block.settings.filter_btn_bg_color != blank -%}
+                          #shopify-section-{{ section.id }} .ffp-trigger-btn {
+                            background-color: {{ block.settings.filter_btn_bg_color }} !important;
+                          }
+                        {%- endif -%}
+                        {%- if block.settings.filter_btn_text_color != blank -%}
+                          #shopify-section-{{ section.id }} .ffp-trigger-btn {
+                            color: {{ block.settings.filter_btn_text_color }} !important;
+                          }
+                          #shopify-section-{{ section.id }} .ffp-trigger-btn svg {
+                            color: {{ block.settings.filter_btn_text_color }} !important;
+                          }
+                        {%- endif -%}
+                        {%- if block.settings.filter_btn_border_color != blank -%}
+                          #shopify-section-{{ section.id }} .ffp-trigger-btn {
+                            border-color: {{ block.settings.filter_btn_border_color }} !important;
+                          }
+                        {%- endif -%}
+                      </style>
+                      {% render 'faceted-filter-popup', 
+                        filter_context: 'collection', 
+                        show_filter_label: block.settings.show_filter_label,
+                        show_filter_icon: block.settings.show_filter_icon
+                      %}
+                    {%- endif -%}
                   </div>
                 </div>
 
@@ -627,6 +657,24 @@ document.addEventListener('shopify:section:load', (event) => {
           "default": true
         },
         {
+          "type": "checkbox",
+          "id": "show_filter_popup",
+          "label": "Show faceted filter button",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_filter_label",
+          "label": "Show filters text label",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_filter_icon",
+          "label": "Show filters icon",
+          "default": true
+        },
+        {
           "type": "header",
           "content": "Visibility"
         },
@@ -774,6 +822,25 @@ document.addEventListener('shopify:section:load', (event) => {
           "type": "color",
           "id": "option_active_text_color",
           "label": "Option Active Text Color"
+        },
+        {
+          "type": "header",
+          "content": "Filter Button Styling"
+        },
+        {
+          "type": "color",
+          "id": "filter_btn_bg_color",
+          "label": "Filter Button Background Color"
+        },
+        {
+          "type": "color",
+          "id": "filter_btn_text_color",
+          "label": "Filter Button Text/Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "filter_btn_border_color",
+          "label": "Filter Button Border Color"
         }
       ]
     },

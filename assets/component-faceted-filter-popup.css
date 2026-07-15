@@ -1,0 +1,456 @@
+/* component-faceted-filter-popup.css */
+
+/* Trigger Button */
+.ffp-trigger-wrapper {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.ffp-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(var(--text-primary-rgb), 0.04);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg, 12px);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-sm, 14px);
+  font-weight: var(--font-weight-medium, 500);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.ffp-trigger-btn:hover {
+  background: rgba(var(--text-primary-rgb), 0.08);
+  border-color: var(--color-accent-secondary, #3b82f6);
+  color: var(--color-accent-secondary, #3b82f6);
+  transform: translateY(-1px);
+}
+
+.ffp-trigger-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.25s ease;
+}
+
+.ffp-trigger-btn:hover svg {
+  transform: scale(1.05);
+}
+
+.ffp-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background-color: var(--color-accent-secondary, #3b82f6);
+  color: var(--bg-primary);
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 9px;
+  margin-inline-start: 4px;
+  animation: ffp-scale-in 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Overlay & Animation */
+.ffp-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999 !important;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 8vh;
+  background: rgba(var(--bg-secondary-rgb, 10, 10, 10), 0.75);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ffp-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ffp-popup {
+  position: relative;
+  width: 90%;
+  max-width: 580px;
+  max-height: 80vh;
+  background: linear-gradient(
+    145deg,
+    rgba(var(--bg-primary-rgb, 255, 255, 255), 0.96) 0%,
+    rgba(var(--bg-secondary-rgb, 245, 245, 245), 0.98) 100%
+  );
+  border: 1px solid var(--border-primary, rgba(0, 0, 0, 0.1));
+  border-radius: var(--radius-xl, 20px);
+  padding: var(--spacing-xl, 32px);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.2),
+    0 0 1px rgba(var(--text-primary-rgb), 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(24px) scale(0.96);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.35s ease;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ffp-overlay.active .ffp-popup {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* Dark Mode styles override check */
+@media (prefers-color-scheme: dark) {
+  .ffp-popup {
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.6),
+      0 0 1px rgba(255, 255, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Close Button */
+.ffp-close-btn {
+  position: absolute;
+  top: var(--spacing-lg, 24px);
+  inset-inline-end: var(--spacing-lg, 24px);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md, 8px);
+  background: transparent;
+  border: 1px solid var(--border-primary, rgba(0, 0, 0, 0.1));
+  color: var(--text-secondary, #666);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.ffp-close-btn:hover {
+  background: rgba(var(--color-accent-secondary-rgb, 59, 130, 246), 0.1);
+  border-color: var(--color-accent-secondary, #3b82f6);
+  color: var(--color-accent-secondary, #3b82f6);
+}
+
+.ffp-close-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Header */
+.ffp-header {
+  margin-bottom: var(--spacing-lg, 24px);
+  padding-bottom: var(--spacing-md, 16px);
+  border-bottom: 1px solid var(--border-light, rgba(0, 0, 0, 0.05));
+  flex-shrink: 0;
+}
+
+.ffp-title {
+  font-size: var(--font-size-xl, 20px);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--text-primary, #111);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.ffp-title span {
+  color: var(--color-accent-secondary, #3b82f6);
+}
+
+/* Accordion Groups */
+.ffp-groups-container {
+  overflow-y: auto;
+  flex-grow: 1;
+  padding-inline-end: 4px;
+  margin-bottom: var(--spacing-lg, 24px);
+}
+
+.ffp-group {
+  border-bottom: 1px solid var(--border-light, rgba(0, 0, 0, 0.05));
+  padding: var(--spacing-md, 16px) 0;
+}
+
+.ffp-group:last-child {
+  border-bottom: none;
+}
+
+.ffp-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-size: var(--font-size-base, 16px);
+  font-weight: var(--font-weight-medium, 500);
+  transition: color 0.2s ease;
+}
+
+.ffp-group-header:hover {
+  color: var(--color-accent-secondary, #3b82f6);
+}
+
+.ffp-group-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ffp-group-header svg.chevron {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--text-secondary);
+}
+
+.ffp-group.collapsed .ffp-group-header svg.chevron {
+  transform: rotate(-90deg);
+}
+
+.ffp-group-content {
+  max-height: 250px;
+  overflow-y: auto;
+  margin-top: var(--spacing-md, 16px);
+  transition: all 0.3s ease;
+  opacity: 1;
+}
+
+.ffp-group.collapsed .ffp-group-content {
+  max-height: 0;
+  overflow: hidden;
+  margin-top: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Custom Scrollbar */
+.ffp-group-content::-webkit-scrollbar,
+.ffp-groups-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.ffp-group-content::-webkit-scrollbar-track,
+.ffp-groups-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ffp-group-content::-webkit-scrollbar-thumb,
+.ffp-groups-container::-webkit-scrollbar-thumb {
+  background: rgba(var(--text-primary-rgb), 0.1);
+  border-radius: 10px;
+}
+
+.ffp-group-content::-webkit-scrollbar-thumb:hover,
+.ffp-groups-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--text-primary-rgb), 0.25);
+}
+
+/* Filter List */
+.ffp-filter-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.ffp-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm, 14px);
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.ffp-checkbox-label:hover {
+  color: var(--text-primary);
+}
+
+.ffp-checkbox-label input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--border-primary, rgba(0, 0, 0, 0.2));
+  border-radius: var(--radius-sm, 4px);
+  background-color: transparent;
+  display: inline-grid;
+  place-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 0;
+}
+
+.ffp-checkbox-label input[type="checkbox"]:hover {
+  border-color: var(--color-accent-secondary, #3b82f6);
+}
+
+.ffp-checkbox-label input[type="checkbox"]:checked {
+  background-color: var(--color-accent-secondary, #3b82f6);
+  border-color: var(--color-accent-secondary, #3b82f6);
+}
+
+.ffp-checkbox-label input[type="checkbox"]::before {
+  content: "";
+  width: 10px;
+  height: 8px;
+  background-color: var(--bg-primary);
+  clip-path: polygon(14% 44%, 0 58%, 38% 96%, 100% 16%, 86% 2%, 38% 70%);
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+}
+
+.ffp-checkbox-label input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+.ffp-count {
+  font-size: 11px;
+  color: var(--text-light, #888);
+  margin-inline-start: auto;
+  opacity: 0.8;
+}
+
+/* Price Range */
+.ffp-price-range {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ffp-price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ffp-price-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ffp-price-field label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light, #888);
+}
+
+.ffp-price-field input {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(var(--text-primary-rgb), 0.04);
+  border: 1px solid var(--border-primary, rgba(0,0,0,0.1));
+  border-radius: var(--radius-md, 8px);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.ffp-price-field input:focus {
+  border-color: var(--color-accent-secondary, #3b82f6);
+}
+
+.ffp-price-separator {
+  color: var(--text-light, #888);
+  align-self: flex-end;
+  padding-bottom: 12px;
+}
+
+/* Action Buttons Footer */
+.ffp-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--spacing-md, 16px);
+  border-top: 1px solid var(--border-light, rgba(0, 0, 0, 0.05));
+  flex-shrink: 0;
+  gap: 16px;
+}
+
+.ffp-clear-all-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: var(--font-size-sm, 14px);
+  font-weight: var(--font-weight-medium, 500);
+  cursor: pointer;
+  padding: 10px 16px;
+  transition: color 0.2s ease;
+}
+
+.ffp-clear-all-btn:hover {
+  color: var(--color-accent-secondary, #3b82f6);
+}
+
+.ffp-apply-btn {
+  background: var(--color-accent-secondary, #3b82f6);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: var(--radius-lg, 12px);
+  padding: 12px 28px;
+  font-family: inherit;
+  font-size: var(--font-size-sm, 14px);
+  font-weight: var(--font-weight-semibold, 600);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px rgba(var(--color-accent-secondary-rgb, 59, 130, 246), 0.4);
+}
+
+.ffp-apply-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(var(--color-accent-secondary-rgb, 59, 130, 246), 0.6);
+  opacity: 0.95;
+}
+
+/* Animations */
+@keyframes ffp-scale-in {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .ffp-overlay {
+    padding-top: 4vh;
+  }
+  .ffp-popup {
+    width: 95%;
+    padding: var(--spacing-lg, 24px);
+    max-height: 90vh;
+    border-radius: var(--radius-lg, 16px);
+  }
+  .ffp-filter-list {
+    grid-template-columns: 1fr;
+  }
+}

@@ -365,5 +365,38 @@
         "default": true
       }
     ]
+  },
+  {
+    "name": "Faceted Filters",
+    "settings": [
+      {
+        "type": "text",
+        "id": "filter_search_help_text",
+        "label": "Search Help Text",
+        "default": "Type your keywords above to browse our premium electronics collection.",
+        "info": "Guidance text displayed in the filter popup when no search query has been entered."
+      },
+      {
+        "type": "checkbox",
+        "id": "filter_popup_collapse_by_default",
+        "label": "Auto-Collapse Filters",
+        "default": false,
+        "info": "Start all filter groups in a collapsed state when the popup is opened."
+      },
+      {
+        "type": "text",
+        "id": "filter_btn_label",
+        "label": "Filter Button Label",
+        "default": "Filters",
+        "info": "Text label displayed next to the funnel icon on the filter trigger button."
+      },
+      {
+        "type": "text",
+        "id": "filter_collection_empty_text",
+        "label": "Empty Collection Text",
+        "default": "No filters are available because this collection has no products.",
+        "info": "Guidance text displayed in the filter popup when a collection is empty."
+      }
+    ]
   }
 ]

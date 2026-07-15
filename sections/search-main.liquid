@@ -351,36 +351,68 @@
                 </span>
               {%- endif -%}
               
-              {%- if block.settings.show_sort -%}
-                <div class="search-sort">
-                  {%- if block.settings.show_sort_label -%}
-                    <label for="sort-select">{{ 'collections.sort_by' | t }}</label>
-                  {%- endif -%}
-                  <div class="ccg-dropdown-box" id="search-sort-dropdown">
-                    <button class="ccg-dropdown-trigger" aria-haspopup="listbox" aria-expanded="false">
-                      {%- assign current_sort = search.sort_options | where: "value", search.sort_by | first -%}
-                      {%- if current_sort == nil -%}
-                        {%- assign current_sort = search.sort_options | where: "value", search.default_sort_by | first -%}
-                      {%- endif -%}
-                      <span class="ccg-dropdown-label">{{ current_sort.name | default: 'Relevance' }}</span>
-                      {%- if block.settings.show_dropdown_arrow -%}
-                        <svg class="ccg-dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                          <polyline points="6 9 12 15 18 9" />
-                        </svg>
-                      {%- endif -%}
-                    </button>
-                    <div class="ccg-dropdown-list" role="listbox">
-                      {%- for option in search.sort_options -%}
-                        <div class="ccg-dropdown-option{% if option.value == search.sort_by %} active{% endif %}" 
-                          role="option" 
-                          data-value="{{ request.path }}?q={{ search.terms | escape }}&sort_by={{ option.value }}">
-                          {{ option.name }}
-                        </div>
-                      {%- endfor -%}
+              <div class="search-meta-actions" style="display: flex; align-items: center; gap: 16px;">
+                {%- if block.settings.show_sort -%}
+                  <div class="search-sort">
+                    {%- if block.settings.show_sort_label -%}
+                      <label for="sort-select">{{ 'collections.sort_by' | t }}</label>
+                    {%- endif -%}
+                    <div class="ccg-dropdown-box" id="search-sort-dropdown">
+                      <button class="ccg-dropdown-trigger" aria-haspopup="listbox" aria-expanded="false">
+                        {%- assign current_sort = search.sort_options | where: "value", search.sort_by | first -%}
+                        {%- if current_sort == nil -%}
+                          {%- assign current_sort = search.sort_options | where: "value", search.default_sort_by | first -%}
+                        {%- endif -%}
+                        <span class="ccg-dropdown-label">{{ current_sort.name | default: 'Relevance' }}</span>
+                        {%- if block.settings.show_dropdown_arrow -%}
+                          <svg class="ccg-dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9" />
+                          </svg>
+                        {%- endif -%}
+                      </button>
+                      <div class="ccg-dropdown-list" role="listbox">
+                        {%- for option in search.sort_options -%}
+                          <div class="ccg-dropdown-option{% if option.value == search.sort_by %} active{% endif %}" 
+                            role="option" 
+                            data-value="{{ request.path }}?q={{ search.terms | escape }}&sort_by={{ option.value }}">
+                            {{ option.name }}
+                          </div>
+                        {%- endfor -%}
+                      </div>
                     </div>
                   </div>
-                </div>
-              {%- endif -%}
+                {%- endif -%}
+
+                {%- if block.settings.show_filter_popup -%}
+                  {{ 'component-faceted-filter-popup.css' | asset_url | stylesheet_tag }}
+                  <script src="{{ 'component-faceted-filter-popup.js' | asset_url }}" defer></script>
+                  <style>
+                    {%- if block.settings.filter_btn_bg_color != blank -%}
+                      #block-{{ block.id }} .ffp-trigger-btn {
+                        background-color: {{ block.settings.filter_btn_bg_color }} !important;
+                      }
+                    {%- endif -%}
+                    {%- if block.settings.filter_btn_text_color != blank -%}
+                      #block-{{ block.id }} .ffp-trigger-btn {
+                        color: {{ block.settings.filter_btn_text_color }} !important;
+                      }
+                      #block-{{ block.id }} .ffp-trigger-btn svg {
+                        color: {{ block.settings.filter_btn_text_color }} !important;
+                      }
+                    {%- endif -%}
+                    {%- if block.settings.filter_btn_border_color != blank -%}
+                      #block-{{ block.id }} .ffp-trigger-btn {
+                        border-color: {{ block.settings.filter_btn_border_color }} !important;
+                      }
+                    {%- endif -%}
+                  </style>
+                  {% render 'faceted-filter-popup', 
+                    filter_context: 'search', 
+                    show_filter_label: block.settings.show_filter_label,
+                    show_filter_icon: block.settings.show_filter_icon
+                  %}
+                {%- endif -%}
+              </div>
             </div>
 
           {%- when 'results_grid' -%}
@@ -667,6 +699,24 @@
         },
         {
           "type": "checkbox",
+          "id": "show_filter_popup",
+          "label": "Show faceted filter button",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_filter_label",
+          "label": "Show filters text label",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_filter_icon",
+          "label": "Show filters icon",
+          "default": true
+        },
+        {
+          "type": "checkbox",
           "id": "show_sort_label",
           "label": "Show sort label",
           "default": true
@@ -804,6 +854,25 @@
           "type": "color",
           "id": "dropdown_shadow_color",
           "label": "Dropdown Shadow Color"
+        },
+        {
+          "type": "header",
+          "content": "Filter Button Styling"
+        },
+        {
+          "type": "color",
+          "id": "filter_btn_bg_color",
+          "label": "Filter Button Background Color"
+        },
+        {
+          "type": "color",
+          "id": "filter_btn_text_color",
+          "label": "Filter Button Text/Icon Color"
+        },
+        {
+          "type": "color",
+          "id": "filter_btn_border_color",
+          "label": "Filter Button Border Color"
         }
       ]
     },
