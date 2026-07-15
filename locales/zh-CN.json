@@ -31,5 +31,29 @@
       "email": "Email Address",
       "success": "We've sent you an email with a link to update your password."
     }
+  },
+  "blog": {
+    "article_metadata_html": "By {{ author }} on {{ date }}",
+    "article_comments": "{{ count }} comments",
+    "comment_form_title": "Leave a comment",
+    "comment_form_name": "Name",
+    "comment_form_email": "Email",
+    "comment_form_body": "Message",
+    "comment_form_submit": "Post comment",
+    "no_categories": "No categories available",
+    "no_tags": "No tags available",
+    "no_blogs": "No blogs available",
+    "all_articles": "All Articles",
+    "read_more": "Read more",
+    "read_full": "Read Full Article",
+    "filter_all": "All Topics",
+    "no_articles": "No articles found.",
+    "showing_articles": "Showing {{ count }} articles",
+    "previous_article": "Previous Article",
+    "next_article": "Next Article",
+    "written_by": "Written by",
+    "share_this_article": "Share this article:",
+    "no_comments_yet": "No comments yet",
+    "featured_products": "Featured Products"
   }
 }
