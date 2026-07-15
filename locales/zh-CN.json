@@ -14,22 +14,22 @@
     "back_to_shopping": "返回购物"
   },
   "accessibility": {
-    "skip_to_content": "Skip to content",
-    "close_menu": "Close menu",
-    "open_menu": "Open menu",
-    "toggle_submenu": "Toggle submenu",
-    "refresh_page": "Page refreshed",
-    "unit_price_separator": "per",
-    "back_to_top": "Back to top",
-    "account": "Account",
+    "skip_to_content": "跳至内容",
+    "close_menu": "关闭菜单",
+    "open_menu": "打开菜单",
+    "toggle_submenu": "切换子菜单",
+    "refresh_page": "页面已刷新",
+    "unit_price_separator": "每",
+    "back_to_top": "返回顶部",
+    "account": "帐户",
     "link_messages": {
-      "new_window": "Opens in a new window"
+      "new_window": "在新窗口中打开"
     }
   },
   "customer": {
     "recover_password": {
-      "email": "Email Address",
-      "success": "We've sent you an email with a link to update your password."
+      "email": "电子邮件",
+      "success": "我们已向您发送了一封电子邮件，其中包含用于更新密码的链接。"
     }
   },
   "blog": {
@@ -284,5 +284,40 @@
     "title": "Search",
     "no_results_html": "No results found for \"{{ terms }}\"",
     "results_for_html": "{{ count }} results for \"{{ terms }}\""
+  },
+  "sections": {
+    "header": {
+      "navigation": "Main navigation",
+      "announcement": "Announcement",
+      "popular_searches": "Popular Searches",
+      "cart_count": "items"
+    },
+    "footer": {
+      "all_rights_reserved": "All rights reserved.",
+      "payment_methods": "Payment methods",
+      "newsletter": {
+        "placeholder": "Your email address",
+        "submit": "Subscribe",
+        "success": "Thanks for subscribing!"
+      }
+    },
+    "cart": {
+      "cart_error": "An error occurred while updating your cart.",
+      "cart_quantity_error_html": "You can only add {{ quantity }} of this item to your cart.",
+      "buttons": {
+        "clear": "Clear"
+      }
+    },
+    "collection_list": {
+      "items_count": "{{ count }} items",
+      "explore": "Explore"
+    },
+    "slideshow": {
+      "pause_slideshow": "Pause slideshow",
+      "play_slideshow": "Play slideshow"
+    },
+    "featured_collection": {
+      "view_all": "View All"
+    }
   }
 }
