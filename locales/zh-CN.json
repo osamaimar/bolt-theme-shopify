@@ -319,5 +319,13 @@
     "featured_collection": {
       "view_all": "View All"
     }
+  },
+  "customer_accounts": {
+    "date": {
+      "range": "{{开始日期}}–{{结束日期}}"
+    },
+    "navigation_and_structure": {
+      "shop_logo_accessibility_label": "{{shopName}}标志"
+    }
   }
 }
