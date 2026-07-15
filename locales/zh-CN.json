@@ -287,37 +287,37 @@
   },
   "sections": {
     "header": {
-      "navigation": "Main navigation",
-      "announcement": "Announcement",
-      "popular_searches": "Popular Searches",
-      "cart_count": "items"
+      "navigation": "主导航",
+      "announcement": "公告",
+      "popular_searches": "热门搜索",
+      "cart_count": "项目"
     },
     "footer": {
-      "all_rights_reserved": "All rights reserved.",
-      "payment_methods": "Payment methods",
+      "all_rights_reserved": "版权所有。",
+      "payment_methods": "付款方式",
       "newsletter": {
-        "placeholder": "Your email address",
-        "submit": "Subscribe",
-        "success": "Thanks for subscribing!"
+        "placeholder": "您的电子邮件地址",
+        "submit": "订阅",
+        "success": "感谢您的订阅！"
       }
     },
     "cart": {
-      "cart_error": "An error occurred while updating your cart.",
-      "cart_quantity_error_html": "You can only add {{ quantity }} of this item to your cart.",
+      "cart_error": "更新您的购物车时出错。",
+      "cart_quantity_error_html": "您只能将此商品的 {{Quantity}} 添加到您的购物车。",
       "buttons": {
-        "clear": "Clear"
+        "clear": "清除"
       }
     },
     "collection_list": {
-      "items_count": "{{ count }} items",
-      "explore": "Explore"
+      "items_count": "{{ 计数 }} 项",
+      "explore": "探索"
     },
     "slideshow": {
-      "pause_slideshow": "Pause slideshow",
-      "play_slideshow": "Play slideshow"
+      "pause_slideshow": "暂停幻灯片放映",
+      "play_slideshow": "播放幻灯片"
     },
     "featured_collection": {
-      "view_all": "View All"
+      "view_all": "查看全部"
     }
   },
   "customer_accounts": {
