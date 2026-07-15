@@ -118,5 +118,61 @@
     "showing_zero_collections": "顯示 0 個集合，共 0 個集合",
     "no_collections_found": "未找到與您的選擇相符的集合。",
     "select_collection": "選擇一個系列來展示產品。"
+  },
+  "general": {
+    "breadcrumb": {
+      "home": "家",
+      "products": "產品"
+    },
+    "home": "家",
+    "share_link_copied": "連結已複製到剪貼簿！",
+    "pagination": {
+      "label": "分頁",
+      "previous": "上一頁",
+      "next": "下一頁"
+    },
+    "share": {
+      "copy_to_clipboard_confirmation": "連結已複製到剪貼簿"
+    },
+    "search": {
+      "all": "所有產品",
+      "submit": "搜尋",
+      "title": "搜尋",
+      "placeholder": "搜尋我們的商店...",
+      "recent": "最近的搜尋",
+      "clear_all": "全部清除",
+      "esc_key": "ESC鍵",
+      "to_search": "搜尋",
+      "to_close": "關閉",
+      "to_toggle": "切換",
+      "no_results_html": "未找到「{{ terms }}」的結果",
+      "results_for_html": "“{{ terms }}”的 {{ count }} 個結果",
+      "no_results": "未找到「{{ terms }}」的結果",
+      "results_with_count": "找到「{{ terms }}」的 {{ count }} 個產品",
+      "results_count": "找到的產品",
+      "no_results_help": "嘗試不同的搜尋字詞或瀏覽我們的類別。",
+      "start_searching_title": "準備好找東西了嗎？",
+      "start_searching_text": "在上面輸入您的關鍵字以瀏覽我們的優質電子產品系列。"
+    },
+    "newsletter_form": {
+      "email_placeholder": "您的電子郵件",
+      "submit": "訂閱",
+      "confirmation": "感謝您的訂閱！"
+    },
+    "coming_soon": {
+      "show_subscribe": "顯示訂閱表格"
+    },
+    "countdown": {
+      "years": "年",
+      "months": "幾個月",
+      "weeks": "週數",
+      "days": "天",
+      "hours": "時間",
+      "minutes": "分分鐘",
+      "seconds": "秒數"
+    },
+    "faq": {
+      "no_results_html": "沒有問題符合您的搜尋。嘗試使用不同的關鍵字或<span class=\"highlight-text\">瀏覽所有類別</span>。"
+    }
   }
 }
