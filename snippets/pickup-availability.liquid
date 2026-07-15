@@ -1,0 +1,164 @@
+{%- comment -%}
+  Renders pickup availability for a product variant.
+  Accepts:
+  - product: {Object} Product object (required)
+  - block: {Object} Block object (required)
+  - section: {Object} Section object (required)
+{%- endcomment -%}
+
+{{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign pick_up_availabilities = current_variant.store_availabilities -%}
+
+<div class="pickup-availability-container" 
+     id="PickupAvailability-{{ section.id }}"
+     data-section-id="{{ section.id }}"
+     data-product-id="{{ product.id }}"
+     data-base-url="{{ shop.secure_url }}"
+     style="margin-top: {{ block.settings.margin_top | default: 0 }}px; margin-bottom: {{ block.settings.margin_bottom | default: 20 }}px;"
+>
+  {%- if pick_up_availabilities.size > 0 -%}
+    {%- assign closest_availability = pick_up_availabilities.first -%}
+    
+    <div class="pua-summary-wrapper">
+      {%- if closest_availability.available -%}
+        <span class="pua-icon pua-icon--available" {% if block.settings.icon_color != blank %}style="color: {{ block.settings.icon_color }} !important; background-color: {{ block.settings.icon_color }}15 !important;"{% endif %}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </span>
+        <div class="pua-info">
+          <p class="pua-title">
+            {%- if block.settings.available_label != blank -%}
+              {{ block.settings.available_label }}
+            {%- else -%}
+              {{ 'products.product.pickup_available' | t }}
+            {%- endif -%}
+            <strong class="pua-location-highlight">{{ closest_availability.location.name }}</strong>
+          </p>
+          <p class="pua-time">{{ closest_availability.pick_up_time }}</p>
+          <button type="button" class="pua-trigger-btn" aria-haspopup="dialog" aria-expanded="false">
+            {{ 'products.product.pickup_view_store_info' | t }}
+          </button>
+        </div>
+      {%- else -%}
+        <span class="pua-icon pua-icon--unavailable" {% if block.settings.icon_color != blank %}style="color: {{ block.settings.icon_color }} !important; background-color: {{ block.settings.icon_color }}15 !important;"{% endif %}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </span>
+        <div class="pua-info">
+          <p class="pua-title">
+            {%- if block.settings.unavailable_label != blank -%}
+              {{ block.settings.unavailable_label }}
+            {%- else -%}
+              {{ 'products.product.pickup_unavailable' | t }}
+            {%- endif -%}
+            <strong class="pua-location-highlight">{{ closest_availability.location.name }}</strong>
+          </p>
+          <button type="button" class="pua-trigger-btn" aria-haspopup="dialog" aria-expanded="false">
+            {{ 'products.product.pickup_view_store_info' | t }}
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Collapsible Drawer (Closed by default) -->
+    <div class="pua-drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="PuaTitle-{{ section.id }}">
+      <div class="pua-drawer__overlay"></div>
+      <div class="pua-drawer__content">
+        <div class="pua-drawer__header">
+          <div class="pua-drawer__header-info">
+            <h3 class="pua-drawer__heading" id="PuaTitle-{{ section.id }}">
+              {%- if block.settings.heading != blank -%}
+                {{ block.settings.heading }}
+              {%- else -%}
+                {{ 'products.product.pickup_availability' | t }}
+              {%- endif -%}
+            </h3>
+            <p class="pua-drawer__variant-title">{{ product.title }}
+              {%- unless current_variant.title contains 'Default Title' -%}
+                - {{ current_variant.title }}
+              {%- endunless -%}
+            </p>
+          </div>
+          <button type="button" class="pua-drawer__close" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="pua-drawer__body">
+          <ul class="pua-locations-list" role="list">
+            {%- for availability in pick_up_availabilities -%}
+              <li class="pua-location-item">
+                <div class="pua-location-header">
+                  <h4 class="pua-location-name">{{ availability.location.name }}</h4>
+                  <div class="pua-location-status">
+                    {%- if availability.available -%}
+                      <span class="pua-badge pua-badge--available" {% if block.settings.badge_available_color != blank %}style="background-color: {{ block.settings.badge_available_color }}20 !important; color: {{ block.settings.badge_available_color }} !important;"{% endif %}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        {%- if block.settings.available_label != blank -%}
+                          {{ block.settings.available_label }}
+                        {%- else -%}
+                          {{ 'products.product.pickup_available' | t }}
+                        {%- endif -%}
+                      </span>
+                    {%- else -%}
+                      <span class="pua-badge pua-badge--unavailable" {% if block.settings.badge_unavailable_color != blank %}style="background-color: {{ block.settings.badge_unavailable_color }}20 !important; color: {{ block.settings.badge_unavailable_color }} !important;"{% endif %}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                          <line x1="18" y1="6" x2="6" y2="18"></line>
+                          <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                        {%- if block.settings.unavailable_label != blank -%}
+                          {{ block.settings.unavailable_label }}
+                        {%- else -%}
+                          {{ 'products.product.pickup_unavailable' | t }}
+                        {%- endif -%}
+                      </span>
+                    {%- endif -%}
+                  </div>
+                </div>
+
+                {%- if availability.available -%}
+                  <p class="pua-location-time">{{ availability.pick_up_time }}</p>
+                {%- endif -%}
+
+                {%- if block.settings.show_store_hours -%}
+                  <p class="pua-location-hours">
+                    {%- if availability.location.metafields.custom.store_hours != blank -%}
+                      {{ availability.location.metafields.custom.store_hours }}
+                    {%- else -%}
+                      <span class="pua-hours-label">Hours:</span> Mon-Fri 9:00 AM - 6:00 PM, Sat 10:00 AM - 4:00 PM
+                    {%- endif -%}
+                  </p>
+                {%- endif -%}
+                
+                {%- assign address = availability.location.address -%}
+                <address class="pua-location-address">
+                  {{ address | format_address }}
+                </address>
+                
+                {%- if address.phone != blank -%}
+                  <p class="pua-location-phone">
+                    <a href="tel:{{ address.phone }}">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pua-phone-icon">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                      </svg>
+                      {{ address.phone }}
+                    </a>
+                  </p>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</div>

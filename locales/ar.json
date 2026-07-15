@@ -1326,7 +1326,15 @@
       "warranty_included": "ضمان سنتين مشمول",
       "price": {
         "from_price_html": "من {{ price }}"
-      }
+      },
+      "pickup_availability": "توفر الاستلام",
+      "pickup_available": "متوفر للاستلام",
+      "pickup_unavailable": "غير متوفر للاستلام",
+      "pickup_usually_ready": "عادة ما يكون جاهزًا خلال {{ time }}",
+      "pickup_view_store_info": "عرض معلومات المتجر",
+      "pickup_loading": "جاري التحقق من التوفر...",
+      "pickup_error": "تعذر تحميل توفر الاستلام.",
+      "pickup_no_stores": "لا توجد متاجر مهيأة للاستلام."
     }
   },
   "cart": {

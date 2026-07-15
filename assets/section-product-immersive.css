@@ -90,7 +90,7 @@
 .pdi-gallery {
     position: sticky;
     top: 90px;
-    height: calc(100vh - 90px);
+    align-self: start;
     padding: var(--spacing-lg);
     display: flex;
     flex-direction: column;
@@ -110,7 +110,6 @@
 }
 
 .pdi-gallery-main {
-    flex: 1;
     border-radius: var(--radius-2xl);
     overflow: hidden;
     position: relative;
@@ -1484,7 +1483,8 @@
     }
 
     .pdi-cart-btn {
-        width: 100%;
+        width: 100% !important;
+        flex: none !important;
     }
 
     .pdi-price-main {

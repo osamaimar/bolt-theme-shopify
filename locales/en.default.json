@@ -176,7 +176,19 @@
       "quantity_label": "Quantity",
       "verified_review": "Verified",
       "sample_product": "Sample Product",
-      "title_placeholder": "Product Title"
+      "title_placeholder": "Product Title",
+      "pairs_well_with": "Pairs Well With",
+      "complementary_products_heading": "Complete the [Look]",
+      "no_complementary_products": "No complementary products set.",
+      "complementary_badge": "Pairs Well With",
+      "pickup_availability": "Pickup availability",
+      "pickup_available": "Available for pickup",
+      "pickup_unavailable": "Not available for pickup",
+      "pickup_usually_ready": "Usually ready in {{ time }}",
+      "pickup_view_store_info": "View store information",
+      "pickup_loading": "Checking availability...",
+      "pickup_error": "Could not load pickup availability.",
+      "pickup_no_stores": "No stores configured for pickup."
     }
   },
   "blogs": {

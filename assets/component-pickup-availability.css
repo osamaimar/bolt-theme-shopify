@@ -1,0 +1,392 @@
+/* 
+ * BoltTheme Component: Pickup Availability (assets/component-pickup-availability.css)
+ */
+
+.pickup-availability-container {
+  display: block;
+  font-family: var(--font-body-family);
+}
+
+.pua-summary-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pua-summary-wrapper:hover {
+  border-color: var(--border-medium);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.pua-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  transition: transform 0.3s ease;
+}
+
+.pua-summary-wrapper:hover .pua-icon {
+  transform: scale(1.05);
+}
+
+.pua-icon--available {
+  background-color: rgba(74, 222, 128, 0.1);
+  color: #4ade80;
+}
+
+.pua-icon--unavailable {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.pua-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.pua-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pua-title {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.pua-location-highlight {
+  color: var(--color-accent-secondary);
+}
+
+.pua-time {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.pua-trigger-btn {
+  font-size: var(--font-size-xs);
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 4px;
+  text-align: left;
+  font-weight: var(--font-weight-semibold);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.pua-trigger-btn:hover {
+  color: var(--color-accent-hover);
+  text-decoration-color: var(--color-accent-hover);
+}
+
+/* Slide-out Drawer */
+.pua-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000000 !important;
+  display: flex;
+  justify-content: flex-end;
+  visibility: hidden;
+  transition: visibility 0.4s ease;
+}
+
+.pua-drawer.is-open {
+  visibility: visible;
+}
+
+.pua-drawer__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.pua-drawer.is-open .pua-drawer__overlay {
+  opacity: 1;
+}
+
+.pua-drawer__content {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 100%;
+  background: linear-gradient(175deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.5), 0 0 40px var(--color-accent-secondary-10), inset 1px 0 0 var(--color-white-5);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: var(--spacing-lg);
+  border-left: 1px solid var(--border-light);
+}
+
+.pua-drawer.is-open .pua-drawer__content {
+  transform: translateX(0);
+}
+
+.pua-drawer__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: var(--spacing-lg);
+}
+
+.pua-drawer__header-info {
+  flex: 1;
+  padding-right: var(--spacing-md);
+}
+
+.pua-drawer__heading {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.pua-drawer__variant-title {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin: 6px 0 0 0;
+}
+
+.pua-drawer__close {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-black-30);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--color-white-10);
+  border-radius: var(--radius-full);
+  color: var(--color-white-70);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.pua-drawer__close:hover {
+  background: var(--color-error);
+  border-color: var(--color-error);
+  color: var(--color-white);
+  transform: rotate(90deg) scale(1.08);
+}
+
+.pua-drawer__close svg {
+  width: 18px;
+  height: 18px;
+}
+
+.pua-drawer__body {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-right: var(--spacing-xs);
+}
+
+.pua-drawer__body::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.pua-drawer__body::-webkit-scrollbar-thumb {
+  background: var(--border-medium) !important;
+  border-radius: var(--radius-full) !important;
+}
+
+.pua-locations-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: 0;
+  margin: 0;
+}
+
+.pua-location-item {
+  padding: var(--spacing-md);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  list-style: none;
+  transition: border-color 0.2s ease;
+}
+
+.pua-location-item:hover {
+  border-color: var(--border-medium);
+}
+
+.pua-location-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+.pua-location-name {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.pua-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.pua-badge--available {
+  background-color: rgba(74, 222, 128, 0.1);
+  color: #4ade80;
+}
+
+.pua-badge--available svg {
+  width: 12px;
+  height: 12px;
+}
+
+.pua-badge--unavailable {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.pua-badge--unavailable svg {
+  width: 12px;
+  height: 12px;
+}
+
+.pua-location-time {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.pua-location-address {
+  font-style: normal;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.pua-location-address p {
+  margin: 0 0 4px 0;
+}
+
+.pua-location-address p:last-child {
+  margin: 0;
+}
+
+.pua-location-phone {
+  font-size: var(--font-size-xs);
+  margin-top: var(--spacing-sm);
+  margin-bottom: 0;
+}
+
+.pua-location-phone a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-accent);
+  transition: color 0.2s ease;
+}
+
+.pua-location-phone a:hover {
+  color: var(--color-accent-hover);
+}
+
+.pua-phone-icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* Skeleton Loading State styling */
+.pua-skeleton {
+  width: 100%;
+  height: 76px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  position: relative;
+}
+
+.pua-skeleton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  animation: puaPulse 1.5s infinite;
+}
+
+@keyframes puaPulse {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.pua-location-hours {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+  line-height: 1.4;
+}
+
+.pua-hours-label {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+/* RTL Support override */
+[dir="rtl"] .pua-drawer {
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .pua-drawer__content {
+  transform: translateX(-100%);
+  border-left: none;
+  border-right: 1px solid var(--border-light);
+}
+
+[dir="rtl"] .pua-drawer.is-open .pua-drawer__content {
+  transform: translateX(0);
+}
+
+[dir="rtl"] .pua-trigger-btn {
+  text-align: right;
+}

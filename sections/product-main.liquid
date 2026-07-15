@@ -260,6 +260,13 @@
                   {%- endif -%}
                 {%- endform -%}
 
+              {%- when 'pickup_availability' -%}
+                {% render 'pickup-availability',
+                  product: product,
+                  block: block,
+                  section: section
+                %}
+
               {%- when 'variants' -%}
                 <div class="pd-variants" id="block-{{ block.id }}" 
                      data-gallery-sync="{{ block.settings.enable_gallery_sync }}" 
@@ -730,6 +737,28 @@
         { "type": "color", "id": "swatch_active_border_color", "label": "Swatch Active Ring Color" }
       ]
     },
+    {
+      "type": "pickup_availability",
+      "name": "Pickup Availability",
+      "limit": 1,
+      "settings": [
+        { "type": "header", "content": "General Settings" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Pickup availability" },
+        { "type": "checkbox", "id": "show_store_hours", "label": "Show store hours per location", "default": true },
+        { "type": "text", "id": "available_label", "label": "Available Label", "default": "Available for pickup" },
+        { "type": "text", "id": "unavailable_label", "label": "Unavailable Label", "default": "Not available for pickup" },
+        { "type": "header", "content": "Visibility" },
+        { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
+        { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
+        { "type": "header", "content": "Layout" },
+        { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
+        { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 20 },
+        { "type": "header", "content": "Colors" },
+        { "type": "color", "id": "icon_color", "label": "Icon Color" },
+        { "type": "color", "id": "badge_available_color", "label": "Available Badge Color" },
+        { "type": "color", "id": "badge_unavailable_color", "label": "Unavailable Badge Color" }
+      ]
+    },
     { 
       "type": "@app"
     }
@@ -745,7 +774,8 @@
         { "type": "description" },
         { "type": "divider" },
         { "type": "highlights" },
-        { "type": "buy_buttons" }
+        { "type": "buy_buttons" },
+        { "type": "pickup_availability" }
       ]
     }
   ]

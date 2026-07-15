@@ -75,6 +75,13 @@
           "type": "buy_buttons",
           "settings": {}
         },
+        "pickup_availability": {
+          "type": "pickup_availability",
+          "settings": {
+            "heading": "Pickup availability",
+            "show_store_hours": true
+          }
+        },
         "divider_2": {
           "type": "divider",
           "settings": {}
@@ -89,6 +96,7 @@
         "divider_1",
         "highlights",
         "buy_buttons",
+        "pickup_availability",
         "divider_2"
       ],
       "settings": {
@@ -140,14 +148,14 @@
         "color_scheme": "background-1"
       }
     },
-    "related": {
-      "type": "product-related",
+    "complementary": {
+      "type": "product-complementary",
       "blocks": {
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "You May Also [Like]",
-            "show_view_all": true
+            "heading": "Complete the [Look]",
+            "show_view_all": false
           }
         },
         "grid": {
@@ -158,6 +166,7 @@
             "show_rating": true,
             "show_quick_view": true,
             "show_add_to_cart": true,
+            "show_badge": true,
             "columns_desktop": "4",
             "columns_tablet": "2",
             "columns_mobile": "1"
@@ -171,7 +180,7 @@
       "settings": {
         "show_section": true,
         "container_width": "standard",
-        "padding_top": 80,
+        "padding_top": 40,
         "padding_bottom": 80,
         "padding_top_mobile": 40,
         "padding_bottom_mobile": 40,
@@ -183,6 +192,6 @@
     "breadcrumb",
     "main",
     "tabs",
-    "related"
+    "complementary"
   ]
 }

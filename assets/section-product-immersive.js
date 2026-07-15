@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initImmersiveQuantity(section);
     initImmersiveAccordions(section);
     initImmersiveVariants(section);
+    initPickupAvailability(section);
   });
   
   initImmersiveSpotlight();
@@ -293,6 +294,9 @@ function initImmersiveVariants(container) {
           matchingThumb.click();
         }
       }
+
+      // Update Pickup Availability
+      updatePickupAvailability(matchedVariant.id, container);
     }
   }
 
@@ -316,3 +320,88 @@ function initImmersiveVariants(container) {
   updateOptionsState();
   checkAvailabilityState();
 }
+
+function initPickupAvailability(container) {
+  const puaContainer = container.querySelector('.pickup-availability-container');
+  if (!puaContainer) return;
+
+  const drawer = puaContainer.querySelector('.pua-drawer');
+  if (drawer) {
+    // Append the drawer to the body so it is outside any nested stacking context and overlays correctly over the header
+    document.body.appendChild(drawer);
+
+    // Add listeners to close the drawer
+    drawer.addEventListener('click', (e) => {
+      const closeBtn = e.target.closest('.pua-drawer__close');
+      const overlay = e.target.closest('.pua-drawer__overlay');
+      if (closeBtn || overlay) {
+        drawer.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('no-scroll');
+        document.documentElement.classList.remove('no-scroll');
+      }
+    });
+  }
+
+  // Handle the trigger button click on the section container
+  // Use unique listeners to avoid duplication
+  if (!container.dataset.puaListenerAdded) {
+    container.addEventListener('click', (e) => {
+      const trigger = e.target.closest('.pua-trigger-btn');
+      if (trigger) {
+        const currentPua = container.querySelector('.pickup-availability-container');
+        if (currentPua) {
+          const sectionId = currentPua.dataset.sectionId;
+          const targetDrawer = document.querySelector(`.pua-drawer[aria-labelledby="PuaTitle-${sectionId}"]`);
+          if (targetDrawer) {
+            targetDrawer.classList.add('is-open');
+            targetDrawer.removeAttribute('aria-hidden');
+            document.body.classList.add('no-scroll');
+            document.documentElement.classList.add('no-scroll');
+          }
+        }
+      }
+    });
+    container.dataset.puaListenerAdded = 'true';
+  }
+}
+
+function updatePickupAvailability(variantId, container) {
+  const puaContainer = container.querySelector('.pickup-availability-container');
+  if (!puaContainer) return;
+
+  const sectionId = puaContainer.dataset.sectionId;
+  if (!sectionId) return;
+
+  // Before re-fetching, remove the old drawer from the body to avoid orphans
+  const oldDrawer = document.querySelector(`.pua-drawer[aria-labelledby="PuaTitle-${sectionId}"]`);
+  if (oldDrawer) {
+    oldDrawer.remove();
+  }
+
+  // Show skeleton pulse loader
+  puaContainer.innerHTML = `<div class="pua-skeleton"></div>`;
+
+  // Fetch using Shopify's Section Rendering API
+  const url = `${window.location.pathname}?variant=${variantId}&section_id=${sectionId}`;
+
+  fetch(url)
+    .then(response => response.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const newPua = doc.querySelector('.pickup-availability-container');
+      if (newPua) {
+        puaContainer.outerHTML = newPua.outerHTML;
+        // Re-initialize to move the new drawer to the body and bind its close events
+        initPickupAvailability(container);
+      } else {
+        puaContainer.innerHTML = '';
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching pickup availability:', error);
+      puaContainer.innerHTML = '';
+    });
+}
+

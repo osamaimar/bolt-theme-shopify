@@ -11,12 +11,12 @@
 
 <style>
   #shopify-section-{{ section.id }} { padding: 0 !important; }
-  #shopify-section-{{ section.id }} .pd-related-outer {
+  #shopify-section-{{ section.id }} .pd-comp-outer {
     padding-top: {{ section.settings.padding_top }}px !important;
     padding-bottom: {{ section.settings.padding_bottom }}px !important;
   }
   @media screen and (max-width: 768px) {
-    #shopify-section-{{ section.id }} .pd-related-outer {
+    #shopify-section-{{ section.id }} .pd-comp-outer {
       padding-top: {{ section.settings.padding_top_mobile }}px !important;
       padding-bottom: {{ section.settings.padding_bottom_mobile }}px !important;
     }
@@ -38,7 +38,10 @@
         }
       }
       {%- if block.type == 'heading' -%}
-        #block-{{ section.id }}-{{ block.id }} .pd-related-title {
+        #block-{{ section.id }}-{{ block.id }} {
+          background: var(--block-gradient, var(--block-bg, transparent)) !important;
+        }
+        #block-{{ section.id }}-{{ block.id }} .pd-comp-title {
           font-size: {{ block.settings.font_size }}rem;
           font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %};
           font-style: {{ block.settings.font_style }};
@@ -46,7 +49,7 @@
           letter-spacing: {{ block.settings.letter_spacing }}px;
           line-height: {{ block.settings.line_height }};
         }
-        #block-{{ section.id }}-{{ block.id }} .pd-related-title span {
+        #block-{{ section.id }}-{{ block.id }} .pd-comp-title span {
           {% if block.settings.highlight_color != blank %}color: {{ block.settings.highlight_color }} !important;{% endif %}
           {% if block.settings.highlight_gradient != blank %}
             background: {{ block.settings.highlight_gradient }};
@@ -55,41 +58,42 @@
             background-clip: text;
           {% endif %}
         }
-        #block-{{ section.id }}-{{ block.id }} .pd-related-link {
+        #block-{{ section.id }}-{{ block.id }} .pd-comp-link {
           {% if block.settings.link_color != blank %}color: {{ block.settings.link_color }} !important;{% endif %}
         }
-        #block-{{ section.id }}-{{ block.id }} .pd-related-link:hover {
+        #block-{{ section.id }}-{{ block.id }} .pd-comp-link:hover {
           {% if block.settings.link_hover_color != blank %}color: {{ block.settings.link_hover_color }} !important;{% endif %}
         }
       {%- endif -%}
 
       {%- if block.type == 'product_grid' -%}
-        #block-{{ section.id }}-{{ block.id }} .pd-related-card-category { {% if block.settings.category_color != blank %}color: {{ block.settings.category_color }} !important;{% endif %} }
-        #block-{{ section.id }}-{{ block.id }} .pd-related-card-name a { {% if block.settings.name_color != blank %}color: {{ block.settings.name_color }} !important;{% endif %} }
-        #block-{{ section.id }}-{{ block.id }} .pd-related-card-price { {% if block.settings.price_color != blank %}color: {{ block.settings.price_color }} !important;{% endif %} }
-        #block-{{ section.id }}-{{ block.id }} .pd-related-card-stars, #block-{{ section.id }}-{{ block.id }} .pd-related-card-stars span { {% if block.settings.rating_color != blank %}color: {{ block.settings.rating_color }} !important;{% endif %} }
-        #block-{{ section.id }}-{{ block.id }} .pd-related-card-stars svg:not(.empty) { {% if block.settings.rating_color != blank %}fill: {{ block.settings.rating_color }} !important;{% endif %} }
-        #block-{{ section.id }}-{{ block.id }} .pd-related-card { 
-          background: {% if block.settings.bg_gradient != blank %}{{ block.settings.bg_gradient }}{% else %}var(--block-bg, var(--bg-glass)){% endif %} !important;
+        #block-{{ section.id }}-{{ block.id }} .pd-comp-card-category { {% if block.settings.category_color != blank %}color: {{ block.settings.category_color }} !important;{% endif %} }
+        #block-{{ section.id }}-{{ block.id }} .pd-comp-card-name a { {% if block.settings.name_color != blank %}color: {{ block.settings.name_color }} !important;{% endif %} }
+        #block-{{ section.id }}-{{ block.id }} .pd-comp-card-price { {% if block.settings.price_color != blank %}color: {{ block.settings.price_color }} !important;{% endif %} }
+        #block-{{ section.id }}-{{ block.id }} .pd-comp-card-stars, #block-{{ section.id }}-{{ block.id }} .pd-comp-card-stars span { {% if block.settings.rating_color != blank %}color: {{ block.settings.rating_color }} !important;{% endif %} }
+        #block-{{ section.id }}-{{ block.id }} .pd-comp-card-stars svg:not(.empty) { {% if block.settings.rating_color != blank %}fill: {{ block.settings.rating_color }} !important;{% endif %} }
+        #block-{{ section.id }}-{{ block.id }} .pd-comp-card { 
+          background: var(--block-gradient, var(--block-bg, var(--bg-glass))) !important;
+          {% if block.settings.border_color != blank %}border-color: {{ block.settings.border_color }} !important;{% endif %}
         }
-        #block-{{ section.id }}-{{ block.id }} .pd-related-card-cta { 
+        #block-{{ section.id }}-{{ block.id }} .pd-comp-card-cta { 
           {% if block.settings.btn_bg_color != blank %}background: {{ block.settings.btn_bg_color }} !important;{% endif %}
           {% if block.settings.btn_text_color != blank %}color: {{ block.settings.btn_text_color }} !important;{% endif %}
         }
-        #block-{{ section.id }}-{{ block.id }} .pd-related-card-cta svg { {% if block.settings.btn_text_color != blank %}color: {{ block.settings.btn_text_color }} !important;{% endif %} }
-        #block-{{ section.id }}-{{ block.id }} .pd-related-quick-btn {
+        #block-{{ section.id }}-{{ block.id }} .pd-comp-card-cta svg { {% if block.settings.btn_text_color != blank %}color: {{ block.settings.btn_text_color }} !important;{% endif %} }
+        #block-{{ section.id }}-{{ block.id }} .cpd-quick-view-btn {
           {% if block.settings.quick_view_bg_color != blank %}background: {{ block.settings.quick_view_bg_color }} !important;{% endif %}
           {% if block.settings.quick_view_text_color != blank %}color: {{ block.settings.quick_view_text_color }} !important;{% endif %}
         }
-        #block-{{ section.id }}-{{ block.id }} .pd-related-quick-btn svg { {% if block.settings.quick_view_text_color != blank %}color: {{ block.settings.quick_view_text_color }} !important;{% endif %} }
+        #block-{{ section.id }}-{{ block.id }} .cpd-quick-view-btn svg { {% if block.settings.quick_view_text_color != blank %}color: {{ block.settings.quick_view_text_color }} !important;{% endif %} }
       {%- endif -%}
     {%- endif -%}
   {%- endfor -%}
 </style>
 
-<div class="pd-related-outer color-{{ section.settings.color_scheme }} {% unless section.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless section.settings.show_on_mobile %} hidden-mobile{% endunless %}">
+<div class="pd-comp-outer color-{{ section.settings.color_scheme }} {% unless section.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless section.settings.show_on_mobile %} hidden-mobile{% endunless %}">
   <div class="pd-page {% if section.settings.container_width == 'full' %}pd-page--full{% elsif section.settings.container_width == 'narrow' %}pd-page--narrow{% endif %}">
-    <section class="pd-related-section">
+    <section class="pd-comp-section">
       
       {%- for block in section.blocks -%}
         {%- case block.type -%}
@@ -99,15 +103,15 @@
             {%- if heading_val != blank -%}
               {%- assign heading_val = heading_val | replace: '[', '<span>' | replace: ']', '</span>' -%}
             {%- else -%}
-              {%- assign heading_val = 'cart.you_may_also_like' | t | replace: '[', '<span>' | replace: ']', '</span>' -%}
+              {%- assign heading_val = 'products.product.complementary_products_heading' | t | replace: '[', '<span>' | replace: ']', '</span>' -%}
             {%- endif -%}
             {%- assign default_view_all_val = 'products.product.view_all_products' | t -%}{%- assign view_all_val = block.settings.view_all_text | default: default_view_all_val -%}
-            <div id="block-{{ section.id }}-{{ block.id }}" class="pd-related-header {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" style="justify-content: {% if 'left' == 'center' %}center{% elsif 'left' == 'right' %}flex-end{% else %}space-between{% endif %}; text-align: {{ 'left' }}; background: {% if block.settings.bg_gradient != blank %}{{ block.settings.bg_gradient }}{% else %}var(--block-bg, transparent){% endif %};" {{ block.shopify_attributes }}>
-              <h2 class="pd-related-title" style="color: var(--block-text-color, inherit);">
+            <div id="block-{{ section.id }}-{{ block.id }}" class="pd-comp-header {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" style="justify-content: {% if 'left' == 'center' %}center{% elsif 'left' == 'right' %}flex-end{% else %}space-between{% endif %}; text-align: {{ 'left' }};" {{ block.shopify_attributes }}>
+              <h2 class="pd-comp-title" style="color: var(--block-text-color, inherit);">
                 {{ heading_val }}
               </h2>
               {%- if block.settings.show_view_all -%}
-                <a href="{{ block.settings.view_all_link | default: routes.all_products_collection_url }}" class="pd-related-link">
+                <a href="{{ block.settings.view_all_link | default: routes.all_products_collection_url }}" class="pd-comp-link">
                   {{ view_all_val }}
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
                 </a>
@@ -115,63 +119,89 @@
             </div>
 
           {%- when 'product_grid' -%}
-            <div id="block-{{ section.id }}-{{ block.id }}" class="pd-related-grid pd-related-grid--{{ block.settings.columns_desktop }} pd-related-grid-tab--{{ block.settings.columns_tablet }} pd-related-grid-mob--{{ block.settings.columns_mobile }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
-              {%- assign related_collection = product.collections.first -%}
-              {%- if related_collection -%}
-                {%- assign count = 0 -%}
-                {%- for p in related_collection.products -%}
-                  {%- if p.id != product.id and count < block.settings.products_to_show -%}
-                    <article class="pd-related-card" data-category="{{ p.type | default: 'Electronics' }}">
-                      <div class="pd-related-card-thumb">
-                        <a href="{{ p.url }}" class="pd-related-card-link">
-                          <img src="{{ p.featured_image | image_url: width: 600, height: 600 }}" alt="{{ p.title }}" loading="lazy" width="600" height="600" />
-                        </a>
-                        {%- if block.settings.show_quick_view -%}
-                        <div class="pd-related-card-overlay">
-                          <button class="pd-related-quick-btn" data-product-handle="{{ p.handle }}" data-quick-view>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                            {{ 'products.product.quick_view' | t }}
-                          </button>
-                        </div>
-                        {%- endif -%}
-                      </div>
-                      <div class="pd-related-card-info">
-                        {%- if block.settings.show_category and p.collections.first -%}
-                          <span class="pd-related-card-category">{{ p.collections.first.title }}</span>
-                        {%- endif -%}
-                        <h3 class="pd-related-card-name">
-                          <a href="{{ p.url }}">{{ p.title }}</a>
-                        </h3>
-                        {%- if block.settings.show_rating -%}
-                        <div class="pd-related-card-stars">
-                          {%- assign rating_value = p.metafields.reviews.rating.value | default: block.settings.rating_value -%}
-                          {%- assign stars_active = rating_value | floor -%}
-                          {%- for i in (1..5) -%}
-                            <svg viewBox="0 0 24 24" class="{% if i > stars_active %}empty{% endif %}"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                          {%- endfor -%}
-                          {%- if block.settings.show_rating_value -%}
-                            <span>{{ rating_value }}</span>
+            {%- assign complementary_products = product.metafields.shopify--discovery--product_recommendation.complementary_products.value -%}
+            
+            {%- if complementary_products == blank or complementary_products.size == 0 -%}
+              {%- if block.settings.fallback_collection != blank -%}
+                {%- assign complementary_products = block.settings.fallback_collection.products -%}
+              {%- endif -%}
+            {%- endif -%}
+
+            <div id="block-{{ section.id }}-{{ block.id }}" class="{% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
+              {%- if complementary_products != blank and complementary_products.size > 0 -%}
+                <div class="pd-comp-grid pd-comp-grid--{{ block.settings.columns_desktop }} pd-comp-grid-tab--{{ block.settings.columns_tablet }} pd-comp-grid-mob--{{ block.settings.columns_mobile }}">
+                  {%- assign count = 0 -%}
+                  {%- for p in complementary_products -%}
+                    {%- if p.id != product.id and count < block.settings.products_to_show -%}
+                      <article class="pd-comp-card cpd-product-card" data-category="{{ p.type | default: 'Electronics' }}">
+                        <div class="pd-comp-card-thumb cpd-product-thumb">
+                          <a href="{{ p.url }}" class="pd-comp-card-link">
+                            <img src="{{ p.featured_image | image_url: width: 600, height: 600 }}" alt="{{ p.title }}" loading="lazy" width="600" height="600" />
+                          </a>
+                          {%- if block.settings.show_badge -%}
+                            <span class="pd-comp-badge">{{ 'products.product.complementary_badge' | t }}</span>
                           {%- endif -%}
-                        </div>
-                        {%- endif -%}
-                        <div class="pd-related-card-desc" style="display: none;">{{ p.description | strip_html | truncatewords: 30 }}</div>
-                        <div class="pd-related-card-footer">
-                          <span class="pd-related-card-price">{{ p.price | money_without_trailing_zeros }}</span>
-                          {%- if block.settings.show_add_to_cart -%}
-                          {%- form 'product', p, class: 'pd-related-card-form' -%}
-                            <input type="hidden" name="id" value="{{ p.variants.first.id }}">
-                            <button type="submit" class="pd-related-card-cta">
-                              <span>{{ 'products.product.add_to_cart' | t }}</span>
-                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                          {%- if block.settings.show_quick_view -%}
+                          <div class="pd-comp-card-overlay">
+                            <button class="cpd-quick-view-btn" data-product-handle="{{ p.handle }}" data-quick-view>
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                              {{ 'products.product.quick_view' | t }}
                             </button>
-                          {%- endform -%}
+                          </div>
                           {%- endif -%}
                         </div>
-                      </div>
-                    </article>
-                    {%- assign count = count | plus: 1 -%}
-                  {%- endif -%}
-                {%- endfor -%}
+                        <div class="pd-comp-card-info">
+                          {%- if block.settings.show_category and p.collections.first -%}
+                            <span class="pd-comp-card-category">{{ p.collections.first.title }}</span>
+                          {%- endif -%}
+                          <h3 class="pd-comp-card-name cpd-product-name">
+                            <a href="{{ p.url }}">{{ p.title }}</a>
+                          </h3>
+                          {%- if block.settings.show_rating -%}
+                          <div class="pd-comp-card-stars">
+                            {%- assign rating_value = p.metafields.reviews.rating.value | default: block.settings.rating_value -%}
+                            {%- assign stars_active = rating_value | floor -%}
+                            {%- for i in (1..5) -%}
+                              <svg viewBox="0 0 24 24" class="{% if i > stars_active %}empty{% endif %}"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            {%- endfor -%}
+                            {%- if block.settings.show_rating_value -%}
+                              <span>{{ rating_value }}</span>
+                            {%- endif -%}
+                          </div>
+                          {%- endif -%}
+                          <div class="pd-comp-card-desc cpd-product-desc" style="display: none;">{{ p.description | strip_html | truncatewords: 30 }}</div>
+                          <div class="pd-comp-card-footer">
+                            <span class="pd-comp-card-price cpd-product-price">{{ p.price | money_without_trailing_zeros }}</span>
+                            {%- if block.settings.show_add_to_cart -%}
+                            {%- form 'product', p, class: 'pd-comp-card-form' -%}
+                              <input type="hidden" name="id" value="{{ p.variants.first.id }}">
+                              <button type="submit" class="pd-comp-card-cta cpd-product-cta {% unless p.available %}disabled{% endunless %}" {% unless p.available %}disabled{% endunless %}>
+                                <span>
+                                  {%- if p.available -%}
+                                    {{ 'products.product.add_to_cart' | t }}
+                                  {%- else -%}
+                                    {{ 'products.product.sold_out' | t }}
+                                  {%- endif -%}
+                                </span>
+                                {%- if p.available -%}
+                                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                                {%- endif -%}
+                              </button>
+                            {%- endform -%}
+                            {%- endif -%}
+                          </div>
+                        </div>
+                      </article>
+                      {%- assign count = count | plus: 1 -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              {%- else -%}
+                {%- if request.design_mode -%}
+                  <div class="pd-comp-empty">
+                    <p>{{ 'products.product.no_complementary_products' | t }}</p>
+                  </div>
+                {%- endif -%}
               {%- endif -%}
             </div>
 
@@ -191,7 +221,7 @@
 
 {% schema %}
 {
-  "name": "Related Products",
+  "name": "Complementary Products",
   "settings": [
     {
       "type": "header",
@@ -268,14 +298,13 @@
       "limit": 1,
       "settings": [
         { "type": "header", "content": "General Settings" },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "You May Also [Like]", "info": "Use [text] to highlight" },
-        
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Pairs Well [With]", "info": "Use [text] to highlight" },
         { "type": "text", "id": "view_all_text", "label": "View All Text", "default": "View All Products" },
         { "type": "url", "id": "view_all_link", "label": "View All Link" },
         { "type": "header", "content": "Visibility" },
         { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
         { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
-        { "type": "checkbox", "id": "show_view_all", "label": "Show 'View All' link", "default": true },
+        { "type": "checkbox", "id": "show_view_all", "label": "Show 'View All' link", "default": false },
         { "type": "header", "content": "Margin" },
         { "type": "range", "id": "margin_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Top", "default": 0 },
         { "type": "range", "id": "margin_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Margin Bottom", "default": 20 },
@@ -305,6 +334,7 @@
       "settings": [
         { "type": "header", "content": "General Settings" },
         { "type": "range", "id": "products_to_show", "min": 2, "max": 12, "step": 1, "label": "Products to show", "default": 4 },
+        { "type": "collection", "id": "fallback_collection", "label": "Fallback Collection", "info": "Displayed if complementary product metafields are empty." },
         { "type": "text", "id": "rating_value", "label": "Rating value", "default": "4.9" },
         { "type": "header", "content": "Visibility" },
         { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
@@ -314,6 +344,7 @@
         { "type": "checkbox", "id": "show_rating_value", "label": "Show rating value text", "default": true },
         { "type": "checkbox", "id": "show_quick_view", "label": "Show Quick View button", "default": true },
         { "type": "checkbox", "id": "show_add_to_cart", "label": "Show Add to Cart button", "default": true },
+        { "type": "checkbox", "id": "show_badge", "label": "Show 'Pairs Well With' Badge", "default": true },
         { "type": "header", "content": "Layout" },
         { "type": "select", "id": "columns_desktop", "label": "Columns on desktop", "default": "4", "options": [{ "value": "2", "label": "2" }, { "value": "3", "label": "3" }, { "value": "4", "label": "4" }] },
         { "type": "select", "id": "columns_tablet", "label": "Columns on tablet", "default": "2", "options": [{ "value": "1", "label": "1" }, { "value": "2", "label": "2" }, { "value": "3", "label": "3" }] },
@@ -326,6 +357,7 @@
         { "type": "header", "content": "Colors" },
         { "type": "color", "id": "bg_color", "label": "Product Background Color" },
         { "type": "color_background", "id": "bg_gradient", "label": "Product Background Gradient" },
+        { "type": "color", "id": "border_color", "label": "Product Card Border Color" },
         { "type": "color", "id": "category_color", "label": "Category Color" },
         { "type": "color", "id": "name_color", "label": "Product Name Color" },
         { "type": "color", "id": "price_color", "label": "Price Color" },
@@ -355,7 +387,7 @@
   ],
   "presets": [
     {
-      "name": "Related Products",
+      "name": "Complementary Products",
       "blocks": [
         { "type": "heading" },
         { "type": "product_grid" }
@@ -364,4 +396,3 @@
   ]
 }
 {% endschema %}
-
