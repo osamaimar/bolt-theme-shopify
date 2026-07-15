@@ -1297,7 +1297,10 @@
       "esc_key": "زر هروب",
       "start_searching_title": "هل أنت مستعد للعثور على شيء ما؟",
       "no_results_html": "لم يتم العثور على نتائج لـ \"{{ terms }}\"",
-      "no_results": "لم يتم العثور على نتائج لـ \"{{ terms }}\""
+      "no_results": "لم يتم العثور على نتائج لـ \"{{ terms }}\"",
+      "predictive_loading": "جاري البحث...",
+      "predictive_empty": "لم يتم العثور على اقتراحات",
+      "predictive_view_all": "عرض جميع النتائج لـ \"{{ terms }}\""
     },
     "breadcrumb": {
       "home": "الرئيسية"

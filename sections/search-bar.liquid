@@ -1,5 +1,9 @@
 {{ 'section-search.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'section-search.js' | asset_url }}" defer="defer"></script>
+{%- if settings.enable_predictive_search -%}
+  {{ 'component-predictive-search.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'component-predictive-search.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 <style>
   #shopify-section-{{ section.id }} {
@@ -177,7 +181,7 @@
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'search_input' -%}
-            <form action="{{ routes.search_url }}" method="get" role="search" class="search-bar block-{{ block.id }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" id="search-bar" {{ block.shopify_attributes }}>
+            <form action="{{ routes.search_url }}" method="get" role="search" class="search-bar block-{{ block.id }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" id="search-bar" data-predictive-target="bar" {{ block.shopify_attributes }}>
               {%- if block.settings.show_search_icon -%}
                 <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="11" cy="11" r="8"></circle>

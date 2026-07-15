@@ -47,9 +47,19 @@
         "nav_block",
         "icons_block"
       ]
+    },
+    "search-popup": {
+      "type": "search-popup",
+      "settings": {
+        "show_section": true,
+        "popup_title": "Search",
+        "show_keyboard_hints": true,
+        "show_recent_searches": true
+      }
     }
   },
   "order": [
-    "header"
+    "header",
+    "search-popup"
   ]
 }

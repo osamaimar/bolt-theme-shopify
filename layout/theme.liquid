@@ -219,7 +219,6 @@
     {%- section 'cart-drawer' -%}
     {% section 'quick-view' %}
     {% section 'language-switcher' %}
-    {% render 'search-popup' %}
 
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
@@ -234,6 +233,26 @@
         cart_update_url: '{{ routes.cart_update_url }}',
         cart_url: '{{ routes.cart_url }}',
         predictive_search_url: '{{ routes.predictive_search_url }}'
+      };
+
+      window.boltTheme = window.boltTheme || {};
+      window.boltTheme.predictiveSearch = {
+        enabled: {{ settings.enable_predictive_search | json }},
+        resultsCount: {{ settings.predictive_search_results_count | json }},
+        showImage: {{ settings.predictive_search_show_image | json }},
+        showPrice: {{ settings.predictive_search_show_price | json }},
+        showVendor: {{ settings.predictive_search_show_vendor | json }},
+        routes: {
+          search_url: '{{ routes.search_url }}'
+        }
+      };
+
+      window.boltTheme.strings = {
+        products: `{{ 'custom_labels.products' | t }}`,
+        currencySymbol: `{{ 'catalog.currency_symbol' | t | default: '$' }}`,
+        predictiveLoading: `{{ 'general.search.predictive_loading' | t }}`,
+        predictiveEmpty: `{{ 'general.search.predictive_empty' | t }}`,
+        predictiveViewAll: `{{ 'general.search.predictive_view_all' | t }}`
       };
 
       window.cartStrings = {

@@ -1,0 +1,203 @@
+/* assets/component-header-localization.css */
+
+.hdr-loc-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.hdr-loc-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Base Toggle Button styles */
+.hdr-loc-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.25s ease;
+  white-space: nowrap;
+}
+
+.hdr-loc-toggle:hover {
+  color: var(--color-accent-secondary);
+}
+
+.hdr-loc-toggle[aria-expanded="true"] {
+  color: var(--color-accent-secondary);
+}
+
+.hdr-loc-flag {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  font-size: 14px;
+  margin-inline-end: 2px;
+}
+
+.hdr-loc-flag-img {
+  width: 16px;
+  height: auto;
+  border-radius: 2px;
+  display: block;
+}
+
+.hdr-loc-caret {
+  font-size: 8px;
+  opacity: 0.6;
+  transition: transform 0.25s ease;
+  margin-inline-start: 4px;
+  display: inline-block;
+}
+
+.hdr-loc-container.open .hdr-loc-caret {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu styling */
+.hdr-loc-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  min-width: 180px;
+  max-height: 300px;
+  overflow-y: auto;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg, 12px);
+  padding: 6px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  list-style: none;
+  margin: 0;
+  z-index: 1000;
+}
+
+/* Dropdown alignment adjustments */
+.hdr-loc-container:first-child .hdr-loc-dropdown {
+  left: 0;
+  transform: translateY(10px);
+}
+
+.hdr-loc-container:last-child .hdr-loc-dropdown {
+  left: auto;
+  right: 0;
+  transform: translateY(10px);
+}
+
+.hdr-loc-container.open .hdr-loc-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Alignment when first/last child has open state */
+.hdr-loc-container.open:first-child .hdr-loc-dropdown {
+  transform: translateY(0);
+}
+.hdr-loc-container.open:last-child .hdr-loc-dropdown {
+  transform: translateY(0);
+}
+
+.hdr-loc-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  text-align: left;
+  color: var(--text-secondary);
+  border-radius: var(--radius-md, 8px);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+}
+
+[dir="rtl"] .hdr-loc-option {
+  text-align: right;
+}
+
+.hdr-loc-option:hover {
+  background: var(--color-white-5, rgba(255, 255, 255, 0.05));
+  color: var(--color-accent-secondary);
+}
+
+.hdr-loc-option.active {
+  background: var(--color-accent-secondary-10, rgba(var(--color-secondary-rgb), 0.1));
+  color: var(--color-accent-secondary);
+  font-weight: 600;
+}
+
+.hdr-loc-check {
+  margin-inline-start: auto;
+  font-size: 10px;
+  color: var(--color-accent-secondary);
+  opacity: 0;
+}
+
+.hdr-loc-option.active .hdr-loc-check {
+  opacity: 1;
+}
+
+/* Mobile Menu Specific Layouts */
+.mobile-menu__localization {
+  padding: 20px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-menu__localization .hdr-loc-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.mobile-menu__localization .hdr-loc-container {
+  width: 100%;
+}
+
+.mobile-menu__localization .hdr-loc-toggle {
+  width: 100%;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.mobile-menu__localization .hdr-loc-dropdown {
+  position: static;
+  transform: none !important;
+  width: 100%;
+  opacity: 1;
+  visibility: visible;
+  display: none;
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: none;
+  margin-top: 5px;
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+.mobile-menu__localization .hdr-loc-container.open .hdr-loc-dropdown {
+  display: block;
+}
+
+

@@ -340,3 +340,8 @@
     display: none;
   }
 }
+
+.search-input-wrapper--no-icon .search-popup-input {
+  padding-inline-start: var(--spacing-lg, 24px);
+}
+

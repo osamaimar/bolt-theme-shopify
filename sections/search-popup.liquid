@@ -1,0 +1,154 @@
+{%- if section.settings.show_section -%}
+  {{ 'component-search-popup.css' | asset_url | stylesheet_tag }}
+  {%- if settings.enable_predictive_search -%}
+    {{ 'component-predictive-search.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'component-predictive-search.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+  <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="{{ section.settings.popup_title | escape }}">
+    <div class="search-popup">
+      <!-- Close -->
+      <button type="button" class="search-popup-close" id="search-popup-close" aria-label="{{ 'accessibility.close_menu' | t }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+      <!-- Title -->
+      {%- if section.settings.show_title and section.settings.popup_title != blank -%}
+        <h2 class="search-popup-title" id="search-title">
+          {{ section.settings.popup_title | replace: ' ', ' <span>' | append: '</span>' }}
+        </h2>
+      {%- endif -%}
+
+      <!-- Search Input -->
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-input-wrapper{% unless section.settings.show_input_icon %} search-input-wrapper--no-icon{% endunless %}" data-predictive-target="popup">
+        {%- if section.settings.show_input_icon -%}
+          <div class="search-input-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+        {%- endif -%}
+        <input 
+          type="search" 
+          name="q"
+          value="{{ search.terms | escape }}"
+          class="search-popup-input" 
+          id="search-popup-input" 
+          placeholder="{{ 'general.search.placeholder' | t }}" 
+          aria-label="{{ 'general.search.placeholder' | t }}"
+          autocomplete="off" 
+        />
+        <input type="hidden" name="type" value="product">
+        {%- if section.settings.show_keyboard_hints -%}
+          <div class="search-kbd" aria-hidden="true">
+            <kbd>⌘</kbd><kbd>K</kbd>
+          </div>
+        {%- endif -%}
+      </form>
+
+      <!-- Quick Links (Popular Searches) -->
+      {%- if section.settings.show_popular_searches and section.settings.popular_searches != blank -%}
+        <div class="search-quick-links">
+          <p class="search-quick-label">{{ 'sections.header.popular_searches' | t | default: 'Popular Searches' }}</p>
+          <nav class="search-quick-tags" aria-label="{{ 'sections.header.popular_searches' | t | default: 'Popular Searches' }}">
+            {%- assign popular_tags = section.settings.popular_searches | split: ',' -%}
+            {%- for tag in popular_tags -%}
+              {%- assign tag_clean = tag | strip -%}
+              <a class="search-quick-tag" href="{{ routes.search_url }}?q={{ tag_clean | url_encode }}&type=product">
+                {{ tag_clean }}
+              </a>
+            {%- endfor -%}
+          </nav>
+        </div>
+      {%- endif -%}
+
+      <!-- Recent Searches -->
+      {%- if section.settings.show_recent_searches -%}
+        <div class="search-recent" id="search-recent" style="display:none">
+          <div class="search-recent-header">
+            <span class="search-recent-label">{{ 'general.search.recent' | t }}</span>
+            <button type="button" class="search-recent-clear" id="search-recent-clear">{{ 'general.search.clear_all' | t }}</button>
+          </div>
+          <ul class="search-recent-list" id="search-recent-list"></ul>
+        </div>
+      {%- endif -%}
+
+      <!-- Footer Hints -->
+      {%- if section.settings.show_keyboard_hints -%}
+        <div class="search-popup-footer" aria-hidden="true">
+          <span class="search-hint"><kbd>↵</kbd> {{ 'general.search.to_search' | t }}</span>
+          <span class="search-hint"><kbd>{{ 'general.search.esc_key' | t | default: 'ESC' }}</kbd> {{ 'general.search.to_close' | t }}</span>
+          <span class="search-hint"><kbd>⌘</kbd><kbd>K</kbd> {{ 'general.search.to_toggle' | t }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Search Popup",
+  "tag": "section",
+  "class": "section-search-popup",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show heading title",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "popup_title",
+      "label": "Heading Title",
+      "default": "Search"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_input_icon",
+      "label": "Show search input icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_keyboard_hints",
+      "label": "Show keyboard shortcuts and hints",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_recent_searches",
+      "label": "Show recent searches",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_popular_searches",
+      "label": "Show popular searches",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "popular_searches",
+      "label": "Popular searches",
+      "default": "Laptop, Phone, Watch, Headphones",
+      "info": "Comma-separated list of popular search terms to display in the search popup."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Search Popup"
+    }
+  ]
+}
+{% endschema %}

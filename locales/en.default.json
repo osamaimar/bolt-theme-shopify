@@ -90,7 +90,10 @@
       "results_count": "products found",
       "no_results_help": "Try a different search term or browse our categories.",
       "start_searching_title": "Ready to find something?",
-      "start_searching_text": "Type your keywords above to browse our premium electronics collection."
+      "start_searching_text": "Type your keywords above to browse our premium electronics collection.",
+      "predictive_loading": "Searching...",
+      "predictive_empty": "No suggestions found",
+      "predictive_view_all": "See all results for \"{{ terms }}\""
     },
     "newsletter_form": {
       "email_placeholder": "Your email",

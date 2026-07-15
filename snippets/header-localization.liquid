@@ -1,0 +1,57 @@
+{%- comment -%}
+  Header Localization Snippet - BoltTheme
+  Renders Shopify-native Country selector.
+  Accepts:
+    - show_country: {Boolean}
+    - show_flag: {Boolean}
+    - show_currency_symbol: {Boolean}
+    - block_id: {String}
+{%- endcomment -%}
+
+{%- if show_country and localization.available_countries.size > 1 -%}
+  <div class="hdr-loc-wrapper">
+    <div class="hdr-loc-container" data-localization-type="country" id="hdr-loc-country-{{ block_id }}">
+      {%- form 'localization', id: 'HeaderCountryForm', class: 'hdr-loc-form' -%}
+        <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+        
+        <button type="button" class="hdr-loc-toggle" 
+                aria-expanded="false" 
+                aria-haspopup="true"
+                aria-controls="HeaderCountryList-{{ block_id }}"
+                aria-label="Select Country">
+          {%- if show_flag -%}
+            <span class="hdr-loc-flag" aria-hidden="true">
+              {{ localization.country | image_url: width: 24 | image_tag: loading: 'lazy', alt: '' }}
+            </span>
+          {%- endif -%}
+          <span class="hdr-loc-label">
+            {{ localization.country.name }} ({{ localization.country.currency.iso_code }}{% if show_currency_symbol %} {{ localization.country.currency.symbol }}{% endif %})
+          </span>
+          <span class="hdr-loc-caret">▼</span>
+        </button>
+        
+        <ul class="hdr-loc-dropdown" id="HeaderCountryList-{{ block_id }}" role="list">
+          {%- for country in localization.available_countries -%}
+            <li role="none">
+              <button type="button" 
+                      class="hdr-loc-option{% if country.iso_code == localization.country.iso_code %} active{% endif %}" 
+                      data-value="{{ country.iso_code }}"
+                      role="menuitem"
+                      {% if country.iso_code == localization.country.iso_code %}aria-current="true"{% endif %}>
+                {%- if show_flag -%}
+                  <span class="hdr-loc-flag" aria-hidden="true">
+                    {{ country | image_url: width: 24 | image_tag: loading: 'lazy', alt: '' }}
+                  </span>
+                {%- endif -%}
+                <span>
+                  {{ country.name }} ({{ country.currency.iso_code }}{% if show_currency_symbol %} {{ country.currency.symbol }}{% endif %})
+                </span>
+                <span class="hdr-loc-check" aria-hidden="true">✓</span>
+              </button>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endform -%}
+    </div>
+  </div>
+{%- endif -%}

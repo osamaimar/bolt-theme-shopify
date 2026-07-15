@@ -1,4 +1,5 @@
 {{ 'section-header.css' | asset_url | stylesheet_tag }}
+{{ 'component-header-localization.css' | asset_url | stylesheet_tag }}
 
 {%- if section.settings.show_section -%}
 {% render 'section-padding',
@@ -87,11 +88,13 @@
       {%- if b_align_alignment != blank -%}text-align: {{ b_align_alignment }} !important;{%- endif -%}
       {%- if block.settings.margin_top != blank -%}margin-top: {{ block.settings.margin_top }}px !important;{%- endif -%}
       {%- if block.settings.margin_bottom != blank -%}margin-bottom: {{ block.settings.margin_bottom }}px !important;{%- endif -%}
-      {%- if block.settings.bg_gradient != blank -%}
-        background: {{ block.settings.bg_gradient }} !important;
-      {%- elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' -%}
-        background-color: {{ block.settings.bg_color }} !important;
-        background-image: none !important;
+      {%- if block.type != 'icons' -%}
+        {%- if block.settings.bg_gradient != blank -%}
+          background: {{ block.settings.bg_gradient }} !important;
+        {%- elsif block.settings.bg_color != blank and block.settings.bg_color != 'rgba(0,0,0,0)' -%}
+          background-color: {{ block.settings.bg_color }} !important;
+          background-image: none !important;
+        {%- endif -%}
       {%- endif -%}
     }
 
@@ -183,53 +186,21 @@
           {%- endif -%}
           {%- if block.settings.cart_badge_text_color != blank and block.settings.cart_badge_text_color != 'rgba(0,0,0,0)' -%}color: {{ block.settings.cart_badge_text_color }} !important;{%- endif -%}
         }
-
-      {%- when 'cta' -%}
-        #shopify-section-{{ section.id }} #hdr-block-{{ block.id }} {
-          {%- if block.settings.border_radius != blank -%}border-radius: {{ block.settings.border_radius }}px !important;{%- endif -%}
-          {%- if block.settings.font_size == 'small' -%}font-size: 0.85rem !important;{%- elsif block.settings.font_size == 'large' -%}font-size: 1.15rem !important;{%- endif -%}
-          {%- if block.settings.font_weight == 'bold' -%}font-weight: 700 !important;{%- elsif block.settings.font_weight == 'normal' -%}font-weight: 400 !important;{%- endif -%}
-          {%- if block.settings.font_style != blank -%}font-style: {{ block.settings.font_style }} !important;{%- endif -%}
-          {%- if block.settings.text_transform != blank -%}text-transform: {{ block.settings.text_transform }} !important;{%- endif -%}
-          {%- if block.settings.letter_spacing != blank -%}letter-spacing: {{ block.settings.letter_spacing }}px !important;{%- endif -%}
-          {%- if block.settings.line_height != blank -%}line-height: {{ block.settings.line_height | divided_by: 100.0 }} !important;{%- endif -%}
-          
-          /* Link default colors with theme variables based on style option */
-          {%- if block.settings.button_style == 'secondary' -%}
-            background-color: var(--color-secondary) !important;
-            background-image: none !important;
-            color: var(--bg-primary) !important;
-            border: 2px solid var(--color-secondary) !important;
-          {%- elsif block.settings.button_style == 'outline' -%}
-            background-color: transparent !important;
-            background-image: none !important;
-            color: var(--color-accent) !important;
-            border: 2px solid var(--color-accent) !important;
-          {%- else -%}
-            /* Primary */
-            background-color: var(--color-accent) !important;
-            background-image: none !important;
-            color: var(--bg-primary) !important;
-            border: 2px solid transparent !important;
+        #shopify-section-{{ section.id }} #hdr-block-{{ block.id }} .hdr-loc-toggle {
+          {%- if block.settings.loc_text_color != blank and block.settings.loc_text_color != 'rgba(0,0,0,0)' -%}color: {{ block.settings.loc_text_color }} !important;{%- endif -%}
+          {%- if block.settings.icon_size != blank -%}
+            {%- assign font_s = block.settings.icon_size | times: 0.55 | round | at_least: 11 -%}
+            font-size: {{ font_s }}px !important;
+            height: calc({{ block.settings.icon_size }}px + 16px) !important;
           {%- endif -%}
         }
-        #shopify-section-{{ section.id }} #hdr-block-{{ block.id }}:hover {
-          /* Link hover states with theme variables based on style option */
-          {%- if block.settings.button_style == 'secondary' -%}
-            background-color: var(--color-accent) !important;
-            background-image: none !important;
-            color: var(--bg-primary) !important;
-          {%- elsif block.settings.button_style == 'outline' -%}
-            background-color: var(--color-accent) !important;
-            background-image: none !important;
-            color: var(--bg-primary) !important;
-            border-color: var(--color-accent) !important;
-          {%- else -%}
-            /* Primary */
-            background-color: var(--color-secondary) !important;
-            background-image: none !important;
-            color: var(--bg-primary) !important;
-            border-color: transparent !important;
+        #shopify-section-{{ section.id }} #hdr-block-{{ block.id }} .hdr-loc-toggle:hover {
+          {%- if block.settings.loc_hover_text_color != blank and block.settings.loc_hover_text_color != 'rgba(0,0,0,0)' -%}color: {{ block.settings.loc_hover_text_color }} !important;{%- endif -%}
+        }
+        #shopify-section-{{ section.id }} #hdr-block-{{ block.id }} .hdr-loc-flag-img {
+          {%- if block.settings.icon_size != blank -%}
+            {%- assign flag_w = block.settings.icon_size | times: 0.82 | round -%}
+            width: {{ flag_w }}px !important;
           {%- endif -%}
         }
     {%- endcase -%}
@@ -243,6 +214,10 @@
   assign show_search = false
   assign show_account = false
   assign show_cart = false
+  assign show_localization = false
+  assign loc_show_country = false
+  assign loc_show_flag = true
+  assign loc_show_currency_symbol = true
 
   for block in section.blocks
     case block.type
@@ -255,6 +230,12 @@
         assign show_search = block.settings.show_search
         assign show_account = block.settings.show_account_icon
         assign show_cart = block.settings.show_cart_icon
+        if block.settings.show_country
+          assign show_localization = true
+          assign loc_show_country = true
+          assign loc_show_flag = block.settings.show_flag
+          assign loc_show_currency_symbol = block.settings.show_currency_symbol
+        endif
     endcase
   endfor
 -%}
@@ -288,6 +269,8 @@
       when 'navigation'
         assign b_align_alignment = 'left'
       when 'icons'
+        assign b_align_alignment = 'right'
+      when 'localization'
         assign b_align_alignment = 'right'
       when 'cta'
         assign b_align_alignment = 'left'
@@ -414,6 +397,15 @@
             {{ block.shopify_attributes }}
           >
             <div class="header-icons">
+              {%- if block.settings.show_country and localization.available_countries.size > 1 -%}
+                {% render 'header-localization',
+                  show_country: block.settings.show_country,
+                  show_flag: block.settings.show_flag,
+                  show_currency_symbol: block.settings.show_currency_symbol,
+                  block_id: block.id
+                %}
+              {%- endif -%}
+
               {%- if block.settings.show_search -%}
                 <button class="header-icon-btn" id="header-search-btn" data-open-search aria-label="{{ 'general.search.submit' | t | default: 'Search' }}">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -555,6 +547,17 @@
     <a href="{{ cta_link | default: '#' }}" class="mobile-cta-button">
       {{ cta_label | escape }}
     </a>
+  {%- endif -%}
+
+  {%- if show_localization -%}
+    <div class="mobile-menu__localization">
+      {% render 'header-localization',
+        show_country: loc_show_country,
+        show_flag: loc_show_flag,
+        show_currency_symbol: loc_show_currency_symbol,
+        block_id: 'mobile'
+      %}
+    </div>
   {%- endif -%}
 </div>
 
@@ -1086,6 +1089,24 @@
           "info": "Requires 'Customer accounts' to be enabled in your Shopify settings."
         },
         {
+          "type": "checkbox",
+          "id": "show_country",
+          "label": "Show country selector",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_flag",
+          "label": "Show country flags",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_currency_symbol",
+          "label": "Show currency symbol in selector",
+          "default": true
+        },
+        {
           "type": "range",
           "id": "icon_size",
           "min": 16,
@@ -1204,6 +1225,20 @@
           "type": "color",
           "id": "cart_badge_text_color",
           "label": "Cart badge text color"
+        },
+        {
+          "type": "header",
+          "content": "Country Selector Colors"
+        },
+        {
+          "type": "color",
+          "id": "loc_text_color",
+          "label": "Country text color"
+        },
+        {
+          "type": "color",
+          "id": "loc_hover_text_color",
+          "label": "Country hover text color"
         }
       ]
     },

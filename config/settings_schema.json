@@ -328,14 +328,41 @@
     "settings": [
       {
         "type": "header",
-        "content": "Search"
+        "content": "Predictive Search"
       },
       {
-        "type": "text",
-        "id": "popular_searches",
-        "label": "Popular searches",
-        "default": "Laptop, Phone, Watch, Headphones",
-        "info": "Comma-separated list of popular search terms to display in the search popup."
+        "type": "checkbox",
+        "id": "enable_predictive_search",
+        "label": "Enable predictive search",
+        "default": true,
+        "info": "Show live product suggestions as customers type."
+      },
+      {
+        "type": "range",
+        "id": "predictive_search_results_count",
+        "min": 3,
+        "max": 10,
+        "step": 1,
+        "label": "Max suggestions",
+        "default": 5
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_show_image",
+        "label": "Show product image in suggestions",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_show_price",
+        "label": "Show product price in suggestions",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_show_vendor",
+        "label": "Show product vendor in suggestions",
+        "default": true
       }
     ]
   }

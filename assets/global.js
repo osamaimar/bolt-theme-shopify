@@ -93,6 +93,85 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ─── Search Popup Logic ───
+    const saveSearch = (query) => {
+        if (!query) return;
+        try {
+            let searches = JSON.parse(localStorage.getItem('bolt-recent-searches')) || [];
+            searches = searches.filter(item => item.toLowerCase() !== query.toLowerCase());
+            searches.unshift(query);
+            searches = searches.slice(0, 5);
+            localStorage.setItem('bolt-recent-searches', JSON.stringify(searches));
+        } catch (e) {
+            console.error('Error saving recent search:', e);
+        }
+    };
+
+    const renderRecentSearches = () => {
+        const recentSection = document.getElementById('search-recent');
+        const recentList = document.getElementById('search-recent-list');
+        if (!recentSection || !recentList) return;
+
+        try {
+            const searches = JSON.parse(localStorage.getItem('bolt-recent-searches')) || [];
+            if (searches.length > 0) {
+                recentList.innerHTML = '';
+                searches.forEach(search => {
+                    const li = document.createElement('li');
+                    li.className = 'search-recent-item';
+                    li.setAttribute('role', 'option');
+
+                    const icon1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    icon1.setAttribute('viewBox', '0 0 24 24');
+                    icon1.setAttribute('fill', 'none');
+                    icon1.setAttribute('stroke', 'currentColor');
+                    icon1.setAttribute('stroke-width', '2');
+                    icon1.setAttribute('stroke-linecap', 'round');
+                    icon1.setAttribute('stroke-linejoin', 'round');
+                    icon1.innerHTML = '<circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>';
+
+                    const span = document.createElement('span');
+                    span.textContent = search;
+
+                    const icon2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    icon2.setAttribute('class', 'search-recent-arrow');
+                    icon2.setAttribute('viewBox', '0 0 24 24');
+                    icon2.setAttribute('fill', 'none');
+                    icon2.setAttribute('stroke', 'currentColor');
+                    icon2.setAttribute('stroke-width', '2');
+                    icon2.setAttribute('stroke-linecap', 'round');
+                    icon2.setAttribute('stroke-linejoin', 'round');
+                    icon2.innerHTML = '<line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline>';
+
+                    li.appendChild(icon1);
+                    li.appendChild(span);
+                    li.appendChild(icon2);
+
+                    li.addEventListener('click', () => {
+                        const searchInput = document.getElementById('search-popup-input');
+                        if (searchInput) {
+                            searchInput.value = search;
+                            const form = searchInput.closest('form');
+                            if (form) {
+                                if (typeof form.requestSubmit === 'function') {
+                                    form.requestSubmit();
+                                } else {
+                                    form.submit();
+                                }
+                            }
+                        }
+                    });
+                    recentList.appendChild(li);
+                });
+                recentSection.style.display = 'block';
+            } else {
+                recentSection.style.display = 'none';
+            }
+        } catch (e) {
+            console.error('Error rendering recent searches:', e);
+            recentSection.style.display = 'none';
+        }
+    };
+
     const toggleSearch = (open) => {
         const searchOverlay = document.getElementById('search-overlay');
         const searchInput = document.getElementById('search-popup-input');
@@ -104,6 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.classList.toggle('no-scroll', isOpen);
         
         if (isOpen) {
+            renderRecentSearches();
             const mobileMenu = document.getElementById('mobile-menu');
             if (mobileMenu && mobileMenu.classList.contains('active')) {
                 mobileMenu.classList.remove('active');
@@ -151,6 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchPopupForm.addEventListener('submit', () => {
             let query = searchPopupInput.value.trim();
             if (query.length > 0) {
+                saveSearch(query);
                 const words = query.split(/\s+/).map(word => {
                     if (word && !word.endsWith('*') && !word.includes(':')) {
                         return word + '*';
@@ -169,6 +250,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Strip name from visible field
                 searchPopupInput.removeAttribute('name');
             }
+        });
+    }
+
+    // Clear recent searches
+    const clearRecentBtn = document.getElementById('search-recent-clear');
+    if (clearRecentBtn) {
+        clearRecentBtn.addEventListener('click', () => {
+            localStorage.removeItem('bolt-recent-searches');
+            const recentSection = document.getElementById('search-recent');
+            if (recentSection) recentSection.style.display = 'none';
         });
     }
 
@@ -448,6 +539,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initBackToTop();
     initFloatingSwitcher();
+
+    // ─── Header Localization Dropdowns (Country/Currency Selectors) ───
+    function initHeaderLocalizationDropdowns() {
+        const containers = document.querySelectorAll('.hdr-loc-container');
+        if (!containers.length) return;
+
+        document.addEventListener('click', (e) => {
+            const toggle = e.target.closest('.hdr-loc-toggle');
+            if (toggle) {
+                e.preventDefault();
+                e.stopPropagation();
+                const container = toggle.closest('.hdr-loc-container');
+                const isOpen = container.classList.contains('open');
+
+                // Close all others
+                containers.forEach(c => {
+                    if (c !== container) {
+                        c.classList.remove('open');
+                        const btn = c.querySelector('.hdr-loc-toggle');
+                        if (btn) btn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                // Toggle this one
+                container.classList.toggle('open', !isOpen);
+                toggle.setAttribute('aria-expanded', !isOpen);
+                return;
+            }
+
+            const option = e.target.closest('.hdr-loc-option');
+            if (option) {
+                e.preventDefault();
+                e.stopPropagation();
+                const val = option.dataset.value;
+                const form = option.closest('form');
+                if (form && val) {
+                    const input = form.querySelector('input[name="country_code"]');
+                    if (input) {
+                        input.value = val;
+                        form.submit();
+                    }
+                }
+                return;
+            }
+
+            let clickedInside = false;
+            containers.forEach(c => {
+                if (c.contains(e.target)) {
+                    clickedInside = true;
+                }
+            });
+            if (!clickedInside) {
+                containers.forEach(c => {
+                    c.classList.remove('open');
+                    const btn = c.querySelector('.hdr-loc-toggle');
+                    if (btn) btn.setAttribute('aria-expanded', 'false');
+                });
+            }
+        });
+    }
+    initHeaderLocalizationDropdowns();
 });
 
 // Utility for formatting money
