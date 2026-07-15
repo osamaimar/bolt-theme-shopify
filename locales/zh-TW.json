@@ -12,5 +12,11 @@
     "title": "404 頁面未找到",
     "not_found": "您要尋找的頁面不存在。",
     "back_to_shopping": "返回購物"
+  },
+  "customer": {
+    "recover_password": {
+      "email": "電子郵件",
+      "success": "我們已向您發送了一封電子郵件，其中包含用於更新密碼的連結。"
+    }
   }
 }
