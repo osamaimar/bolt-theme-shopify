@@ -33,28 +33,28 @@
     }
   },
   "blog": {
-    "article_metadata_html": "By {{ author }} on {{ date }}",
-    "article_comments": "{{ count }} comments",
-    "comment_form_title": "Leave a comment",
-    "comment_form_name": "Name",
-    "comment_form_email": "Email",
-    "comment_form_body": "Message",
-    "comment_form_submit": "Post comment",
-    "no_categories": "No categories available",
-    "no_tags": "No tags available",
-    "no_blogs": "No blogs available",
-    "all_articles": "All Articles",
-    "read_more": "Read more",
-    "read_full": "Read Full Article",
-    "filter_all": "All Topics",
-    "no_articles": "No articles found.",
-    "showing_articles": "Showing {{ count }} articles",
-    "previous_article": "Previous Article",
-    "next_article": "Next Article",
-    "written_by": "Written by",
-    "share_this_article": "Share this article:",
-    "no_comments_yet": "No comments yet",
-    "featured_products": "Featured Products"
+    "article_metadata_html": "作者：{{author}}，日期：{{date}}",
+    "article_comments": "{{ count }} 条评论",
+    "comment_form_title": "发表评论",
+    "comment_form_name": "姓名",
+    "comment_form_email": "电子邮件",
+    "comment_form_body": "信息",
+    "comment_form_submit": "发表评论",
+    "no_categories": "没有可用的类别",
+    "no_tags": "没有可用的标签",
+    "no_blogs": "没有可用的博客",
+    "all_articles": "所有文章",
+    "read_more": "阅读更多",
+    "read_full": "阅读全文",
+    "filter_all": "所有主题",
+    "no_articles": "没有找到文章。",
+    "showing_articles": "显示 {{ count }} 篇文章",
+    "previous_article": "上一篇",
+    "next_article": "下一篇",
+    "written_by": "撰写者",
+    "share_this_article": "分享这篇文章：",
+    "no_comments_yet": "还没有评论",
+    "featured_products": "特色产品"
   },
   "cart": {
     "title": "Your Cart",
@@ -326,6 +326,13 @@
     },
     "navigation_and_structure": {
       "shop_logo_accessibility_label": "{{shopName}}标志"
+    }
+  },
+  "blogs": {
+    "article": {
+      "read_more": "阅读更多",
+      "read_more_title": "阅读有关{{标题}}的更多信息",
+      "read_time": "{{ count }} 分钟阅读"
     }
   }
 }
