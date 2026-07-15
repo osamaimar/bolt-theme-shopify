@@ -134,67 +134,67 @@
   },
   "general": {
     "breadcrumb": {
-      "home": "Home",
-      "products": "Products"
+      "home": "家",
+      "products": "产品"
     },
-    "home": "Home",
-    "share_link_copied": "Link copied to clipboard!",
+    "home": "家",
+    "share_link_copied": "链接已复制到剪贴板！",
     "pagination": {
-      "label": "Pagination",
-      "previous": "Previous page",
-      "next": "Next page"
+      "label": "分页",
+      "previous": "上一页",
+      "next": "下一页"
     },
     "share": {
-      "copy_to_clipboard_confirmation": "Link copied to clipboard"
+      "copy_to_clipboard_confirmation": "链接已复制到剪贴板"
     },
     "search": {
-      "all": "All Products",
-      "submit": "Search",
-      "title": "Search",
-      "placeholder": "Search our store...",
-      "recent": "Recent Searches",
-      "clear_all": "Clear All",
-      "esc_key": "ESC",
-      "to_search": "to search",
-      "to_close": "to close",
-      "to_toggle": "to toggle",
-      "no_results_html": "No results found for \"{{ terms }}\"",
-      "results_for_html": "{{ count }} results for \"{{ terms }}\"",
-      "no_results": "No results found for \"{{ terms }}\"",
-      "results_with_count": "{{ count }} products found for \"{{ terms }}\"",
-      "results_count": "products found",
-      "no_results_help": "Try a different search term or browse our categories.",
-      "start_searching_title": "Ready to find something?",
-      "start_searching_text": "Type your keywords above to browse our premium electronics collection."
+      "all": "所有产品",
+      "submit": "搜索",
+      "title": "搜索",
+      "placeholder": "搜索我们的商店...",
+      "recent": "最近的搜索",
+      "clear_all": "全部清除",
+      "esc_key": "ESC键",
+      "to_search": "搜索",
+      "to_close": "关闭",
+      "to_toggle": "切换",
+      "no_results_html": "未找到“{{ terms }}”的结果",
+      "results_for_html": "“{{ terms }}”的 {{ count }} 个结果",
+      "no_results": "未找到“{{ terms }}”的结果",
+      "results_with_count": "找到“{{ terms }}”的 {{ count }} 个产品",
+      "results_count": "找到的产品",
+      "no_results_help": "尝试不同的搜索词或浏览我们的类别。",
+      "start_searching_title": "准备好找东西了吗？",
+      "start_searching_text": "在上面输入您的关键字以浏览我们的优质电子产品系列。"
     },
     "newsletter_form": {
-      "email_placeholder": "Your email",
-      "submit": "Subscribe",
-      "confirmation": "Thanks for subscribing!"
+      "email_placeholder": "您的电子邮件",
+      "submit": "订阅",
+      "confirmation": "感谢您的订阅！"
     },
     "coming_soon": {
-      "show_subscribe": "Show subscribe form"
+      "show_subscribe": "显示订阅表格"
     },
     "countdown": {
-      "years": "Years",
-      "months": "Months",
-      "weeks": "Weeks",
-      "days": "Days",
-      "hours": "Hours",
-      "minutes": "Minutes",
-      "seconds": "Seconds"
+      "years": "年",
+      "months": "几个月",
+      "weeks": "周数",
+      "days": "天",
+      "hours": "时间",
+      "minutes": "分钟",
+      "seconds": "秒数"
     },
     "faq": {
-      "no_results_html": "No questions match your search. Try a different keyword or <span class=\"highlight-text\">browse all categories</span>."
+      "no_results_html": "没有问题符合您的搜索。尝试使用不同的关键字或<span class=\"highlight-text\">浏览所有类别</span>。"
     }
   },
   "gift_card": {
-    "balance": "Balance",
-    "expired": "Expired",
-    "expires_on": "Expires on {{ date }}",
-    "card": "Gift card",
-    "use_at_checkout": "Use this code at checkout",
-    "add_to_apple_wallet": "Add to Apple Wallet"
+    "balance": "平衡",
+    "expired": "已到期",
+    "expires_on": "于 {{ date }} 到期",
+    "card": "礼品卡",
+    "use_at_checkout": "结帐时使用此代码",
+    "add_to_apple_wallet": "添加到苹果钱包"
   },
   "hello_world": {
     "title": "Hello, World!",
