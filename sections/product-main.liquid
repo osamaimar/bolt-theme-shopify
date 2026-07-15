@@ -47,7 +47,11 @@
   {%- endfor -%}
 </style>
 
-<div class="pd-main-outer color-{{ section.settings.color_scheme }} {% unless section.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless section.settings.show_on_mobile %} hidden-mobile{% endunless %}">
+<div class="pd-main-outer color-{{ section.settings.color_scheme }} {% unless section.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless section.settings.show_on_mobile %} hidden-mobile{% endunless %}"
+     data-video-autoplay="{{ section.settings.video_autoplay }}"
+     data-video-loop="{{ section.settings.video_loop }}"
+     data-video-muted="{{ section.settings.video_muted }}"
+     data-media-fit="{{ section.settings.gallery_media_fit | default: 'cover' }}">
   <div class="pd-page {% if section.settings.container_width == 'full' %}pd-page--full{% elsif section.settings.container_width == 'narrow' %}pd-page--narrow{% endif %}">
     <div class="pd-product-main">
       
@@ -66,18 +70,16 @@
             {%- if featured_media -%}
               {%- for media in product.media -%}
                 <div class="pd-media-item {% if media == featured_media %}active{% endif %}" data-media-id="{{ media.id }}" data-media-type="{{ media.media_type }}">
-                  {%- case media.media_type -%}
-                    {%- when 'image' -%}
-                      <img src="{{ media | image_url: width: 1200 }}" alt="{{ media.alt | escape }}" width="{{ media.width }}" height="{{ media.height }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" />
-                    {%- when 'external_video' -%}
-                      <div class="pd-external-video-wrapper">
-                        {{ media | external_video_tag: class: 'pd-video-external' }}
-                      </div>
-                    {%- when 'video' -%}
-                      {{ media | video_tag: controls: true, class: 'pd-video-native' }}
-                    {%- when 'model' -%}
-                      {{ media | model_viewer_tag: interaction_prompt: 'always', class: 'pd-model-viewer' }}
-                  {%- endcase -%}
+                  {% render 'product-media',
+                    media: media,
+                    loop_index: forloop.index0,
+                    prefix: 'pd',
+                    section: section,
+                    show_ar_button: section.settings.show_ar_button,
+                    video_autoplay: section.settings.video_autoplay,
+                    video_loop: section.settings.video_loop,
+                    video_muted: section.settings.video_muted
+                  %}
                 </div>
               {%- endfor -%}
             {%- else -%}
@@ -101,10 +103,18 @@
                     <div class="pd-thumb-icon">
                       <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                     </div>
+                    <span class="pd-thumb-type-badge">
+                      {%- if media.media_type == 'external_video' -%}
+                        {{ media.host | upcase }}
+                      {%- else -%}
+                        VIDEO
+                      {%- endif -%}
+                    </span>
                   {%- elsif media.media_type == 'model' -%}
                     <div class="pd-thumb-icon">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 16 12 21 3 16 3 8 12 3 21 8"/><polyline points="3 8 12 13 21 8"/><line x1="12" y1="13" x2="12" y2="21"/></svg>
                     </div>
+                    <span class="pd-thumb-type-badge">3D</span>
                   {%- endif -%}
                 </div>
               {%- endfor -%}
@@ -453,6 +463,44 @@
         { "value": "accent-1", "label": "Accent 1" },
         { "value": "accent-2", "label": "Accent 2" },
         { "value": "inverse", "label": "Inverse" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Rich Product Media"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_autoplay",
+      "label": "Autoplay native videos",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "video_loop",
+      "label": "Loop native videos",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "video_muted",
+      "label": "Mute native videos by default",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ar_button",
+      "label": "Show View in AR button for 3D models",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "gallery_media_fit",
+      "label": "Media object-fit style",
+      "default": "cover",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" }
       ]
     }
   ],

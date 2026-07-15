@@ -1,0 +1,88 @@
+{% comment %}
+    Renders product media (image, native video, external video, model)
+    Accepts:
+    - media: {Object} Product Media Liquid object
+    - loop_index: {Number} The index of the media in the loop (optional)
+    - prefix: {String} CSS prefix, e.g. 'pd' or 'pdi' (default: 'pd')
+    - show_ar_button: {Boolean} Show the View in AR button for models (optional)
+    - video_autoplay: {Boolean} Autoplay native videos (optional)
+    - video_loop: {Boolean} Loop native videos (optional)
+    - video_muted: {Boolean} Mute native videos (optional)
+{% endcomment %}
+
+{%- liquid
+  assign prefix = prefix | default: 'pd'
+  assign video_autoplay = video_autoplay | default: false
+  assign video_loop = video_loop | default: true
+  assign video_muted = video_muted | default: true
+  assign show_ar_button = show_ar_button | default: true
+-%}
+
+{%- case media.media_type -%}
+  {%- when 'image' -%}
+    <img 
+      src="{{ media | image_url: width: 1200 }}" 
+      alt="{{ media.alt | escape }}" 
+      width="{{ media.width }}" 
+      height="{{ media.height }}" 
+      loading="{% if loop_index == 0 %}eager{% else %}lazy{% endif %}" 
+    />
+  
+  {%- when 'video' -%}
+    <div class="{{ prefix }}-video-container">
+      {%- liquid
+        assign video_class = prefix | append: '-video-native'
+      -%}
+      {{ media | video_tag: controls: true, autoplay: video_autoplay, loop: video_loop, muted: video_muted, playsinline: true, class: video_class }}
+      
+      <button type="button" class="{{ prefix }}-play-overlay" aria-label="Play video">
+        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+
+      <button type="button" class="{{ prefix }}-mute-btn {% if video_muted %}is-muted{% endif %}" aria-label="Toggle mute">
+        <svg class="icon-unmute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        </svg>
+        <svg class="icon-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <line x1="23" y1="9" x2="17" y2="15"/>
+          <line x1="17" y1="9" x2="23" y2="15"/>
+        </svg>
+      </button>
+    </div>
+
+  {%- when 'external_video' -%}
+    <div class="{{ prefix }}-external-video-wrapper">
+      <div class="{{ prefix }}-external-video-placeholder" data-video-id="{{ media.external_id }}" data-host="{{ media.host }}">
+        <img src="{{ media.preview_image | image_url: width: 1200 }}" alt="{{ media.alt | escape }}" width="{{ media.preview_image.width }}" height="{{ media.preview_image.height }}" loading="lazy" />
+        <button type="button" class="{{ prefix }}-play-overlay" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </button>
+      </div>
+    </div>
+
+  {%- when 'model' -%}
+    <div class="{{ prefix }}-model-container" style="position: relative; width: 100%; height: 100%;">
+      {%- liquid
+        assign model_class = prefix | append: '-model-viewer'
+      -%}
+      {{ media | model_viewer_tag: interaction_prompt: 'always', class: model_class }}
+      {%- if show_ar_button -%}
+        <button 
+          class="{{ prefix }}-ar-badge" 
+          data-shopify-xr 
+          data-shopify-model3d-id="{{ media.id }}" 
+          data-shopify-title="{{ product.title | escape }}" 
+          data-shopify-xr-hidden
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="21 8 21 16 12 21 3 16 3 8 12 3 21 8"/>
+            <polyline points="3 8 12 13 21 8"/>
+            <line x1="12" y1="13" x2="12" y2="21"/>
+          </svg>
+          <span>View in AR</span>
+        </button>
+      {%- endif -%}
+    </div>
+{%- endcase -%}

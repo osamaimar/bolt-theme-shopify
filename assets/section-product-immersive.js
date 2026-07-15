@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initImmersiveAccordions(section);
     initImmersiveVariants(section);
     initPickupAvailability(section);
+    initImmersiveMediaEnhancements(section);
   });
   
   initImmersiveSpotlight();
@@ -403,5 +404,104 @@ function updatePickupAvailability(variantId, container) {
       console.error('Error fetching pickup availability:', error);
       puaContainer.innerHTML = '';
     });
+}
+
+function initImmersiveMediaEnhancements(container) {
+  const mediaItems = container.querySelectorAll('.pdi-media-item');
+  const autoplaySetting = container.dataset.videoAutoplay === 'true';
+
+  mediaItems.forEach(item => {
+    // 1. Setup native video controls
+    const video = item.querySelector('video');
+    const playOverlay = item.querySelector('.pdi-play-overlay');
+    const muteBtn = item.querySelector('.pdi-mute-btn');
+
+    if (video) {
+      if (playOverlay) {
+        playOverlay.addEventListener('click', (e) => {
+          e.stopPropagation();
+          video.play();
+          playOverlay.classList.add('is-playing');
+        });
+        video.addEventListener('play', () => {
+          playOverlay.classList.add('is-playing');
+        });
+        video.addEventListener('pause', () => {
+          playOverlay.classList.remove('is-playing');
+        });
+      }
+      if (muteBtn) {
+        muteBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          video.muted = !video.muted;
+          muteBtn.classList.toggle('is-muted', video.muted);
+        });
+      }
+    }
+
+    // 2. Setup external video placeholders
+    const placeholder = item.querySelector('.pdi-external-video-placeholder');
+    if (placeholder) {
+      placeholder.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const videoId = placeholder.dataset.videoId;
+        const host = placeholder.dataset.host;
+        let iframe = document.createElement('iframe');
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allowfullscreen', '1');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        
+        if (host === 'youtube') {
+          iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&enablejsapi=1`);
+        } else if (host === 'vimeo') {
+          iframe.setAttribute('src', `https://player.vimeo.com/video/${videoId}?autoplay=1&muted=1`);
+        }
+        
+        placeholder.appendChild(iframe);
+        const playOverlay = placeholder.querySelector('.pdi-play-overlay');
+        if (playOverlay) playOverlay.style.display = 'none';
+      });
+    }
+  });
+
+  // 3. MutationObserver to handle active state transitions (autoplay/pause/iframe reset)
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach(mutation => {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        const target = mutation.target;
+        const isActive = target.classList.contains('active');
+        const video = target.querySelector('video');
+        const iframe = target.querySelector('iframe');
+        const playOverlay = target.querySelector('.pdi-play-overlay');
+
+        if (isActive) {
+          if (video && autoplaySetting) {
+            video.play().catch(err => console.log('Autoplay blocked:', err));
+            if (playOverlay) playOverlay.classList.add('is-playing');
+          }
+        } else {
+          // Pause native video on deactivate
+          if (video) {
+            video.pause();
+            if (playOverlay) playOverlay.classList.remove('is-playing');
+          }
+          // Reset external video iframe to stop playback
+          if (iframe) {
+            const placeholder = target.querySelector('.pdi-external-video-placeholder');
+            if (placeholder) {
+              const existingIframe = placeholder.querySelector('iframe');
+              if (existingIframe) existingIframe.remove();
+              const playOverlay = placeholder.querySelector('.pdi-play-overlay');
+              if (playOverlay) playOverlay.style.display = '';
+            }
+          }
+        }
+      }
+    });
+  });
+
+  mediaItems.forEach(item => {
+    observer.observe(item, { attributes: true, attributeFilter: ['class'] });
+  });
 }
 

@@ -69,7 +69,7 @@
   endif
 -%}
 
-<div class="cpd-product-card cpd-product-card--{{ card_style | default: 'standard' }}" data-category="{{ product_card_product.type | handle }}" style="--card-image-ratio: {{ card_image_ratio }};">
+<div class="cpd-product-card cpd-product-card--{{ card_style | default: 'standard' }}" data-category="{{ product_card_product.type | handle }}" data-product-handle="{{ product_card_product.handle }}" style="--card-image-ratio: {{ card_image_ratio }};">
   {%- if product_card_product.variants.first.id -%}
     <input type="hidden" name="id" value="{{ product_card_product.variants.first.id }}" />
   {%- endif -%}
