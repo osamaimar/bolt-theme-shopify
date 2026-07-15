@@ -212,5 +212,77 @@
   },
   "newsletter": {
     "success": "Thanks for subscribing!"
+  },
+  "password": {
+    "title": "Opening Soon",
+    "password": "Password",
+    "enter": "Enter",
+    "header_text": "Password Page Header",
+    "footer_text": "Password Page Footer"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "on_sale": "Sale",
+      "quick_view": "Quick View",
+      "select_options": "Select Options",
+      "view_details": "View Details",
+      "view_grid": "Grid View",
+      "view_list": "List View",
+      "vendor": "Vendor",
+      "price": {
+        "from_price_html": "From {{ price }}",
+        "regular_price": "Regular price",
+        "sale_price": "Sale price",
+        "unit_price": "Unit price"
+      },
+      "media": {
+        "image_available": "Image {{ index }} available"
+      },
+      "value_unavailable": "{{ option_value }} is currently unavailable",
+      "in_stock": "In Stock",
+      "free_express_shipping": "Free Express Shipping",
+      "warranty_included": "2-Year Warranty Included",
+      "easy_returns": "30-Day Easy Returns",
+      "view_all_products": "View All Products",
+      "no_products_available": "No products available",
+      "no_products_found": "No products found in this collection.",
+      "no_products_found_short": "No products found.",
+      "reviews": "Reviews",
+      "off": "OFF",
+      "stars": "Stars",
+      "based_on_reviews_html": "Based on {{ count }} reviews",
+      "review_app_placeholder": "Review content would be rendered here. Please paste your review app snippet in the block settings.",
+      "category": "Category",
+      "product_name_placeholder": "Product Name",
+      "description_placeholder": "Product description goes here.",
+      "shipping_note": "Free Express Shipping · 2-Year Warranty",
+      "tab_description": "Description",
+      "tab_specifications": "Specifications",
+      "tab_custom_content": "Custom Content",
+      "spec_driver_size": "Driver Size",
+      "spec_driver_size_val": "40mm Dynamic",
+      "spec_frequency_resp": "Frequency Resp.",
+      "spec_frequency_resp_val": "20Hz - 40kHz (Hi-Res)",
+      "spec_battery_life": "Battery Life",
+      "spec_battery_life_val": "Up to 40 Hours",
+      "spec_charging_port": "Charging Port",
+      "spec_charging_port_val": "USB-C",
+      "spec_bluetooth": "Bluetooth",
+      "spec_bluetooth_val": "V5.2",
+      "spec_warranty": "Warranty",
+      "spec_warranty_val": "2-Year Manufacturer",
+      "badge_new": "New",
+      "badge_hot": "Hot"
+    }
+  },
+  "search": {
+    "placeholder": "Search our store...",
+    "submit": "Search",
+    "title": "Search",
+    "no_results_html": "No results found for \"{{ terms }}\"",
+    "results_for_html": "{{ count }} results for \"{{ terms }}\""
   }
 }
