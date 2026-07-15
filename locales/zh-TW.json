@@ -174,5 +174,19 @@
     "faq": {
       "no_results_html": "沒有問題符合您的搜尋。嘗試使用不同的關鍵字或<span class=\"highlight-text\">瀏覽所有類別</span>。"
     }
+  },
+  "hello_world": {
+    "title": "你好世界！",
+    "desc_1": "Skeleton 主題是一個簡約、結構嚴謹的 Shopify 主題，旨在幫助您快速入門。設計時考慮了模組化、可維護性和 Shopify 的最佳實務。",
+    "desc_2": "主題塑造了商家及其客戶的線上商店體驗。使用 Shopify 的主題模板語言 Liquid 以及 HTML、CSS、JavaScript 和 JSON 大規模建立快速、靈活的主題。",
+    "key_concepts_title": "關鍵概念",
+    "key_concepts_desc": "Shopify 主題是模板文件、建構塊和支援資產的包。使用這些構建塊來創建模組化、可自訂的主題。",
+    "key_concepts_link": "了解有關關鍵概念的更多信息",
+    "liquid_title": "液體",
+    "liquid_desc": "Liquid 模板語言是 Shopify 主題的支柱，用於在商店中載入動態內容。擴展 Liquid 物件以使用元字段儲存和呈現自訂資料。",
+    "liquid_link": "查看液體參考",
+    "best_practices_title": "最佳實踐",
+    "best_practices_desc": "為了優化您的主題開發體驗，Shopify 建立了一套最佳實踐，您可以在開發主題以及設定工具鏈和流程時參考。",
+    "best_practices_link": "遵循最佳實踐"
   }
 }
