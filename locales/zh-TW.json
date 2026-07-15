@@ -18,5 +18,29 @@
       "email": "電子郵件",
       "success": "我們已向您發送了一封電子郵件，其中包含用於更新密碼的連結。"
     }
+  },
+  "blog": {
+    "article_metadata_html": "作者：{{author}}，日期：{{date}}",
+    "article_comments": "{{ count }} 一則評論",
+    "comment_form_title": "發表評論",
+    "comment_form_name": "姓名",
+    "comment_form_email": "電子郵件",
+    "comment_form_body": "訊息",
+    "comment_form_submit": "發表評論",
+    "no_categories": "沒有可用的類別",
+    "no_tags": "沒有可用的標籤",
+    "no_blogs": "沒有可用的博客",
+    "all_articles": "所有文章",
+    "read_more": "閱讀更多",
+    "read_full": "閱讀全文",
+    "filter_all": "所有主題",
+    "no_articles": "沒有找到文章。",
+    "showing_articles": "顯示 {{ count }} 篇文章",
+    "previous_article": "上一篇",
+    "next_article": "下一篇",
+    "written_by": "撰寫者",
+    "share_this_article": "分享這篇文章：",
+    "no_comments_yet": "還沒有評論",
+    "featured_products": "特色產品"
   }
 }
