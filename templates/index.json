@@ -204,6 +204,7 @@
         "stat-3"
       ],
       "settings": {
+        "image": "shopify://shop_images/hero-tech-bg.webp",
         "show_section": true,
         "show_stats_bar": true,
         "show_on_desktop": true,
