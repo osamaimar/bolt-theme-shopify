@@ -334,5 +334,29 @@
       "read_more_title": "阅读有关{{标题}}的更多信息",
       "read_time": "{{ count }} 分钟阅读"
     }
+  },
+  "catalog": {
+    "page_title_showcase": "技术展示|博尔特电子",
+    "title_showcase": "量子[X15笔记本电脑]",
+    "desc_showcase": "突破性的性能采用最新的 M3 芯片、令人惊叹的 15 英寸视网膜显示屏和 20 小时以上的电池寿命。专为追求卓越的专业人士打造。",
+    "rating_info": "{{ 评分 }}（{{ 计数 }} 条评论）",
+    "btn_add_to_cart": "添加到购物车",
+    "btn_view_specs": "查看规格",
+    "title_picks": "热门[精选]",
+    "btn_browse_all": "浏览全部",
+    "prod_prodisplay_ultra_title": "专业显示超",
+    "prod_laptop_skytab_title": "SkyTab 专业版",
+    "prod_gamepad_pro_title": "游戏大师专业版",
+    "currency_short": "美元",
+    "btn_view_details": "查看详情",
+    "stat_smart_gadgets": "智能小工具",
+    "stat_happy_customers": "快乐的顾客",
+    "stat_avg_rating": "平均评分",
+    "stat_guarantee_100": "退款保证",
+    "filter_all_items": "所有项目",
+    "filter_computers": "电脑",
+    "filter_mobile": "移动的",
+    "filter_audio": "声音的",
+    "filter_gaming": "赌博"
   }
 }
