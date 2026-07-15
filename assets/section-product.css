@@ -591,17 +591,20 @@
 }
 
 /* Quantity & Cart Actions */
-.pd-actions {
+.pd-main-product-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    width: 100%;
+}
+
+.pd-actions-row {
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
-    margin-bottom: var(--spacing-lg);
     flex-wrap: wrap;
-}
-
-.pd-actions .product-form {
-    flex: 1;
-    display: flex;
+    width: 100%;
 }
 
 .pd-qty-selector {
@@ -697,15 +700,32 @@
     z-index: 2;
 }
 
+.pd-accelerated-checkout {
+    width: 100%;
+    margin-top: 4px;
+}
+
+.pd-accelerated-checkout .shopify-payment-button__button {
+    border-radius: 14px !important;
+    font-family: inherit !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    height: 48px !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pd-accelerated-checkout .shopify-payment-button__button:hover {
+    filter: brightness(0.9);
+}
+
 @keyframes pd-spin {
     from { transform: translate(-50%, -50%) rotate(0deg); }
     to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-
-
 @media (max-width: 576px) {
-    .pd-actions {
+    .pd-actions-row {
         flex-direction: column;
         align-items: stretch;
         gap: 12px;
@@ -723,8 +743,6 @@
     .pd-add-cart-btn {
         min-width: unset;
     }
-
-
 }
 
 /* Trust Badges */

@@ -282,19 +282,20 @@
 
             {%- when 'buy_buttons' -%}
               <div id="block-{{ block.id }}" class="pdi-cart-section {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
-                <div class="pdi-cart-row" style="justify-content: {% if 'left' == 'center' %}center{% elsif 'left' == 'right' %}flex-end{% else %}flex-start{% endif %};">
-                  {%- if block.settings.show_qty -%}
-                    <div class="pdi-qty pdi-qty--{{ block.settings.font_size }}" style="{% if block.settings.qty_bg_color != blank %}background: {{ block.settings.qty_bg_color }} !important; border-color: {{ block.settings.qty_bg_color }} !important;{% endif %} {% if block.settings.qty_text_color != blank %}color: {{ block.settings.qty_text_color }} !important;{% endif %}">
-                      <button class="pdi-qty-btn" id="pdi-qty-minus" aria-label="Decrease quantity" style="color: inherit;">−</button>
-                      <span class="pdi-qty-val" id="pdi-qty-val" style="color: inherit;">1</span>
-                      <button class="pdi-qty-btn" id="pdi-qty-plus" aria-label="Increase quantity" style="color: inherit;">+</button>
-                    </div>
-                  {%- endif -%}
-                  
-                  {%- assign product_form_id = 'product-form-' | append: section.id -%}
-                  {%- form 'product', product, class: 'product-form pdi-form', id: product_form_id -%}
-                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                    <input type="hidden" name="quantity" class="pdi-qty-hidden" value="1">
+                {%- assign product_form_id = 'product-form-' | append: section.id -%}
+                {%- form 'product', product, class: 'product-form pdi-form pdi-main-product-form', id: product_form_id -%}
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  <input type="hidden" name="quantity" class="pdi-qty-hidden" value="1">
+
+                  <div class="pdi-cart-row">
+                    {%- if block.settings.show_qty -%}
+                      <div class="pdi-qty pdi-qty--{{ block.settings.font_size }}" style="{% if block.settings.qty_bg_color != blank %}background: {{ block.settings.qty_bg_color }} !important; border-color: {{ block.settings.qty_bg_color }} !important;{% endif %} {% if block.settings.qty_text_color != blank %}color: {{ block.settings.qty_text_color }} !important;{% endif %}">
+                        <button type="button" class="pdi-qty-btn" id="pdi-qty-minus" aria-label="Decrease quantity" style="color: inherit;">−</button>
+                        <span class="pdi-qty-val" id="pdi-qty-val" style="color: inherit;">1</span>
+                        <button type="button" class="pdi-qty-btn" id="pdi-qty-plus" aria-label="Increase quantity" style="color: inherit;">+</button>
+                      </div>
+                    {%- endif -%}
+
                     <button type="submit" class="pdi-cart-btn pdi-cart-btn--{{ block.settings.font_size }}" id="pdi-cart-btn" style="{% if block.settings.atc_bg_color != blank %}background: {{ block.settings.atc_bg_color }} !important; border-color: {{ block.settings.atc_bg_color }} !important;{% elsif block.settings.bg_color != blank %}background: {{ block.settings.bg_color }} !important;{% endif %} {% if block.settings.atc_text_color != blank %}color: {{ block.settings.atc_text_color }} !important;{% elsif block.settings.text_color != blank %}color: {{ block.settings.text_color }} !important;{% endif %}">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="9" cy="21" r="1" />
@@ -308,9 +309,14 @@
                       {%- endif -%}
                       <span>{{ button_label_val }}</span>
                     </button>
-                  {%- endform -%}
+                  </div>
 
-                </div>
+                  {%- if block.settings.show_accelerated_checkout -%}
+                    <div class="pdi-accelerated-checkout">
+                      {{ form | payment_button }}
+                    </div>
+                  {%- endif -%}
+                {%- endform -%}
               </div>
 
               {%- when 'variants' -%}
@@ -881,6 +887,7 @@
         { "type": "checkbox", "id": "show_on_desktop", "label": "Show on Desktop", "default": true },
         { "type": "checkbox", "id": "show_on_mobile", "label": "Show on Mobile", "default": true },
         { "type": "checkbox", "id": "show_qty", "label": "Show qty", "default": true },
+        { "type": "checkbox", "id": "show_accelerated_checkout", "label": "Show accelerated checkout buttons", "default": true },
         { "type": "header", "content": "Layout" },
         
         { "type": "header", "content": "Margin" },

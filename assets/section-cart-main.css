@@ -353,6 +353,17 @@
     box-shadow: 0 10px 20px rgba(var(--color-accent-secondary-rgb, 59, 130, 246), 0.3);
 }
 
+.cart-additional-checkout-buttons {
+    margin-top: 12px;
+    width: 100%;
+}
+
+.cart-additional-checkout-buttons [data-shopify-buttoncontainer] {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 /* =========================================
    Cards Grid (You May Also Like / Related)
    ========================================= */
