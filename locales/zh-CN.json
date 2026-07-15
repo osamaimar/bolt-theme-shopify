@@ -25,5 +25,11 @@
     "link_messages": {
       "new_window": "Opens in a new window"
     }
+  },
+  "customer": {
+    "recover_password": {
+      "email": "Email Address",
+      "success": "We've sent you an email with a link to update your password."
+    }
   }
 }
