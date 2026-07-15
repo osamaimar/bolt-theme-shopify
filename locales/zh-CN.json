@@ -12,5 +12,18 @@
     "title": "404 页面未找到",
     "not_found": "您寻找的页面不存在。",
     "back_to_shopping": "返回购物"
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "close_menu": "Close menu",
+    "open_menu": "Open menu",
+    "toggle_submenu": "Toggle submenu",
+    "refresh_page": "Page refreshed",
+    "unit_price_separator": "per",
+    "back_to_top": "Back to top",
+    "account": "Account",
+    "link_messages": {
+      "new_window": "Opens in a new window"
+    }
   }
 }
