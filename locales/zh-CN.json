@@ -195,5 +195,22 @@
     "card": "Gift card",
     "use_at_checkout": "Use this code at checkout",
     "add_to_apple_wallet": "Add to Apple Wallet"
+  },
+  "hello_world": {
+    "title": "Hello, World!",
+    "desc_1": "The Skeleton theme is a minimal, carefully structured Shopify theme designed to help you quickly get started. Designed with modularity, maintainability, and Shopify's best practices in mind.",
+    "desc_2": "Themes shape the online store experience for merchants and their customers. Build fast, flexible themes at scale using Liquid, Shopify's theme templating language, along with HTML, CSS, JavaScript, and JSON.",
+    "key_concepts_title": "Key Concepts",
+    "key_concepts_desc": "Shopify themes are a package of template files, building blocks, and supporting assets. Use these building blocks to create modular, customizable themes.",
+    "key_concepts_link": "Learn more about key concepts",
+    "liquid_title": "Liquid",
+    "liquid_desc": "The Liquid templating language is the backbone of Shopify themes, and is used to load dynamic content on storefronts. Extend Liquid objects to store and present custom data using metafields.",
+    "liquid_link": "View the Liquid reference",
+    "best_practices_title": "Best Practices",
+    "best_practices_desc": "To optimize your theme development experience, Shopify has established a set of best practices that you can refer to when developing your theme and setting up your toolchains and processes.",
+    "best_practices_link": "Follow best practices"
+  },
+  "newsletter": {
+    "success": "Thanks for subscribing!"
   }
 }
