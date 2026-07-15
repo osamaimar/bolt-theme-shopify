@@ -126,6 +126,9 @@
                           <p class="cart-item-property">{{ property.first }}: {{ property.last }}</p>
                         {%- endunless -%}
                       {%- endfor -%}
+                      {%- if item.selling_plan_allocation -%}
+                        {%- render 'selling-plan-badge', selling_plan_allocation: item.selling_plan_allocation -%}
+                      {%- endif -%}
                     </div>
                   </div>
 

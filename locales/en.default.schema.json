@@ -150,6 +150,17 @@
               "label": "Subheading"
             }
           }
+        },
+        "follow_on_shop": {
+          "name": "Follow on Shop",
+          "settings": {
+            "heading": {
+              "label": "Heading"
+            },
+            "subheading": {
+              "label": "Subheading"
+            }
+          }
         }
       }
     }

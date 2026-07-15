@@ -85,6 +85,9 @@
                             {%- if item.variant.title != 'Default Title' -%}
                                 <p class="cd-item-variant">{{ item.variant.title }}</p>
                             {%- endif -%}
+                            {%- if item.selling_plan_allocation -%}
+                                {%- render 'selling-plan-badge', selling_plan_allocation: item.selling_plan_allocation -%}
+                            {%- endif -%}
                             
                             <div class="cd-item-bottom">
                                 <div class="cd-item-qty">

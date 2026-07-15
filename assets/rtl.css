@@ -342,3 +342,9 @@
   margin-right: auto !important;
   margin-left: 0 !important;
 }
+
+/* Selling plan badge RTL overrides — ensure the recurring icon isn't mirrored */
+[dir="rtl"] .sp-badge__icon {
+  transform: none !important;
+}
+

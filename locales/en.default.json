@@ -405,5 +405,11 @@
     "best_practices_title": "Best Practices",
     "best_practices_desc": "To optimize your theme development experience, Shopify has established a set of best practices that you can refer to when developing your theme and setting up your toolchains and processes.",
     "best_practices_link": "Follow best practices"
+  },
+  "selling_plan": {
+    "badge_label": "Subscription",
+    "subscription": "Subscription",
+    "delivery_every": "Delivers {{ cycle }}",
+    "subscribe_save": "Subscribe & Save"
   }
 }

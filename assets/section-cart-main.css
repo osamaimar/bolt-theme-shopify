@@ -569,3 +569,41 @@
     
     .cart-card-grid { grid-template-columns: 1fr; }
 }
+
+/* =========================================
+   Selling Plan Badge (.sp-badge)
+   Uses only CSS custom properties — compatible
+   with all 6 color schemes automatically.
+   ========================================= */
+.sp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent-secondary-10);
+    border: 1px solid var(--color-accent-secondary-20);
+    color: var(--color-accent-secondary);
+    font-size: var(--font-size-xs);   /* 12px */
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.2;
+    max-width: 100%;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.sp-badge__icon {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    color: currentColor;
+}
+
+.sp-badge__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 220px;
+}
+

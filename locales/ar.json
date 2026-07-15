@@ -1384,5 +1384,11 @@
   },
   "404": {
     "back_to_shopping": "العودة للتسوق"
+  },
+  "selling_plan": {
+    "badge_label": "اشتراك",
+    "subscription": "اشتراك",
+    "delivery_every": "يُسلَّم {{ cycle }}",
+    "subscribe_save": "اشترك ووفّر"
   }
 }

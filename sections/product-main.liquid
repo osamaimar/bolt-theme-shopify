@@ -130,7 +130,7 @@
       <!-- Info Column -->
       <div class="pd-info" style="text-align: {{ 'left' }};">
         {%- for block in section.blocks -%}
-          <div class="pd-info-block-wrapper {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" id="block-{{ block.id }}" {{ block.shopify_attributes }}>
+          <div class="pd-info-block-wrapper {% if block.settings.show_on_desktop == false %} hidden-desktop{% endif %} {% if block.settings.show_on_mobile == false %} hidden-mobile{% endif %}" id="block-{{ block.id }}" {{ block.shopify_attributes }}>
             {%- case block.type -%}
               {%- when 'title' -%}
                 <h1 class="pd-title pd-title--{{ block.settings.font_size }}" style="text-align: {{ 'left' }}; margin: 0; font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; font-style: {{ block.settings.font_style }}; text-transform: {{ block.settings.text_transform }}; letter-spacing: {{ block.settings.letter_spacing }}px; line-height: {{ block.settings.line_height }};">

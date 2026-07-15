@@ -456,3 +456,21 @@
     transform: translateX(0);
 }
 
+/* Compact badge variant for the cart drawer narrow column */
+.cd-item-info .sp-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.cd-item-info .sp-badge__icon {
+    width: 10px;
+    height: 10px;
+}
+
+.cd-item-info .sp-badge__label {
+    max-width: 160px;
+}
+
+
