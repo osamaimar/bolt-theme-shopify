@@ -188,5 +188,12 @@
     "best_practices_title": "最佳實踐",
     "best_practices_desc": "為了優化您的主題開發體驗，Shopify 建立了一套最佳實踐，您可以在開發主題以及設定工具鏈和流程時參考。",
     "best_practices_link": "遵循最佳實踐"
+  },
+  "password": {
+    "title": "即將開業",
+    "password": "密碼",
+    "enter": "進入",
+    "header_text": "密碼頁眉",
+    "footer_text": "密碼頁尾"
   }
 }
