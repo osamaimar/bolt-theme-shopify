@@ -1,0 +1,199 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "404": {
+    "title": "404 頁面未找到",
+    "not_found": "您要尋找的頁面不存在。",
+    "back_to_shopping": "返回購物"
+  },
+  "customer": {
+    "recover_password": {
+      "email": "電子郵件",
+      "success": "我們已向您發送了一封電子郵件，其中包含用於更新密碼的連結。"
+    }
+  },
+  "blog": {
+    "article_metadata_html": "作者：{{author}}，日期：{{date}}",
+    "article_comments": "{{ count }} 一則評論",
+    "comment_form_title": "發表評論",
+    "comment_form_name": "姓名",
+    "comment_form_email": "電子郵件",
+    "comment_form_body": "訊息",
+    "comment_form_submit": "發表評論",
+    "no_categories": "沒有可用的類別",
+    "no_tags": "沒有可用的標籤",
+    "no_blogs": "沒有可用的博客",
+    "all_articles": "所有文章",
+    "read_more": "閱讀更多",
+    "read_full": "閱讀全文",
+    "filter_all": "所有主題",
+    "no_articles": "沒有找到文章。",
+    "showing_articles": "顯示 {{ count }} 篇文章",
+    "previous_article": "上一篇",
+    "next_article": "下一篇",
+    "written_by": "撰寫者",
+    "share_this_article": "分享這篇文章：",
+    "no_comments_yet": "還沒有評論",
+    "featured_products": "特色產品"
+  },
+  "cart": {
+    "title": "您的購物車",
+    "remove": "消除",
+    "update": "更新購物車",
+    "clear": "清除購物車",
+    "checkout": "進行結算",
+    "subtotal": "小計",
+    "tax": "稅",
+    "total": "全部的",
+    "shipping": "船運",
+    "calculated_at_checkout": "結帳時計算",
+    "included": "包括",
+    "free_shipping_remaining_html": "您距離免運費還有<strong>{{ amount }}</strong>！",
+    "free_shipping_unlocked": "您已解鎖免費送貨！",
+    "tax_shipping_note": "稅金和運費在結帳時計算",
+    "secondary_text_trans": "稅金和運費在結帳時計算",
+    "empty_title": "您的購物車是空的",
+    "empty": "您的購物車是空的",
+    "empty_desc": "您似乎尚未將任何商品添加到購物車。",
+    "empty_message": "您似乎還沒有添加任何東西到您的購物車。",
+    "continue_shopping": "繼續購物",
+    "view_cart": "看完整購物車",
+    "table_product": "產品",
+    "table_price": "價格",
+    "table_qty": "數量",
+    "table_total": "全部的",
+    "decrease_quantity": "減少數量",
+    "increase_quantity": "增加數量",
+    "quantity": "數量",
+    "cart_totals": "購物車總計",
+    "coupon_code": "優惠券代碼",
+    "coupon_hint": "輸入您的優惠券代碼以獲得折扣",
+    "coupon_placeholder": "例如節省20",
+    "discount_code": "折扣碼",
+    "apply": "申請",
+    "add_to_cart": "加入購物車",
+    "related_services": "相關服務",
+    "you_may_also_like": "你可能也喜歡",
+    "quantity_for": "{{ 標題 }} 的數量"
+  },
+  "collections": {
+    "title": "所有系列",
+    "filter_all": "全部",
+    "price_min_label": "最小",
+    "price_max_label": "最大限度",
+    "title_placeholder": "收藏名稱",
+    "zero_products": "0 產品",
+    "empty": "該系列中未找到任何產品。",
+    "showing_results": "顯示 {{ count }} 個優質產品",
+    "showing_results_html": "顯示<strong>{{ count }}</strong>優質產品",
+    "results_info_premium_html": "顯示<strong>{{ count }}</strong>優質產品",
+    "filter_all_gear": "所有裝備",
+    "filter_laptops": "筆記型電腦",
+    "filter_phones": "智慧型手機",
+    "filter_audio": "聲音的",
+    "filter_gaming": "賭博",
+    "filter_smart_home": "智慧家庭",
+    "search_placeholder": "快速找到產品...",
+    "sort_by": "排序方式：",
+    "sort_featured": "精選",
+    "sort_price_low": "價格：從低到高",
+    "sort_price_high": "價格：從高到低",
+    "sort_rating": "最高評價",
+    "pagination_prev": "上一頁",
+    "pagination_next": "下一頁",
+    "showing_range_html": "顯示<strong>{{ 第一個 }}–{{ 最後一個 }}</strong> 個產品，共 <strong>{{ 總計 }}</strong> 個產品",
+    "showing_count_html": "顯示<strong>{{ count }}</strong>優質產品",
+    "show_filters": "顯示過濾器",
+    "no_search_results": "在此視圖中沒有與您的搜尋相符的產品。",
+    "showing_collections": "顯示 {{ count }} 個集合",
+    "showing_collections_plural": "顯示 {{ count }} 個集合",
+    "showing_range_collections": "顯示 {{first }}–{{last }}（共 {{total }} 個集合）",
+    "showing_zero_collections": "顯示 0 個集合，共 0 個集合",
+    "no_collections_found": "未找到與您的選擇相符的集合。",
+    "select_collection": "選擇一個系列來展示產品。"
+  },
+  "general": {
+    "breadcrumb": {
+      "home": "家",
+      "products": "產品"
+    },
+    "home": "家",
+    "share_link_copied": "連結已複製到剪貼簿！",
+    "pagination": {
+      "label": "分頁",
+      "previous": "上一頁",
+      "next": "下一頁"
+    },
+    "share": {
+      "copy_to_clipboard_confirmation": "連結已複製到剪貼簿"
+    },
+    "search": {
+      "all": "所有產品",
+      "submit": "搜尋",
+      "title": "搜尋",
+      "placeholder": "搜尋我們的商店...",
+      "recent": "最近的搜尋",
+      "clear_all": "全部清除",
+      "esc_key": "ESC鍵",
+      "to_search": "搜尋",
+      "to_close": "關閉",
+      "to_toggle": "切換",
+      "no_results_html": "未找到「{{ terms }}」的結果",
+      "results_for_html": "“{{ terms }}”的 {{ count }} 個結果",
+      "no_results": "未找到「{{ terms }}」的結果",
+      "results_with_count": "找到「{{ terms }}」的 {{ count }} 個產品",
+      "results_count": "找到的產品",
+      "no_results_help": "嘗試不同的搜尋字詞或瀏覽我們的類別。",
+      "start_searching_title": "準備好找東西了嗎？",
+      "start_searching_text": "在上面輸入您的關鍵字以瀏覽我們的優質電子產品系列。"
+    },
+    "newsletter_form": {
+      "email_placeholder": "您的電子郵件",
+      "submit": "訂閱",
+      "confirmation": "感謝您的訂閱！"
+    },
+    "coming_soon": {
+      "show_subscribe": "顯示訂閱表格"
+    },
+    "countdown": {
+      "years": "年",
+      "months": "幾個月",
+      "weeks": "週數",
+      "days": "天",
+      "hours": "時間",
+      "minutes": "分分鐘",
+      "seconds": "秒數"
+    },
+    "faq": {
+      "no_results_html": "沒有問題符合您的搜尋。嘗試使用不同的關鍵字或<span class=\"highlight-text\">瀏覽所有類別</span>。"
+    }
+  },
+  "hello_world": {
+    "title": "你好世界！",
+    "desc_1": "Skeleton 主題是一個簡約、結構嚴謹的 Shopify 主題，旨在幫助您快速入門。設計時考慮了模組化、可維護性和 Shopify 的最佳實務。",
+    "desc_2": "主題塑造了商家及其客戶的線上商店體驗。使用 Shopify 的主題模板語言 Liquid 以及 HTML、CSS、JavaScript 和 JSON 大規模建立快速、靈活的主題。",
+    "key_concepts_title": "關鍵概念",
+    "key_concepts_desc": "Shopify 主題是模板文件、建構塊和支援資產的包。使用這些構建塊來創建模組化、可自訂的主題。",
+    "key_concepts_link": "了解有關關鍵概念的更多信息",
+    "liquid_title": "液體",
+    "liquid_desc": "Liquid 模板語言是 Shopify 主題的支柱，用於在商店中載入動態內容。擴展 Liquid 物件以使用元字段儲存和呈現自訂資料。",
+    "liquid_link": "查看液體參考",
+    "best_practices_title": "最佳實踐",
+    "best_practices_desc": "為了優化您的主題開發體驗，Shopify 建立了一套最佳實踐，您可以在開發主題以及設定工具鏈和流程時參考。",
+    "best_practices_link": "遵循最佳實踐"
+  },
+  "password": {
+    "title": "即將開業",
+    "password": "密碼",
+    "enter": "進入",
+    "header_text": "密碼頁眉",
+    "footer_text": "密碼頁尾"
+  }
+}

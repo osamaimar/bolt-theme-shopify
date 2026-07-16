@@ -1,0 +1,378 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "hello_world": {
+    "key_concepts_link": "En savoir plus sur les concepts clés",
+    "liquid_title": "Liquide",
+    "liquid_desc": "Le langage de template Liquid est la colonne vertéale des thèmes Shopify, et est utilisé pour charger du contenu dynamique sur les vitrines des boutiques. Étendez les objets Liquid pour stocker et présenter des données personnalisées à l'aide de méta-champs.",
+    "liquid_link": "Consulter la référence Liquid",
+    "best_practices_title": "Bonnes Pratiques",
+    "best_practices_desc": "Pour optimiser votre expérience de développement de thèmes, Shopify a établi un ensemble de bonnes pratiques auxquelles vous pouvez vous référer lors du développement de votre thème et de la configuration de vos chaînes d'outils et processus.",
+    "best_practices_link": "Suivez les meilleures pratiques",
+    "title": "Bonjour, le monde !",
+    "desc_1": "Le thème Skeleton est un thème Shopify minimaliste et soigneusement structuré, conçu pour vous aider à démarrer rapidement. Il a été créé en tenant compte de la modularité, de la maintenabilité et des bonnes pratiques de Shopify.",
+    "desc_2": "Les thèmes façonnent l'expérience de la boutique en ligne pour les marchands et leurs clients. Créez des thèmes rapides et flexibles à grande échelle en utilisant Liquid, le langage de templating de thème de Shopify, ainsi que HTML, CSS, JavaScript et JSON.",
+    "key_concepts_title": "Concepts clés",
+    "key_concepts_desc": "Les thèmes Shopify sont un ensemble de fichiers de modèle, de blocs de construction et de ressources de support. Utilisez ces blocs de construction pour créer des thèmes modulaires et personnalisables."
+  },
+  "collections": {
+    "filter_gaming": "Jeu vidéo",
+    "filter_smart_home": "Maison connectée",
+    "search_placeholder": "Trouver rapidement un produit...",
+    "sort_by": "Trier par :",
+    "sort_featured": "En vedette",
+    "sort_price_low": "Prix : du plus bas au plus élevé",
+    "sort_price_high": "Prix : du plus élevé au plus bas",
+    "sort_rating": "Les mieux notés",
+    "pagination_prev": "Page précédente",
+    "pagination_next": "Page suivante",
+    "showing_range_html": "Affichage de <strong>{{ first }}–{{ last }}</strong> sur <strong>{{ total }}</strong> produits",
+    "showing_count_html": "Affichage de <strong>{{ count }}</strong> produits premium",
+    "show_filters": "Afficher les filtres",
+    "no_search_results": "Aucun produit ne correspond à votre recherche dans cette vue.",
+    "showing_collections": "Affichage de {{ count }} collection",
+    "showing_collections_plural": "Affichage de {{ count }} collections",
+    "showing_range_collections": "Affichage des collections {{ first }}–{{ last }} sur {{ total }}",
+    "showing_zero_collections": "Affichage de 0 collection(s) sur 0",
+    "no_collections_found": "Aucune collection trouvée correspondant à votre sélection.",
+    "select_collection": "Sélectionnez une collection pour afficher les produits.",
+    "title": "Toutes les collections",
+    "filter_all": "Tout",
+    "price_min_label": "Min.",
+    "title_placeholder": "Titre de la collection",
+    "zero_products": "0 produits",
+    "empty": "Aucun produit trouvé dans cette collection.",
+    "showing_results": "Affichage de {{ count }} produits premium",
+    "showing_results_html": "Affichage de <strong>{{ count }}</strong> produits premium",
+    "results_info_premium_html": "Affichage de <strong>{{ count }}</strong> produits premium",
+    "filter_all_gear": "Tous les équipements",
+    "filter_laptops": "Ordinateurs portables"
+  },
+  "catalog": {
+    "page_title_showcase": "Présentation technologique | BoltElectronics",
+    "title_showcase": "Ordinateur portable Quantum [X15]",
+    "desc_showcase": "Des performances révolutionnaires grâce à la toute dernière puce M3, un superbe écran Retina de 15 pouces et plus de 20 heures d'autonomie. Conçu pour les professionnels qui exigent l'excellence.",
+    "rating_info": "{{ rating }} ({{ count }} avis)",
+    "btn_add_to_cart": "Ajouter au panier",
+    "btn_view_specs": "Voir les spécifications",
+    "title_picks": "Meilleures [Sélections]",
+    "btn_browse_all": "Tout parcourir",
+    "prod_watch_nexa_title": "NexaWatch Gén. 2",
+    "prod_gamepad_pro_title": "Maître de Jeu Pro",
+    "currency_short": "dollars américains",
+    "btn_view_details": "Voir les détails",
+    "stat_smart_gadgets": "Gadgets intelligents",
+    "stat_happy_customers": "Clients satisfaits",
+    "stat_avg_rating": "Note moyenne",
+    "stat_guarantee_100": "Garantie de remboursement",
+    "filter_all_items": "Tous les articles",
+    "filter_computers": "Ordinateurs",
+    "filter_gaming": "Jeu vidéo"
+  },
+  "404": {
+    "title": "Page introuvable 404",
+    "not_found": "La page que vous recherchez n'existe pas.",
+    "back_to_shopping": "De retour au magasinage"
+  },
+  "password": {
+    "title": "Ouverture Prochainement",
+    "password": "Mot de passe",
+    "enter": "Entrer",
+    "header_text": "En-tête de la page de mot de passe",
+    "footer_text": "Pied de page de la page de mot de passe"
+  },
+  "gift_card": {
+    "balance": "Solde",
+    "expired": "Expiré",
+    "expires_on": "Expire le {{ date }}",
+    "card": "Carte cadeau",
+    "use_at_checkout": "Utilisez ce code à la caisse",
+    "add_to_apple_wallet": "Ajouter à Cartes"
+  },
+  "customer": {
+    "recover_password": {
+      "email": "Adresse e-mail",
+      "success": "Nous vous avons envoyé un e-mail contenant un lien pour mettre à jour votre mot de passe."
+    }
+  },
+  "custom_labels": {
+    "product": "Produit",
+    "price": "Prix",
+    "quantity": "Quantité",
+    "update-cart": "Mettre à jour le panier",
+    "clear-cart": "Vider le panier",
+    "cart-totals": "Total du panier",
+    "subtotal": "Sous-total",
+    "tax": "Impôt",
+    "included": "Inclus",
+    "shipping": "Expédition",
+    "calculated-at-checkout": "Calculé à la caisse",
+    "proceed-to-checkout": "Passer à la caisse",
+    "filters": "Filtres",
+    "subscribe": "S'abonner",
+    "your-email-address": "Votre adresse e-mail",
+    "all-topics": "Tous les sujets",
+    "read-full-article": "Lire l'article complet",
+    "read-more": "En savoir plus",
+    "add-to-cart": "Ajouter au panier",
+    "products": "produits",
+    "view-all-products": "Voir tous les produits",
+    "no-products-found-in-this-collection": "Aucun produit trouvé dans cette collection.",
+    "no-products-found": "Aucun produit trouvé.",
+    "show-filters": "Afficher les filtres",
+    "select-a-collection-to-show-products": "Sélectionnez une collection pour afficher les produits.",
+    "view-all": "Tout afficher",
+    "page-not-found": "Page [Introuvable]",
+    "the-page-you-re-looking-for-doesn-t-exist-or-may-have-been-moved": "La page que vous recherchez n'existe pas ou a peut-être été déplacée.",
+    "button": "Bouton",
+    "home": "Accueil",
+    "return-to-main-page": "Retour à la page principale",
+    "need-help-a-href-pages-contact-get-in-touch-a-with-our-team": "Besoin d'aide ? <a href=\"/pages/contact\">Contactez</a> notre équipe."
+  },
+  "sections": {
+    "header": {
+      "navigation": "Navigation principale",
+      "announcement": "Annonce",
+      "popular_searches": "Recherches populaires",
+      "cart_count": "éléments"
+    },
+    "footer": {
+      "all_rights_reserved": "Tous droits réservés.",
+      "payment_methods": "Moyens de paiement",
+      "newsletter": {
+        "placeholder": "Votre adresse e-mail",
+        "submit": "S'abonner",
+        "success": "Merci de vous être abonné !"
+      }
+    },
+    "cart": {
+      "cart_error": "Une erreur est survenue lors de la mise à jour de votre panier.",
+      "cart_quantity_error_html": "Vous ne pouvez ajouter que {{ quantity }} de cet article à votre panier.",
+      "buttons": {
+        "clear": "Clair"
+      }
+    },
+    "collection_list": {
+      "items_count": "{{ count }} articles",
+      "explore": "Explorer"
+    },
+    "slideshow": {
+      "pause_slideshow": "Mettre le diaporama en pause",
+      "play_slideshow": "Lancer le diaporama"
+    },
+    "featured_collection": {
+      "view_all": "Tout afficher"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Aller au contenu",
+    "close_menu": "Fermer le menu",
+    "open_menu": "Ouvrir le menu",
+    "toggle_submenu": "Afficher/masquer le sous-menu",
+    "refresh_page": "Page actualisée",
+    "unit_price_separator": "par",
+    "back_to_top": "Retour en haut",
+    "account": "Compte",
+    "link_messages": {
+      "new_window": "S'ouvre dans une nouvelle fenêtre"
+    }
+  },
+  "search": {
+    "placeholder": "Rechercher dans notre boutique...",
+    "submit": "Rechercher",
+    "title": "Rechercher",
+    "no_results_html": "Aucun résultat trouvé pour «{{ terms }}»",
+    "results_for_html": "{{ count }} résultats pour « {{ terms }} »"
+  },
+  "newsletter": {
+    "success": "Merci de vous être abonné !"
+  },
+  "general": {
+    "breadcrumb": {
+      "home": "Accueil",
+      "products": "Produits"
+    },
+    "home": "Accueil",
+    "share_link_copied": "Lien copié dans le presse-papiers !",
+    "pagination": {
+      "previous": "Page précédente",
+      "next": "Page suivante"
+    },
+    "share": {
+      "copy_to_clipboard_confirmation": "Lien copié dans le presse-papiers"
+    },
+    "search": {
+      "all": "Tous les produits",
+      "submit": "Rechercher",
+      "title": "Rechercher",
+      "placeholder": "Rechercher dans notre boutique...",
+      "recent": "Recherches récentes",
+      "clear_all": "Tout effacer",
+      "esc_key": "ÉCHAP",
+      "to_search": "chercher",
+      "to_close": "fermer",
+      "to_toggle": "activer/désactiver",
+      "no_results_html": "Aucun résultat trouvé pour «{{ terms }}»",
+      "results_for_html": "{{ count }} résultats pour « {{ terms }} »",
+      "no_results": "Aucun résultat trouvé pour «{{ terms }}»",
+      "results_with_count": "{{ count }} produits trouvés pour « {{ terms }} »",
+      "results_count": "produits trouvés",
+      "no_results_help": "Essayez un autre terme de recherche ou parcourez nos catégories.",
+      "start_searching_title": "Prêt à trouver quelque chose ?",
+      "start_searching_text": "Saisissez vos mots-clés ci-dessus pour parcourir notre collection d'appareils électroniques haut de gamme."
+    },
+    "newsletter_form": {
+      "email_placeholder": "Votre e-mail",
+      "submit": "S'abonner",
+      "confirmation": "Merci de vous être abonné !"
+    },
+    "coming_soon": {
+      "show_subscribe": "Afficher le formulaire d'abonnement"
+    },
+    "countdown": {
+      "years": "Ans",
+      "months": "Mois",
+      "weeks": "Semaines",
+      "days": "Jours",
+      "hours": "Heures",
+      "minutes": "Procès-verbal",
+      "seconds": "secondes"
+    },
+    "faq": {
+      "no_results_html": "Aucune question ne correspond à votre recherche. Essayez un autre mot-clé ou <span class=\"highlight-text\">parcourez toutes les catégories</span>."
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Ajouter au panier",
+      "sold_out": "Épuisé",
+      "unavailable": "Indisponible",
+      "on_sale": "Soldes",
+      "quick_view": "Aperçu rapide",
+      "select_options": "Sélectionner les options",
+      "view_details": "Voir les détails",
+      "view_grid": "Affichage en grille",
+      "view_list": "Affichage Liste",
+      "vendor": "Fournisseur",
+      "price": {
+        "from_price_html": "À partir de {{ price }}",
+        "regular_price": "Prix normal",
+        "sale_price": "Prix de vente",
+        "unit_price": "Prix unitaire"
+      },
+      "media": {
+        "image_available": "Image {{ index }} disponible"
+      },
+      "value_unavailable": "{{ option_value }} est actuellement indisponible",
+      "in_stock": "En stock",
+      "free_express_shipping": "Livraison express gratuite",
+      "warranty_included": "Garantie de 2 ans incluse",
+      "easy_returns": "Retours faciles sous 30 jours",
+      "view_all_products": "Voir tous les produits",
+      "no_products_available": "Aucun produit disponible",
+      "no_products_found": "Aucun produit trouvé dans cette collection.",
+      "no_products_found_short": "Aucun produit trouvé.",
+      "reviews": "Avis",
+      "stars": "Étoiles",
+      "based_on_reviews_html": "Basé sur {{ count }} avis",
+      "review_app_placeholder": "Le contenu de l'avis serait affiché ici. Veuillez coller l'extrait de votre application d'avis dans les paramètres du bloc.",
+      "category": "Catégorie",
+      "product_name_placeholder": "Nom du produit",
+      "description_placeholder": "La description du produit sera ici.",
+      "shipping_note": "Livraison express gratuite · Garantie de 2 ans",
+      "tab_specifications": "Spécifications",
+      "tab_custom_content": "Contenu personnalisé",
+      "spec_driver_size": "Taille du pilote",
+      "spec_driver_size_val": "Dynamique de 40 mm",
+      "spec_frequency_resp": "Réponse en fréquence",
+      "spec_frequency_resp_val": "20 Hz - 40 kHz (Haute Résolution)",
+      "spec_battery_life": "Autonomie de la batterie",
+      "spec_battery_life_val": "Jusqu'à 40 heures",
+      "spec_charging_port": "Port de charge",
+      "spec_warranty": "Garantie",
+      "spec_warranty_val": "Garantie du fabricant de 2 ans",
+      "badge_new": "Nouveau",
+      "badge_hot": "Chaud",
+      "variant_label": "Variante",
+      "quantity_label": "Quantité",
+      "verified_review": "Vérifié",
+      "sample_product": "Échantillon de produit",
+      "title_placeholder": "Titre du produit"
+    }
+  },
+  "blogs": {
+    "article": {
+      "read_more": "En savoir plus",
+      "read_more_title": "En savoir plus sur {{ title }}",
+      "read_time": "{{ count }} min de lecture"
+    }
+  },
+  "blog": {
+    "article_metadata_html": "Par {{ author }} le {{ date }}",
+    "article_comments": "{{ count }} commentaires",
+    "comment_form_title": "Laisser un commentaire",
+    "comment_form_name": "Nom",
+    "comment_form_email": "Courriel",
+    "comment_form_submit": "Publier un commentaire",
+    "no_categories": "Aucune catégorie disponible",
+    "no_tags": "Aucune étiquette disponible",
+    "no_blogs": "Aucun blog disponible",
+    "all_articles": "Tous les articles",
+    "read_more": "En savoir plus",
+    "read_full": "Lire l'article complet",
+    "filter_all": "Tous les sujets",
+    "no_articles": "Aucun article trouvé.",
+    "showing_articles": "Affichage de {{ count }} articles",
+    "previous_article": "Article précédent",
+    "next_article": "Article suivant",
+    "written_by": "Écrit par",
+    "share_this_article": "Partagez cet article :",
+    "no_comments_yet": "Aucun commentaire pour l'instant",
+    "featured_products": "Produits phares"
+  },
+  "cart": {
+    "title": "Votre panier",
+    "remove": "Supprimer",
+    "update": "Mettre à jour le panier",
+    "clear": "Vider le panier",
+    "checkout": "Passer à la caisse",
+    "subtotal": "Sous-total",
+    "tax": "Impôt",
+    "shipping": "Expédition",
+    "calculated_at_checkout": "Calculé à la caisse",
+    "included": "Inclus",
+    "free_shipping_remaining_html": "Il vous reste <strong>{{ amount }}</strong> pour bénéficier de la livraison gratuite !",
+    "free_shipping_unlocked": "Vous avez débloqué la livraison gratuite !",
+    "tax_shipping_note": "Taxes et frais de port calculés au moment du paiement",
+    "secondary_text_trans": "Taxes et frais de port calculés à la caisse",
+    "empty_title": "Votre panier est vide",
+    "empty": "Votre panier est vide",
+    "empty_desc": "Il semble que votre panier soit encore vide.",
+    "empty_message": "Il semble que vous n'ayez encore rien ajouté à votre panier.",
+    "continue_shopping": "Continuer vos achats",
+    "view_cart": "Voir le panier complet",
+    "table_product": "Produit",
+    "table_price": "Prix",
+    "table_qty": "Quantité",
+    "decrease_quantity": "Diminuer la quantité",
+    "increase_quantity": "Augmenter la quantité",
+    "quantity": "Quantité",
+    "cart_totals": "Total du panier",
+    "coupon_code": "Code de réduction",
+    "coupon_hint": "Saisissez votre code promo pour bénéficier d'une réduction",
+    "coupon_placeholder": "par ex. ÉPARGNEZ20",
+    "discount_code": "Code de réduction",
+    "apply": "Postuler",
+    "add_to_cart": "Ajouter au panier",
+    "related_services": "Services connexes",
+    "you_may_also_like": "Vous aimerez aussi",
+    "quantity_for": "Quantité pour {{ title }}"
+  }
+}

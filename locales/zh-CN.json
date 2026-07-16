@@ -1,0 +1,397 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "404": {
+    "title": "404 页面未找到",
+    "not_found": "您寻找的页面不存在。",
+    "back_to_shopping": "返回购物"
+  },
+  "accessibility": {
+    "skip_to_content": "跳至内容",
+    "close_menu": "关闭菜单",
+    "open_menu": "打开菜单",
+    "toggle_submenu": "切换子菜单",
+    "refresh_page": "页面已刷新",
+    "unit_price_separator": "每",
+    "back_to_top": "返回顶部",
+    "account": "帐户",
+    "link_messages": {
+      "new_window": "在新窗口中打开"
+    }
+  },
+  "customer": {
+    "recover_password": {
+      "email": "电子邮件",
+      "success": "我们已向您发送了一封电子邮件，其中包含用于更新密码的链接。"
+    }
+  },
+  "blog": {
+    "article_metadata_html": "作者：{{author}}，日期：{{date}}",
+    "article_comments": "{{ count }} 条评论",
+    "comment_form_title": "发表评论",
+    "comment_form_name": "姓名",
+    "comment_form_email": "电子邮件",
+    "comment_form_body": "信息",
+    "comment_form_submit": "发表评论",
+    "no_categories": "没有可用的类别",
+    "no_tags": "没有可用的标签",
+    "no_blogs": "没有可用的博客",
+    "all_articles": "所有文章",
+    "read_more": "阅读更多",
+    "read_full": "阅读全文",
+    "filter_all": "所有主题",
+    "no_articles": "没有找到文章。",
+    "showing_articles": "显示 {{ count }} 篇文章",
+    "previous_article": "上一篇",
+    "next_article": "下一篇",
+    "written_by": "撰写者",
+    "share_this_article": "分享这篇文章：",
+    "no_comments_yet": "还没有评论",
+    "featured_products": "特色产品"
+  },
+  "cart": {
+    "title": "您的购物车",
+    "remove": "消除",
+    "update": "更新购物车",
+    "clear": "清除购物车",
+    "checkout": "进行结算",
+    "subtotal": "小计",
+    "tax": "税",
+    "total": "全部的",
+    "shipping": "船运",
+    "calculated_at_checkout": "结账时计算",
+    "included": "包括",
+    "free_shipping_remaining_html": "您距离免运费还有<strong>{{ amount }}</strong>！",
+    "free_shipping_unlocked": "您已解锁免费送货！",
+    "tax_shipping_note": "税费和运费在结账时计算",
+    "secondary_text_trans": "税费和运费在结账时计算",
+    "empty_title": "您的购物车是空的",
+    "empty": "您的购物车是空的",
+    "empty_desc": "您似乎尚未将任何商品添加到购物车。",
+    "empty_message": "您似乎还没有添加任何东西到您的购物车。",
+    "continue_shopping": "继续购物",
+    "view_cart": "查看完整购物车",
+    "table_product": "产品",
+    "table_price": "价格",
+    "table_qty": "数量",
+    "table_total": "全部的",
+    "decrease_quantity": "减少数量",
+    "increase_quantity": "增加数量",
+    "quantity": "数量",
+    "cart_totals": "购物车总计",
+    "coupon_code": "优惠券代码",
+    "coupon_hint": "输入您的优惠券代码以获得折扣",
+    "coupon_placeholder": "例如节省20",
+    "discount_code": "折扣码",
+    "apply": "申请",
+    "add_to_cart": "添加到购物车",
+    "related_services": "相关服务",
+    "you_may_also_like": "你可能也喜欢",
+    "quantity_for": "{{ 标题 }} 的数量"
+  },
+  "collections": {
+    "title": "所有系列",
+    "filter_all": "全部",
+    "price_min_label": "最小",
+    "price_max_label": "最大限度",
+    "title_placeholder": "藏品名称",
+    "zero_products": "0 产品",
+    "empty": "该系列中未找到任何产品。",
+    "showing_results": "显示 {{ count }} 个优质产品",
+    "showing_results_html": "显示<strong>{{ count }}</strong>优质产品",
+    "results_info_premium_html": "显示<strong>{{ count }}</strong>优质产品",
+    "filter_all_gear": "所有装备",
+    "filter_laptops": "笔记本电脑",
+    "filter_phones": "智能手机",
+    "filter_audio": "声音的",
+    "filter_gaming": "赌博",
+    "filter_smart_home": "智能家居",
+    "search_placeholder": "快速查找产品...",
+    "sort_by": "排序方式：",
+    "sort_featured": "精选",
+    "sort_price_low": "价格：从低到高",
+    "sort_price_high": "价格：从高到低",
+    "sort_rating": "最高评价",
+    "pagination_prev": "上一页",
+    "pagination_next": "下一页",
+    "showing_range_html": "显示<strong>{{ 第一个 }}–{{ 最后一个 }}</strong> 个产品，共 <strong>{{ 总计 }}</strong> 个产品",
+    "showing_count_html": "显示<strong>{{ count }}</strong>优质产品",
+    "show_filters": "显示过滤器",
+    "no_search_results": "在此视图中没有与您的搜索匹配的产品。",
+    "showing_collections": "显示 {{ count }} 个集合",
+    "showing_collections_plural": "显示 {{ count }} 个集合",
+    "showing_range_collections": "显示 {{first }}–{{last }}（共 {{total }} 个集合）",
+    "showing_zero_collections": "显示 0 个集合，共 0 个集合",
+    "no_collections_found": "未找到与您的选择相匹配的集合。",
+    "select_collection": "选择一个系列来展示产品。"
+  },
+  "general": {
+    "breadcrumb": {
+      "home": "家",
+      "products": "产品"
+    },
+    "home": "家",
+    "share_link_copied": "链接已复制到剪贴板！",
+    "pagination": {
+      "label": "分页",
+      "previous": "上一页",
+      "next": "下一页"
+    },
+    "share": {
+      "copy_to_clipboard_confirmation": "链接已复制到剪贴板"
+    },
+    "search": {
+      "all": "所有产品",
+      "submit": "搜索",
+      "title": "搜索",
+      "placeholder": "搜索我们的商店...",
+      "recent": "最近的搜索",
+      "clear_all": "全部清除",
+      "esc_key": "ESC键",
+      "to_search": "搜索",
+      "to_close": "关闭",
+      "to_toggle": "切换",
+      "no_results_html": "未找到“{{ terms }}”的结果",
+      "results_for_html": "“{{ terms }}”的 {{ count }} 个结果",
+      "no_results": "未找到“{{ terms }}”的结果",
+      "results_with_count": "找到“{{ terms }}”的 {{ count }} 个产品",
+      "results_count": "找到的产品",
+      "no_results_help": "尝试不同的搜索词或浏览我们的类别。",
+      "start_searching_title": "准备好找东西了吗？",
+      "start_searching_text": "在上面输入您的关键字以浏览我们的优质电子产品系列。"
+    },
+    "newsletter_form": {
+      "email_placeholder": "您的电子邮件",
+      "submit": "订阅",
+      "confirmation": "感谢您的订阅！"
+    },
+    "coming_soon": {
+      "show_subscribe": "显示订阅表格"
+    },
+    "countdown": {
+      "years": "年",
+      "months": "几个月",
+      "weeks": "周数",
+      "days": "天",
+      "hours": "时间",
+      "minutes": "分钟",
+      "seconds": "秒数"
+    },
+    "faq": {
+      "no_results_html": "没有问题符合您的搜索。尝试使用不同的关键字或<span class=\"highlight-text\">浏览所有类别</span>。"
+    }
+  },
+  "gift_card": {
+    "balance": "平衡",
+    "expired": "已到期",
+    "expires_on": "于 {{ date }} 到期",
+    "card": "礼品卡",
+    "use_at_checkout": "结帐时使用此代码",
+    "add_to_apple_wallet": "添加到苹果钱包"
+  },
+  "hello_world": {
+    "title": "你好世界！",
+    "desc_1": "Skeleton 主题是一个简约、结构严谨的 Shopify 主题，旨在帮助您快速入门。设计时考虑了模块化、可维护性和 Shopify 的最佳实践。",
+    "desc_2": "主题塑造了商家及其客户的在线商店体验。使用 Shopify 的主题模板语言 Liquid 以及 HTML、CSS、JavaScript 和 JSON 大规模构建快速、灵活的主题。",
+    "key_concepts_title": "关键概念",
+    "key_concepts_desc": "Shopify 主题是模板文件、构建块和支持资产的包。使用这些构建块来创建模块化、可定制的主题。",
+    "key_concepts_link": "了解有关关键概念的更多信息",
+    "liquid_title": "液体",
+    "liquid_desc": "Liquid 模板语言是 Shopify 主题的支柱，用于在店面加载动态内容。扩展 Liquid 对象以使用元字段存储和呈现自定义数据。",
+    "liquid_link": "查看液体参考",
+    "best_practices_title": "最佳实践",
+    "best_practices_desc": "为了优化您的主题开发体验，Shopify 建立了一套最佳实践，您可以在开发主题以及设置工具链和流程时参考。",
+    "best_practices_link": "遵循最佳实践"
+  },
+  "newsletter": {
+    "success": "感谢您的订阅！"
+  },
+  "password": {
+    "title": "Opening Soon",
+    "password": "Password",
+    "enter": "Enter",
+    "header_text": "Password Page Header",
+    "footer_text": "Password Page Footer"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "添加到购物车",
+      "sold_out": "售罄",
+      "unavailable": "不可用",
+      "on_sale": "销售",
+      "quick_view": "快速查看",
+      "select_options": "选择选项",
+      "view_details": "查看详情",
+      "view_grid": "网格视图",
+      "view_list": "列表视图",
+      "vendor": "小贩",
+      "price": {
+        "from_price_html": "从{{价格}}起",
+        "regular_price": "正常价格",
+        "sale_price": "销售价格",
+        "unit_price": "单价"
+      },
+      "media": {
+        "image_available": "图片 {{index}} 可用"
+      },
+      "value_unavailable": "{{ option_value }} 当前不可用",
+      "in_stock": "有存货",
+      "free_express_shipping": "免费快递",
+      "warranty_included": "包含 2 年保修",
+      "easy_returns": "30 天轻松退货",
+      "view_all_products": "查看所有产品",
+      "no_products_available": "没有可用的产品",
+      "no_products_found": "该系列中未找到任何产品。",
+      "no_products_found_short": "没有找到产品。",
+      "reviews": "评论",
+      "off": "离开",
+      "stars": "星星",
+      "based_on_reviews_html": "基于 {{ count }} 条评论",
+      "review_app_placeholder": "评论内容将在此处呈现。请将您的评论应用程序片段粘贴到阻止设置中。",
+      "category": "类别",
+      "product_name_placeholder": "产品名称",
+      "description_placeholder": "产品说明位于此处。",
+      "shipping_note": "免费快递 · 2 年保修",
+      "tab_description": "描述",
+      "tab_specifications": "规格",
+      "tab_custom_content": "定制内容",
+      "spec_driver_size": "驱动器尺寸",
+      "spec_driver_size_val": "40毫米动态",
+      "spec_frequency_resp": "频率响应",
+      "spec_frequency_resp_val": "20Hz - 40kHz（高分辨率）",
+      "spec_battery_life": "电池寿命",
+      "spec_battery_life_val": "长达 40 小时",
+      "spec_charging_port": "充电口",
+      "spec_charging_port_val": "USB-C",
+      "spec_bluetooth": "蓝牙",
+      "spec_bluetooth_val": "V5.2",
+      "spec_warranty": "保修单",
+      "spec_warranty_val": "2 年制造商",
+      "badge_new": "新的",
+      "badge_hot": "热的"
+    }
+  },
+  "search": {
+    "placeholder": "搜索我们的商店...",
+    "submit": "搜索",
+    "title": "搜索",
+    "no_results_html": "未找到“{{ terms }}”的结果",
+    "results_for_html": "“{{ terms }}”的 {{ count }} 个结果"
+  },
+  "sections": {
+    "header": {
+      "navigation": "主导航",
+      "announcement": "公告",
+      "popular_searches": "热门搜索",
+      "cart_count": "项目"
+    },
+    "footer": {
+      "all_rights_reserved": "版权所有。",
+      "payment_methods": "付款方式",
+      "newsletter": {
+        "placeholder": "您的电子邮件地址",
+        "submit": "订阅",
+        "success": "感谢您的订阅！"
+      }
+    },
+    "cart": {
+      "cart_error": "更新您的购物车时出错。",
+      "cart_quantity_error_html": "您只能将此商品的 {{Quantity}} 添加到您的购物车。",
+      "buttons": {
+        "clear": "清除"
+      }
+    },
+    "collection_list": {
+      "items_count": "{{ 计数 }} 项",
+      "explore": "探索"
+    },
+    "slideshow": {
+      "pause_slideshow": "暂停幻灯片放映",
+      "play_slideshow": "播放幻灯片"
+    },
+    "featured_collection": {
+      "view_all": "查看全部"
+    }
+  },
+  "customer_accounts": {
+    "date": {
+      "range": "{{开始日期}}–{{结束日期}}"
+    },
+    "navigation_and_structure": {
+      "shop_logo_accessibility_label": "{{shopName}}标志"
+    }
+  },
+  "blogs": {
+    "article": {
+      "read_more": "阅读更多",
+      "read_more_title": "阅读有关{{标题}}的更多信息",
+      "read_time": "{{ count }} 分钟阅读"
+    }
+  },
+  "catalog": {
+    "page_title_showcase": "技术展示|博尔特电子",
+    "title_showcase": "量子[X15笔记本电脑]",
+    "desc_showcase": "突破性的性能采用最新的 M3 芯片、令人惊叹的 15 英寸视网膜显示屏和 20 小时以上的电池寿命。专为追求卓越的专业人士打造。",
+    "rating_info": "{{ 评分 }}（{{ 计数 }} 条评论）",
+    "btn_add_to_cart": "添加到购物车",
+    "btn_view_specs": "查看规格",
+    "title_picks": "热门[精选]",
+    "btn_browse_all": "浏览全部",
+    "prod_prodisplay_ultra_title": "专业显示超",
+    "prod_laptop_skytab_title": "SkyTab 专业版",
+    "prod_gamepad_pro_title": "游戏大师专业版",
+    "currency_short": "美元",
+    "btn_view_details": "查看详情",
+    "stat_smart_gadgets": "智能小工具",
+    "stat_happy_customers": "快乐的顾客",
+    "stat_avg_rating": "平均评分",
+    "stat_guarantee_100": "退款保证",
+    "filter_all_items": "所有项目",
+    "filter_computers": "电脑",
+    "filter_mobile": "移动的",
+    "filter_audio": "声音的",
+    "filter_gaming": "赌博"
+  },
+  "custom_labels": {
+    "product": "产品",
+    "price": "价格",
+    "quantity": "数量",
+    "total": "全部的",
+    "update-cart": "更新购物车",
+    "clear-cart": "清除购物车",
+    "cart-totals": "购物车总计",
+    "subtotal": "小计",
+    "tax": "税",
+    "included": "包括",
+    "shipping": "船运",
+    "calculated-at-checkout": "结账时计算",
+    "proceed-to-checkout": "进行结算",
+    "filters": "过滤器",
+    "subscribe": "订阅",
+    "your-email-address": "您的电子邮件地址",
+    "all-topics": "所有主题",
+    "read-full-article": "阅读全文",
+    "read-more": "阅读更多",
+    "add-to-cart": "添加到购物车",
+    "products": "产品",
+    "view-all-products": "查看所有产品",
+    "no-products-found-in-this-collection": "该系列中未找到任何产品。",
+    "no-products-found": "没有找到产品。",
+    "show-filters": "显示过滤器",
+    "select-a-collection-to-show-products": "选择一个系列来展示产品。",
+    "view-all": "查看全部",
+    "page-not-found": "页面 [未找到]",
+    "the-page-you-re-looking-for-doesn-t-exist-or-may-have-been-moved": "您要查找的页面不存在或可能已被移动。",
+    "button": "按钮",
+    "home": "家",
+    "return-to-main-page": "返回主页",
+    "need-help-a-href-pages-contact-get-in-touch-a-with-our-team": "需要帮助吗？ <a href=\"/pages/contact\">与我们的团队联系</a>。"
+  }
+}

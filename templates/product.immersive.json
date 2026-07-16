@@ -95,7 +95,9 @@
         "specifications_accordion": {
           "type": "specifications_accordion",
           "settings": {
-            "title": "Specifications"
+            "title": "Specifications",
+            "show_metafields": true,
+            "metafield_namespace": "custom"
           }
         },
         "reviews_accordion": {
