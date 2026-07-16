@@ -335,8 +335,8 @@
 
 .btn-checkout {
     width: 100%;
-    background: var(--color-accent-secondary-light);
-    color: var(--bg-primary);
+    background: var(--color-accent-secondary);
+    color: var(--bg-secondary);
     border: none;
     padding: 16px;
     border-radius: 8px;
@@ -349,6 +349,7 @@
 
 .btn-checkout:hover {
     background: var(--color-accent-secondary);
+    filter: brightness(1.08);
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(var(--color-accent-secondary-rgb, 59, 130, 246), 0.3);
 }
@@ -605,5 +606,13 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 220px;
+}
+
+/* Unit pricing */
+.cart-unit-price {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin: 3px 0 0;
+  letter-spacing: 0.01em;
 }
 

@@ -635,11 +635,7 @@
                   
                   {%- if block.settings.show_excerpt -%}
                   <p class="blog-featured-excerpt">
-                    {%- if featured_article.excerpt.size > 0 -%}
-                      {{ featured_article.excerpt | strip_html | truncate: block.settings.excerpt_length }}
-                    {%- else -%}
-                      {{ featured_article.content | strip_html | truncate: block.settings.excerpt_length }}
-                    {%- endif -%}
+                    {{ featured_article.excerpt_or_content | strip_html | truncate: block.settings.excerpt_length }}
                   </p>
                   {%- endif -%}
                   
@@ -796,11 +792,7 @@
                     
                     {%- if block.settings.show_excerpt -%}
                     <p class="blog-card-excerpt">
-                      {%- if article.excerpt.size > 0 -%}
-                        {{ article.excerpt | strip_html | truncate: block.settings.excerpt_length }}
-                      {%- else -%}
-                        {{ article.content | strip_html | truncate: block.settings.excerpt_length }}
-                      {%- endif -%}
+                      {{ article.excerpt_or_content | strip_html | truncate: block.settings.excerpt_length }}
                     </p>
                     {%- endif -%}
                     

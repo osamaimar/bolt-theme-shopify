@@ -65,13 +65,9 @@
       </a>
     </h3>
 
-    {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
+    {%- if article.excerpt_or_content.size > 0 -%}
       <p class="blog-card-excerpt">
-        {%- if article.excerpt.size > 0 -%}
-          {{ article.excerpt | strip_html | truncatewords: 30 }}
-        {%- else -%}
-          {{ article.content | strip_html | truncatewords: 30 }}
-        {%- endif -%}
+        {{ article.excerpt_or_content | strip_html | truncatewords: 30 }}
       </p>
     {%- endif -%}
 

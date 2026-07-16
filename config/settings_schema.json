@@ -324,6 +324,26 @@
     ]
   },
   {
+    "name": "Product Pricing",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Unit Pricing"
+      },
+      {
+        "type": "paragraph",
+        "content": "Unit pricing (e.g. $1.20 / 100ml) is required by law in some regions (EU, UK, Australia). Only displays when a product has unit pricing configured in the Shopify Admin product editor."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_unit_price",
+        "label": "Show unit price",
+        "default": true,
+        "info": "Applies to: product cards, product pages, cart page, and cart drawer."
+      }
+    ]
+  },
+  {
     "name": "Header",
     "settings": [
       {

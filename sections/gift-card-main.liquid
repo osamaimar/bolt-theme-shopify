@@ -107,6 +107,34 @@
 <div class="gc-section color-{{ section.settings.color_scheme }}{% unless section.settings.show_on_desktop %} hidden-desktop{% endunless %}{% unless section.settings.show_on_mobile %} hidden-mobile{% endunless %}" id="section-{{ section.id }}">
   <div class="gc-section-container {% if section.settings.container_width == 'wide' %}container-fluid{% elsif section.settings.container_width == 'narrow' %}container-narrow{% else %}container{% endif %}">
     <div class="gc-header" style="text-align: {{ 'center' }}; width: 100%; display: flex; flex-direction: column; align-items: center;">
+      {%- liquid
+        assign text_direction = request.locale.direction | default: 'ltr'
+        if request.locale.iso_code == 'ar' or request.locale.iso_code == 'he' or request.locale.iso_code == 'fa' or request.locale.iso_code == 'ur'
+          assign text_direction = 'rtl'
+        endif
+
+        assign store_logo = settings.logo_ltr
+        if text_direction == 'rtl' and settings.logo_rtl != blank
+          assign store_logo = settings.logo_rtl
+        elsif settings.logo_ltr == blank and settings.logo_rtl != blank
+          assign store_logo = settings.logo_rtl
+        endif
+      -%}
+      {%- if store_logo != blank -%}
+        <div class="gc-logo-wrapper" style="margin-bottom: 20px;">
+          <img src="{{ store_logo | image_url: width: 400 }}" 
+               alt="{{ shop.name }}" 
+               style="width: {{ section.settings.logo_width | default: 150 }}px; max-width: 100%; height: auto; display: block; margin: 0 auto;"
+               width="{{ store_logo.width }}"
+               height="{{ store_logo.height }}"
+               loading="lazy"
+          >
+        </div>
+      {%- elsif section.settings.show_shop_name -%}
+        <div class="gc-shop-name" style="font-size: 1.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-primary); margin-bottom: 20px;">
+          {{ shop.name }}
+        </div>
+      {%- endif -%}
     {%- for block in section.blocks -%}
 {%- liquid
   assign b_align_alignment = ''
@@ -204,6 +232,8 @@
       when 'info_grid'
         assign b_align_alignment = 'left'
       when 'button'
+        assign b_align_alignment = 'center'
+      when 'apple_wallet'
         assign b_align_alignment = 'center'
   endcase
 -%}
@@ -388,31 +418,6 @@
                 {% endif %}
               </div>
             {%- endif -%}
-        {%- endcase -%}
-      {%- endfor -%}
-    </div>
-
-    {%- for block in section.blocks -%}
-{%- liquid
-  assign b_align_alignment = ''
-  case block.type
-      when 'heading'
-        assign b_align_alignment = 'center'
-      when 'subheading'
-        assign b_align_alignment = 'center'
-      when 'balance'
-        assign b_align_alignment = 'center'
-      when 'code'
-        assign b_align_alignment = 'space-between'
-      when 'qr_code'
-        assign b_align_alignment = 'left'
-      when 'info_grid'
-        assign b_align_alignment = 'left'
-      when 'button'
-        assign b_align_alignment = 'center'
-  endcase
--%}
-      {%- case block.type -%}
           {%- when 'qr_code' -%}
           {%- if block.settings.show_on_desktop != false or block.settings.show_on_mobile != false -%}
             <!-- QR Code Section -->
@@ -523,8 +528,32 @@
               </div>
             {%- endif -%}
           {%- endif -%}
+        {%- when 'apple_wallet' -%}
+          {%- if gift_card.pass_url or request.design_mode -%}
+            {%- if block.settings.show_on_desktop != false or block.settings.show_on_mobile != false -%}
+              <div class="gc-apple-wallet-wrapper gc-block no-print {% unless block.settings.show_on_desktop != false %} hidden-desktop{% endunless %}{% unless block.settings.show_on_mobile != false %} hidden-mobile{% endunless %}"
+                   {{ block.shopify_attributes }}
+                   style="
+                     --m-t: {{ block.settings.margin_top | default: 20 }}px;
+                     --m-b: {{ block.settings.margin_bottom | default: 20 }}px;
+                     --m-t-m: {{ block.settings.margin_top_mobile | default: 15 }}px;
+                     --m-b-m: {{ block.settings.margin_bottom_mobile | default: 15 }}px;
+                   ">
+                <a href="{{ gift_card.pass_url | default: '#' }}" class="gc-apple-wallet-link">
+                  <img src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}" 
+                       width="145" 
+                       height="45" 
+                       alt="{{ 'gift_card.add_to_apple_wallet' | t | default: 'Add to Apple Wallet' }}" 
+                       loading="lazy"
+                       class="gc-apple-wallet-image"
+                  >
+                </a>
+              </div>
+            {%- endif -%}
+          {%- endif -%}
       {%- endcase -%}
     {%- endfor -%}
+    </div>
   </div>
   </div>
   </div>
@@ -635,6 +664,26 @@
       "type": "checkbox",
       "id": "show_on_mobile",
       "label": "Show on Mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Store Branding"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo Width",
+      "default": 150
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shop_name",
+      "label": "Show Shop Name (Fallback)",
       "default": true
     },
     
@@ -2662,6 +2711,73 @@
           "label": "Hover Border Color"
         }
       ]
+    },
+    {
+      "type": "apple_wallet",
+      "name": "Apple Wallet Pass",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 15
+        }
+      ]
     }
   ],
   "default": {
@@ -2682,13 +2798,16 @@
         "type": "code"
       },
       {
-        "type": "qr_code"
-      },
-      {
         "type": "info_grid"
       },
       {
+        "type": "qr_code"
+      },
+      {
         "type": "button"
+      },
+      {
+        "type": "apple_wallet"
       }
     ]
   }

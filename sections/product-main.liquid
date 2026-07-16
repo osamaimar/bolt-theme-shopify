@@ -28,6 +28,10 @@
         margin-top: {{ block.settings.margin_top | default: 0 }}px !important;
         margin-bottom: {{ block.settings.margin_bottom | default: 0 }}px !important;
         {% if block.settings.text_color != blank %}--block-text-color: {{ block.settings.text_color }};{% endif %}
+        {% if block.settings.unit_price_color != blank %}
+          --block-unit-price-color: {{ block.settings.unit_price_color }};
+          --block-unit-price-opacity: 1;
+        {% endif %}
         {% if block.settings.bg_color != blank %}--block-bg: {{ block.settings.bg_color }};{% endif %}
         {% if block.settings.bg_gradient != blank %}--block-gradient: {{ block.settings.bg_gradient }};{% endif %}
       }
@@ -190,6 +194,21 @@
                       {%- assign savings = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
                       <span class="pd-discount-label">-{{ savings }}% {{ 'products.product.off' | t }}</span>
                     {%- endif -%}
+                  {%- endif -%}
+                  {%- if settings.show_unit_price -%}
+                    {%- assign up_v = product.selected_or_first_available_variant -%}
+                    <div class="pd-unit-price{% if up_v.unit_price_measurement == nil %} hidden{% endif %}" id="pd-unit-price-{{ section.id }}" style="color: var(--block-unit-price-color, var(--text-secondary)) !important; opacity: var(--block-unit-price-opacity, 0.75) !important;">
+                      <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}:&nbsp;</span>
+                      <span class="pd-unit-price-value">{{ up_v.unit_price | money }}</span>
+                      <span aria-hidden="true">/</span>
+                      <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+                      <span class="pd-unit-price-ref">
+                        {%- if up_v.unit_price_measurement.reference_value != 1 -%}
+                          {{- up_v.unit_price_measurement.reference_value -}}
+                        {%- endif -%}
+                        {{ up_v.unit_price_measurement.reference_unit }}
+                      </span>
+                    </div>
                   {%- endif -%}
                 </div>
 
@@ -597,6 +616,7 @@
         { "type": "range", "id": "line_height", "min": 0.8, "max": 2.0, "step": 0.1, "unit": "em", "label": "Line Height", "default": 1.2 },
         { "type": "header", "content": "Colors" },
         { "type": "color", "id": "text_color", "label": "Price Color" },
+        { "type": "color", "id": "unit_price_color", "label": "Unit Price Color" },
         { "type": "color", "id": "bg_color", "label": "Background Color" },
         { "type": "color_background", "id": "bg_gradient", "label": "Background Gradient" }
       ]

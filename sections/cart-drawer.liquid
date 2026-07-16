@@ -37,7 +37,7 @@
         </header>
 
         <!-- Shipping Bar -->
-        {%- if settings.enable_free_shipping_threshold and settings.free_shipping_threshold != blank -%}
+        {%- if section.settings.show_shipping_bar and settings.enable_free_shipping_threshold and settings.free_shipping_threshold != blank -%}
             {%- assign threshold = settings.free_shipping_threshold | times: 100 -%}
             {%- assign remaining = threshold | minus: cart.total_price -%}
             {%- assign progress = cart.total_price | times: 100 | divided_by: threshold -%}
@@ -82,34 +82,72 @@
                             <h3 class="cd-item-title">
                                 <a href="{{ item.url }}">{{ item.product.title }}</a>
                             </h3>
-                            {%- if item.variant.title != 'Default Title' -%}
-                                <p class="cd-item-variant">{{ item.variant.title }}</p>
+                            {%- if section.settings.show_variants -%}
+                                {%- unless item.variant.title == 'Default Title' -%}
+                                    {%- for option in item.options_with_values -%}
+                                        <p class="cd-item-variant">
+                                            <span class="cd-item-option-name">{{ option.name }}: </span>
+                                            <span class="cd-item-option-value">{{ option.value }}</span>
+                                        </p>
+                                    {%- endfor -%}
+                                {%- endunless -%}
                             {%- endif -%}
-                            {%- if item.selling_plan_allocation -%}
+                            {%- if section.settings.show_unit_price and item.variant.unit_price_measurement != nil -%}
+                                <p class="cd-item-unit-price">
+                                    <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}:&nbsp;</span>
+                                    {{ item.variant.unit_price | money }}
+                                    <span aria-hidden="true">/</span>
+                                    <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+                                    {%- if item.variant.unit_price_measurement.reference_value != 1 -%}
+                                        {{- item.variant.unit_price_measurement.reference_value -}}
+                                    {%- endif -%}
+                                    {{ item.variant.unit_price_measurement.reference_unit }}
+                                </p>
+                            {%- endif -%}
+                            {%- if section.settings.show_selling_plan and item.selling_plan_allocation -%}
                                 {%- render 'selling-plan-badge', selling_plan_allocation: item.selling_plan_allocation -%}
+                            {%- endif -%}
+                            {%- if item.line_level_discount_allocations.size > 0 -%}
+                                <ul class="cd-item-discounts">
+                                    {%- for discount_allocation in item.line_level_discount_allocations -%}
+                                        <li class="cd-discount-badge">
+                                            <svg class="sp-badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                                                <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                                            </svg>
+                                            <span class="sp-badge__label">
+                                                {{ discount_allocation.discount_application.title }} (-{{ discount_allocation.amount | money }})
+                                            </span>
+                                        </li>
+                                    {%- endfor -%}
+                                </ul>
                             {%- endif -%}
                             
                             <div class="cd-item-bottom">
-                                <div class="cd-item-qty">
-                                    <button type="button" class="cd-qty-btn" data-change="-1" aria-label="{{ 'cart.update' | t }}: {{ item.product.title }} - 1">
-                                        <span>−</span>
-                                    </button>
-                                    <span class="cd-qty-value" aria-live="polite">{{ item.quantity }}</span>
-                                    <button type="button" class="cd-qty-btn" data-change="1" aria-label="{{ 'cart.update' | t }}: {{ item.product.title }} + 1">
-                                        <span>+</span>
-                                    </button>
-                                </div>
+                                {%- if section.settings.show_quantity -%}
+                                    <div class="cd-item-qty">
+                                        <button type="button" class="cd-qty-btn" data-change="-1" aria-label="{{ 'cart.update' | t }}: {{ item.product.title }} - 1">
+                                            <span>−</span>
+                                        </button>
+                                        <span class="cd-qty-value" aria-live="polite">{{ item.quantity }}</span>
+                                        <button type="button" class="cd-qty-btn" data-change="1" aria-label="{{ 'cart.update' | t }}: {{ item.product.title }} + 1">
+                                            <span>+</span>
+                                        </button>
+                                    </div>
+                                {%- endif -%}
                                 <span class="cd-item-price" aria-live="polite">
                                     {{ item.final_line_price | money }}
                                 </span>
                             </div>
                         </div>
-                        <button type="button" class="cd-item-remove" data-remove aria-label="{{ 'cart.remove' | t }}: {{ item.product.title }}">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <polyline points="3 6 5 6 21 6"></polyline>
-                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                            </svg>
-                        </button>
+                        {%- if section.settings.show_remove_button -%}
+                            <button type="button" class="cd-item-remove" data-remove aria-label="{{ 'cart.remove' | t }}: {{ item.product.title }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                            </button>
+                        {%- endif -%}
                     </article>
                 {%- endfor -%}
             {%- endif -%}
@@ -129,18 +167,64 @@
 
         <!-- Footer -->
         <footer class="cd-footer" id="cd-footer" {%- if cart.item_count == 0 -%}style="display:none"{%- endif -%}>
-            <div class="cd-subtotal-row">
-                <span class="cd-subtotal-label">{{ 'cart.subtotal' | t }}</span>
-                <span class="cd-subtotal-value" aria-live="polite">{{ cart.total_price | money }}</span>
-            </div>
-            <p class="cd-tax-note">{{ 'cart.tax_shipping_note' | t }}</p>
+            {%- if section.settings.show_subtotal -%}
+                <div class="cd-subtotal-row">
+                    <span class="cd-subtotal-label">{{ 'cart.subtotal' | t }}</span>
+                    <span class="cd-subtotal-value" aria-live="polite">
+                        {%- if cart.cart_level_discount_applications.size > 0 -%}
+                            {{ cart.items_subtotal_price | money }}
+                        {%- else -%}
+                            {{ cart.total_price | money }}
+                        {%- endif -%}
+                    </span>
+                </div>
+            {%- endif -%}
+
+            {%- if cart.cart_level_discount_applications.size > 0 -%}
+                <div class="cd-discounts-wrapper">
+                    {%- for discount_application in cart.cart_level_discount_applications -%}
+                        <div class="cd-discount-row">
+                            <span class="cd-discount-title">
+                                <svg class="sp-badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="width: 10px; height: 10px; margin-right: 4px; display: inline-block; vertical-align: middle;">
+                                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                                    <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                                </svg>
+                                {{ discount_application.title }}
+                            </span>
+                            <span class="cd-discount-amount">-{{ discount_application.total_allocated_amount | money }}</span>
+                        </div>
+                    {%- endfor -%}
+                </div>
+                
+                <div class="cd-total-row">
+                    <span class="cd-total-label">{{ 'cart.total' | t | default: 'Total' }}</span>
+                    <span class="cd-total-value">{{ cart.total_price | money }}</span>
+                </div>
+            {%- endif -%}
+            {%- if section.settings.show_tax_note -%}
+                <p class="cd-tax-note">
+                    {%- if cart.taxes_included and shop.shipping_policy.url != blank -%}
+                        {{ 'cart.taxes_included_and_shipping_policy_from_api_html' | t: link: shop.shipping_policy.url }}
+                    {%- elsif cart.taxes_included -%}
+                        {{ 'cart.taxes_included_but_shipping_at_checkout' | t }}
+                    {%- elsif shop.shipping_policy.url != blank -%}
+                        {{ 'cart.taxes_and_shipping_policy_from_api_html' | t: link: shop.shipping_policy.url }}
+                    {%- else -%}
+                        {{ 'cart.taxes_and_shipping_at_checkout' | t }}
+                    {%- endif -%}
+                </p>
+            {%- endif -%}
             
-            <form action="{{ routes.cart_url }}" method="post">
-                <button type="submit" name="checkout" class="cd-checkout-btn">
-                    {{ 'cart.checkout' | t }}
-                </button>
-            </form>
-            <a href="{{ routes.cart_url }}" class="cd-view-cart-btn">{{ 'cart.view_cart' | t }}</a>
+            {%- if section.settings.show_checkout_button -%}
+                <form action="{{ routes.cart_url }}" method="post">
+                    <button type="submit" name="checkout" class="cd-checkout-btn">
+                        {{ 'cart.checkout' | t }}
+                    </button>
+                </form>
+            {%- endif -%}
+            {%- if section.settings.show_view_cart_button -%}
+                <a href="{{ routes.cart_url }}" class="cd-view-cart-btn">{{ 'cart.view_cart' | t }}</a>
+            {%- endif -%}
         </footer>
     </aside>
 </div>
@@ -152,6 +236,66 @@
     {
       "type": "header",
       "content": "Drawer settings are in Theme Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variants",
+      "label": "Show variant options",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_unit_price",
+      "label": "Show unit price",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_selling_plan",
+      "label": "Show selling plan allocation",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quantity",
+      "label": "Show quantity selector",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_remove_button",
+      "label": "Show remove button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subtotal",
+      "label": "Show subtotal",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tax_note",
+      "label": "Show taxes and shipping note",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_checkout_button",
+      "label": "Show checkout button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_cart_button",
+      "label": "Show view cart button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shipping_bar",
+      "label": "Show free shipping progress bar",
+      "default": true
     }
   ]
 }

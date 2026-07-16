@@ -1711,6 +1711,12 @@
                 {%- endif -%}
               </nav>
               {%- endif -%}
+
+            {%- when 'article_comments' -%}
+              {% render 'article-comments-block', block: block %}
+
+            {%- when 'article_comment_form' -%}
+              {% render 'article-comment-form-block', block: block %}
             
           {%- endcase -%}
         {%- endfor -%}
@@ -5578,6 +5584,49 @@
           "default": 3
         }
       ]
+    },
+    {
+      "type": "article_comments",
+      "name": "Article Comments",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "comments_per_page",
+          "min": 5,
+          "max": 50,
+          "step": 5,
+          "label": "Comments per page",
+          "default": 10
+        },
+        {
+          "type": "select",
+          "id": "heading_level",
+          "label": "Heading level",
+          "default": "2",
+          "options": [
+            { "value": "2", "label": "H2" },
+            { "value": "3", "label": "H3" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "article_comment_form",
+      "name": "Article Comment Form",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "heading_level",
+          "label": "Heading level",
+          "default": "2",
+          "options": [
+            { "value": "2", "label": "H2" },
+            { "value": "3", "label": "H3" }
+          ]
+        }
+      ]
     }
   ],
   "presets": [
@@ -5607,6 +5656,12 @@
         },
         {
           "type": "post_navigation"
+        },
+        {
+          "type": "article_comments"
+        },
+        {
+          "type": "article_comment_form"
         },
         {
           "type": "blog-toc-widget",

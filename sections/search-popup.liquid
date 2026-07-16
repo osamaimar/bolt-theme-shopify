@@ -42,7 +42,7 @@
           aria-label="{{ 'general.search.placeholder' | t }}"
           autocomplete="off" 
         />
-        <input type="hidden" name="type" value="product">
+        <input type="hidden" name="type" value="product,article,page">
         {%- if section.settings.show_keyboard_hints -%}
           <div class="search-kbd" aria-hidden="true">
             <kbd>⌘</kbd><kbd>K</kbd>
@@ -58,7 +58,7 @@
             {%- assign popular_tags = section.settings.popular_searches | split: ',' -%}
             {%- for tag in popular_tags -%}
               {%- assign tag_clean = tag | strip -%}
-              <a class="search-quick-tag" href="{{ routes.search_url }}?q={{ tag_clean | url_encode }}&type=product">
+              <a class="search-quick-tag" href="{{ routes.search_url }}?q={{ tag_clean | url_encode }}&type=product,article,page">
                 {{ tag_clean }}
               </a>
             {%- endfor -%}

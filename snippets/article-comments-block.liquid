@@ -1,25 +1,75 @@
-{%- comment -%}Article Comments Block{%- endcomment -%}
+{{ 'section-article-comments.css' | asset_url | stylesheet_tag }}
+
 {%- if blog.comments_enabled? -%}
   <div class="article-comments" {{ block.shopify_attributes }}>
-    <h{{ block.settings.heading_level }}>{{ 'blog.article_comments' | t }}</h{{ block.settings.heading_level }}>
+    <h{{ block.settings.heading_level }}>
+      <span class="acf-heading-label">{{ 'blog.article_comments' | t: count: article.comments_count }}</span>
+    </h{{ block.settings.heading_level }}>
     
     <div id="comments">
       {% paginate article.comments by block.settings.comments_per_page %}
         {%- if article.comments.size > 0 -%}
-          {%- for comment in article.comments -%}
-            <div class="article-comment">
-              <p class="article-comment-author">{{ comment.author }}</p>
-              <p class="article-comment-date">
-                {{- comment.created_at | time_tag: format: 'date' -}}
-              </p>
-              <p class="article-comment-content">{{ comment.content }}</p>
-            </div>
-          {%- endfor -%}
+          <div class="acf-timeline">
+            {%- for comment in article.comments -%}
+              <div class="acf-timeline-item">
+                <div class="acf-comment-bubble">
+                  <div class="acf-comment-header">
+                    <div class="acf-timeline-avatar">
+                      {{ comment.author | slice: 0 }}
+                    </div>
+                    <div class="acf-author-info">
+                      <span class="acf-author-name">{{ comment.author }}</span>
+                      {%- if comment.author == article.user.name or comment.author == article.author -%}
+                        <span class="acf-author-badge">{{ 'blogs.comments.author' | t | default: 'Author' }}</span>
+                      {%- endif -%}
+                    </div>
+                    <span class="acf-author-date">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                      </svg>
+                      {{- comment.created_at | time_tag: format: 'date' -}}
+                    </span>
+                  </div>
+                  <div class="acf-comment-body">
+                    {{ comment.content }}
+                  </div>
+                  
+                  <div class="acf-comment-actions">
+                    <button class="acf-action-btn" type="button" aria-label="Like comment">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                      </svg>
+                      <span>Like</span>
+                    </button>
+                    <button class="acf-action-btn" type="button" aria-label="Reply to comment">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-up-left">
+                        <polyline points="9 14 4 9 9 4"></polyline>
+                        <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+                      </svg>
+                      <span>Reply</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
         {%- else -%}
-          <p class="article-no-comments">{{ 'blog.no_comments_yet' | t }}</p>
+          <div class="acf-empty-state">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <p>{{ 'blog.no_comments_yet' | t }}</p>
+          </div>
         {%- endif -%}
         
-        {{ paginate | default_pagination: anchor: 'comments' }}
+        {%- if paginate.pages > 1 -%}
+          <div class="acf-pagination">
+            {{ paginate | default_pagination: anchor: 'comments' }}
+          </div>
+        {%- endif -%}
       {% endpaginate %}
     </div>
   </div>

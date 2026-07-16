@@ -7,15 +7,79 @@
   padding_bottom_mobile: section.settings.padding_bottom_mobile
 %}
 
+<style>
+.cart-note-wrapper {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cart-note-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--section-text, var(--text-primary));
+}
+.cart-note-textarea {
+  min-height: 120px;
+  padding: 15px;
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--border-medium, rgba(255, 255, 255, 0.15));
+  background: var(--color-white-2, rgba(255, 255, 255, 0.02));
+  color: var(--section-text, var(--text-primary));
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+.cart-note-textarea:focus {
+  border-color: var(--color-accent, #3b82f6);
+}
+.cart-discounts-list {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.cart-discount-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: var(--color-accent-secondary-10);
+  border: 1px solid var(--color-accent-secondary-20);
+  color: var(--color-accent-secondary);
+  font-size: var(--font-size-xs, 12px);
+  font-weight: var(--font-weight-semibold, 600);
+  line-height: 1.2;
+  max-width: 100%;
+  overflow: hidden;
+  vertical-align: middle;
+}
+.cart-discount-badge .sp-badge__label {
+  white-space: normal;
+  text-overflow: clip;
+  max-width: none;
+}
+</style>
+
 {%- if section.settings.show_section -%}
   {%- assign cart_table_block = nil -%}
   {%- assign cart_totals_block = nil -%}
+  {%- assign cart_note_block = nil -%}
   {%- for block in section.blocks -%}
     {%- if block.type == 'cart_table' -%}
       {%- assign cart_table_block = block -%}
     {%- endif -%}
     {%- if block.type == 'cart_totals' -%}
       {%- assign cart_totals_block = block -%}
+    {%- endif -%}
+    {%- if block.type == 'cart_note' -%}
+      {%- assign cart_note_block = block -%}
     {%- endif -%}
   {%- endfor -%}
 
@@ -118,16 +182,38 @@
                       <h4>
                         <a href="{{ item.url }}" class="cart-product-link">{{ item.product.title }}</a>
                       </h4>
-                      {%- if item.variant.title != 'Default Title' -%}
-                        <p>{{ item.variant.title }}</p>
+                      {%- if cart_table_block.settings.show_variants -%}
+                        {%- unless item.variant.title == 'Default Title' -%}
+                          {%- for option in item.options_with_values -%}
+                            <p class="cart-item-option">
+                              <span class="cart-item-option-name">{{ option.name }}: </span>
+                              <span class="cart-item-option-value">{{ option.value }}</span>
+                            </p>
+                          {%- endfor -%}
+                        {%- endunless -%}
                       {%- endif -%}
                       {%- for property in item.properties -%}
                         {%- unless property.last == blank -%}
                           <p class="cart-item-property">{{ property.first }}: {{ property.last }}</p>
                         {%- endunless -%}
                       {%- endfor -%}
-                      {%- if item.selling_plan_allocation -%}
+                      {%- if cart_table_block.settings.show_selling_plan and item.selling_plan_allocation -%}
                         {%- render 'selling-plan-badge', selling_plan_allocation: item.selling_plan_allocation -%}
+                      {%- endif -%}
+                      {%- if cart_table_block.settings.show_discounts and item.line_level_discount_allocations.size > 0 -%}
+                        <ul class="cart-discounts-list" role="list" aria-label="{{ 'cart.discount_code' | t }}">
+                          {%- for discount_allocation in item.line_level_discount_allocations -%}
+                            <li class="cart-discount-badge">
+                              <svg class="sp-badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                                <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                              </svg>
+                              <span class="sp-badge__label">
+                                {{ discount_allocation.discount_application.title }} (-{{ discount_allocation.amount | money }})
+                              </span>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
                       {%- endif -%}
                     </div>
                   </div>
@@ -139,6 +225,19 @@
                       <span class="cart-price-final">{{ item.final_price | money }}</span>
                     {%- else -%}
                       {{ item.original_price | money }}
+                    {%- endif -%}
+
+                    {%- if cart_table_block.settings.show_unit_price and item.variant.unit_price_measurement != nil -%}
+                      <div class="cart-unit-price">
+                        <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}:&nbsp;</span>
+                        {{ item.variant.unit_price | money }}
+                        <span aria-hidden="true">/</span>
+                        <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+                        {%- if item.variant.unit_price_measurement.reference_value != 1 -%}
+                          {{- item.variant.unit_price_measurement.reference_value -}}
+                        {%- endif -%}
+                        {{ item.variant.unit_price_measurement.reference_unit }}
+                      </div>
                     {%- endif -%}
                   </div>
 
@@ -213,6 +312,65 @@
                 {{ clear_text }}
               </a>
             </div>
+
+            {%- if cart_note_block -%}
+              {%- assign note_bg_color = cart_note_block.settings.bg_color -%}
+              {%- assign note_bg_gradient = cart_note_block.settings.bg_gradient -%}
+              {%- assign note_border_color = cart_note_block.settings.border_color -%}
+              {%- assign note_text_color = cart_note_block.settings.text_color -%}
+              {%- assign note_label_color = cart_note_block.settings.label_color -%}
+              {%- assign note_placeholder_color = cart_note_block.settings.placeholder_color -%}
+              {%- if note_placeholder_color != blank -%}
+                <style>
+                  #CartNote-{{ section.id }}::placeholder {
+                    color: {{ note_placeholder_color }} !important;
+                    opacity: 1;
+                  }
+                </style>
+              {%- endif -%}
+              <div class="cart-note-wrapper {% unless cart_note_block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless cart_note_block.settings.show_on_mobile %} hidden-mobile{% endunless %}" 
+                   {{ cart_note_block.shopify_attributes }}
+                   style="
+                     --m-t: {{ cart_note_block.settings.margin_top | default: 30 }}px; 
+                     --m-b: {{ cart_note_block.settings.margin_bottom | default: 0 }}px; 
+                     --m-t-m: {{ cart_note_block.settings.margin_top_mobile | default: 20 }}px; 
+                     --m-b-m: {{ cart_note_block.settings.margin_bottom_mobile | default: 0 }}px;
+                     margin-top: var(--m-t) !important;
+                     margin-bottom: var(--m-b) !important;
+                     max-width: {{ cart_note_block.settings.max_width | default: 600 }}px;
+                   ">
+                <label for="CartNote-{{ section.id }}" 
+                       class="cart-note-label"
+                       style="
+                         font-size: {% if cart_note_block.settings.font_size == 'small' %}13px{% elsif cart_note_block.settings.font_size == 'large' %}18px{% else %}15px{% endif %} !important;
+                         font-weight: {% if cart_note_block.settings.font_weight == 'bold' %}700{% else %}500{% endif %} !important; 
+                         font-style: {{ cart_note_block.settings.font_style | default: 'normal' }}; 
+                         text-transform: {{ cart_note_block.settings.text_transform | default: 'none' }}; 
+                         letter-spacing: {{ cart_note_block.settings.letter_spacing | default: 0 }}px; 
+                         line-height: {{ cart_note_block.settings.line_height | default: 120 }}% !important;
+                         {% if note_label_color != blank %}color: {{ note_label_color }} !important;{% endif %}
+                       ">
+                  {{ cart_note_block.settings.label | default: 'Order Note' }}
+                </label>
+                <textarea
+                  name="note"
+                  id="CartNote-{{ section.id }}"
+                  class="cart-note-textarea"
+                  placeholder="{{ cart_note_block.settings.placeholder }}"
+                  style="
+                    font-size: {% if cart_note_block.settings.textarea_font_size == 'small' %}13px{% elsif cart_note_block.settings.textarea_font_size == 'large' %}18px{% else %}15px{% endif %} !important;
+                    font-weight: {% if cart_note_block.settings.textarea_font_weight == 'bold' %}700{% else %}400{% endif %} !important; 
+                    font-style: {{ cart_note_block.settings.textarea_font_style | default: 'normal' }}; 
+                    text-transform: {{ cart_note_block.settings.textarea_text_transform | default: 'none' }}; 
+                    letter-spacing: {{ cart_note_block.settings.textarea_letter_spacing | default: 0 }}px; 
+                    line-height: {{ cart_note_block.settings.textarea_line_height | default: 140 }}% !important;
+                    {% if note_text_color != blank %}color: {{ note_text_color }} !important;{% endif %}
+                    {% if note_bg_gradient != blank %}background: {{ note_bg_gradient }} !important;{% elsif note_bg_color != blank %}background-color: {{ note_bg_color }} !important;{% endif %}
+                    {% if note_border_color != blank %}border-color: {{ note_border_color }} !important;{% endif %}
+                  "
+                >{{ cart.note }}</textarea>
+              </div>
+            {%- endif -%}
           </div>
         {%- endif -%}
 
@@ -229,6 +387,23 @@
                   {%- assign default_subtotal_label = 'cart.subtotal' | t -%}{%- assign subtotal_label = cart_totals_block.settings.subtotal_label | default: default_subtotal_label -%}
                   <span>{{ subtotal_label }}</span>
                   <span>{{ cart.items_subtotal_price | money }}</span>
+                </div>
+              {%- endif -%}
+
+              {%- if cart_totals_block.settings.show_discounts and cart.cart_level_discount_applications.size > 0 -%}
+                <div class="cart-discounts-totals">
+                  {%- for discount_application in cart.cart_level_discount_applications -%}
+                    <div class="summary-row cart-discount-row" style="color: var(--color-accent-secondary); font-weight: 500;">
+                      <span class="cart-discount-title">
+                        <svg class="sp-badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="width: 12px; height: 12px; margin-right: 4px; display: inline-block; vertical-align: middle;">
+                          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                          <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                        </svg>
+                        {{ discount_application.title }}
+                      </span>
+                      <span class="cart-discount-amount">-{{ discount_application.total_allocated_amount | money }}</span>
+                    </div>
+                  {%- endfor -%}
                 </div>
               {%- endif -%}
 
@@ -252,7 +427,13 @@
                   {%- assign default_shipping_label = 'cart.shipping' | t -%}{%- assign shipping_label = cart_totals_block.settings.shipping_label | default: default_shipping_label -%}
                   <span>{{ shipping_label }}</span>
                   {%- assign default_shipping_note = 'cart.calculated_at_checkout' | t -%}{%- assign shipping_note = cart_totals_block.settings.shipping_note | default: default_shipping_note -%}
-                  <span class="shipping-note">{{ shipping_note }}</span>
+                  <span class="shipping-note">
+                    {%- if shop.shipping_policy.url != blank -%}
+                      <a href="{{ shop.shipping_policy.url }}">{{ shipping_note }}</a>
+                    {%- else -%}
+                      {{ shipping_note }}
+                    {%- endif -%}
+                  </span>
                 </div>
               {%- endif -%}
 
@@ -960,6 +1141,34 @@
           "id": "clear_button_text",
           "label": "Clear button text",
           "default": "Clear Cart"
+        },
+        {
+          "type": "header",
+          "content": "Item Details Options"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_variants",
+          "label": "Show variant options",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_unit_price",
+          "label": "Show unit price",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_selling_plan",
+          "label": "Show selling plan allocation",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_discounts",
+          "label": "Show product discounts",
+          "default": true
         }
       ]
     },
@@ -1042,6 +1251,12 @@
           "id": "total_label",
           "label": "Total label",
           "default": "Total"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_discounts",
+          "label": "Show order discounts",
+          "default": true
         },
         {
           "type": "header",
@@ -1781,6 +1996,267 @@
           "type": "color",
           "id": "border_color",
           "label": "Border Color"
+        }
+      ]
+    },
+    {
+      "type": "cart_note",
+      "name": "Cart Note",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Note label",
+          "default": "Add a note to your order"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder text",
+          "default": "How can we help you?"
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_desktop",
+          "label": "Show on Desktop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 300,
+          "max": 1000,
+          "step": 50,
+          "unit": "px",
+          "label": "Max Width",
+          "default": 600
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Desktop)",
+          "default": 32
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_top_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Top Margin (Mobile)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Bottom Margin (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "select",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "default": "bold",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "font_style",
+          "label": "Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Line Height",
+          "default": 120
+        },
+        {
+          "type": "header",
+          "content": "Textarea Typography"
+        },
+        {
+          "type": "select",
+          "id": "textarea_font_size",
+          "label": "Textarea Font Size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "textarea_font_weight",
+          "label": "Textarea Font Weight",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "textarea_font_style",
+          "label": "Textarea Font Style",
+          "default": "normal",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "italic", "label": "Italic" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "textarea_text_transform",
+          "label": "Textarea Text Transform",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "lowercase", "label": "Lowercase" },
+            { "value": "capitalize", "label": "Capitalize" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "textarea_letter_spacing",
+          "min": -5,
+          "max": 10,
+          "step": 0.5,
+          "unit": "px",
+          "label": "Textarea Letter Spacing",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "textarea_line_height",
+          "min": 80,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "label": "Textarea Line Height",
+          "default": 140
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "label_color",
+          "label": "Label Text Color"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Textarea Input Color"
+        },
+        {
+          "type": "color",
+          "id": "placeholder_color",
+          "label": "Textarea Placeholder Color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Textarea Background Color"
+        },
+        {
+          "type": "color_background",
+          "id": "bg_gradient",
+          "label": "Textarea Background Gradient"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Textarea Border Color"
         }
       ]
     }

@@ -40,6 +40,21 @@
 
     <div class="card-v2-meta">
       <span class="card-v2-price">{{ product.price | money }}</span>
+      {%- if settings.show_unit_price -%}
+        {%- assign up_v = product.selected_or_first_available_variant -%}
+        {%- if up_v.unit_price_measurement != nil -%}
+          <div class="card-v2-unit-price">
+            <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}:&nbsp;</span>
+            {{ up_v.unit_price | money }}
+            <span aria-hidden="true">/</span>
+            <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+            {%- if up_v.unit_price_measurement.reference_value != 1 -%}
+              {{- up_v.unit_price_measurement.reference_value -}}
+            {%- endif -%}
+            {{ up_v.unit_price_measurement.reference_unit }}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
       {%- if show_rating -%}
         <div class="rating-v2">
           <span style="color:var(--color-accent-secondary)">

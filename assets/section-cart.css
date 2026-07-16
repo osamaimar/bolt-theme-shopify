@@ -140,7 +140,7 @@
 
 .btn-checkout {
     width: 100%;
-    background: var(--color-accent);
+    background: var(--color-accent-secondary);
     color: var(--bg-secondary);
     border: none;
     padding: 14px;
@@ -153,6 +153,8 @@
 }
 
 .btn-checkout:hover {
+    background: var(--color-accent-secondary);
+    filter: brightness(1.08);
     box-shadow: 0 8px 24px rgba(var(--color-secondary-rgb), 0.3);
     transform: translateY(-2px);
 }

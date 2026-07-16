@@ -820,11 +820,7 @@
                 </h2>
                 {%- if block.settings.show_card_excerpt -%}
                 <p class="blog-sb-card-excerpt">
-                  {%- if article.excerpt != blank -%}
-                    {{ article.excerpt | strip_html | truncate: block.settings.excerpt_length }}
-                  {%- else -%}
-                    {{ article.content | strip_html | truncate: block.settings.excerpt_length }}
-                  {%- endif -%}
+                  {{ article.excerpt_or_content | strip_html | truncate: block.settings.excerpt_length }}
                 </p>
                 {%- endif -%}
                 <div class="blog-sb-card-bottom">

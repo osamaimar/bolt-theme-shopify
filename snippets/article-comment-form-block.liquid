@@ -1,29 +1,52 @@
-{%- comment -%}Article Comment Form Block{%- endcomment -%}
+{{ 'section-article-comments.css' | asset_url | stylesheet_tag }}
+
 {%- if blog.comments_enabled? -%}
   <div class="article-comment-form-wrapper" {{ block.shopify_attributes }}>
-    <h{{ block.settings.heading_level }}>{{ 'blog.comment_form_title' | t }}</h{{ block.settings.heading_level }}>
+    <h{{ block.settings.heading_level }}>
+      <span class="acf-heading-label">{{ 'blog.comment_form_title' | t }}</span>
+    </h{{ block.settings.heading_level }}>
     
     {% form 'new_comment', article %}
-      {{ form.errors | default_errors }}
-      
-      <div class="article-comment-form">
-        <div class="form-group">
-          <label for="author-{{ block.id }}">{{ 'blog.comment_form_name' | t }}</label>
-          <input type="text" name="comment[author]" id="author-{{ block.id }}" value="{{ form.author }}" required>
+      {%- if form.posted_successfully? -%}
+        <div class="form-status form-status-success" tabindex="-1" autofocus style="padding: 16px; margin-bottom: 20px; background: var(--color-accent-secondary-10); border: 1px solid var(--color-accent-secondary-20); color: var(--color-accent-secondary); border-radius: var(--radius-md, 8px); font-weight: 600;">
+          {%- if blog.moderated? -%}
+            {{ 'blogs.comments.success_moderated' | t | default: 'Your comment was posted successfully. We will publish it after review.' }}
+          {%- else -%}
+            {{ 'blogs.comments.success' | t | default: 'Your comment was posted successfully! Thank you.' }}
+          {%- endif -%}
         </div>
+      {%- else -%}
+        {%- if form.errors -%}
+          <div class="acf-error-banner">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
         
-        <div class="form-group">
-          <label for="email-{{ block.id }}">{{ 'blog.comment_form_email' | t }}</label>
-          <input type="email" name="comment[email]" id="email-{{ block.id }}" value="{{ form.email }}" required>
+        <div class="acf-card-form">
+          <div class="article-comment-form">
+            <div class="acf-form-grid">
+              <div class="acf-field-wrapper">
+                <input type="text" name="comment[author]" id="author-{{ block.id }}" value="{{ form.author }}" class="acf-floating-input" placeholder=" " required>
+                <label for="author-{{ block.id }}">{{ 'blog.comment_form_name' | t }}</label>
+              </div>
+              
+              <div class="acf-field-wrapper">
+                <input type="email" name="comment[email]" id="email-{{ block.id }}" value="{{ form.email }}" class="acf-floating-input" placeholder=" " required>
+                <label for="email-{{ block.id }}">{{ 'blog.comment_form_email' | t }}</label>
+              </div>
+            </div>
+            
+            <div class="acf-field-wrapper">
+              <textarea name="comment[body]" id="body-{{ block.id }}" class="acf-floating-input" placeholder=" " required>{{ form.body }}</textarea>
+              <label for="body-{{ block.id }}">{{ 'blog.comment_form_body' | t }}</label>
+            </div>
+            
+            <button type="submit" class="acf-submit-btn">
+              {{ 'blog.comment_form_submit' | t }}
+            </button>
+          </div>
         </div>
-        
-        <div class="form-group">
-          <label for="body-{{ block.id }}">{{ 'blog.comment_form_body' | t }}</label>
-          <textarea name="comment[body]" id="body-{{ block.id }}" required>{{ form.body }}</textarea>
-        </div>
-        
-        <button type="submit" class="btn">{{ 'blog.comment_form_submit' | t }}</button>
-      </div>
+      {%- endif -%}
     {% endform %}
   </div>
 {%- endif -%}

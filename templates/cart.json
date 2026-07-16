@@ -49,6 +49,7 @@
             "show_additional_checkout_buttons": true
           }
         },
+
         "empty_icon": {
           "type": "empty_icon"
         },

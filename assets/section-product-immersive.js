@@ -287,6 +287,21 @@ function initImmersiveVariants(container) {
         }
       }
 
+      // Update Unit Price — element only exists in DOM when settings.show_unit_price is enabled
+      const unitPriceEl = container.querySelector('.pdi-unit-price');
+      if (unitPriceEl) {
+        const upm = matchedVariant.unit_price_measurement;
+        if (upm) {
+          const valueEl = unitPriceEl.querySelector('.pdi-unit-price-value');
+          const refEl   = unitPriceEl.querySelector('.pdi-unit-price-ref');
+          if (valueEl) valueEl.textContent = formatMoney(matchedVariant.unit_price);
+          if (refEl)   refEl.textContent   = (upm.reference_value !== 1 ? upm.reference_value : '') + upm.reference_unit;
+          unitPriceEl.classList.remove('hidden');
+        } else {
+          unitPriceEl.classList.add('hidden');
+        }
+      }
+
       // Sync Gallery if enabled
       if (syncGallery && matchedVariant.featured_media) {
         const mediaId = matchedVariant.featured_media.id;

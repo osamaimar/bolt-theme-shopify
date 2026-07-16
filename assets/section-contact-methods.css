@@ -27,7 +27,7 @@
 .contact-method-icon {
   width: 60px;
   height: 60px;
-  background: var(--bg-contact);
+  background: var(--color-accent-10);
   border-radius: var(--radius-lg);
   display: inline-flex;
   align-items: center;

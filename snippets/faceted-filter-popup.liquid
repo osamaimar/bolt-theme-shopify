@@ -83,7 +83,7 @@
     <form class="ffp-form" id="ffp-form-{{ context }}" action="{{ results_url }}" method="get">
       {%- if context == 'search' -%}
         <input type="hidden" name="q" value="{{ search.terms | escape }}">
-        <input type="hidden" name="type" value="product">
+        <input type="hidden" name="type" value="product,article,page">
       {%- endif -%}
 
       {%- assign sort_value = collection.sort_by | default: collection.default_sort_by | default: search.sort_by -%}

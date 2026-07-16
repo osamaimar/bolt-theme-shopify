@@ -1,5 +1,6 @@
 {{ 'section-search.css' | asset_url | stylesheet_tag }}
 {{ 'component-product-card.css' | asset_url | stylesheet_tag }}
+{{ 'section-blog.css' | asset_url | stylesheet_tag }}
 
 <style>
   #shopify-section-{{ section.id }} {
@@ -448,6 +449,101 @@
                           show_cta_in_footer: block.settings.show_view_details,
                           view_details_label: block.settings.view_details_label
                         %}
+                      {%- elsif item.object_type == 'article' -%}
+                        <div class="cpd-product-card cpd-product-card--standard article-card" style="--card-image-ratio: 16 / 10;">
+                          <div class="cpd-product-thumb" style="aspect-ratio: 16 / 10 !important; height: auto !important; position: relative !important;">
+                            <a href="{{ item.url }}" class="full-unstyled-link">
+                              {%- if item.image -%}
+                                <img
+                                  src="{{ item.image | image_url: width: 533 }}"
+                                  sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+                                  alt="{{ item.image.alt | escape }}"
+                                  loading="lazy"
+                                  width="{{ item.image.width }}"
+                                  height="{{ item.image.height }}"
+                                  style="width: 100% !important; height: 100% !important; object-fit: cover !important; display: block !important;"
+                                >
+                              {%- else -%}
+                                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                              {%- endif -%}
+                            </a>
+                            <div class="card__badge">
+                              <span class="badge badge--article" style="background: var(--color-accent-secondary); color: var(--bg-primary); font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem;">
+                                {{ 'blogs.article.read_more' | t | default: 'Article' }}
+                              </span>
+                            </div>
+                          </div>
+                          <div class="cpd-product-info" style="display: flex; flex-direction: column; height: 100%; padding-top: 0 !important;">
+                            {%- if block.settings.show_blog_author_date -%}
+                              <div class="cpd-product-category" style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-accent); font-weight: 700; margin-bottom: 6px;">
+                                {{ item.author }} &bull; {{ item.published_at | date: '%b %d, %Y' }}
+                              </div>
+                            {%- endif -%}
+                            <div class="cpd-product-name" style="margin-bottom: 8px;">
+                              <a href="{{ item.url }}" class="full-unstyled-link" style="font-weight: 700; font-size: 1.1rem; line-height: 1.4;">
+                                {{ item.title | escape }}
+                              </a>
+                            </div>
+                            {%- if block.settings.show_blog_description -%}
+                              <p class="cpd-product-desc" style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px; flex-grow: 1;">
+                                {{ item.excerpt_or_content | strip_html | truncatewords: 15 }}
+                              </p>
+                            {%- endif -%}
+                            {%- if block.settings.show_blog_read_more -%}
+                              <div class="cpd-product-footer" style="margin-top: auto; padding-top: 12px; {% unless block.settings.show_blog_divider %}border-top: none !important;{% endunless %} display: flex; justify-content: flex-end;">
+                                <a href="{{ item.url }}" class="cpd-product-cta" style="width: 100%; justify-content: center;">
+                                  {{ 'blogs.article.read_more' | t }}
+                                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 14px; height: 14px; margin-inline-start: 6px;"><polyline points="9 18 15 12 9 6"/></svg>
+                                </a>
+                              </div>
+                            {%- elsif block.settings.show_blog_divider -%}
+                              <div class="cpd-product-footer" style="margin-top: auto; padding-top: 0; border-top: 1px solid var(--border-light); display: flex;"></div>
+                            {%- endif -%}
+                          </div>
+                        </div>
+                      {%- elsif item.object_type == 'page' -%}
+                        <div class="cpd-product-card cpd-product-card--standard page-card" style="--card-image-ratio: 16 / 10;">
+                          <div class="cpd-product-thumb" style="background: var(--color-white-5); display: flex; align-items: center; justify-content: center; aspect-ratio: 16 / 10 !important; height: auto !important; border-radius: var(--radius-lg); position: relative !important;">
+                            <a href="{{ item.url }}" class="full-unstyled-link" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 48px; height: 48px; color: var(--color-accent-secondary-40);">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                              </svg>
+                            </a>
+                            <div class="card__badge">
+                              <span class="badge badge--page" style="background: var(--color-accent); color: var(--bg-primary); font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem;">
+                                {{ 'general.search.page' | t | default: 'Page' }}
+                              </span>
+                            </div>
+                          </div>
+                          <div class="cpd-product-info" style="display: flex; flex-direction: column; height: 100%; padding-top: 0 !important;">
+                            {%- if block.settings.show_blog_author_date -%}
+                              <div class="cpd-product-category" style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-accent-secondary); font-weight: 700; margin-bottom: 6px;">
+                                {{ 'general.search.page' | t | default: 'Information Page' }}
+                              </div>
+                            {%- endif -%}
+                            <div class="cpd-product-name" style="margin-bottom: 8px;">
+                              <a href="{{ item.url }}" class="full-unstyled-link" style="font-weight: 700; font-size: 1.1rem; line-height: 1.4;">
+                                {{ item.title | escape }}
+                              </a>
+                            </div>
+                            {%- if block.settings.show_blog_description -%}
+                              <p class="cpd-product-desc" style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px; flex-grow: 1;">
+                                {{ item.content | strip_html | truncatewords: 15 }}
+                              </p>
+                            {%- endif -%}
+                            {%- if block.settings.show_blog_read_more -%}
+                              <div class="cpd-product-footer" style="margin-top: auto; padding-top: 12px; {% unless block.settings.show_blog_divider %}border-top: none !important;{% endunless %} display: flex; justify-content: flex-end;">
+                                <a href="{{ item.url }}" class="cpd-product-cta" style="width: 100%; justify-content: center;">
+                                  {{ 'blogs.article.read_more' | t | default: 'View Page' }}
+                                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 14px; height: 14px; margin-inline-start: 6px;"><polyline points="9 18 15 12 9 6"/></svg>
+                                </a>
+                              </div>
+                            {%- elsif block.settings.show_blog_divider -%}
+                              <div class="cpd-product-footer" style="margin-top: auto; padding-top: 0; border-top: 1px solid var(--border-light); display: flex;"></div>
+                            {%- endif -%}
+                          </div>
+                        </div>
                       {%- endif -%}
                     {%- endfor -%}
                   </div>
@@ -1100,6 +1196,34 @@
           "type": "checkbox",
           "id": "show_badges",
           "label": "Show badges",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Blog & Page Card Settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_blog_author_date",
+          "label": "Show blog author and date",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_blog_description",
+          "label": "Show blog description",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_blog_divider",
+          "label": "Show blog thin divider line",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_blog_read_more",
+          "label": "Show blog read more button",
           "default": true
         },
         {
