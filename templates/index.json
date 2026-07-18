@@ -739,7 +739,7 @@
         "product-1": {
           "type": "product_card",
           "settings": {
-            "product": "xreal-1s-ar-glasses-500-virtual-screen-52-fov-native-3dof-3d-mode-x1-chip-smart-glasses-support-iphone-17-16-15-usb-c-dp-device-1",
+            "product": "ultra-wide-49-inch-curved-led-monitor-5k-60hz-144hz-hdr-gaming-ips-ultrawide-curvado-lcd-for-desktop-replacement",
             "category": "Wearables",
             "title": "",
             "price": "",
@@ -779,7 +779,7 @@
         "product-2": {
           "type": "product_card",
           "settings": {
-            "product": "all-in-one-4k-72hz-90hz-6dof-105-fov-spatial-4-glasses-vr-ar-mr-device-with-3d-video-glasses-2",
+            "product": "49-inch-curved-screen-165hz-gaming-4k-monitor-wide-screen-computer-monitor-with-dp-interface-for-desktop-application",
             "category": "Accessories",
             "title": "",
             "price": "",
@@ -913,7 +913,7 @@
         "collection": {
           "type": "collection_strip",
           "settings": {
-            "collection": "top-picks",
+            "collection": "smartphones",
             "columns_desktop": "4",
             "columns_tablet": "3",
             "columns_mobile": "2",
