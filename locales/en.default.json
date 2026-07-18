@@ -8,6 +8,8 @@
     "unit_price_separator": "per",
     "back_to_top": "Back to top",
     "account": "Account",
+    "close_cart": "Close cart",
+    "out_of_5_stars": "{{ rating }} out of 5 stars",
     "link_messages": {
       "new_window": "Opens in a new window"
     }

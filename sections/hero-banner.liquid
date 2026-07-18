@@ -82,10 +82,11 @@
     <div class="hec-hero-visual">
       <div class="hec-hero-card">
         {%- if section.settings.image != blank -%}
+          {%- assign hero_img_alt = section.settings.image.alt | default: section.settings.featured_product_title | default: 'Hero image' | escape -%}
           {{ section.settings.image | image_url: width: 2000 | image_tag: 
             loading: 'eager', 
             widths: '600, 900, 1200, 1500, 2000',
-            alt: section.settings.image.alt | default: section.settings.featured_product_title 
+            alt: hero_img_alt 
           }}
         {%- else -%}
           {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}

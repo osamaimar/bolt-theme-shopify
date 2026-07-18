@@ -68,7 +68,8 @@
                          style="--m-t: {{ image_block.settings.margin_top }}px; --m-b: {{ image_block.settings.margin_bottom }}px; --m-t-m: {{ image_block.settings.margin_top_mobile }}px; --m-b-m: {{ image_block.settings.margin_bottom_mobile }}px;" 
                          {{ image_block.shopify_attributes }}>
                         {%- if image_block.settings.image != blank -%}
-                            {{ image_block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: image_block.settings.image.alt | default: 'Product image' | escape }}
+                            {%- assign deal_img_alt = image_block.settings.image.alt | default: 'Product image' | escape -%}
+                            {{ image_block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: deal_img_alt }}
                         {%- else -%}
                             <img src="{{ 'deal-headphones.png' | asset_url }}" loading="lazy" alt="Premium Wireless Headphones — Studio Edition" width="1200" height="auto">
                         {%- endif -%}
@@ -285,7 +286,7 @@
                                        {% if block.settings.hover_text_color != blank %}--btn-hover-text: {{ block.settings.hover_text_color }};{% else %}--btn-hover-text: {{ btn_text }};{% endif %}
                                        {% if block.settings.hover_border_color != blank %}--btn-hover-border: {{ block.settings.hover_border_color }};{% endif %}
                                        {% if block.settings.hover_shadow_color != blank %}--btn-hover-shadow-color: {{ block.settings.hover_shadow_color }};{% endif %}"
-                                       {% if block.settings.open_in_new_tab %}target="_blank"{% endif %}
+                                       {% if block.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
                                        {{ block.shopify_attributes }}>
                                         {{ block.settings.label }}
                                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true" focusable="false">

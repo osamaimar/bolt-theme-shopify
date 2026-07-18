@@ -605,7 +605,8 @@
             {%- when 'image' -%}
               <div class="contact-image-wrapper {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }} style="--contact-img-radius: {{ block.settings.border_radius }}px;">
                 {%- if block.settings.image != blank -%}
-                  {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'contact-image', alt: block.settings.image.alt | default: 'Contact image' }}
+                  {%- assign contact_image_alt = block.settings.image.alt | default: 'Contact image' | escape -%}
+                  {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'contact-image', alt: contact_image_alt }}
                 {%- else -%}
                   {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                 {%- endif -%}

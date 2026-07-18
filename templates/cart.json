@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "cart-main": {
@@ -49,9 +58,9 @@
             "show_additional_checkout_buttons": true
           }
         },
-
         "empty_icon": {
-          "type": "empty_icon"
+          "type": "empty_icon",
+          "settings": {}
         },
         "empty_heading": {
           "type": "empty_heading",
@@ -67,10 +76,7 @@
         },
         "empty_button": {
           "type": "empty_button",
-          "settings": {
-            "button_label": "Continue Shopping",
-            "button_link": "shopify:\/\/collections\/all"
-          }
+          "settings": {}
         }
       },
       "block_order": [
@@ -84,25 +90,16 @@
       ],
       "settings": {
         "show_section": true,
-        "show_additional_checkout_buttons": true,
         "container_width": "standard",
-
-        "color_scheme": "background-1",
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 80,
-        "padding_bottom_mobile": 60
+        "padding_bottom_mobile": 60,
+        "color_scheme": "background-1"
       }
     },
     "cart-you-may-also-like": {
       "type": "cart-you-may-also-like",
-      "settings": {
-        "show_section": true,
-        "container_width": "standard",
-        "color_scheme": "background-1",
-        "padding_top": 60,
-        "padding_bottom": 80
-      },
       "blocks": {
         "header-1": {
           "type": "header",
@@ -135,7 +132,19 @@
           }
         }
       },
-      "block_order": ["header-1", "product-1", "product-2", "product-3"]
+      "block_order": [
+        "header-1",
+        "product-1",
+        "product-2",
+        "product-3"
+      ],
+      "settings": {
+        "show_section": true,
+        "padding_top": 60,
+        "padding_bottom": 80,
+        "container_width": "standard",
+        "color_scheme": "background-1"
+      }
     },
     "cart-related-products": {
       "type": "cart-related-products",
@@ -159,16 +168,19 @@
           }
         }
       },
-      "block_order": ["header-1", "subtitle-1", "collection-1"],
+      "block_order": [
+        "header-1",
+        "subtitle-1",
+        "collection-1"
+      ],
       "settings": {
         "show_section": true,
         "container_width": "standard",
-
-        "color_scheme": "background-1",
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 80,
-        "padding_bottom_mobile": 60
+        "padding_bottom_mobile": 60,
+        "color_scheme": "background-1"
       }
     }
   },

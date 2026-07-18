@@ -431,13 +431,19 @@
                     <line x1="3" y1="6" x2="21" y2="6"/>
                     <path d="M16 10a4 4 0 0 1-8 0"/>
                   </svg>
-                  <span class="cart-badge" id="header-cart-badge" aria-live="polite">{{ cart.item_count }}</span>
+                  <span class="cart-badge" id="header-cart-badge" aria-live="polite" style="{% if cart.item_count == 0 %}display: none;{% endif %}">{{ cart.item_count }}</span>
                 </button>
               {%- endif -%}
             </div>
 
             <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-              <span id="menu-icon">☰</span>
+              <span id="menu-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width: 24px; height: 24px; display: block;">
+                  <line x1="4" y1="12" x2="20" y2="12"></line>
+                  <line x1="4" y1="6" x2="20" y2="6"></line>
+                  <line x1="4" y1="18" x2="20" y2="18"></line>
+                </svg>
+              </span>
             </button>
           </div>
 
@@ -447,7 +453,7 @@
 </header>
 
 {%- comment -%}--- Mobile Menu ---{%- endcomment -%}
-<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="{{ 'sections.header.navigation' | t | default: 'Mobile navigation' }}">
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-toggle" aria-label="{{ 'sections.header.navigation' | t | default: 'Mobile navigation' }}">
   <div class="mobile-menu__header">
     <span class="mobile-menu__title">{{ shop.name }}</span>
     <button class="mobile-close-btn" id="mobile-close" aria-label="{{ 'accessibility.close_menu' | t | default: 'Close menu' }}">

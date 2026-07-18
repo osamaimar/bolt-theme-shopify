@@ -1,20 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "error-404": {
       "type": "error-404",
-      "settings": {
-        "show_section": true,
-        "show_on_desktop": true,
-        "show_on_mobile": true,
-        "container_width": "narrow",
-        "max_width": 720,
-        "blocks_position": "center",
-        "color_scheme": "background-1",
-        "padding_top": 40,
-        "padding_bottom": 80,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40
-      },
       "blocks": {
         "error_code": {
           "type": "error_code",
@@ -22,6 +18,7 @@
             "error_code": "404",
             "show_on_desktop": true,
             "show_on_mobile": true,
+            "show_shadow": true,
             "margin_top": 20,
             "margin_bottom": 24,
             "margin_top_mobile": 16,
@@ -35,7 +32,6 @@
             "text_color": "",
             "bg_color": "",
             "bg_gradient": "",
-            "show_shadow": true,
             "shadow_color": ""
           }
         },
@@ -61,7 +57,6 @@
             "heading_tag": "h1",
             "show_on_desktop": true,
             "show_on_mobile": true,
-            "alignment": "",
             "margin_top": 0,
             "margin_bottom": 16,
             "margin_top_mobile": 0,
@@ -86,7 +81,6 @@
             "description_tag": "p",
             "show_on_desktop": true,
             "show_on_mobile": true,
-            "alignment": "",
             "max_width": 560,
             "margin_top": 0,
             "margin_bottom": 40,
@@ -112,13 +106,12 @@
             "url": "/",
             "style": "primary",
             "open_in_new_tab": false,
-            "show_button": true,
-            "show_icon": true,
             "icon": "arrow",
             "icon_position": "right",
             "show_on_desktop": true,
             "show_on_mobile": true,
-            "alignment": "",
+            "show_button": true,
+            "show_icon": true,
             "margin_top": 20,
             "margin_bottom": 20,
             "margin_top_mobile": 15,
@@ -143,13 +136,12 @@
             "url": "/pages/contact",
             "style": "secondary",
             "open_in_new_tab": false,
-            "show_button": true,
-            "show_icon": true,
             "icon": "mail",
             "icon_position": "left",
             "show_on_desktop": true,
             "show_on_mobile": true,
-            "alignment": "",
+            "show_button": true,
+            "show_icon": true,
             "margin_top": 20,
             "margin_bottom": 20,
             "margin_top_mobile": 15,
@@ -275,7 +267,6 @@
             "footer_note": "<p>Need help? <a href=\"/pages/contact\">Get in touch</a> with our team.</p>",
             "show_on_desktop": true,
             "show_on_mobile": true,
-            "alignment": "",
             "margin_top": 48,
             "margin_bottom": 0,
             "margin_top_mobile": 36,
@@ -306,7 +297,20 @@
         "nav_item_2",
         "nav_item_3",
         "footer_note"
-      ]
+      ],
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "narrow",
+        "max_width": 720,
+        "blocks_position": "center",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
     }
   },
   "order": [

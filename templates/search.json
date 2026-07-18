@@ -1,20 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "header": {
       "type": "search-header",
-      "settings": {
-        "show_section": true,
-        "show_on_desktop": true,
-        "show_on_mobile": true,
-        "container_width": "narrow",
-        "max_width": 1200,
-        "blocks_position": "center",
-        "color_scheme": "background-1",
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 20
-      },
       "blocks": {
         "heading_1": {
           "type": "heading",
@@ -23,7 +19,6 @@
             "heading_tag": "h1",
             "show_on_desktop": true,
             "show_on_mobile": true,
-            "alignment": "center",
             "margin_top": 0,
             "margin_bottom": 24,
             "margin_top_mobile": 0,
@@ -43,7 +38,6 @@
             "subheading_tag": "p",
             "show_on_desktop": true,
             "show_on_mobile": true,
-            "alignment": "center",
             "max_width": 800,
             "margin_top": 0,
             "margin_bottom": 28,
@@ -61,10 +55,7 @@
       "block_order": [
         "heading_1",
         "subheading_1"
-      ]
-    },
-    "bar": {
-      "type": "search-bar",
+      ],
       "settings": {
         "show_section": true,
         "show_on_desktop": true,
@@ -73,11 +64,14 @@
         "max_width": 1200,
         "blocks_position": "center",
         "color_scheme": "background-1",
-        "padding_top": 0,
-        "padding_bottom": 32,
-        "padding_top_mobile": 0,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
         "padding_bottom_mobile": 20
-      },
+      }
+    },
+    "bar": {
+      "type": "search-bar",
       "blocks": {
         "search_input_1": {
           "type": "search_input",
@@ -97,26 +91,23 @@
       },
       "block_order": [
         "search_input_1"
-      ]
-    },
-    "filters": {
-      "type": "search-filters",
+      ],
       "settings": {
         "show_section": true,
         "show_on_desktop": true,
         "show_on_mobile": true,
-        "filter_source": "product_type",
-        "show_heading": false,
-        "heading": "Browse by Category",
-        "blocks_position": "center",
         "container_width": "narrow",
-        "max_width": 1350,
+        "max_width": 1200,
+        "blocks_position": "center",
         "color_scheme": "background-1",
         "padding_top": 0,
         "padding_bottom": 32,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 20
-      },
+      }
+    },
+    "filters": {
+      "type": "search-filters",
       "blocks": {
         "filter_computing": {
           "type": "category_chip",
@@ -220,23 +211,26 @@
         "filter_audio",
         "filter_gaming",
         "filter_mobile"
-      ]
-    },
-    "empty-state": {
-      "type": "search-empty-state",
+      ],
       "settings": {
         "show_section": true,
         "show_on_desktop": true,
         "show_on_mobile": true,
+        "show_heading": false,
+        "filter_source": "product_type",
+        "heading": "Browse by Category",
+        "blocks_position": "center",
         "container_width": "narrow",
         "max_width": 1350,
-        "blocks_position": "center",
         "color_scheme": "background-1",
         "padding_top": 0,
-        "padding_bottom": 60,
+        "padding_bottom": 32,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 40
-      },
+        "padding_bottom_mobile": 20
+      }
+    },
+    "empty-state": {
+      "type": "search-empty-state",
       "blocks": {
         "icon": {
           "type": "icon",
@@ -259,7 +253,6 @@
             "heading_tag": "h3",
             "show_on_desktop": true,
             "show_on_mobile": true,
-            "alignment": "center",
             "margin_top": 0,
             "margin_bottom": 24,
             "margin_top_mobile": 0,
@@ -279,7 +272,6 @@
             "text_tag": "p",
             "show_on_desktop": true,
             "show_on_mobile": true,
-            "alignment": "center",
             "max_width": 800,
             "margin_top": 0,
             "margin_bottom": 24,
@@ -298,35 +290,31 @@
         "icon",
         "heading",
         "text"
-      ]
-    },
-    "main": {
-      "type": "search-main",
+      ],
       "settings": {
         "show_section": true,
         "show_on_desktop": true,
         "show_on_mobile": true,
-        "show_divider": false,
-        "container_width": "standard",
-        "max_width": 1400,
+        "container_width": "narrow",
+        "max_width": 1350,
         "blocks_position": "center",
-        "results_per_page": 12,
-        "show_pagination": true,
         "color_scheme": "background-1",
         "padding_top": 0,
-        "padding_bottom": 0,
+        "padding_bottom": 60,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0
-      },
+        "padding_bottom_mobile": 40
+      }
+    },
+    "main": {
+      "type": "search-main",
       "blocks": {
         "meta": {
           "type": "results_meta",
           "settings": {
-            "alignment": "space-between",
-            "show_count": true,
-            "show_sort": true,
             "show_on_desktop": true,
             "show_on_mobile": true,
+            "show_count": true,
+            "show_sort": true,
             "margin_top": 0,
             "margin_bottom": 24,
             "margin_top_mobile": 0,
@@ -336,20 +324,20 @@
         "grid": {
           "type": "results_grid",
           "settings": {
+            "rating_value": 4.5,
+            "rating_count": "12",
             "columns_desktop": "4",
             "columns_tablet": "2",
             "columns_mobile": "1",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
             "margin_top": 20,
             "margin_bottom": 20,
             "margin_top_mobile": 16,
             "margin_bottom_mobile": 16,
+            "show_on_desktop": true,
+            "show_on_mobile": true,
             "show_category": true,
             "show_rating": false,
-            "rating_value": 4.5,
             "show_rating_count": true,
-            "rating_count": "12",
             "show_quick_view": true,
             "show_add_to_cart": false,
             "show_description": false
@@ -358,7 +346,6 @@
         "no_results": {
           "type": "no_results",
           "settings": {
-            "alignment": "center",
             "help_text": "",
             "show_on_desktop": true,
             "show_on_mobile": true,
@@ -376,7 +363,23 @@
         "meta",
         "grid",
         "no_results"
-      ]
+      ],
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "show_divider": false,
+        "container_width": "standard",
+        "max_width": 1400,
+        "blocks_position": "center",
+        "results_per_page": 12,
+        "show_pagination": true,
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
     }
   },
   "order": [

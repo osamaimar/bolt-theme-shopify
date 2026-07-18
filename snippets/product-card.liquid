@@ -74,7 +74,7 @@
     <input type="hidden" name="id" value="{{ product_card_product.variants.first.id }}" />
   {%- endif -%}
   <div class="cpd-product-thumb">
-    <a href="{{ product_card_product.url }}" class="full-unstyled-link">
+    <a href="{{ product_card_product.url }}" class="full-unstyled-link" aria-hidden="true" tabindex="-1">
       {%- if product_card_product.featured_media -%}
         <img
           srcset="{%- if product_card_product.featured_media.width >= 165 -%}{{ product_card_product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
@@ -86,7 +86,7 @@
             {{ product_card_product.featured_media | image_url }} {{ product_card_product.featured_media.width }}w"
           src="{{ product_card_product.featured_media | image_url: width: 533 }}"
           sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
-          alt="{{ product_card_product.featured_media.alt | escape }}"
+          alt="{{ product_card_product.featured_media.alt | default: product_card_product.title | escape }}"
           loading="lazy"
           class="motion-reduce"
           width="{{ product_card_product.featured_media.width }}"
@@ -101,8 +101,10 @@
       <div class="card__badge">
         {%- if product_card_product.available == false -%}
           <span class="badge badge--sold-out" aria-hidden="true">{{ 'products.product.sold_out' | t }}</span>
+          <span class="visually-hidden">{{ 'products.product.sold_out' | t }}</span>
         {%- elsif product_card_product.compare_at_price > product_card_product.price and product_card_product.available -%}
           <span class="badge badge--sale" aria-hidden="true">{{ 'products.product.on_sale' | t }}</span>
+          <span class="visually-hidden">{{ 'products.product.on_sale' | t }}</span>
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -110,7 +112,7 @@
     {%- if show_quick_view -%}
       <div class="cpd-product-overlay">
         <a href="{{ product_card_product.url }}" class="cpd-quick-view-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
             <circle cx="12" cy="12" r="3"></circle>
           </svg>
@@ -153,15 +155,15 @@
         assign rating_full = display_rating | floor
       -%}
       <div class="cpd-product-rating">
-        <div class="cpd-product-stars">
+        <div class="cpd-product-stars" role="img" aria-label="{{ display_rating }} {{ 'accessibility.out_of_5_stars' | t | default: 'out of 5 stars' }}">
           {%- assign rating_full_plus_one = rating_full | plus: 1 -%}
           {%- for i in (1..5) -%}
             {%- if i <= rating_full -%}
-              <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+              <svg viewBox="0 0 24 24" class="filled" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
             {%- elsif rating_decimal > 0 and i == rating_full_plus_one -%}
-              <svg viewBox="0 0 24 24" class="half-filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+              <svg viewBox="0 0 24 24" class="half-filled" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
             {%- else -%}
-              <svg viewBox="0 0 24 24" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+              <svg viewBox="0 0 24 24" class="empty" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
             {%- endif -%}
           {%- endfor -%}
         </div>

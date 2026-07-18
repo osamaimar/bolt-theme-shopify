@@ -174,10 +174,10 @@
                 {%- assign rating_value = product.metafields.reviews.rating.value | default: block.settings.rating_value -%}
                 {%- assign review_count = product.metafields.reviews.rating_count | default: block.settings.review_count -%}
                 <div class="pd-rating-row" style="justify-content: {% if 'left' == 'center' %}center{% elsif 'left' == 'right' %}flex-end{% else %}flex-start{% endif %};">
-                  <div class="pd-stars" id="pd-stars-{{ section.id }}">
+                  <div class="pd-stars" id="pd-stars-{{ section.id }}" role="img" aria-label="{{ rating_value }} {{ 'accessibility.out_of_5_stars' | t | default: 'out of 5 stars' }}">
                     {%- assign stars_active = rating_value | floor -%}
                     {%- for i in (1..5) -%}
-                      <svg viewBox="0 0 24 24" class="{% if i > stars_active %}empty{% endif %}" style="{% if i <= stars_active and block.settings.star_color != blank %}fill: {{ block.settings.star_color }} !important; color: {{ block.settings.star_color }} !important;{% endif %}"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                      <svg viewBox="0 0 24 24" class="{% if i > stars_active %}empty{% endif %}" style="{% if i <= stars_active and block.settings.star_color != blank %}fill: {{ block.settings.star_color }} !important; color: {{ block.settings.star_color }} !important;{% endif %}" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                     {%- endfor -%}
                     <span class="pd-rating-value pd-rating-value--{{ block.settings.font_size }}" style="font-weight: {% if block.settings.font_weight == 'bold' %}700{% else %}400{% endif %}; font-style: {{ block.settings.font_style }}; text-transform: {{ block.settings.text_transform }}; letter-spacing: {{ block.settings.letter_spacing }}px; line-height: {{ block.settings.line_height }}; {% if block.settings.rating_value_color != blank %}color: {{ block.settings.rating_value_color }} !important;{% endif %}">{{ rating_value }}</span>
                   </div>
@@ -324,14 +324,16 @@
                       {%- assign is_color = true -%}
                     {%- endif -%}
                     
-                    <div class="pd-variant-group" data-option-name="{{ option.name | escape }}">
+                    <div class="pd-variant-group" data-option-name="{{ option.name | escape }}" role="group" aria-labelledby="OptionLabel-{{ section.id }}-{{ forloop.index0 }}">
                       {%- if block.settings.show_label -%}
-                        <div class="pd-variant-label">
+                        <div class="pd-variant-label" id="OptionLabel-{{ section.id }}-{{ forloop.index0 }}">
                           <span class="pd-variant-option-name">{{ option.name }}:</span>
                           <span class="pd-variant-selected-val" data-option-index="{{ forloop.index0 }}">
                             {{ product.selected_or_first_available_variant.options[forloop.index0] }}
                           </span>
                         </div>
+                      {%- else -%}
+                        <span class="visually-hidden" id="OptionLabel-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</span>
                       {%- endif -%}
                       
                       <div class="pd-variant-options {% if block.settings.sold_out_handling == 'hide' %}sold-out-hide{% endif %}" data-option-index="{{ forloop.index0 }}">

@@ -89,11 +89,12 @@
     <div class="{% if section.settings.container_width == 'full' %}container-fluid{% else %}container{% endif %}">
     <div class="hev-hero-bg">
         {%- if section.settings.image != blank -%}
+            {%- assign hero_alt = section.settings.image.alt | default: 'Hero background' | escape -%}
             {{ section.settings.image | image_url: width: 2000 | image_tag: 
                 loading: 'eager', 
                 widths: '600, 900, 1200, 1500, 2000',
                 sizes: '100vw',
-                alt: section.settings.image.alt | default: 'Hero background',
+                alt: hero_alt,
                 width: 2000,
                 height: 1333
             }}

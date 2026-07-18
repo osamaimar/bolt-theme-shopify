@@ -9,6 +9,7 @@ class PredictiveSearch {
     this.currentSearchTerm = '';
     this.selectedItemIndex = -1;
     this.items = [];
+    this.abortController = null;
 
     // Get settings
     this.config = window.boltTheme?.predictiveSearch || {
@@ -116,12 +117,18 @@ class PredictiveSearch {
   }
 
   fetchSuggestions(query) {
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+    this.abortController = new AbortController();
+    const { signal } = this.abortController;
+
     this.showLoading();
 
     const limit = this.config.resultsCount;
     const url = `/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=${limit}`;
 
-    fetch(url)
+    fetch(url, { signal })
       .then((res) => {
         if (!res.ok) throw new Error('Search request failed');
         return res.json();
@@ -131,6 +138,7 @@ class PredictiveSearch {
         this.renderResults(products, query);
       })
       .catch((err) => {
+        if (err.name === 'AbortError') return;
         console.error('Predictive Search Error:', err);
         this.renderEmptyState(query);
       });

@@ -31,11 +31,12 @@
           
           <div class="hec-promo-card-bg">
             {%- if block.settings.image != blank -%}
+              {%- assign promo_card_alt = block.settings.image.alt | default: block.settings.heading | default: 'Promo banner' | escape -%}
               {{ block.settings.image | image_url: width: 1500 | image_tag: 
                 loading: 'lazy',
                 class: 'promo-card-image',
                 widths: '375, 550, 750, 1100, 1500',
-                alt: block.settings.heading | escape
+                alt: promo_card_alt
               }}
             {%- else -%}
               {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}

@@ -321,11 +321,16 @@ function initProductVariants(container) {
   }
 
   buttons.forEach(btn => {
+    btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const parent = btn.closest('.pd-variant-options');
-      parent.querySelectorAll('.pd-variant-btn, .pd-variant-swatch').forEach(b => b.classList.remove('active'));
+      parent.querySelectorAll('.pd-variant-btn, .pd-variant-swatch').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
 
       const labelVal = btn.closest('.pd-variant-group').querySelector('.pd-variant-selected-val');
       if (labelVal) {

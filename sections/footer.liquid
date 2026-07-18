@@ -41,7 +41,7 @@
   {%- for block in section.blocks -%}
     /* Block-Level Scoped Styles for Block: {{ block.id }} */
     #shopify-section-{{ section.id }} #ftr-block-{{ block.id }} {
-      {%- if 'left' != blank -%}text-align: {{ 'left' }} !important;{%- endif -%}
+      text-align: left !important;
       {%- if block.settings.margin_top != blank -%}margin-top: {{ block.settings.margin_top }}px !important;{%- endif -%}
       {%- if block.settings.margin_bottom != blank -%}margin-bottom: {{ block.settings.margin_bottom }}px !important;{%- endif -%}
       {%- if block.settings.bg_gradient != blank -%}
@@ -66,13 +66,7 @@
           {%- if block.settings.max_width != blank -%}max-width: {{ block.settings.max_width }}px !important;{%- endif -%}
         }
         #shopify-section-{{ section.id }} #ftr-block-{{ block.id }} .footer-logo {
-          {%- if 'left' == 'center' -%}
-            justify-content: center !important;
-          {%- elsif 'left' == 'right' -%}
-            justify-content: flex-end !important;
-          {%- else -%}
-            justify-content: flex-start !important;
-          {%- endif -%}
+          justify-content: flex-start !important;
         }
         #shopify-section-{{ section.id }} #ftr-block-{{ block.id }} .logo-text {
           font-size: {{ logo_w | divided_by: 5.0 | at_least: 14 }}px !important;
@@ -186,13 +180,7 @@
           flex-wrap: wrap !important;
           max-width: 100% !important;
           gap: 16px !important;
-          {%- if 'left' == 'center' -%}
-            justify-content: center !important;
-          {%- elsif 'left' == 'right' -%}
-            justify-content: flex-end !important;
-          {%- else -%}
-            justify-content: flex-start !important;
-          {%- endif -%}
+          justify-content: flex-start !important;
         }
         #shopify-section-{{ section.id }} #ftr-block-{{ block.id }} .social-link {
           {%- if block.settings.icon_size != blank -%}width: {{ block.settings.icon_size | plus: 16 }}px !important; height: {{ block.settings.icon_size | plus: 16 }}px !important;{%- endif -%}
@@ -225,13 +213,7 @@
           list-style: none !important;
           padding: 0 !important;
           margin: 0 !important;
-          {%- if 'left' == 'center' -%}
-            justify-content: center !important;
-          {%- elsif 'left' == 'right' -%}
-            justify-content: flex-end !important;
-          {%- else -%}
-            justify-content: flex-start !important;
-          {%- endif -%}
+          justify-content: flex-start !important;
         }
         #shopify-section-{{ section.id }} #ftr-block-{{ block.id }} .payment-icon,
         #shopify-section-{{ section.id }} #ftr-block-{{ block.id }} .footer-payment-item--svg svg {
@@ -401,81 +383,7 @@
                 <h3 class="footer-heading">{{ block.settings.heading | escape }}</h3>
               {%- endif -%}
               <div class="social-links">
-                {%- if settings.social_facebook_link != blank -%}
-                  <a href="{{ settings.social_facebook_link }}" class="social-link" aria-label="Facebook" rel="noopener noreferrer" target="_blank">
-                    <i class="fa-brands fa-facebook icon-social"></i>
-                  </a>
-                {%- endif -%}
-                {%- if settings.social_instagram_link != blank -%}
-                  <a href="{{ settings.social_instagram_link }}" class="social-link" aria-label="Instagram" rel="noopener noreferrer" target="_blank">
-                    <i class="fa-brands fa-instagram icon-social"></i>
-                  </a>
-                {%- endif -%}
-                {%- if settings.social_twitter_link != blank -%}
-                  <a href="{{ settings.social_twitter_link }}" class="social-link" aria-label="Twitter" rel="noopener noreferrer" target="_blank">
-                    <i class="fa-brands fa-x-twitter icon-social"></i>
-                  </a>
-                {%- endif -%}
-                {%- if settings.social_youtube_link != blank -%}
-                  <a href="{{ settings.social_youtube_link }}" class="social-link" aria-label="YouTube" rel="noopener noreferrer" target="_blank">
-                    <i class="fa-brands fa-youtube icon-social"></i>
-                  </a>
-                {%- endif -%}
-                {%- if settings.social_tiktok_link != blank -%}
-                  <a href="{{ settings.social_tiktok_link }}" class="social-link" aria-label="TikTok" rel="noopener noreferrer" target="_blank">
-                    <i class="fa-brands fa-tiktok icon-social"></i>
-                  </a>
-                {%- endif -%}
-                {%- if settings.social_pinterest_link != blank -%}
-                  <a href="{{ settings.social_pinterest_link }}" class="social-link" aria-label="Pinterest" rel="noopener noreferrer" target="_blank">
-                    <i class="fa-brands fa-pinterest icon-social"></i>
-                  </a>
-                {%- endif -%}
-                {%- if settings.social_linkedin_link != blank -%}
-                  <a href="{{ settings.social_linkedin_link }}" class="social-link" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">
-                    <i class="fa-brands fa-linkedin icon-social"></i>
-                  </a>
-                {%- endif -%}
-                {%- if settings.social_snapchat_link != blank -%}
-                  <a href="{{ settings.social_snapchat_link }}" class="social-link" aria-label="Snapchat" rel="noopener noreferrer" target="_blank">
-                    <i class="fa-brands fa-snapchat icon-social"></i>
-                  </a>
-                {%- endif -%}
-                {%- if settings.social_tumblr_link != blank -%}
-                  <a href="{{ settings.social_tumblr_link }}" class="social-link" aria-label="Tumblr" rel="noopener noreferrer" target="_blank">
-                    <i class="fa-brands fa-tumblr icon-social"></i>
-                  </a>
-                {%- endif -%}
-                {%- if settings.social_vimeo_link != blank -%}
-                  <a href="{{ settings.social_vimeo_link }}" class="social-link" aria-label="Vimeo" rel="noopener noreferrer" target="_blank">
-                    <i class="fa-brands fa-vimeo icon-social"></i>
-                  </a>
-                {%- endif -%}
-                {%- if settings.social_discord_link != blank -%}
-                  <a href="{{ settings.social_discord_link }}" class="social-link" aria-label="Discord" rel="noopener noreferrer" target="_blank">
-                    <i class="fa-brands fa-discord icon-social"></i>
-                  </a>
-                {%- endif -%}
-                {%- if settings.social_threads_link != blank -%}
-                  <a href="{{ settings.social_threads_link }}" class="social-link" aria-label="Threads" rel="noopener noreferrer" target="_blank">
-                    <i class="fa-brands fa-threads icon-social"></i>
-                  </a>
-                {%- endif -%}
-                {%- if settings.social_whatsapp_link != blank -%}
-                  <a href="{{ settings.social_whatsapp_link }}" class="social-link" aria-label="WhatsApp" rel="noopener noreferrer" target="_blank">
-                    <i class="fa-brands fa-whatsapp icon-social"></i>
-                  </a>
-                {%- endif -%}
-                {%- if settings.social_telegram_link != blank -%}
-                  <a href="{{ settings.social_telegram_link }}" class="social-link" aria-label="Telegram" rel="noopener noreferrer" target="_blank">
-                    <i class="fa-brands fa-telegram icon-social"></i>
-                  </a>
-                {%- endif -%}
-                {%- if settings.social_reddit_link != blank -%}
-                  <a href="{{ settings.social_reddit_link }}" class="social-link" aria-label="Reddit" rel="noopener noreferrer" target="_blank">
-                    <i class="fa-brands fa-reddit icon-social"></i>
-                  </a>
-                {%- endif -%}
+                {%- render 'footer-social-links' -%}
               </div>
             </div>
 
@@ -500,7 +408,8 @@
                       {%- assign custom_img = block.settings[img_key] -%}
                       {%- if custom_img != blank -%}
                         <li class="footer-payment-item">
-                          {{ custom_img | image_url: height: block.settings.icon_height | image_tag: class: 'payment-icon payment-icon--custom', loading: 'lazy' }}
+                          {%- assign payment_alt = custom_img.alt | default: 'Payment method' | escape -%}
+                          {{ custom_img | image_url: height: block.settings.icon_height | image_tag: class: 'payment-icon payment-icon--custom', loading: 'lazy', alt: payment_alt }}
                         </li>
                       {%- endif -%}
                     {%- endfor -%}
@@ -593,7 +502,8 @@
                     {%- assign custom_img = block.settings[img_key] -%}
                     {%- if custom_img != blank -%}
                       <li class="footer-payment-item">
-                        {{ custom_img | image_url: height: block.settings.icon_height | image_tag: class: 'payment-icon payment-icon--custom', loading: 'lazy' }}
+                        {%- assign payment_alt = custom_img.alt | default: 'Payment method' | escape -%}
+                        {{ custom_img | image_url: height: block.settings.icon_height | image_tag: class: 'payment-icon payment-icon--custom', loading: 'lazy', alt: payment_alt }}
                       </li>
                     {%- endif -%}
                   {%- endfor -%}
@@ -607,81 +517,7 @@
 
           {%- when 'footer_socials' -%}
             <div class="social-links{% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %}{% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" id="ftr-block-{{ block.id }}" {{ block.shopify_attributes }}>
-              {%- if settings.social_facebook_link != blank -%}
-                <a href="{{ settings.social_facebook_link }}" class="social-link" aria-label="Facebook" rel="noopener noreferrer" target="_blank">
-                  <i class="fa-brands fa-facebook icon-social"></i>
-                </a>
-              {%- endif -%}
-              {%- if settings.social_instagram_link != blank -%}
-                <a href="{{ settings.social_instagram_link }}" class="social-link" aria-label="Instagram" rel="noopener noreferrer" target="_blank">
-                  <i class="fa-brands fa-instagram icon-social"></i>
-                </a>
-              {%- endif -%}
-              {%- if settings.social_twitter_link != blank -%}
-                <a href="{{ settings.social_twitter_link }}" class="social-link" aria-label="Twitter" rel="noopener noreferrer" target="_blank">
-                  <i class="fa-brands fa-x-twitter icon-social"></i>
-                </a>
-              {%- endif -%}
-              {%- if settings.social_youtube_link != blank -%}
-                <a href="{{ settings.social_youtube_link }}" class="social-link" aria-label="YouTube" rel="noopener noreferrer" target="_blank">
-                  <i class="fa-brands fa-youtube icon-social"></i>
-                </a>
-              {%- endif -%}
-              {%- if settings.social_tiktok_link != blank -%}
-                <a href="{{ settings.social_tiktok_link }}" class="social-link" aria-label="TikTok" rel="noopener noreferrer" target="_blank">
-                  <i class="fa-brands fa-tiktok icon-social"></i>
-                </a>
-              {%- endif -%}
-              {%- if settings.social_pinterest_link != blank -%}
-                <a href="{{ settings.social_pinterest_link }}" class="social-link" aria-label="Pinterest" rel="noopener noreferrer" target="_blank">
-                  <i class="fa-brands fa-pinterest icon-social"></i>
-                </a>
-              {%- endif -%}
-              {%- if settings.social_linkedin_link != blank -%}
-                <a href="{{ settings.social_linkedin_link }}" class="social-link" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">
-                  <i class="fa-brands fa-linkedin icon-social"></i>
-                </a>
-              {%- endif -%}
-              {%- if settings.social_snapchat_link != blank -%}
-                <a href="{{ settings.social_snapchat_link }}" class="social-link" aria-label="Snapchat" rel="noopener noreferrer" target="_blank">
-                  <i class="fa-brands fa-snapchat icon-social"></i>
-                </a>
-              {%- endif -%}
-              {%- if settings.social_tumblr_link != blank -%}
-                <a href="{{ settings.social_tumblr_link }}" class="social-link" aria-label="Tumblr" rel="noopener noreferrer" target="_blank">
-                  <i class="fa-brands fa-tumblr icon-social"></i>
-                </a>
-              {%- endif -%}
-              {%- if settings.social_vimeo_link != blank -%}
-                <a href="{{ settings.social_vimeo_link }}" class="social-link" aria-label="Vimeo" rel="noopener noreferrer" target="_blank">
-                  <i class="fa-brands fa-vimeo icon-social"></i>
-                </a>
-              {%- endif -%}
-              {%- if settings.social_discord_link != blank -%}
-                <a href="{{ settings.social_discord_link }}" class="social-link" aria-label="Discord" rel="noopener noreferrer" target="_blank">
-                  <i class="fa-brands fa-discord icon-social"></i>
-                </a>
-              {%- endif -%}
-              {%- if settings.social_threads_link != blank -%}
-                <a href="{{ settings.social_threads_link }}" class="social-link" aria-label="Threads" rel="noopener noreferrer" target="_blank">
-                  <i class="fa-brands fa-threads icon-social"></i>
-                </a>
-              {%- endif -%}
-              {%- if settings.social_whatsapp_link != blank -%}
-                <a href="{{ settings.social_whatsapp_link }}" class="social-link" aria-label="WhatsApp" rel="noopener noreferrer" target="_blank">
-                  <i class="fa-brands fa-whatsapp icon-social"></i>
-                </a>
-              {%- endif -%}
-              {%- if settings.social_telegram_link != blank -%}
-                <a href="{{ settings.social_telegram_link }}" class="social-link" aria-label="Telegram" rel="noopener noreferrer" target="_blank">
-                  <i class="fa-brands fa-telegram icon-social"></i>
-                </a>
-              {%- endif -%}
-              {%- if settings.social_reddit_link != blank -%}
-                <a href="{{ settings.social_reddit_link }}" class="social-link" aria-label="Reddit" rel="noopener noreferrer" target="_blank">
-                  <i class="fa-brands fa-reddit icon-social"></i>
-                </a>
-              {%- endif -%}
+              {%- render 'footer-social-links' -%}
             </div>
 
         {%- endcase -%}

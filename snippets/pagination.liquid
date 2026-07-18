@@ -11,6 +11,12 @@
 {{ 'component-pagination.css' | asset_url | stylesheet_tag }}
 
 {%- if paginate.pages > 1 -%}
+  {%- if paginate.previous -%}
+    <link rel="prev" href="{{ shop.url | append: paginate.previous.url }}">
+  {%- endif -%}
+  {%- if paginate.next -%}
+    <link rel="next" href="{{ shop.url | append: paginate.next.url }}">
+  {%- endif -%}
   <nav class="cpd-pagination" role="navigation" aria-label="Pagination">
     {%- if paginate.previous -%}
       <a href="{{ paginate.previous.url }}" class="cpd-page-link" aria-label="Previous page">
@@ -24,7 +30,7 @@
       {%- if part.is_link -%}
         <a href="{{ part.url }}" class="cpd-page-link" aria-label="Go to page {{ part.title }}">{{ part.title }}</a>
       {%- else -%}
-        <span class="cpd-page-link {% if part.title == paginate.current_page %}active{% endif %}" aria-current="page">{{ part.title }}</span>
+        <span class="cpd-page-link {% if part.title == paginate.current_page %}active{% endif %}"{% if part.title == paginate.current_page %} aria-current="page"{% endif %}>{{ part.title }}</span>
       {%- endif -%}
     {%- endfor -%}
 

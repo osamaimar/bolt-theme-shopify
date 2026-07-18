@@ -82,6 +82,88 @@
         <span class="pd-breadcrumb-current">{{ page_title }}</span>
       {%- endif -%}
     </nav>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": {{ 'general.breadcrumb.home' | t | json }},
+            "item": {{ shop.url | append: routes.root_url | json }}
+          }
+          {%- assign position = 2 -%}
+          {%- if template contains 'product' -%}
+            {%- if collection -%}
+              ,{
+                "@type": "ListItem",
+                "position": {{ position }},
+                "name": {{ collection.title | json }},
+                "item": {{ shop.url | append: collection.url | json }}
+              }
+              {%- assign position = position | plus: 1 -%}
+            {%- else -%}
+              ,{
+                "@type": "ListItem",
+                "position": {{ position }},
+                "name": {{ 'general.breadcrumb.products' | t | json }},
+                "item": {{ shop.url | append: routes.all_products_collection_url | json }}
+              }
+              {%- assign position = position | plus: 1 -%}
+            {%- endif -%}
+            ,{
+              "@type": "ListItem",
+              "position": {{ position }},
+              "name": {{ product.title | json }},
+              "item": {{ shop.url | append: product.url | json }}
+            }
+          {%- elsif template contains 'collection' and collection.handle -%}
+            ,{
+              "@type": "ListItem",
+              "position": {{ position }},
+              "name": {{ collection.title | json }},
+              "item": {{ shop.url | append: collection.url | json }}
+            }
+          {%- elsif template contains 'blog' -%}
+            ,{
+              "@type": "ListItem",
+              "position": {{ position }},
+              "name": {{ blog.title | json }},
+              "item": {{ shop.url | append: blog.url | json }}
+            }
+          {%- elsif template contains 'article' -%}
+            ,{
+              "@type": "ListItem",
+              "position": {{ position }},
+              "name": {{ blog.title | json }},
+              "item": {{ shop.url | append: blog.url | json }}
+            }
+            {%- assign position = position | plus: 1 -%}
+            ,{
+              "@type": "ListItem",
+              "position": {{ position }},
+              "name": {{ article.title | json }},
+              "item": {{ shop.url | append: article.url | json }}
+            }
+          {%- elsif template contains 'page' -%}
+            ,{
+              "@type": "ListItem",
+              "position": {{ position }},
+              "name": {{ page.title | json }},
+              "item": {{ shop.url | append: page.url | json }}
+            }
+          {%- else -%}
+            ,{
+              "@type": "ListItem",
+              "position": {{ position }},
+              "name": {{ page_title | json }},
+              "item": {{ canonical_url | json }}
+            }
+          {%- endif -%}
+        ]
+      }
+    </script>
   </div>
 </div>
 {%- endif -%}

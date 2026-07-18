@@ -16,6 +16,9 @@
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
+    {%- else -%}
+      <link rel="icon" href="data:;base64,=">
     {%- endif -%}
 
     <title>
@@ -32,10 +35,16 @@
     {% render 'meta-tags' %}
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     {%- comment -%}theme-check-disable RemoteAsset{%- endcomment -%}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" /></noscript>
     {%- comment -%}theme-check-enable RemoteAsset{%- endcomment -%}
     {{ content_for_header }}
+
+    {%- if request.page_type == 'product' and product.featured_media -%}
+      <link rel="preload" as="image" href="{{ product.featured_media | image_url: width: 800 }}" fetchpriority="high">
+    {%- endif -%}
 
     {%- liquid
       assign body_font_bold = settings.body_font | font_modify: 'weight', 'bold'
@@ -200,7 +209,7 @@
   </head>
 
   <body class="gradient template-{{ template.name | handle }} template-{{ template | handle }}{% if settings.bg_primary | color_brightness > 128 %} theme-light{% else %} theme-dark{% endif %}">
-    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+    <a class="skip-to-content-link button visually-hidden" href="#main-content">
       {{ "accessibility.skip_to_content" | t }}
     </a>
 
@@ -219,6 +228,8 @@
     {%- section 'cart-drawer' -%}
     {% section 'quick-view' %}
     {% section 'language-switcher' %}
+
+    <div id="toast-container" aria-live="polite" aria-atomic="false"></div>
 
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>

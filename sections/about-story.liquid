@@ -355,10 +355,11 @@
             {%- if block.type == 'image' -%}
               <div class="story-image-block block-{{ block.id }} {% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %} {% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" {{ block.shopify_attributes }}>
                 {%- if block.settings.story_image != blank -%}
+                  {%- assign story_img_alt = block.settings.story_image.alt | default: 'Our story' | escape -%}
                   {{ block.settings.story_image | image_url: width: 1200 | image_tag:
                     loading: 'lazy',
                     class: 'about-story-img',
-                    alt: block.settings.story_image.alt | default: 'Our story',
+                    alt: story_img_alt,
                     widths: '400, 600, 800, 1200'
                   }}
                 {%- else -%}

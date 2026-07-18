@@ -64,7 +64,8 @@
         <div class="hev-cta-card">
             <div class="hev-cta-bg {% if section.settings.enable_overlay %}hev-cta-bg--overlay{% endif %}">
                 {%- if section.settings.background_image != blank -%}
-                {{ section.settings.background_image | image_url: width: 2000 | image_tag: loading: 'lazy', alt: section.settings.heading | default: 'CTA background' | escape }}
+                  {%- assign cta_bg_alt = section.settings.background_image.alt | default: section.settings.heading | default: 'CTA background' | escape -%}
+                  {{ section.settings.background_image | image_url: width: 2000 | image_tag: loading: 'lazy', alt: cta_bg_alt }}
                 {%- else -%}
                     {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
                 {%- endif -%}

@@ -29,7 +29,6 @@ function initCatalogSidebarToggle() {
     const sidebar = document.getElementById('cpd-sidebar');
 
     if (!toggleBtn || !sidebar) {
-        console.warn('Catalog: Sidebar or Toggle button not found');
         return;
     }
 
@@ -187,7 +186,13 @@ function initCatalogFilters() {
 
     // Search Input integration
     const globalSearch = document.getElementById('cpd-search');
-    if (globalSearch) globalSearch.oninput = applyFilters;
+    if (globalSearch) {
+        let debounceTimer;
+        globalSearch.oninput = () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(applyFilters, 200);
+        };
+    }
 }
 
 /**
@@ -262,12 +267,18 @@ function initCatalogViewToggle() {
  */
 function initCatalogSpotlight() {
     document.querySelectorAll('.cpd-product-card').forEach(card => {
+        let rafPending = false;
         card.onmousemove = (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-            card.style.setProperty('--mouse-x', `${x}%`);
-            card.style.setProperty('--mouse-y', `${y}%`);
+            if (rafPending) return;
+            rafPending = true;
+            requestAnimationFrame(() => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--mouse-x', `${x}%`);
+                card.style.setProperty('--mouse-y', `${y}%`);
+                rafPending = false;
+            });
         };
     });
 }

@@ -58,7 +58,7 @@
             {{ product.featured_media | image_url }} {{ product.featured_media.width }}w"
           src="{{ product.featured_media | image_url: width: 533 }}"
           sizes="(min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
-          alt="{{ product.featured_media.alt | escape }}"
+          alt="{{ product.featured_media.alt | default: product.title | escape }}"
           loading="lazy"
           class="motion-reduce main-img"
           width="{{ product.featured_media.width }}"
@@ -67,7 +67,7 @@
         {%- if hover_image and product.media[1] != nil -%}
           <img
             src="{{ product.media[1] | image_url: width: 533 }}"
-            alt="{{ product.media[1].alt | escape }}"
+            alt="{{ product.media[1].alt | default: product.title | escape }}"
             loading="lazy"
             class="cpd-product-hover-img"
             width="{{ product.media[1].width }}"

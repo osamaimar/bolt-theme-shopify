@@ -28,7 +28,7 @@
                     {{ cart.item_count }}
                 </span>
             </div>
-            <button type="button" class="cd-close" id="cd-close" aria-label="{{ 'accessibility.close_menu' | t }}">
+            <button type="button" class="cd-close" id="cd-close" aria-label="{{ 'accessibility.close_cart' | t | default: 'Close cart' }}">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <line x1="18" y1="6" x2="6" y2="18"/>
                     <line x1="6" y1="6" x2="18" y2="18"/>
@@ -166,7 +166,7 @@
         </div>
 
         <!-- Footer -->
-        <footer class="cd-footer" id="cd-footer" {%- if cart.item_count == 0 -%}style="display:none"{%- endif -%}>
+        <div class="cd-footer" id="cd-footer" {%- if cart.item_count == 0 -%}style="display:none"{%- endif -%}>
             {%- if section.settings.show_subtotal -%}
                 <div class="cd-subtotal-row">
                     <span class="cd-subtotal-label">{{ 'cart.subtotal' | t }}</span>
@@ -225,7 +225,7 @@
             {%- if section.settings.show_view_cart_button -%}
                 <a href="{{ routes.cart_url }}" class="cd-view-cart-btn">{{ 'cart.view_cart' | t }}</a>
             {%- endif -%}
-        </footer>
+        </div>
     </aside>
 </div>
 

@@ -23,11 +23,12 @@
     {% for article in blog.articles %}
       <div style="margin-bottom: 40px;">
         {% if article.image %}
+          {% assign blog_article_alt = article.image.alt | default: article.title | escape %}
           <a href="{{ article.url }}">
             {{ article.image | image_url: width: 1000 | image_tag:
               loading: 'lazy',
               widths: '400, 600, 800, 1000',
-              alt: article.image.alt | default: article.title
+              alt: blog_article_alt
             }}
           </a>
         {% endif %}

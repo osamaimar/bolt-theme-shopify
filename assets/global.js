@@ -1,7 +1,93 @@
 /* global.js: core JS functionality for BoltTheme */
 
+// ─── Focus Trap Utility ───
+function trapFocus(element) {
+    const focusables = element.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    function handleTrap(e) {
+        if (e.key !== 'Tab') return;
+        if (e.shiftKey) {
+            if (document.activeElement === first) { last.focus(); e.preventDefault(); }
+        } else {
+            if (document.activeElement === last) { first.focus(); e.preventDefault(); }
+        }
+    }
+
+    element._trapHandler = handleTrap;
+    element.addEventListener('keydown', handleTrap);
+}
+
+function removeTrapFocus(element) {
+    if (element && element._trapHandler) {
+        element.removeEventListener('keydown', element._trapHandler);
+        element._trapHandler = null;
+    }
+}
+
+function togglePageInertness(isInert) {
+    if (window.Shopify && window.Shopify.designMode) return;
+    const mainContent = document.getElementById('main-content');
+    if (mainContent) {
+        if (isInert) {
+            mainContent.setAttribute('aria-hidden', 'true');
+        } else {
+            mainContent.removeAttribute('aria-hidden');
+        }
+    }
+}
+
+function updateCartQuantityButtonsAccessibility() {
+    const cdOverlay = document.getElementById('cd-overlay');
+    if (!cdOverlay) return;
+    const items = cdOverlay.querySelectorAll('.cd-item');
+    items.forEach(item => {
+        const qtyValEl = item.querySelector('.cd-qty-value');
+        if (qtyValEl) {
+            const qty = parseInt(qtyValEl.textContent);
+            const minusBtn = item.querySelector('.cd-qty-btn[data-change="-1"]');
+            if (minusBtn) {
+                if (qty <= 1) {
+                    minusBtn.setAttribute('aria-disabled', 'true');
+                    minusBtn.setAttribute('disabled', 'disabled');
+                } else {
+                    minusBtn.removeAttribute('aria-disabled');
+                    minusBtn.removeAttribute('disabled');
+                }
+            }
+        }
+    });
+}
+
+// ─── Toast Notification Utility ───
+function showToast(message, type) {
+    type = type || 'error';
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = 'toast toast-' + type;
+    toast.setAttribute('role', 'alert');
+    toast.setAttribute('aria-live', 'polite');
+    toast.textContent = message;
+
+    container.appendChild(toast);
+
+    // Trigger animation
+    requestAnimationFrame(() => toast.classList.add('toast--visible'));
+
+    setTimeout(() => {
+        toast.classList.remove('toast--visible');
+        toast.addEventListener('transitionend', () => toast.remove(), { once: true });
+    }, 4000);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('BoltTheme loaded');
+    let cartNeedsRefresh = true;
 
     // ─── Sticky Header Logic ───
     const header = document.getElementById('main-header');
@@ -47,6 +133,13 @@ document.addEventListener('DOMContentLoaded', () => {
             body.classList.toggle('no-scroll', isOpen);
             document.documentElement.classList.toggle('no-scroll', isOpen);
             mobileToggle.setAttribute('aria-expanded', isOpen);
+            if (isOpen) {
+                trapFocus(mobileMenu);
+            } else {
+                removeTrapFocus(mobileMenu);
+                mobileToggle.focus();
+            }
+            togglePageInertness(isOpen);
         };
 
         mobileToggle.addEventListener('click', (e) => {
@@ -74,6 +167,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 submenu.classList.toggle('active', !isActive);
                 dropdownBtn.classList.toggle('active', !isActive);
                 dropdownBtn.setAttribute('aria-expanded', !isActive);
+            }
+        });
+
+        mobileMenu.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const dropdownBtn = e.target.closest('.mobile-dropdown-btn');
+                if (!dropdownBtn) return;
+
+                e.preventDefault();
+                e.stopPropagation();
+
+                const parentLi = dropdownBtn.closest('li');
+                const submenu = parentLi.querySelector('.mobile-dropdown-menu, .mobile-sub-dropdown-menu');
+                
+                if (submenu) {
+                    const isActive = submenu.classList.contains('active');
+                    submenu.classList.toggle('active', !isActive);
+                    dropdownBtn.classList.toggle('active', !isActive);
+                    dropdownBtn.setAttribute('aria-expanded', !isActive);
+                }
             }
         });
 
@@ -182,6 +295,9 @@ document.addEventListener('DOMContentLoaded', () => {
         body.classList.toggle('no-scroll', isOpen);
         document.documentElement.classList.toggle('no-scroll', isOpen);
         
+        const searchTriggers = document.querySelectorAll('[data-open-search]');
+        searchTriggers.forEach(trigger => trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false'));
+
         if (isOpen) {
             renderRecentSearches();
             const mobileMenu = document.getElementById('mobile-menu');
@@ -189,12 +305,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 mobileMenu.classList.remove('active');
                 const mobileToggle = document.getElementById('mobile-toggle');
                 if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+                removeTrapFocus(mobileMenu);
             }
+            setTimeout(() => trapFocus(searchOverlay), 160);
+        } else {
+            removeTrapFocus(searchOverlay);
+            const searchTrigger = document.querySelector('[data-open-search]');
+            if (searchTrigger) searchTrigger.focus();
         }
         
         if (isOpen && searchInput) {
             setTimeout(() => searchInput.focus(), 150);
         }
+        
+        togglePageInertness(isOpen);
     };
 
     document.addEventListener('click', (e) => {
@@ -280,11 +404,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.documentElement.classList.remove('no-scroll');
                 const mobileToggle = document.getElementById('mobile-toggle');
                 if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+                removeTrapFocus(mobileMenu);
             }
+            trapFocus(cdOverlay);
+        } else {
+            removeTrapFocus(cdOverlay);
+            const cartTrigger = document.getElementById('header-cart-btn') || document.querySelector('[data-open-cart], .cart-trigger');
+            if (cartTrigger) cartTrigger.focus();
         }
 
         // Fetch latest cart when opening
-        if (isOpen) refreshCartDrawer();
+        if (isOpen && cartNeedsRefresh) {
+            refreshCartDrawer();
+        } else if (isOpen) {
+            updateCartQuantityButtonsAccessibility();
+        }
+        
+        togglePageInertness(isOpen);
     };
 
     document.addEventListener('click', (e) => {
@@ -345,14 +481,19 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) return response.json().then(err => Promise.reject(err));
+            return response.json();
+        })
         .then(item => {
-            console.log('Added to cart:', item);
+            cartNeedsRefresh = true;
             updateAllCartBadges();
             toggleCart(true); // Open drawer only after success
         })
         .catch(error => {
             console.error('Error adding to cart:', error);
+            const msg = (error && error.description) || (error && error.message) || 'Could not add item to cart. Please try again.';
+            showToast(msg, 'error');
         })
         .finally(() => {
             if (submitBtn) submitBtn.classList.remove('loading');
@@ -379,9 +520,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }]
             })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) return response.json().then(err => Promise.reject(err));
+            return response.json();
+        })
         .then(item => {
-            console.log('Added to cart via event:', item);
+            cartNeedsRefresh = true;
             updateAllCartBadges();
             toggleCart(true);
             if (target && target.classList.contains('qv-add-to-cart')) {
@@ -391,6 +535,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => {
             console.error('Error adding to cart via event:', error);
+            const msg = (error && error.description) || (error && error.message) || 'Could not add item to cart. Please try again.';
+            showToast(msg, 'error');
         })
         .finally(() => {
             if (target) target.classList.remove('loading');
@@ -424,7 +570,8 @@ document.addEventListener('DOMContentLoaded', () => {
             await response.json();
             
             // Re-render drawer content by fetching the section
-            const sectionResponse = await fetch(`${window.location.pathname}?sections=cart-drawer`);
+            const cartUrl = (window.routes && window.routes.cart_url) || '/cart';
+            const sectionResponse = await fetch(`${cartUrl}?sections=cart-drawer`);
             const sectionData = await sectionResponse.json();
             const html = sectionData['cart-drawer'];
             
@@ -433,6 +580,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const newInner = doc.querySelector('.cd-drawer').innerHTML;
             
             document.getElementById('cd-drawer').innerHTML = newInner;
+            cartNeedsRefresh = false;
+            updateCartQuantityButtonsAccessibility();
             
             // Update all badges
             updateAllCartBadges();
@@ -444,13 +593,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function refreshCartDrawer() {
-        const sectionResponse = await fetch(`${window.location.pathname}?sections=cart-drawer`);
+        const cartUrl = (window.routes && window.routes.cart_url) || '/cart';
+        const sectionResponse = await fetch(`${cartUrl}?sections=cart-drawer`);
         const sectionData = await sectionResponse.json();
         const html = sectionData['cart-drawer'];
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
         const newInner = doc.querySelector('.cd-drawer').innerHTML;
         document.getElementById('cd-drawer').innerHTML = newInner;
+        cartNeedsRefresh = false;
+        updateCartQuantityButtonsAccessibility();
         updateAllCartBadges();
     }
 
@@ -602,10 +754,17 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeaderLocalizationDropdowns();
 });
 
-// Utility for formatting money
+// Utility for formatting money — uses the store's active currency
 function formatMoney(cents) {
-    return (cents / 100).toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'USD',
-    });
+    const currency = (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) || 'USD';
+    const locale = document.documentElement.lang || 'en';
+    try {
+        return (cents / 100).toLocaleString(locale, {
+            style: 'currency',
+            currency: currency,
+        });
+    } catch (e) {
+        // Fallback for unsupported locale/currency combinations
+        return (cents / 100).toFixed(2) + ' ' + currency;
+    }
 }
