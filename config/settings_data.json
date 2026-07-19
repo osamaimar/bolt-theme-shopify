@@ -28,6 +28,7 @@
     "page_width": 1200,
     "spacing_scale": 100,
     "border_radius": 8,
+    "logo_ltr": "shopify://shop_images/logo.svg",
     "cart_type": "drawer",
     "sections": {
       "quick-view": {
@@ -39,7 +40,9 @@
               "image_position": "left",
               "image_aspect_ratio": "square",
               "image_border_radius": 0,
-              "enable_zoom": true
+              "enable_zoom": true,
+              "enable_media_gallery": true,
+              "gallery_thumb_count": 4
             }
           },
           "category": {
@@ -153,7 +156,18 @@
       },
       "cart-drawer": {
         "type": "cart-drawer",
-        "settings": {}
+        "settings": {
+          "show_variants": true,
+          "show_unit_price": true,
+          "show_selling_plan": true,
+          "show_quantity": true,
+          "show_remove_button": true,
+          "show_subtotal": true,
+          "show_tax_note": true,
+          "show_checkout_button": true,
+          "show_view_cart_button": true,
+          "show_shipping_bar": true
+        }
       },
       "language-switcher": {
         "type": "language-switcher",

@@ -17,8 +17,20 @@
         "logo_block": {
           "type": "logo",
           "settings": {
+            "logo_size": 180,
             "show_on_desktop": true,
-            "show_on_mobile": true
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120,
+            "bg_color": "",
+            "bg_gradient": ""
           }
         },
         "nav_block": {
@@ -26,7 +38,25 @@
           "settings": {
             "menu": "main-menu",
             "show_on_desktop": true,
-            "show_on_mobile": false
+            "show_on_mobile": false,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120,
+            "text_color": "",
+            "link_hover_color": "",
+            "active_link_color": "",
+            "dropdown_bg": "",
+            "dropdown_text_color": "",
+            "dropdown_hover_bg": "",
+            "dropdown_hover_text_color": "",
+            "dropdown_border_color": ""
           }
         },
         "icons_block": {
@@ -35,8 +65,27 @@
             "show_search": true,
             "show_cart_icon": true,
             "show_account_icon": true,
+            "show_country": true,
+            "show_flag": false,
+            "show_currency_symbol": true,
+            "icon_size": 22,
             "show_on_desktop": true,
-            "show_on_mobile": true
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "text_color": "",
+            "icon_hover_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": "",
+            "hover_bg_color": "",
+            "hover_border_color": "",
+            "cart_badge_bg": "",
+            "cart_badge_text_color": "",
+            "loc_text_color": "",
+            "loc_hover_text_color": ""
           }
         }
       },
@@ -49,20 +98,31 @@
         "show_section": true,
         "show_on_desktop": true,
         "show_on_mobile": true,
+        "show_divider": false,
         "container_width": "standard",
         "max_width": 1340,
         "logo_position": "middle-left",
         "sticky_header": "on-scroll",
-        "color_scheme": "background-1"
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "color_scheme": "background-1",
+        "header_bg_not_scrolled": "rgba(0,0,0,0)",
+        "header_bg_scrolled": ""
       }
     },
     "search-popup": {
       "type": "search-popup",
       "settings": {
         "show_section": true,
+        "show_title": true,
         "popup_title": "Search",
+        "show_input_icon": true,
         "show_keyboard_hints": true,
-        "show_recent_searches": true
+        "show_recent_searches": true,
+        "show_popular_searches": true,
+        "popular_searches": "Laptop, Phone, Watch, Headphones"
       }
     }
   },
