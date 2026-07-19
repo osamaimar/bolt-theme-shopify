@@ -17,9 +17,25 @@
         "brand_block": {
           "type": "brand",
           "settings": {
+            "logo_size": 180,
             "text": "<p>Your premier electronics destination, dedicated to providing the latest technology and gadgets that enhance your daily life.</p>",
             "show_on_desktop": true,
-            "show_on_mobile": true
+            "show_on_mobile": true,
+            "max_width": 400,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size_body": "medium",
+            "font_weight_body": "normal",
+            "font_style_body": "normal",
+            "text_transform_body": "none",
+            "letter_spacing_body": 0,
+            "line_height_body": 170,
+            "body_text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "mobile_width": "half"
           }
         },
         "menu_categories": {
@@ -27,8 +43,33 @@
           "settings": {
             "heading": "Categories",
             "menu": "main-menu",
+            "menu_layout": "list",
+            "link_spacing": 14,
             "show_on_desktop": true,
-            "show_on_mobile": true
+            "show_on_mobile": true,
+            "show_heading": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120,
+            "font_size_menu_item": "medium",
+            "font_weight_menu_item": "normal",
+            "font_style_menu_item": "normal",
+            "text_transform_menu_item": "none",
+            "letter_spacing_menu_item": 0,
+            "line_height_menu_item": 150,
+            "text_color": "",
+            "link_color": "",
+            "link_hover_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "mobile_width": "half"
           }
         },
         "menu_pages": {
@@ -36,8 +77,33 @@
           "settings": {
             "heading": "Pages",
             "menu": "footer",
+            "menu_layout": "list",
+            "link_spacing": 14,
             "show_on_desktop": true,
-            "show_on_mobile": true
+            "show_on_mobile": true,
+            "show_heading": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120,
+            "font_size_menu_item": "medium",
+            "font_weight_menu_item": "normal",
+            "font_style_menu_item": "normal",
+            "text_transform_menu_item": "none",
+            "letter_spacing_menu_item": 0,
+            "line_height_menu_item": 150,
+            "text_color": "",
+            "link_color": "",
+            "link_hover_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "mobile_width": "half"
           }
         },
         "copyright_block": {
@@ -45,21 +111,48 @@
           "settings": {
             "copyright_text": "© 2026 [StoreName]. All rights reserved.",
             "show_on_desktop": true,
-            "show_on_mobile": true
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120,
+            "text_color": ""
           }
         },
         "payment_icons_block": {
           "type": "payment_icons",
           "settings": {
+            "icon_height": 24,
+            "show_custom_payment_icons": false,
             "show_on_desktop": true,
-            "show_on_mobile": true
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0
           }
         },
         "socials_block": {
           "type": "footer_socials",
           "settings": {
+            "icon_size": 24,
             "show_on_desktop": true,
-            "show_on_mobile": true
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "text_color": "",
+            "icon_hover_color": "",
+            "icon_bg_color": "",
+            "icon_hover_bg_color": "",
+            "border_radius": 10
           }
         }
       },
