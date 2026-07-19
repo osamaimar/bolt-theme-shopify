@@ -137,6 +137,12 @@
   letter-spacing: 0.01em;
 }
 
+.search-popup-input:focus,
+.search-popup-input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .search-popup-input::placeholder {
   color: var(--text-primary-60);
 }

@@ -92,6 +92,8 @@
             {%- assign hero_alt = section.settings.image.alt | default: 'Hero background' | escape -%}
             {{ section.settings.image | image_url: width: 2000 | image_tag: 
                 loading: 'eager', 
+                fetchpriority: 'high',
+                decoding: 'async',
                 widths: '600, 900, 1200, 1500, 2000',
                 sizes: '100vw',
                 alt: hero_alt,
@@ -99,7 +101,7 @@
                 height: 1333
             }}
         {%- else -%}
-            <img src="{{ 'hero-tech-bg.png' | asset_url }}" loading="eager" alt="Hero background" width="2000" height="1333">
+            <img src="{{ 'hero-tech-bg.png' | asset_url }}" loading="eager" fetchpriority="high" decoding="async" alt="Hero background" width="2000" height="1333">
         {%- endif -%}
     </div>
 

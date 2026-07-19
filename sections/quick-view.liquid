@@ -60,7 +60,7 @@
                  data-enable-media="{{ image_block.settings.enable_media_gallery | default: true }}"
                  data-max-thumbs="{{ image_block.settings.gallery_thumb_count | default: 4 }}"
                  {{ image_block.shopify_attributes }}>
-                <img id="qv-image" src="{{ 'blank.svg' | asset_url }}" alt="Product image" width="800" height="800" style="display: none !important;" aria-hidden="true" />
+                <img id="qv-image" src="{{ 'blank.svg' | asset_url }}" alt="Product image" width="800" height="800" loading="lazy" decoding="async" style="display: none !important;" aria-hidden="true" />
                 <div id="qv-gallery-viewer" class="qv-gallery-viewer"></div>
                 <div id="qv-thumbs-strip" class="qv-thumbs-strip"></div>
                 <button type="button" class="qv-gallery-nav qv-gallery-prev" id="qv-gallery-prev" aria-label="Previous media">

@@ -796,7 +796,7 @@
               {%- if block.settings.show_card_image -%}
               <div class="blog-sb-card-image-wrapper">
                 {%- if article.image -%}
-                  {{ article.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: article.title, class: 'blog-sb-card-image' }}
+                  {{ article.image | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(min-width: 991px) 60vw, 100vw', alt: article.title, class: 'blog-sb-card-image' }}
                 {%- else -%}
                   <div class="blog-sb-card-image-placeholder">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">

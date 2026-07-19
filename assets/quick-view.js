@@ -245,6 +245,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /**
+     * Resizes a Shopify CDN image URL by appending a width parameter.
+     * Works with both cdn.shopify.com URLs and other image hosts.
+     */
+    function shopifyImageUrl(src, width) {
+        if (!src || !width) return src;
+        // Already has a width param — replace it
+        if (src.includes('width=')) {
+            return src.replace(/width=\d+/, `width=${width}`);
+        }
+        // Shopify CDN URL — append width
+        const separator = src.includes('?') ? '&' : '?';
+        return `${src}${separator}width=${width}`;
+    }
+
     function fetchAndBuildQvGallery(handle, defaultImg, defaultAlt) {
         if (!qvGalleryViewer || !qvThumbsStrip) return;
 
@@ -288,9 +303,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderFallbackImage(src, alt) {
         if (!src) return;
+        const resized = shopifyImageUrl(src, 1200);
         qvGalleryViewer.innerHTML = `
             <div class="qv-gallery-media-item active">
-                <img src="${src}" alt="${alt || 'Product image'}" />
+                <img src="${resized}"
+                     srcset="${shopifyImageUrl(src, 800)} 800w, ${shopifyImageUrl(src, 1200)} 1200w, ${shopifyImageUrl(src, 1600)} 1600w"
+                     sizes="(min-width: 960px) 50vw, 100vw"
+                     alt="${alt || 'Product image'}" />
             </div>
         `;
     }
@@ -306,7 +325,15 @@ document.addEventListener('DOMContentLoaded', () => {
             item.setAttribute('data-media-type', media.media_type);
 
             if (media.media_type === 'image') {
-                item.innerHTML = `<img src="${media.src}" alt="${media.alt || ''}" />`;
+                const mainSrc = shopifyImageUrl(media.src, 1200);
+                item.innerHTML = `<img
+                    src="${mainSrc}"
+                    srcset="${shopifyImageUrl(media.src, 800)} 800w, ${shopifyImageUrl(media.src, 1200)} 1200w, ${shopifyImageUrl(media.src, 1600)} 1600w"
+                    sizes="(min-width: 960px) 50vw, 100vw"
+                    alt="${media.alt || ''}"
+                    width="${media.width || ''}"
+                    height="${media.height || ''}"
+                />`;
             } else if (media.media_type === 'video') {
                 item.innerHTML = `
                     <div class="qv-video-container">
@@ -321,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.innerHTML = `
                     <div class="qv-external-video-wrapper">
                         <div class="qv-external-video-placeholder" data-video-id="${media.external_id}" data-host="${media.host}">
-                            <img src="${media.preview_image.src}" alt="${media.alt || ''}" />
+                            <img src="${shopifyImageUrl(media.preview_image.src, 1200)}" alt="${media.alt || ''}" />
                             <button type="button" class="qv-play-overlay" aria-label="Play video">
                                 <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                             </button>
@@ -354,7 +381,8 @@ document.addEventListener('DOMContentLoaded', () => {
             thumb.setAttribute('data-index', idx);
             thumb.setAttribute('data-media-id', media.id);
 
-            let thumbInner = `<img src="${media.preview_image?.src || media.src}" alt="${media.alt || ''}" />`;
+            const thumbRawSrc = media.preview_image?.src || media.src;
+            let thumbInner = `<img src="${shopifyImageUrl(thumbRawSrc, 200)}" alt="${media.alt || ''}" />`;
             if (media.media_type === 'video' || media.media_type === 'external_video') {
                 thumbInner += `
                     <div class="qv-thumb-icon">

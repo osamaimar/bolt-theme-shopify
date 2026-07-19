@@ -408,7 +408,7 @@
                     <a href="{{ product.url }}">
                       {%- if product.featured_image != blank -%}
                         {%- assign catalog_img_alt = product.featured_image.alt | default: product.title | escape -%}
-                        {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: catalog_img_alt }}
+                        {{ product.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 991px) 25vw, (min-width: 769px) 33vw, 50vw', alt: catalog_img_alt }}
                       {%- else -%}
                         {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
                       {%- endif -%}

@@ -612,7 +612,7 @@
                 {%- if block.settings.show_image -%}
                   <div class="blog-featured-image-wrapper">
                     {%- if featured_article.image -%}
-                      {{ featured_article.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: featured_article.title, class: 'blog-featured-image' }}
+                      {{ featured_article.image | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '(min-width: 991px) 60vw, 100vw', alt: featured_article.title, class: 'blog-featured-image' }}
                     {%- else -%}
                       <div class="blog-featured-image-placeholder">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -745,7 +745,7 @@
                   {%- endif -%}
                   <div class="blog-card-image-wrapper" style="{% if card_ratio != 'auto' %}--image-ratio: {{ card_ratio }};{% endif %}">
                     {%- if article.image -%}
-                      {{ article.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: article.title, class: 'blog-card-image' }}
+                      {{ article.image | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(min-width: 991px) 33vw, (min-width: 769px) 50vw, 100vw', alt: article.title, class: 'blog-card-image' }}
                     {%- else -%}
                       <div class="blog-card-image-placeholder">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">

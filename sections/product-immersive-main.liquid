@@ -370,7 +370,7 @@
                      {% if block.settings.active_text_color != blank %}--active-text: {{ block.settings.active_text_color }};{% endif %}
                      {% if block.settings.active_border_color != blank %}--active-border: {{ block.settings.active_border_color }};{% endif %}
                      {% if block.settings.swatch_border_color != blank %}--swatch-border: {{ block.settings.swatch_border_color }};{% endif %}
-                     {% if block.settings.swatch_hover_border_color != blank %}--swatch-hover-border: {{ block.settings.swatch_hover_border_color }};{% endif %}
+                    {% if block.settings.swatch_hover_border_color != blank %}--swatch-hover-border: {{ block.settings.swatch_hover_border_color }};{% endif %}
                      {% if block.settings.swatch_active_border_color != blank %}--swatch-active-border: {{ block.settings.swatch_active_border_color }};{% endif %}
                      {% if block.settings.label_color != blank %}--label-color: {{ block.settings.label_color }};{% endif %}
                      {% if block.settings.selected_value_color != blank %}--selected-val-color: {{ block.settings.selected_value_color }};{% endif %}
@@ -379,9 +379,15 @@
                 {%- for option in product.options_with_values -%}
                   {%- assign is_color = false -%}
                   {%- assign downcased_name = option.name | downcase -%}
-                  {%- if downcased_name contains 'color' or downcased_name contains 'colour' -%}
-                    {%- assign is_color = true -%}
-                  {%- endif -%}
+                  
+                  {%- assign translated_option_names = 'colors.option_names' | t | downcase | split: ',' -%}
+                  {%- for name_key in translated_option_names -%}
+                    {%- assign name_clean = name_key | strip -%}
+                    {%- if name_clean != blank and downcased_name contains name_clean -%}
+                      {%- assign is_color = true -%}
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
                   
                   <div class="pdi-variant-group" data-option-name="{{ option.name | escape }}">
                     {%- if block.settings.show_label -%}
@@ -403,28 +409,108 @@
                         {%- if is_color and block.settings.color_style == 'swatches' -%}
                           {%- assign color_name = value | downcase | strip -%}
                           {%- assign swatch_color = color_name -%}
-                          {%- if color_name == 'rose gold' -%}{%- assign swatch_color = '#e0a899' -%}
-                          {%- elsif color_name == 'gold' -%}{%- assign swatch_color = '#e5c158' -%}
-                          {%- elsif color_name == 'matte black' -%}{%- assign swatch_color = '#1c1c1c' -%}
-                          {%- elsif color_name == 'space gray' or color_name == 'space grey' -%}{%- assign swatch_color = '#555559' -%}
-                          {%- elsif color_name == 'midnight' -%}{%- assign swatch_color = '#1a1f2c' -%}
-                          {%- elsif color_name == 'silver' -%}{%- assign swatch_color = '#d1d1d6' -%}
-                          {%- elsif color_name == 'white' -%}{%- assign swatch_color = '#ffffff' -%}
-                          {%- elsif color_name == 'cream' or color_name == 'off white' -%}{%- assign swatch_color = '#faf6ee' -%}
-                          {%- elsif color_name == 'charcoal' -%}{%- assign swatch_color = '#36454f' -%}
-                          {%- elsif color_name == 'navy' or color_name == 'navy blue' -%}{%- assign swatch_color = '#1b263b' -%}
-                          {%- elsif color_name == 'olive' or color_name == 'forest green' -%}{%- assign swatch_color = '#2e3d30' -%}
-                          {%- elsif color_name == 'burgundy' -%}{%- assign swatch_color = '#800020' -%}
-                          {%- elsif color_name == 'starlight' -%}{%- assign swatch_color = '#f0eae0' -%}
-                          {%- elsif color_name == 'graphite' -%}{%- assign swatch_color = '#4b4c4d' -%}
-                          {%- elsif color_name == 'titanium' -%}{%- assign swatch_color = '#8a8b8c' -%}
-                          {%- endif -%}
+                          {%- assign swatch_image = nil -%}
+                          {%- if value.swatch != nil -%}
+                            {%- if value.swatch.image -%}
+                              {%- assign swatch_image = value.swatch.image | image_url: width: 50 -%}
+                            {%- elsif value.swatch.color -%}
+                              {%- assign swatch_color = value.swatch.color -%}
+                            {%- endif -%}
+                          {%- else -%}
+                            {%- assign swatch_file_name = color_name | handle | append: '.png' -%}
+                            {%- if images[swatch_file_name] != blank -%}
+                              {%- assign swatch_image = images[swatch_file_name] | image_url: width: 50 -%}
+                            {%- else -%}
+                              {%- assign trans_rose_gold = 'colors.rose_gold' | t | downcase | strip -%}
+                              {%- assign trans_gold = 'colors.gold' | t | downcase | strip -%}
+                              {%- assign trans_matte_black = 'colors.matte_black' | t | downcase | strip -%}
+                              {%- assign trans_space_gray = 'colors.space_gray' | t | downcase | strip -%}
+                              {%- assign trans_space_grey = 'colors.space_grey' | t | downcase | strip -%}
+                              {%- assign trans_midnight = 'colors.midnight' | t | downcase | strip -%}
+                              {%- assign trans_silver = 'colors.silver' | t | downcase | strip -%}
+                              {%- assign trans_white = 'colors.white' | t | downcase | strip -%}
+                              {%- assign trans_cream = 'colors.cream' | t | downcase | strip -%}
+                              {%- assign trans_off_white = 'colors.off_white' | t | downcase | strip -%}
+                              {%- assign trans_charcoal = 'colors.charcoal' | t | downcase | strip -%}
+                              {%- assign trans_navy = 'colors.navy' | t | downcase | strip -%}
+                              {%- assign trans_navy_blue = 'colors.navy_blue' | t | downcase | strip -%}
+                              {%- assign trans_olive = 'colors.olive' | t | downcase | strip -%}
+                              {%- assign trans_forest_green = 'colors.forest_green' | t | downcase | strip -%}
+                              {%- assign trans_burgundy = 'colors.burgundy' | t | downcase | strip -%}
+                              {%- assign trans_starlight = 'colors.starlight' | t | downcase | strip -%}
+                              {%- assign trans_graphite = 'colors.graphite' | t | downcase | strip -%}
+                              {%- assign trans_titanium = 'colors.titanium' | t | downcase | strip -%}
+                              {%- assign trans_black = 'colors.black' | t | downcase | strip -%}
+                              {%- assign trans_blue = 'colors.blue' | t | downcase | strip -%}
+                              {%- assign trans_green = 'colors.green' | t | downcase | strip -%}
+                              {%- assign trans_red = 'colors.red' | t | downcase | strip -%}
+                              {%- assign trans_yellow = 'colors.yellow' | t | downcase | strip -%}
+                              {%- assign trans_pink = 'colors.pink' | t | downcase | strip -%}
+                              {%- assign trans_purple = 'colors.purple' | t | downcase | strip -%}
+                              {%- assign trans_orange = 'colors.orange' | t | downcase | strip -%}
+                              {%- assign trans_brown = 'colors.brown' | t | downcase | strip -%}
+                              {%- assign trans_grey = 'colors.grey' | t | downcase | strip -%}
+                              {%- assign trans_gray = 'colors.gray' | t | downcase | strip -%}
+
+                              {%- if color_name == 'rose gold' or color_name == trans_rose_gold -%}
+                                {%- assign swatch_color = '#e0a899' -%}
+                              {%- elsif color_name == 'gold' or color_name == trans_gold -%}
+                                {%- assign swatch_color = '#e5c158' -%}
+                              {%- elsif color_name == 'matte black' or color_name == trans_matte_black -%}
+                                {%- assign swatch_color = '#1c1c1c' -%}
+                              {%- elsif color_name == 'space gray' or color_name == trans_space_gray or color_name == 'space grey' or color_name == trans_space_grey -%}
+                                {%- assign swatch_color = '#555559' -%}
+                              {%- elsif color_name == 'midnight' or color_name == trans_midnight -%}
+                                {%- assign swatch_color = '#1a1f2c' -%}
+                              {%- elsif color_name == 'silver' or color_name == trans_silver -%}
+                                {%- assign swatch_color = '#d1d1d6' -%}
+                              {%- elsif color_name == 'white' or color_name == trans_white -%}
+                                {%- assign swatch_color = '#ffffff' -%}
+                              {%- elsif color_name == 'cream' or color_name == trans_cream or color_name == 'off white' or color_name == trans_off_white -%}
+                                {%- assign swatch_color = '#faf6ee' -%}
+                              {%- elsif color_name == 'charcoal' or color_name == trans_charcoal -%}
+                                {%- assign swatch_color = '#36454f' -%}
+                              {%- elsif color_name == 'navy' or color_name == trans_navy or color_name == 'navy blue' or color_name == trans_navy_blue -%}
+                                {%- assign swatch_color = '#1b263b' -%}
+                              {%- elsif color_name == 'olive' or color_name == trans_olive or color_name == 'forest green' or color_name == trans_forest_green -%}
+                                {%- assign swatch_color = '#2e3d30' -%}
+                              {%- elsif color_name == 'burgundy' or color_name == trans_burgundy -%}
+                                {%- assign swatch_color = '#800020' -%}
+                              {%- elsif color_name == 'starlight' or color_name == trans_starlight -%}
+                                {%- assign swatch_color = '#f0eae0' -%}
+                              {%- elsif color_name == 'graphite' or color_name == trans_graphite -%}
+                                {%- assign swatch_color = '#4b4c4d' -%}
+                              {%- elsif color_name == 'titanium' or color_name == trans_titanium -%}
+                                {%- assign swatch_color = '#8a8b8c' -%}
+                              {%- elsif color_name == 'black' or color_name == trans_black -%}
+                                {%- assign swatch_color = 'black' -%}
+                              {%- elsif color_name == 'blue' or color_name == trans_blue -%}
+                                {%- assign swatch_color = 'blue' -%}
+                              {%- elsif color_name == 'green' or color_name == trans_green -%}
+                                {%- assign swatch_color = 'green' -%}
+                                  {%- elsif color_name == 'red' or color_name == trans_red -%}
+                                    {%- assign swatch_color = 'red' -%}
+                                  {%- elsif color_name == 'yellow' or color_name == trans_yellow -%}
+                                    {%- assign swatch_color = 'yellow' -%}
+                                  {%- elsif color_name == 'pink' or color_name == trans_pink -%}
+                                    {%- assign swatch_color = 'pink' -%}
+                                  {%- elsif color_name == 'purple' or color_name == trans_purple -%}
+                                    {%- assign swatch_color = 'purple' -%}
+                                  {%- elsif color_name == 'orange' or color_name == trans_orange -%}
+                                    {%- assign swatch_color = 'orange' -%}
+                                  {%- elsif color_name == 'brown' or color_name == trans_brown -%}
+                                    {%- assign swatch_color = 'brown' -%}
+                                  {%- elsif color_name == 'grey' or color_name == trans_grey or color_name == 'gray' or color_name == trans_gray -%}
+                                    {%- assign swatch_color = 'gray' -%}
+                                {%- endif -%}
+                              {%- endif -%}
+                            {%- endif -%}
                           <button
                             type="button"
                             class="pdi-variant-swatch {% if option_active %}active{% endif %}"
                             data-value="{{ value | escape }}"
                             data-option-index="{{ forloop.parentloop.index0 }}"
-                            style="background-color: {{ swatch_color }};"
+                            style="{% if swatch_image != nil %}background-image: url('{{ swatch_image }}'); background-size: cover; background-position: center;{% else %}background-color: {{ swatch_color }};{% endif %}"
                             aria-label="{{ value | escape }}"
                             title="{{ value | escape }}"
                           ></button>
@@ -1248,7 +1334,7 @@
         { "type": "color", "id": "active_border_color", "label": "Active Pill Border" },
         { "type": "color", "id": "swatch_border_color", "label": "Swatch Inactive Outline" },
         { "type": "color", "id": "swatch_hover_border_color", "label": "Swatch Hover Ring Color" },
-        { "type": "color", "id": "swatch_active_border_color", "label": "Swatch Active Ring Color" }
+        { "type": "color", "id": "swatch_active_border_color", "label": "Swatch Active Ring Color" },
       ]
     },
     {

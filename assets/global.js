@@ -768,3 +768,37 @@ function formatMoney(cents) {
         return (cents / 100).toFixed(2) + ' ' + currency;
     }
 }
+
+// ─── IntersectionObserver Media & Lazy Component Observer ───
+(function initIntersectionLazyLoader() {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+
+    const lazyMediaObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const element = entry.target;
+                if (element.dataset.src) {
+                    element.src = element.dataset.src;
+                    element.removeAttribute('data-src');
+                }
+                if (element.dataset.srcset) {
+                    element.srcset = element.dataset.srcset;
+                    element.removeAttribute('data-srcset');
+                }
+                element.classList.add('lazy-loaded');
+                observer.unobserve(element);
+            }
+        });
+    }, {
+        rootMargin: '200px 0px',
+        threshold: 0.01
+    });
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('[data-src], [data-srcset]').forEach(el => lazyMediaObserver.observe(el));
+        });
+    } else {
+        document.querySelectorAll('[data-src], [data-srcset]').forEach(el => lazyMediaObserver.observe(el));
+    }
+})();

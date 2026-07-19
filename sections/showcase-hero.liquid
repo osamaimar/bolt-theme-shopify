@@ -480,7 +480,7 @@
       <div class="csh-hero-image csh-hero-image--{{ section.settings.image_ratio }}">
         {%- if image != blank -%}
           {%- assign showcase_alt = image.alt | default: product.title | escape -%}
-          {{ image | image_url: width: 800 | image_tag: loading: 'lazy', alt: showcase_alt }}
+          {{ image | image_url: width: 1600 | image_tag: loading: 'eager', fetchpriority: 'high', decoding: 'async', sizes: '(min-width: 991px) 50vw, 100vw', alt: showcase_alt }}
         {%- else -%}
           {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
         {%- endif -%}

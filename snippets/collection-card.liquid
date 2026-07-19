@@ -30,7 +30,8 @@
           alt="{{ collection.title | escape }}"
           height="{{ collection.featured_image.height }}"
           width="{{ collection.featured_image.width }}"
-          loading="lazy"
+          loading="{{ loading | default: 'lazy' }}"
+          decoding="{{ decoding | default: 'async' }}"
         >
       {%- else -%}
         {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}

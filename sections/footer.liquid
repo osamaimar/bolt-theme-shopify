@@ -289,6 +289,7 @@
                     {{ logo_img | image_url: width: logo_w | image_tag:
                       class: 'logo-image',
                       loading: 'lazy',
+                      decoding: 'async',
                       alt: shop.name
                     }}
                   {%- else -%}

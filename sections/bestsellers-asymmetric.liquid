@@ -175,9 +175,9 @@
                          {{ block.shopify_attributes }}>
                             <div class="hev-bs-card-img">
                                 {%- if block.settings.image != blank -%}
-                                    {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: block.settings.title | default: 'Product image' }}
+                                    {{ block.settings.image | image_url: width: 1500 | image_tag: loading: 'lazy', sizes: '(min-width: 769px) 60vw, 100vw', alt: block.settings.title | default: 'Product image' }}
                                 {%- elsif block.settings.product != blank -%}
-                                    {{ block.settings.product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: block.settings.product.title | escape }}
+                                    {{ block.settings.product.featured_image | image_url: width: 1500 | image_tag: loading: 'lazy', sizes: '(min-width: 769px) 60vw, 100vw', alt: block.settings.product.title | escape }}
                                 {%- else -%}
                                     {{ 'product-' | append: product_index | placeholder_svg_tag: 'placeholder-svg' }}
                                 {%- endif -%}

@@ -462,13 +462,13 @@
             {%- assign articles_shown = 0 -%}
             
             {%- comment -%}Render related articles (excluding current){%- endcomment -%}
-            {%- for blog_article in blog.articles -%}
+        {%- for blog_article in blog.articles -%}
               {%- if blog_article.id != current_article_id and articles_shown < block.settings.posts_to_show -%}
                 {%- assign articles_shown = articles_shown | plus: 1 -%}
                 <article class="blog-card related-blog-card">
                   <div class="blog-card-image-wrapper">
                     {%- if blog_article.image -%}
-                      {{ blog_article.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: blog_article.title, class: 'blog-card-image' }}
+                      {{ blog_article.image | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(min-width: 991px) 33vw, (min-width: 769px) 50vw, 100vw', alt: blog_article.title, class: 'blog-card-image' }}
                     {%- else -%}
                       <div class="blog-card-image-placeholder">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">

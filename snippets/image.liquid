@@ -32,6 +32,10 @@
     assign width = width | default: image.width
   endunless
 
+  assign image_loading = loading | default: 'lazy'
+  assign image_decoding = decoding | default: 'async'
+  assign image_fetchpriority = fetchpriority | default: 'auto'
+
   if url
     assign wrapper = 'a'
   else
@@ -46,7 +50,7 @@
   {% endif %}
 >
   {%- assign image_alt = image.alt | default: 'Image' | escape -%}
-  {{ image | image_url: width: width, height: height, crop: crop | image_tag: alt: image_alt }}
+  {{ image | image_url: width: width, height: height, crop: crop | image_tag: alt: image_alt, loading: image_loading, decoding: image_decoding, fetchpriority: image_fetchpriority }}
 </{{ wrapper }}>
 
 {% stylesheet %}

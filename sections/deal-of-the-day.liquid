@@ -69,9 +69,9 @@
                          {{ image_block.shopify_attributes }}>
                         {%- if image_block.settings.image != blank -%}
                             {%- assign deal_img_alt = image_block.settings.image.alt | default: 'Product image' | escape -%}
-                            {{ image_block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: deal_img_alt }}
+                            {{ image_block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', decoding: 'async', alt: deal_img_alt }}
                         {%- else -%}
-                            <img src="{{ 'deal-headphones.png' | asset_url }}" loading="lazy" alt="Premium Wireless Headphones — Studio Edition" width="1200" height="auto">
+                            <img src="{{ 'deal-headphones.png' | asset_url }}" loading="lazy" decoding="async" alt="Premium Wireless Headphones — Studio Edition" width="1200" height="auto">
                         {%- endif -%}
                     </div>
                 {%- else -%}

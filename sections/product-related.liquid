@@ -124,7 +124,7 @@
                     <article class="pd-related-card" data-category="{{ p.type | default: 'Electronics' }}">
                       <div class="pd-related-card-thumb">
                         <a href="{{ p.url }}" class="pd-related-card-link">
-                          <img src="{{ p.featured_image | image_url: width: 600, height: 600 }}" alt="{{ p.title }}" loading="lazy" width="600" height="600" />
+                          {{ p.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 991px) 25vw, (min-width: 769px) 33vw, 50vw', alt: p.title }}
                         </a>
                         {%- if block.settings.show_quick_view -%}
                         <div class="pd-related-card-overlay">

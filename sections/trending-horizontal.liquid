@@ -238,7 +238,7 @@
                                         <input type="hidden" name="id" value="{{ product.variants.first.id }}">
                                         <div class="cpd-product-desc hidden" style="display: none;">{{ product.description | strip_html | truncatewords: 30 }}</div>
                                         {%- if product.featured_image != blank -%}
-                                            {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title | escape }}
+                                            {{ product.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 991px) 25vw, (min-width: 769px) 33vw, 50vw', alt: product.title | escape }}
                                         {%- else -%}
                                             {{ 'product-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
                                         {%- endif -%}
