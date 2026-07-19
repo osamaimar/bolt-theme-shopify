@@ -1,0 +1,319 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "error-404": {
+      "type": "error-404",
+      "blocks": {
+        "error_code": {
+          "type": "error_code",
+          "settings": {
+            "error_code": "404",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_shadow": true,
+            "margin_top": 20,
+            "margin_bottom": 24,
+            "margin_top_mobile": 16,
+            "margin_bottom_mobile": 16,
+            "font_size": "large",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 90,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "shadow_color": ""
+          }
+        },
+        "divider": {
+          "type": "divider",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 32,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 24,
+            "width": 30,
+            "thickness": 3,
+            "divider_style": "solid",
+            "divider_color": ""
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "title": "Page [Not Found]",
+            "heading_tag": "h1",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 16,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 12,
+            "font_size": "large",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 110,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "highlight_color": "",
+            "highlight_gradient": ""
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "description": "The page you're looking for doesn't exist or may have been moved. Please check the URL or use one of the options below.",
+            "description_tag": "p",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "max_width": 560,
+            "margin_top": 0,
+            "margin_bottom": 40,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 32,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 170,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "highlight_color": "",
+            "highlight_gradient": ""
+          }
+        },
+        "primary_btn": {
+          "type": "button",
+          "settings": {
+            "label": "Go Home",
+            "url": "/",
+            "style": "primary",
+            "open_in_new_tab": false,
+            "icon": "arrow",
+            "icon_position": "right",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_button": true,
+            "show_icon": true,
+            "margin_top": 20,
+            "margin_bottom": 20,
+            "margin_top_mobile": 15,
+            "margin_bottom_mobile": 15,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "uppercase",
+            "letter_spacing": 0,
+            "line_height": 115,
+            "text_color": "",
+            "icon_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": ""
+          }
+        },
+        "secondary_btn": {
+          "type": "button",
+          "settings": {
+            "label": "Contact Us",
+            "url": "/pages/contact",
+            "style": "secondary",
+            "open_in_new_tab": false,
+            "icon": "mail",
+            "icon_position": "left",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_button": true,
+            "show_icon": true,
+            "margin_top": 20,
+            "margin_bottom": 20,
+            "margin_top_mobile": 15,
+            "margin_bottom_mobile": 15,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "uppercase",
+            "letter_spacing": 0,
+            "line_height": 115,
+            "text_color": "",
+            "icon_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": ""
+          }
+        },
+        "divider_2": {
+          "type": "divider",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 40,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 32,
+            "width": 100,
+            "thickness": 1,
+            "divider_style": "solid",
+            "divider_color": ""
+          }
+        },
+        "nav_item_1": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Home",
+            "hint": "Return to main page",
+            "link": "/",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_nav_item": true,
+            "show_hint": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120,
+            "text_color": "",
+            "hint_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": "",
+            "bg_hover_color": "",
+            "border_hover_color": ""
+          }
+        },
+        "nav_item_2": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Services",
+            "hint": "Explore our solutions",
+            "link": "/pages/services",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_nav_item": true,
+            "show_hint": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120,
+            "text_color": "",
+            "hint_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": "",
+            "bg_hover_color": "",
+            "border_hover_color": ""
+          }
+        },
+        "nav_item_3": {
+          "type": "nav_item",
+          "settings": {
+            "label": "About",
+            "hint": "Learn about our team",
+            "link": "/pages/about",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_nav_item": true,
+            "show_hint": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120,
+            "text_color": "",
+            "hint_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": "",
+            "bg_hover_color": "",
+            "border_hover_color": ""
+          }
+        },
+        "footer_note": {
+          "type": "footer_note",
+          "settings": {
+            "footer_note": "<p>Need help? <a href=\"/pages/contact\">Get in touch</a> with our team.</p>",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 48,
+            "margin_bottom": 0,
+            "margin_top_mobile": 36,
+            "margin_bottom_mobile": 0,
+            "font_size": "small",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 150,
+            "text_color": "",
+            "link_color": "",
+            "link_hover_color": "",
+            "bg_color": "",
+            "bg_gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "error_code",
+        "divider",
+        "heading",
+        "description",
+        "primary_btn",
+        "secondary_btn",
+        "divider_2",
+        "nav_item_1",
+        "nav_item_2",
+        "nav_item_3",
+        "footer_note"
+      ],
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "narrow",
+        "max_width": 720,
+        "blocks_position": "center",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "error-404"
+  ]
+}

@@ -1,0 +1,392 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "header": {
+      "type": "search-header",
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Search [Electronics]",
+            "heading_tag": "h1",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 24,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 16,
+            "font_size": "large",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 1.2
+          }
+        },
+        "subheading_1": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Find the perfect tech gear and gadgets for your lifestyle.",
+            "subheading_tag": "p",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "max_width": 800,
+            "margin_top": 0,
+            "margin_bottom": 28,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 20,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 1.6
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "subheading_1"
+      ],
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "narrow",
+        "max_width": 1200,
+        "blocks_position": "center",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "bar": {
+      "type": "search-bar",
+      "blocks": {
+        "search_input_1": {
+          "type": "search_input",
+          "settings": {
+            "placeholder": "Search gadgets, accessories, tools...",
+            "show_search_icon": true,
+            "show_clear_button": true,
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "max_width": 720,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0
+          }
+        }
+      },
+      "block_order": [
+        "search_input_1"
+      ],
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "narrow",
+        "max_width": 1200,
+        "blocks_position": "center",
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 32,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "filters": {
+      "type": "search-filters",
+      "blocks": {
+        "filter_computing": {
+          "type": "category_chip",
+          "settings": {
+            "label": "Computing",
+            "category": "Computing",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120
+          }
+        },
+        "filter_smarthome": {
+          "type": "category_chip",
+          "settings": {
+            "label": "Smart Home",
+            "category": "SmartHome",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120
+          }
+        },
+        "filter_audio": {
+          "type": "category_chip",
+          "settings": {
+            "label": "Audio",
+            "category": "Audio",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120
+          }
+        },
+        "filter_gaming": {
+          "type": "category_chip",
+          "settings": {
+            "label": "Gaming",
+            "category": "Gaming",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120
+          }
+        },
+        "filter_mobile": {
+          "type": "category_chip",
+          "settings": {
+            "label": "Mobile",
+            "category": "Mobile",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120
+          }
+        }
+      },
+      "block_order": [
+        "filter_computing",
+        "filter_smarthome",
+        "filter_audio",
+        "filter_gaming",
+        "filter_mobile"
+      ],
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "show_heading": false,
+        "filter_source": "product_type",
+        "heading": "Browse by Category",
+        "blocks_position": "center",
+        "container_width": "narrow",
+        "max_width": 1350,
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 32,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "empty-state": {
+      "type": "search-empty-state",
+      "blocks": {
+        "icon": {
+          "type": "icon",
+          "settings": {
+            "icon": "search-plus",
+            "custom_icon_svg": "",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "icon_size": 64,
+            "margin_top": 20,
+            "margin_bottom": 20,
+            "margin_top_mobile": 16,
+            "margin_bottom_mobile": 16
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ready to find something?",
+            "heading_tag": "h3",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 24,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 16,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 1.2
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "Type your keywords above to browse our premium electronics collection.",
+            "text_tag": "p",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "max_width": 800,
+            "margin_top": 0,
+            "margin_bottom": 24,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 16,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 1.6
+          }
+        }
+      },
+      "block_order": [
+        "icon",
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "narrow",
+        "max_width": 1350,
+        "blocks_position": "center",
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 60,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "main": {
+      "type": "search-main",
+      "blocks": {
+        "meta": {
+          "type": "results_meta",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_count": true,
+            "show_sort": true,
+            "margin_top": 0,
+            "margin_bottom": 24,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 16
+          }
+        },
+        "grid": {
+          "type": "results_grid",
+          "settings": {
+            "rating_value": 4.5,
+            "rating_count": "12",
+            "columns_desktop": "4",
+            "columns_tablet": "2",
+            "columns_mobile": "1",
+            "margin_top": 20,
+            "margin_bottom": 20,
+            "margin_top_mobile": 16,
+            "margin_bottom_mobile": 16,
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_category": true,
+            "show_rating": false,
+            "show_rating_count": true,
+            "show_quick_view": true,
+            "show_add_to_cart": false,
+            "show_description": false
+          }
+        },
+        "no_results": {
+          "type": "no_results",
+          "settings": {
+            "help_text": "",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 20,
+            "margin_bottom": 20,
+            "margin_top_mobile": 16,
+            "margin_bottom_mobile": 16,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal"
+          }
+        }
+      },
+      "block_order": [
+        "meta",
+        "grid",
+        "no_results"
+      ],
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "show_divider": false,
+        "container_width": "standard",
+        "max_width": 1400,
+        "blocks_position": "center",
+        "results_per_page": 12,
+        "show_pagination": true,
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
+    }
+  },
+  "order": [
+    "header",
+    "bar",
+    "filters",
+    "main",
+    "empty-state"
+  ]
+}

@@ -1,0 +1,315 @@
+{
+  "sections": {
+    "contact-hero": {
+      "type": "contact-hero",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "blocks_position": "center",
+        "container_width": "standard",
+        "max_width": 1200,
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 0,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 0
+      },
+      "blocks": {
+        "header-1": {
+          "type": "header",
+          "settings": {
+            "heading": "How Can We [Help]?",
+            "heading_tag": "h1",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "",
+            "max_width": 800,
+            "margin_top": 0,
+            "margin_bottom": 20,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 16,
+            "font_size": "large",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120
+          }
+        },
+        "subtitle-1": {
+          "type": "subtitle",
+          "settings": {
+            "subheading": "Have questions about our latest products or need technical support? Get in touch with our expert team today for personalized assistance.",
+            "subheading_tag": "p",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "",
+            "max_width": 800,
+            "margin_top": 0,
+            "margin_bottom": 60,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 40,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 160
+          }
+        }
+      },
+      "block_order": ["header-1", "subtitle-1"]
+    },
+    "contact-methods": {
+      "type": "contact-methods",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "blocks_position": "center",
+        "container_width": "standard",
+        "max_width": 1200,
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 80,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 60
+      },
+      "blocks": {
+        "method-email": {
+          "type": "contact_method",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "title": "Email Us",
+            "line_1": "support@boltelectronics.com",
+            "line_2": "Our support team replies within 24 hours",
+            "link": "mailto:support@boltelectronics.com",
+            "icon": "mail"
+          }
+        },
+        "method-phone": {
+          "type": "contact_method",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "title": "Call Us",
+            "line_1": "+1 (800) BOLT-TECH",
+            "line_2": "Support available Mon-Sat, 9am - 8pm",
+            "link": "tel:+18002558325",
+            "icon": "phone"
+          }
+        },
+        "method-location": {
+          "type": "contact_method",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "title": "Visit Us",
+            "line_1": "456 Tech Plaza, Silicon Drive",
+            "line_2": "San Francisco, CA 94105",
+            "icon": "map-pin"
+          }
+        }
+      },
+      "block_order": ["method-email", "method-phone", "method-location"]
+    },
+    "contact-page-form": {
+      "type": "contact-page-form",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "blocks_position": "left",
+        "container_width": "standard",
+        "max_width": 1200,
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 80,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 60
+      },
+      "blocks": {
+        "header-2": {
+          "type": "header",
+          "settings": {
+            "heading": "Visit Our [Support Center]",
+            "heading_tag": "h2",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "",
+            "max_width": 800,
+            "margin_top": 0,
+            "margin_bottom": 20,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 16,
+            "font_size": "large",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120
+          }
+        },
+        "description-1": {
+          "type": "description",
+          "settings": {
+            "description": "Whether you're looking for the perfect laptop, need a screen repair, or have questions about your home theater setup, our tech enthusiasts are ready to provide expert guidance and solutions tailored to your lifestyle.",
+            "description_tag": "p",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "",
+            "max_width": 800,
+            "margin_top": 10,
+            "margin_bottom": 30,
+            "margin_top_mobile": 10,
+            "margin_bottom_mobile": 20,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 170
+          }
+        },
+        "benefits_heading-1": {
+          "type": "benefits_heading",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "heading": "Why Shop With Us?"
+          }
+        },
+        "benefit-1": {
+          "type": "benefit",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "text": "100% Genuine products from official brands"
+          }
+        },
+        "benefit-2": {
+          "type": "benefit",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "text": "On-site technical support and setup services"
+          }
+        },
+        "benefit-3": {
+          "type": "benefit",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "text": "Standard 2-year warranty on all major devices"
+          }
+        },
+        "benefit-4": {
+          "type": "benefit",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "text": "Hassle-free 30-day return & exchange policy"
+          }
+        },
+        "form": {
+          "type": "form",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "form_heading": "Start Your Project",
+            "name_label": "Name",
+            "name_placeholder": "Your full name",
+            "email_label": "Email Address",
+            "email_placeholder": "your@email.com",
+            "phone_label": "Phone",
+            "phone_placeholder": "(555) 123-4567",
+            "message_label": "How can we help?",
+            "message_placeholder": "Describe your inquiry (e.g., product availability, repair status, technical issue)...",
+            "submit_label": "Submit",
+            "success_message": "Thanks for contacting us! We'll get back to you soon."
+          }
+        }
+      },
+      "block_order": ["header-2", "description-1", "benefits_heading-1", "benefit-1", "benefit-2", "benefit-3", "benefit-4", "form"]
+    },
+    "contact-faq": {
+      "type": "contact-faq",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "blocks_position": "center",
+        "container_width": "standard",
+        "max_width": 1000,
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 80,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 60
+      },
+      "blocks": {
+        "header-1": {
+          "type": "header",
+          "settings": {
+            "heading": "Frequently Asked [Questions]",
+            "heading_tag": "h2",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "",
+            "max_width": 800,
+            "margin_top": 0,
+            "margin_bottom": 20,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 16,
+            "font_size": "large",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120
+          }
+        },
+        "faq-1": {
+          "type": "faq_item",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "question": "What is your warranty policy?",
+            "answer": "All our electronic devices come with a minimum 1-year manufacturer warranty. We also offer extended protection plans for peace of mind."
+          }
+        },
+        "faq-2": {
+          "type": "faq_item",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "question": "Do you offer on-site installation?",
+            "answer": "Yes, we provide professional installation for home theaters, smart home systems, and network setups. Contact our support team to schedule a visit."
+          }
+        },
+        "faq-3": {
+          "type": "faq_item",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "question": "How can I track my repair status?",
+            "answer": "You can track your device repair status using the repair ID provided at drop-off through our online portal or by calling our service center."
+          }
+        },
+        "faq-4": {
+          "type": "faq_item",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "question": "Do you accept trade-ins?",
+            "answer": "We have a trade-in program for smartphones and laptops. Bring your device to our store for an evaluation and receive credit toward your next purchase."
+          }
+        }
+      },
+      "block_order": ["header-1", "faq-1", "faq-2", "faq-3", "faq-4"]
+    }
+  },
+  "order": ["contact-hero", "contact-methods", "contact-page-form", "contact-faq"]
+}

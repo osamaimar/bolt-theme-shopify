@@ -1,0 +1,127 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "header": {
+      "type": "catalog-sidebar-header",
+      "blocks": {
+        "heading_block": {
+          "type": "heading",
+          "settings": {
+            "heading": "Tech [Explorer]"
+          }
+        },
+        "subheading_block": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Discover high-performance electronics, laptops, and smartphones with advanced sidebar filtering."
+          }
+        }
+      },
+      "block_order": [
+        "heading_block",
+        "subheading_block"
+      ],
+      "settings": {
+        "show_section": true,
+        "container_width": "standard",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "color_scheme": "background-1"
+      }
+    },
+    "main": {
+      "type": "catalog-sidebar-main",
+      "blocks": {
+        "categories": {
+          "type": "filter_group",
+          "settings": {
+            "title": "Categories",
+            "tags": "Laptops, Smartphones, Audio, Gaming"
+          }
+        },
+        "price": {
+          "type": "filter_group",
+          "settings": {
+            "title": "Price Range",
+            "tags": "Refurbished, $100 - $500, $50 - $150, $150+"
+          }
+        },
+        "features": {
+          "type": "filter_group",
+          "settings": {
+            "title": "Features",
+            "tags": "4K Resolution, Wireless, Noise Canceling, Fast Charging"
+          }
+        },
+        "grid": {
+          "type": "product_grid",
+          "settings": {
+            "columns_desktop": "3",
+            "columns_tablet": "2",
+            "columns_mobile": "1",
+            "show_vendor": false,
+            "show_price": true,
+            "show_quick_view": true,
+            "show_add_to_cart": true
+          }
+        },
+        "paginate": {
+          "type": "pagination",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 60,
+            "margin_bottom": 0,
+            "margin_top_mobile": 40,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": "",
+            "hover_border_color": "",
+            "hover_bg_color": "",
+            "hover_shadow_color": "",
+            "active_text_color": "",
+            "active_bg_color": "",
+            "active_bg_gradient": "",
+            "active_border_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "categories",
+        "price",
+        "features",
+        "grid",
+        "paginate"
+      ],
+      "settings": {
+        "show_section": true,
+        "padding_top": 0,
+        "padding_bottom": 80,
+        "sidebar_title": "Filters",
+        "products_per_page": 12,
+        "container_width": "standard",
+        "color_scheme": "background-1"
+      }
+    }
+  },
+  "order": [
+    "header",
+    "main"
+  ]
+}

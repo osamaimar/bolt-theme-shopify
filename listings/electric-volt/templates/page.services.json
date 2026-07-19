@@ -1,0 +1,233 @@
+{
+  "sections": {
+    "services-page": {
+      "type": "services-page",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "standard",
+        "max_width": 1340,
+        "blocks_position": "center",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 30
+      },
+      "blocks": {
+        "header-1": {
+          "type": "header",
+          "settings": {
+            "heading": "Our [Services]",
+            "heading_tag": "h1",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "",
+            "max_width": 800,
+            "margin_top": 0,
+            "margin_bottom": 20,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 16,
+            "font_size": "large",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120
+          }
+        },
+        "subtitle-1": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "We offer comprehensive marketing solutions tailored to drive your business growth and maximize your digital presence.",
+            "subheading_tag": "p",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "",
+            "max_width": 800,
+            "margin_top": 0,
+            "margin_bottom": 28,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 20,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 160
+          }
+        },
+        "service-1": {
+          "type": "service_card",
+          "settings": {
+            "icon": "website",
+            "title": "WordPress/Shopify/React Website Creation",
+            "description": "<p>Modern and relevant websites, optimized for search engines and AI, with modern technology, secure and fast — ready for automation and e-commerce.</p>",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_icon": true,
+            "show_title": true,
+            "show_description": true,
+            "icon_size": 50,
+            "icon_svg_size": 28,
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 170
+          }
+        },
+        "service-2": {
+          "type": "service_card",
+          "settings": {
+            "icon": "network",
+            "title": "360 Digital Presence (Ads & Content)",
+            "description": "<p>End-to-end management of <strong>your online presence</strong>: I create relevant content and launch ads that bring in customers — always with a <strong>consistent brand voice</strong> and a focus on results.</p>",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_icon": true,
+            "show_title": true,
+            "show_description": true,
+            "icon_size": 50,
+            "icon_svg_size": 28,
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 170
+          }
+        },
+        "service-3": {
+          "type": "service_card",
+          "settings": {
+            "icon": "chat",
+            "title": "AI Automation (chatbots, email/SMS, bookings)",
+            "description": "<p>I configure chatbots, emails, and SMS for immediate responses, automated appointments, and reminders — your business saves time and never loses leads.</p>",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_icon": true,
+            "show_title": true,
+            "show_description": true,
+            "icon_size": 50,
+            "icon_svg_size": 28,
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 170
+          }
+        },
+        "service-4": {
+          "type": "service_card",
+          "settings": {
+            "icon": "target",
+            "title": "Lead Generation — Strategy & Implementation",
+            "description": "<p>I design the strategy and implement the funnel: landing pages, offers, and campaigns — to bring qualified leads to your business every week.</p>",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_icon": true,
+            "show_title": true,
+            "show_description": true,
+            "icon_size": 50,
+            "icon_svg_size": 28,
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 170
+          }
+        },
+        "service-5": {
+          "type": "service_card",
+          "settings": {
+            "icon": "analytics",
+            "title": "AI Consulting — Sales & Support Automation",
+            "description": "<p>I analyze your processes and create AI automations for sales, customer service, and analysis — less manual work, more speed and accuracy.</p>",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_icon": true,
+            "show_title": true,
+            "show_description": true,
+            "icon_size": 50,
+            "icon_svg_size": 28,
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 170
+          }
+        },
+        "service-6": {
+          "type": "service_card",
+          "settings": {
+            "icon": "team",
+            "title": "AI Training (Team & Leadership)",
+            "description": "<p>I provide practical training to your team and leadership: how to use AI in daily tasks safely, real-world business cases, and a clear adoption plan.</p>",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_icon": true,
+            "show_title": true,
+            "show_description": true,
+            "icon_size": 50,
+            "icon_svg_size": 28,
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 170
+          }
+        }
+      },
+      "block_order": [
+        "header-1",
+        "subtitle-1",
+        "service-1",
+        "service-2",
+        "service-3",
+        "service-4",
+        "service-5",
+        "service-6"
+      ]
+    }
+  },
+  "order": [
+    "services-page"
+  ]
+}

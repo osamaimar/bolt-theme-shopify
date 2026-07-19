@@ -1,0 +1,154 @@
+{
+  "sections": {
+    "hero": {
+      "type": "legal-grid",
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "standard",
+        "max_width": 1200,
+        "blocks_position": "center",
+        "grid_gap": 60,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 30,
+        "color_scheme": "background-1"
+      },
+      "blocks": {
+        "header-1": {
+          "type": "header",
+          "settings": {
+            "heading": "[Privacy] Policy",
+            "heading_tag": "h1",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "",
+            "max_width": 800,
+            "margin_top": 0,
+            "margin_bottom": 20,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 16,
+            "font_size": "large",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 120,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "highlight_color": "",
+            "highlight_gradient": ""
+          }
+        },
+        "subheading-1": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Effective date: March 2026 | Last updated: March 2026",
+            "subheading_tag": "p",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "",
+            "max_width": 800,
+            "margin_top": 0,
+            "margin_bottom": 28,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 20,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 160,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": ""
+          }
+        },
+        "button-1": {
+          "type": "button",
+          "settings": {
+            "download_text": "Download PDF Version",
+            "download_link": "",
+            "download_icon": "",
+            "style": "outline",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_icon": true,
+            "icon_type": "download",
+            "alignment": "center",
+            "margin_top": 20,
+            "margin_bottom": 20,
+            "margin_top_mobile": 16,
+            "margin_bottom_mobile": 16,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 115,
+            "text_color": "",
+            "icon_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": ""
+          }
+        },
+        "card-1": {
+          "type": "card",
+          "settings": {
+            "card_id": "section-legal-content",
+            "heading": "",
+            "content": "<h2>Introduction</h2><p>At BoltElectronics, we are dedicated to providing a secure and transparent digital shopping environment. This Privacy Policy outlines how we manage your data when you interact with our technology storefront and services.</p><h2>Information We Collect</h2><p>To process your tech orders, we collect the following:</p><ul><li>Full names, email addresses, and phone numbers</li><li>Shipping and billing addresses</li><li>Payment details (handled by secure third-party gateways)</li></ul><p>We also automatically collect technical data including device information, browser type, and IP addresses to optimize site performance.</p><h2>How We Use Your Information</h2><p>Your data is used strictly for the following purposes:</p><ul><li>Fulfilling orders and delivering your gadgets</li><li>Providing after-sales support and warranty services</li><li>Sending updates on new technology drops and sales</li><li>Improving our storefront through analytics</li></ul><h2>Data Sharing</h2><p>We share data with trusted partners essential to our operations, such as payment processors, logistics companies, and technical support teams. We never sell your data to independent third-party marketers.</p><h2>Information Security</h2><p>BoltElectronics implements industry-standard encryption and security protocols to protect your sensitive information. We continuously monitor our infrastructure for potential vulnerabilities.</p><p>We retain data only as long as necessary for fulfillment, warranty history, and legal compliance.</p><h2>Cookie Policy</h2><p>We use cookies to maintain your shopping cart, analyze traffic patterns, and personalize your experience. You can manage cookie permissions directly through your browser settings.</p><h2>Your Choices and Rights</h2><p>You have the right to access, correct, or delete your personal data. If you wish to manage your stored information or close your account, please contact our support team.</p><h2>Children's Privacy</h2><p>Our storefront is not designed for users under the age of 13. We do not knowingly collect data from children.</p><h2>Policy Updates</h2><p>We may update this policy as we evolve. Significant changes will be posted here with an updated effective date.</p><h2>Contact Us</h2><p>For any privacy-related questions, please reach out to our dedicated legal team via the Contact page or our customer support hotline.</p>",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "alignment": "left",
+            "width": 100,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 170,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "heading_color": "",
+            "heading_gradient": ""
+          }
+        },
+        "divider-1": {
+          "type": "divider",
+          "settings": {
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 48,
+            "margin_bottom": 32,
+            "margin_top_mobile": 32,
+            "margin_bottom_mobile": 24,
+            "width": 100,
+            "thickness": 1,
+            "divider_style": "solid",
+            "divider_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "header-1",
+        "subheading-1",
+        "card-1",
+        "divider-1",
+        "button-1"
+      ]
+    }
+  },
+  "order": [
+    "hero"
+  ]
+}
