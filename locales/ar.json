@@ -1545,7 +1545,21 @@
     "empty_message": "يبدو أنك لم تضف أي شيء إلى سلة التسوق بعد.",
     "continue_shopping": "متابعة التسوق",
     "view_cart": "عرض سلة التسوق كاملة",
-    "table_product": "المنتج"
+    "table_product": "المنتج",
+    "table_price": "السعر",
+    "table_qty": "الكمية",
+    "table_total": "الإجمالي",
+    "decrease_quantity": "خفض الكمية",
+    "increase_quantity": "زيادة الكمية",
+    "quantity": "الكمية",
+    "cart_totals": "إجمالي السلة",
+    "coupon_code": "رمز القسيمة",
+    "coupon_hint": "أدخل رمز القسيمة الخاص بك للحصول على خصم",
+    "coupon_placeholder": "مثلاً: SAVE20",
+    "discount_code": "رمز الخصم",
+    "apply": "تقديم",
+    "add_to_cart": "أضف إلى عربة التسوق",
+    "you_may_also_like": "قد يعجبك أيضاً"
   },
   "collections": {
     "filter_all": "الكل",
@@ -1553,13 +1567,67 @@
     "price_max_label": "ماكس",
     "showing_zero_collections": "إظهار 0 من 0 مجموعات",
     "showing_collections_plural": "عرض {{ count }} مجموعات",
-    "title_placeholder": "عنوان المجموعة"
+    "title_placeholder": "عنوان المجموعة",
+    "title": "جميع المجموعات",
+    "filter_button": "فلاتر",
+    "filters": "فلاتر",
+    "options": "خيارات",
+    "no_filters_available": "لم يتم إعداد أي فلاتر حاليًا. يُرجى تفعيل تصفية واجهة المتجر في تطبيق Shopify Search & Discovery.",
+    "clear_all": "مسح الكل",
+    "apply": "تطبيق عوامل التصفية",
+    "zero_products": "0 منتجات",
+    "empty": "لم يتم العثور على منتجات في هذه المجموعة.",
+    "showing_results": "عرض {{ count }} منتجات مميزة",
+    "showing_results_html": "عرض <strong>{{ count }}</strong> منتج مميز",
+    "results_info_premium_html": "عرض <strong>{{ count }}</strong> منتج مميز",
+    "filter_all_gear": "كل المعدات",
+    "filter_laptops": "أجهزة الكمبيوتر المحمولة",
+    "filter_phones": "الهواتف الذكية",
+    "filter_audio": "صوت",
+    "filter_gaming": "ألعاب الفيديو",
+    "filter_smart_home": "المنزل الذكي",
+    "search_placeholder": "العثور على المنتج بسرعة...",
+    "sort_by": "الترتيب حسب:",
+    "sort_featured": "مميز",
+    "sort_price_low": "السعر: من الأقل للأعلى",
+    "sort_price_high": "السعر: من الأعلى إلى الأقل",
+    "sort_rating": "الأعلى تقييماً",
+    "pagination_prev": "الصفحة السابقة",
+    "pagination_next": "الصفحة التالية",
+    "showing_range_html": "عرض <strong>{{ first }}–{{ last }}</strong> من أصل <strong>{{ total }}</strong> منتج",
+    "showing_count_html": "عرض <strong>{{ count }}</strong> منتج مميز",
+    "show_filters": "إظهار الفلاتر",
+    "no_search_results": "لا توجد منتجات مطابقة لبحثك في هذا العرض.",
+    "showing_collections": "عرض {{ count }} مجموعة",
+    "showing_range_collections": "عرض {{ first }}–{{ last }} من إجمالي {{ total }} مجموعة",
+    "no_collections_found": "لم يتم العثور على مجموعات مطابقة لاختيارك.",
+    "select_collection": "حدد مجموعة لعرض المنتجات."
   },
   "catalog": {
     "currency_short": "دولار أمريكي",
     "page_title_showcase": "عرض تقني | BoltElectronics",
     "rating_info": "{{ rating }} ({{ count }} مراجعات)",
-    "prod_prodisplay_ultra_title": "ProDisplay الترا"
+    "prod_prodisplay_ultra_title": "ProDisplay الترا",
+    "title_showcase": "كمبيوتر محمول كوانتوم [X15]",
+    "desc_showcase": "أداء فائق بفضل شريحة M3 الأحدث، وشاشة Retina خلابة مقاس 15 إنش، وعمر بطارية يتجاوز 20 ساعة. مصمم للمحترفين الذين يطلبون التميز.",
+    "btn_add_to_cart": "أضف إلى عربة التسوق",
+    "btn_view_specs": "عرض المواصفات",
+    "title_picks": "أهم الاختيارات",
+    "btn_browse_all": "تصفح الكل",
+    "prod_watch_nexa_title": "NexaWatch الجيل الثاني",
+    "prod_laptop_skytab_title": "سكاي تاب برو",
+    "prod_sonicpods_title": "سونيـك بودز برو",
+    "prod_gamepad_pro_title": "جيم ماستر برو",
+    "btn_view_details": "عرض التفاصيل",
+    "stat_smart_gadgets": "الأدوات الذكية",
+    "stat_happy_customers": "عملاء سعداء",
+    "stat_avg_rating": "متوسط التقييم",
+    "stat_guarantee_100": "ضمان استعادة الأموال",
+    "filter_all_items": "كل العناصر",
+    "filter_computers": "الحواسيب",
+    "filter_mobile": "جوال",
+    "filter_audio": "صوت",
+    "filter_gaming": "ألعاب الفيديو"
   },
   "custom_labels": {
     "tax": "ضريبة",
@@ -1577,7 +1645,24 @@
     "the-page-you-re-looking-for-doesn-t-exist-or-may-have-been-moved": "الصفحة التي تبحث عنها غير موجودة أو ربما تم نقلها.",
     "button": "زر",
     "return-to-main-page": "العودة إلى الصفحة الرئيسية",
-    "need-help-a-href-pages-contact-get-in-touch-a-with-our-team": "هل تحتاج إلى مساعدة؟ <a href=\"/pages/contact\">تواصل</a> مع فريقنا."
+    "need-help-a-href-pages-contact-get-in-touch-a-with-our-team": "هل تحتاج إلى مساعدة؟ <a href=\"/pages/contact\">تواصل</a> مع فريقنا.",
+    "product": "المنتج",
+    "price": "السعر",
+    "quantity": "الكمية",
+    "total": "الإجمالي",
+    "update-cart": "تحديث سلة التسوق",
+    "clear-cart": "إفراغ سلة التسوق",
+    "cart-totals": "إجمالي السلة",
+    "subtotal": "المجموع الفرعي",
+    "included": "مضمّن",
+    "shipping": "الشحن",
+    "calculated-at-checkout": "يُحسب عند الدفع",
+    "proceed-to-checkout": "المتابعة لإتمام الشراء",
+    "filters": "فلاتر",
+    "subscribe": "اشترك",
+    "your-email-address": "عنوان بريدك الإلكتروني",
+    "all-topics": "جميع المواضيع",
+    "read-full-article": "اقرأ المقال كاملاً"
   },
   "blog": {
     "comment_form_name": "الاسم",
@@ -1620,7 +1705,9 @@
     "no_results_html": "لم يتم العثور على نتائج لـ \"{{ terms }}\""
   },
   "404": {
-    "back_to_shopping": "العودة للتسوق"
+    "back_to_shopping": "العودة للتسوق",
+    "title": "صفحة 404 غير موجودة",
+    "not_found": "الصفحة التي تبحث عنها غير موجودة."
   },
   "selling_plan": {
     "badge_label": "اشتراك",
@@ -1685,6 +1772,26 @@
       "success": "تم نشر تعليقك بنجاح! شكرا لك.",
       "success_moderated": "تم نشر تعليقك بنجاح. سنقوم بنشره بعد المراجعة.",
       "author": "المؤلف"
+    }
+  },
+  "password": {
+    "title": "يفتتح قريباً",
+    "password": "كلمة المرور",
+    "enter": "إدخال",
+    "header_text": "عنوان صفحة كلمة المرور",
+    "footer_text": "تذييل صفحة كلمة المرور"
+  },
+  "gift_card": {
+    "balance": "الرصيد",
+    "expired": "انتهت صلاحيته",
+    "card": "بطاقة هدية",
+    "use_at_checkout": "استخدم هذا الرمز عند الدفع",
+    "add_to_apple_wallet": "أضف إلى Apple Wallet"
+  },
+  "customer": {
+    "recover_password": {
+      "email": "عنوان البريد الإلكتروني",
+      "success": "لقد أرسلنا إليك بريدًا إلكترونيًا يحتوي على رابط لتحديث كلمة مرورك."
     }
   }
 }
