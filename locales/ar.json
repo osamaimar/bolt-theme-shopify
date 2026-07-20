@@ -1359,7 +1359,20 @@
   "custom_labels": {
     "tax": "ضريبة",
     "home": "الرئيسية",
-    "page-not-found": "الصفحة [غير موجود]"
+    "page-not-found": "الصفحة [غير موجود]",
+    "read-more": "اقرأ المزيد",
+    "add-to-cart": "أضف إلى عربة التسوق",
+    "products": "منتجات",
+    "view-all-products": "عرض جميع المنتجات",
+    "no-products-found-in-this-collection": "لم يتم العثور على منتجات في هذه المجموعة.",
+    "no-products-found": "لا توجد منتجات.",
+    "show-filters": "إظهار الفلاتر",
+    "select-a-collection-to-show-products": "حدد مجموعة لعرض المنتجات.",
+    "view-all": "عرض الكل",
+    "the-page-you-re-looking-for-doesn-t-exist-or-may-have-been-moved": "الصفحة التي تبحث عنها غير موجودة أو ربما تم نقلها.",
+    "button": "زر",
+    "return-to-main-page": "العودة إلى الصفحة الرئيسية",
+    "need-help-a-href-pages-contact-get-in-touch-a-with-our-team": "هل تحتاج إلى مساعدة؟ <a href=\"/pages/contact\">تواصل</a> مع فريقنا."
   },
   "blog": {
     "comment_form_name": "الاسم",
@@ -1423,5 +1436,19 @@
     "brown": "بني",
     "grey": "رمادي",
     "gray": "رمادي"
+  },
+  "hello_world": {
+    "title": "مرحباً بالعالم!",
+    "desc_1": "سمة الهيكل العظمي هي سمة Shopify بسيطة ومنظمة بعناية مصممة لمساعدتك على البدء بسرعة. مصممة مع مراعاة المعيارية وقابلية الصيانة وأفضل ممارسات Shopify.",
+    "desc_2": "تُشكل الثيمات تجربة المتجر الإلكتروني لكل من التجار والعملاء. ابنِ ثيمات سريعة ومرنة وقابلة للتوسع باستخدام Liquid، وهي لغة قوالب الثيمات الخاصة بـ Shopify، بالإضافة إلى HTML وCSS وJavaScript وJSON.",
+    "key_concepts_title": "المفاهيم الأساسية",
+    "key_concepts_desc": "سمات Shopify عبارة عن حزمة من ملفات القوالب، وكتل الإنشاء، والأصول الداعمة. استخدم كتل الإنشاء هذه لإنشاء سمات معيارية قابلة للتخصيص.",
+    "key_concepts_link": "تعرف على المزيد حول المفاهيم الأساسية",
+    "liquid_title": "سائل",
+    "liquid_desc": "تُعد لغة قوالب Liquid هي أساس تصميمات Shopify، وتُستخدم لتحميل المحتوى الديناميكي على واجهات المتاجر. قم بتوسيع كائنات Liquid لتخزين وتقديم البيانات المخصصة باستخدام الحقول الوصفية (metafields).",
+    "liquid_link": "عرض مرجع Liquid",
+    "best_practices_title": "أفضل الممارسات",
+    "best_practices_desc": "لتحسين تجربة تطوير القوالب لديك، وضعت Shopify مجموعة من أفضل الممارسات التي يمكنك الرجوع إليها عند تطوير القالب الخاص بك وإعداد سلاسل الأدوات والعمليات الخاصة بك.",
+    "best_practices_link": "اتبع أفضل الممارسات"
   }
 }
