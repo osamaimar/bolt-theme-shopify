@@ -22,6 +22,20 @@
     }
   }
 
+  {%- assign aspect_ratio_val = section.settings.gallery_aspect_ratio | default: 'adapt' -%}
+  {%- if aspect_ratio_val == 'adapt' -%}
+    {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+    {%- if featured_media.aspect_ratio != blank -%}
+      {%- assign aspect_ratio_val = featured_media.aspect_ratio -%}
+    {%- else -%}
+      {%- assign aspect_ratio_val = '1' -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  #shopify-section-{{ section.id }} .pd-gallery-main {
+    aspect-ratio: {{ aspect_ratio_val }};
+  }
+
   {%- for block in section.blocks -%}
     {%- if block.type != '@app' -%}
       #block-{{ block.id }} {
@@ -55,7 +69,7 @@
      data-video-autoplay="{{ section.settings.video_autoplay }}"
      data-video-loop="{{ section.settings.video_loop }}"
      data-video-muted="{{ section.settings.video_muted }}"
-     data-media-fit="{{ section.settings.gallery_media_fit | default: 'cover' }}">
+     data-media-fit="cover">
   <div class="pd-page {% if section.settings.container_width == 'full' %}pd-page--full{% elsif section.settings.container_width == 'narrow' %}pd-page--narrow{% endif %}">
     <div class="pd-product-main">
       
@@ -607,12 +621,20 @@
     },
     {
       "type": "select",
-      "id": "gallery_media_fit",
-      "label": "Media object-fit style",
-      "default": "cover",
+      "id": "gallery_aspect_ratio",
+      "label": "Image aspect ratio",
+      "default": "adapt",
+      "info": "Controls the height of the main product image gallery.",
       "options": [
-        { "value": "cover", "label": "Cover" },
-        { "value": "contain", "label": "Contain" }
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "1/1", "label": "Square (1:1)" },
+        { "value": "4/3", "label": "Landscape (4:3)" },
+        { "value": "5/4", "label": "Standard (5:4)" },
+        { "value": "3/2", "label": "Classic (3:2)" },
+        { "value": "16/9", "label": "Widescreen (16:9)" },
+        { "value": "2/3", "label": "Portrait (2:3)" },
+        { "value": "3/4", "label": "Tall (3:4)" },
+        { "value": "4/5", "label": "Tall (4:5)" }
       ]
     }
   ],

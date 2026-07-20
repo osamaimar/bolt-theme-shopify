@@ -115,22 +115,13 @@
     position: relative;
     border: 1px solid var(--border-light);
     background: var(--bg-glass);
-    aspect-ratio: 5 / 4;
 }
 
 @media (max-width: 1024px) {
     .pdi-gallery-main {
         width: 100% !important;
         max-width: 100% !important;
-        aspect-ratio: 5 / 4;
         height: auto;
-    }
-}
-
-@media (max-width: 768px) {
-    .pdi-gallery-main {
-        aspect-ratio: 4 / 3 !important;
-        min-height: 280px !important;
     }
 }
 

@@ -61,7 +61,7 @@
 
     {%- case block.type -%}
       {%- when 'brand' -%}
-        {%- assign logo_w = block.settings.logo_size | default: 110 -%}
+        {%- assign logo_w = block.settings.logo_size | default: 100 -%}
         #shopify-section-{{ section.id }} #ftr-block-{{ block.id }} {
           {%- if block.settings.max_width != blank -%}max-width: {{ block.settings.max_width }}px !important;{%- endif -%}
         }
@@ -280,7 +280,7 @@
               elsif settings.logo_ltr == blank and settings.logo_rtl != blank
                 assign logo_img = settings.logo_rtl
               endif
-              assign logo_w = block.settings.logo_size | default: 110
+              assign logo_w = block.settings.logo_size | default: 100
             -%}
             <div class="footer-col footer-col--wide{% if block.settings.mobile_width == 'half' %} footer-col--mobile-half{% endif %}{% unless block.settings.show_on_desktop %} hidden-desktop{% endunless %}{% unless block.settings.show_on_mobile %} hidden-mobile{% endunless %}" id="ftr-block-{{ block.id }}" {{ block.shopify_attributes }}>
               <div class="footer-logo">
@@ -655,7 +655,7 @@
           "min": 50,
           "max": 300,
           "step": 10,
-          "default": 110,
+          "default": 100,
           "unit": "px",
           "label": "Custom logo size"
         },

@@ -33,6 +33,7 @@
   data-options="{{ product_options }}"
   data-price="{{ product.price | divided_by: 100.0 }}"
   data-category="{{ product.collections.first.title | default: product.type | escape }}"
+  data-product-handle="{{ product.handle }}"
 >
   {%- if product.variants.first.id -%}
     <input type="hidden" name="id" value="{{ product.variants.first.id }}" />

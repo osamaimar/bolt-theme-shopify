@@ -86,7 +86,6 @@
     background: var(--bg-glass);
     border: 1px solid var(--border-light);
     margin-bottom: var(--spacing-md);
-    aspect-ratio: 5 / 4;
 }
 
 .pd-gallery-viewer {

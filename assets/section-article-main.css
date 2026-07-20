@@ -804,3 +804,12 @@
   .title-size-large { font-size: 1.7rem; }
   .title-size-xlarge { font-size: 1.9rem; }
 }
+
+/* Responsive iframe embeds (YouTube, Vimeo, etc.) */
+.blog-post-body iframe {
+  display: block;
+  max-width: 100%;
+  border: none;
+  border-radius: var(--radius-lg);
+  margin: var(--spacing-xl) auto;
+}

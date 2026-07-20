@@ -559,12 +559,15 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .rte img,
-.rte iframe,
 .rte video,
 .rte embed,
 .rte object {
   max-width: 100% !important;
   height: auto !important;
+}
+
+.rte iframe {
+  max-width: 100% !important;
 }
 
 .rte table {

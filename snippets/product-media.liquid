@@ -21,7 +21,14 @@
 {%- case media.media_type -%}
   {%- when 'image' -%}
     <img 
-      src="{{ media | image_url: width: 1200 }}" 
+      src="{{ media | image_url: width: 1800 }}" 
+      srcset="
+        {{ media | image_url: width: 800 }} 800w,
+        {{ media | image_url: width: 1200 }} 1200w,
+        {{ media | image_url: width: 1800 }} 1800w,
+        {{ media | image_url: width: 2400 }} 2400w
+      "
+      sizes="(max-width: 768px) 100vw, 50vw"
       alt="{{ media.alt | default: product.title | escape }}" 
       width="{{ media.width }}" 
       height="{{ media.height }}" 

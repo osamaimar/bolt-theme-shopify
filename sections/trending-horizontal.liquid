@@ -233,7 +233,7 @@
                     <div class="hes-trending-strip hes-trending-strip--{{ block.settings.image_ratio }} hes-trending-strip--align-{{ 'left' }}" {{ block.shopify_attributes }}>
                         {%- if collection != blank and collection.products.size > 0 -%}
                             {%- for product in collection.products limit: products_to_show -%}
-                                <article class="hes-trend-card theme-card-v2" data-category="{{ product.type | handleize }}">
+                                <article class="hes-trend-card theme-card-v2" data-category="{{ product.type | handleize }}" data-product-handle="{{ product.handle }}">
                                     <div class="hes-trend-img">
                                         <input type="hidden" name="id" value="{{ product.variants.first.id }}">
                                         <div class="cpd-product-desc hidden" style="display: none;">{{ product.description | strip_html | truncatewords: 30 }}</div>
@@ -286,6 +286,7 @@
                                                     <button type="button" class="cpd-quick-view-btn hes-trend-quick-btn" 
                                                         aria-label="Quick View"
                                                         title="Quick View"
+                                                        data-product-handle="{{ product.handle }}"
                                                     >
                                                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true" focusable="false">
                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

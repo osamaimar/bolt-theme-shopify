@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Opens the Quick View modal and populates it with product card data.
      */
-    function openQuickView(card) {
+    function openQuickView(card, btn = null) {
         lastFocusedElement = document.activeElement;
         
         const img = card.querySelector('.cpd-product-thumb img') || card.querySelector('.card-v2-image') || card.querySelector('.pd-related-card-thumb img') || card.querySelector('.hes-trend-img img') || card.querySelector('img');
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Fetch and Build gallery
-        const handle = card.getAttribute('data-product-handle');
+        const handle = card.getAttribute('data-product-handle') || (btn ? btn.getAttribute('data-product-handle') : null) || (card.querySelector('[data-product-handle]') ? card.querySelector('[data-product-handle]').getAttribute('data-product-handle') : null);
         const enableMedia = qvGalleryViewer ? qvGalleryViewer.parentElement.dataset.enableMedia !== 'false' : true;
         if (enableMedia) {
             fetchAndBuildQvGallery(handle, img ? img.src : '', name ? name.textContent.trim() : '');
@@ -153,11 +153,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Delegation to handle dynamically rendered products
     document.addEventListener('click', (e) => {
-        const btn = e.target.closest('.cpd-quick-view-btn') || e.target.closest('.btn-v2-quick-view') || e.target.closest('.pd-related-quick-btn');
+        const btn = e.target.closest('.cpd-quick-view-btn') || e.target.closest('.btn-v2-quick-view') || e.target.closest('.pd-related-quick-btn') || e.target.closest('.hes-trend-quick-btn');
         if (btn) {
             e.preventDefault();
             const card = btn.closest('.cpd-product-card') || btn.closest('.theme-card-v2') || btn.closest('article');
-            if (card) openQuickView(card);
+            if (card) openQuickView(card, btn);
         }
     });
 
