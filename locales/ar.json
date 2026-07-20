@@ -11,7 +11,8 @@
   "shopify": {
     "sentence": {
       "words_connector": "،",
-      "two_words_connector": "و"
+      "two_words_connector": "و",
+      "last_word_connector": "، و"
     },
     "checkout": {
       "general": {
@@ -32,7 +33,23 @@
             "june": "يونيو",
             "july": "يوليو",
             "march": "مارس",
-            "april": "أبريل"
+            "april": "أبريل",
+            "january": "يناير",
+            "february": "فبراير",
+            "august": "أغسطس",
+            "september": "سبتمبر",
+            "october": "أكتوبر",
+            "november": "نوفمبر",
+            "december": "ديسمبر"
+          },
+          "weekdays": {
+            "monday": "الاثنين",
+            "tuesday": "الثلاثاء",
+            "wednesday": "الأربعاء",
+            "thursday": "الخميس",
+            "friday": "الجمعة",
+            "saturday": "السبت",
+            "sunday": "الأحد"
           }
         },
         "error_page_title": "خطأ",
@@ -46,26 +63,178 @@
             "product_not_published": "المنتج غير منشور.",
             "merchandise_not_applicable": "لا يمكن شراء هذا البديل للمنتج.",
             "gift_card_invalid": "رمز بطاقة الهدية {{code}} غير صالح.",
-            "selling_plan_mismatch": "تم تحديث الاشتراك."
+            "selling_plan_mismatch": "تم تحديث الاشتراك.",
+            "only_value_constraint": "يُسمح بالقيم الدقيقة فقط في مدخلات البضائع.",
+            "merchandise_not_found": "المنتج غير موجود.",
+            "merchandise_variant_not_found": "لم يتم العثور على صيغة المنتج.",
+            "mixed_currencies": "تحتوي سلة التسوق على بنود بعملات مختلفة.",
+            "bundle_products_not_supported_for_b2b": "لا يمكن إضافة العناصر المجمّعة إلى طلبات B2B لهذا الموقع.",
+            "gift_card_quantity_mismatch": "عند تحديد رموز بطاقات الهدايا، يجب أن تتطابق كمية بند الصنف مع عدد رموز بطاقات الهدايا.",
+            "gift_card_not_supported": "بطاقات الهدايا غير مدعومة عند الدفع هذا.",
+            "gift_card_not_unique": "{{code}}تظهر بطاقة الهدية بالرمز أكثر من مرة في عملية الدفع هذه. يتم تنسيق الرموز قبل المقارنة.",
+            "gift_card_used": "كود بطاقة الهدية {{code}} مخصص بالفعل لبطاقة هدية. يتم تنسيق الأكواد قبل المقارنة.",
+            "gift_card_code_changed": "تم تغيير رمز بطاقة الهدايا {{proposed_code}} إلى {{formatted_code}} ليتوافق مع قواعد التنسيق.",
+            "gift_card_with_attributes_not_supported": "بطاقات الهدايا ذات السمات المخصصة غير مدعومة عند إتمام عملية الشراء هذه.",
+            "gift_card_with_components_not_supported": "لا تدعم صفحة الدفع هذه بطاقات الهدايا ذات المكونات.",
+            "selling_plan_not_supported_b2b": "الاشتراكات غير مدعومة لعملية الدفع بين الشركات.",
+            "price_mismatch": "السعر المقترح مسبقًا لهذه البضاعة لم يعد صالحًا وتم تحديثه.",
+            "inventory_not_found": "لم يتم العثور على مخزون لهذه البضاعة.",
+            "product_not_published_in_buyer_location": "المنتج غير متوفر في موقع المشتري الحالي.",
+            "duplicated_stable_id": "يحتوي خط البضائع هذا على نفس معرّف الثبات مثل خط آخر.",
+            "minimum_quantity_not_met": "كمية بعض الأصناف لا تفي بالحد الأدنى المطلوب.",
+            "maximum_quantity_exceeded": "تتجاوز كمية بعض الأصناف الحد الأقصى المسموح به.",
+            "quantity_increment_not_met": "كمية بعض الأصناف لا تفي بحدود الطلب.",
+            "quantity_rules_not_met": "كمية بعض الأصناف لا تفي بحدود الطلب.",
+            "bundle_requires_components": "لا تحتوي حزمة البضائع هذه على مكونات.",
+            "combined_listing_parent_not_purchasable": "لا يمكن شراء منتجات الأصل المجمعة المدرجة مباشرةً.",
+            "title_too_long": "عنوان المنتج طويل جدًا."
           },
           "delivery": {
             "invalid_signature": "توقيع الخصم غير صالح.",
-            "out_of_stock_at_origin_location": "لا يوجد مخزون في الموقع الأصلي."
+            "out_of_stock_at_origin_location": "لا يوجد مخزون في الموقع الأصلي.",
+            "only_one_delivery_line_allowed": "يجب أن يحتوي سلة التسوق على سطر تسليم واحد فقط.",
+            "wrong_number_of_delivery_lines": "يجب تحديد خط تسليم لكل مجموعة بضائع.",
+            "external_delivery_promise_error": "خطأ في جلب وعد التسليم الخارجي.",
+            "options_instructions_invalid": "التعليمات المحددة لا تتوافق مع النمط المتوقع.",
+            "destination_address_required": "عنوان الوجهة مطلوب للمتابعة.",
+            "pickup_points_unavailable": "نقاط الاستلام غير متاحة حالياً.",
+            "local_pickup_delivery_line_detail_changed": "يجب تغيير استراتيجية التسليم الحالية بالاستلام المحلي حتى نتمكن من الاستمرار.",
+            "selected_pickup_option_no_longer_available": "خيار الاستلام الذي تم اختياره مسبقاً لم يعد متوفراً.",
+            "local_pickup_no_delivery_strategy_available": "لم يتم العثور على استراتيجية تسليم للاستلام المحلي المتاحة.",
+            "origin_location_id_required": "يلزم توفير مُعرّف موقع المنشأ عند طلب طريقة التسليم \"البيع بالتجزئة\".",
+            "invalid_origin_location_id": "تعذر العثور على موقع مطابق لمعرف موقع المنشأ.",
+            "origin_location_id_not_allowed": "طرق التسليم المطلوبة لا تدعم معرف موقع مصدر.",
+            "auto_fulfill_not_allowed": "هذه الجلسة غير مصرح لها بتجاوز سلوك الإنجاز.",
+            "auto_fulfill_required": "التنفيذ التلقائي مطلوب عند طلب طريقة التسليم \"بالتجزئة\".",
+            "prefetch_shipping_rates_used": "لا ينبغي أبدًا أن تُرجع أسعار الشحن التي تم جلبها مسبقًا أي أسعار.",
+            "fulfillment_constraints_not_satisfied": "لم يتم استيفاء قيد واحد أو أكثر من قيود التلبية.",
+            "must_fulfill_from_constraint_not_satisfied": "لا يمكن تلبية قيود الوفاء لأن الأصناف لا يمكن الوفاء بها من المواقع المطلوبة.",
+            "must_fulfill_from_same_location_constraint_not_satisfied": "لم تتم تلبية قيود التنفيذ لأنه لا يمكن تنفيذ العناصر من نفس الموقع.",
+            "delivery_strategy_conditions_not_satisfied": "تتوفر استراتيجيات التسليم لهذا الموقع، ولكن لم يتم استيفاء شروطها.",
+            "mixed_destination_countries": "التسليم غير متاح لأن خطوط التسليم تمتد عبر عدة بلدان."
           },
           "payment": {
             "subscription_terms_not_accepted": "شروط الاشتراك لم يتم قبولها.",
             "method_required": "يجب اقتراح طريقة دفع.",
-            "paypal_express_address_invalid": "أرجع PayPal عنوانًا غير صالح."
+            "paypal_express_address_invalid": "أرجع PayPal عنوانًا غير صالح.",
+            "manual_payments_not_allowed_for_b2b": "الدفعات اليدوية غير مسموحة في متاجر B2B.",
+            "positive_amount_expected": "يجب أن يكون المبلغ المراد دفعه أكبر من 0.",
+            "total_amount_mismatch": "المبلغ الإجمالي للدفع لا يطابق مجموع مبالغ المدفوعات.",
+            "missing_session_id": "فقدت معلومات جلسة بطاقة الائتمان.",
+            "gateway_not_supported": "لا تدعم بوابة الدفع تخزين طريقة الدفع.",
+            "credit_card_last_name_required": "لا يمكن أن يكون \"اسم العائلة\" فارغًا.",
+            "credit_card_update_failed": "فشل تحديث بطاقة الائتمان.",
+            "invalid_address_type": "نوع العنوان المقدم غير صالح لطريقة الدفع هذه.",
+            "missing_retail_attributions": "تتطلب مدفوعات بطاقات الائتمان التي تُدخل يدويًا إسنادًا للبيع بالتجزئة.",
+            "unexpected_retail_attributions": "تم تقديم إسنادات البيع بالتجزئة بشكل غير متوقع لسداد بطاقة الائتمان.",
+            "invalid_card_source": "لا تملك هذه الجلسة إذنًا باستخدام مصدر البطاقة هذا.",
+            "wallet_content_missing": "محتوى المحفظة مفقود.",
+            "payment_instrument_not_found": "تعذّر العثور على طريقة الدفع",
+            "unauthorized_capture_method": "لا يُسمح بتكوين طريقة تحصيل الدفع.",
+            "saved_payment_methods_not_allowed": "لا يسمح بحفظ طرق الدفع.",
+            "saved_payment_methods_not_enabled": "لا يتم تمكين طرق الدفع المحفوظة لهذا المتجر.",
+            "saved_payment_methods_cvv_verification_disabled": "تتطلب طريقة الدفع المحددة التحقق من رمز CVV، وهو غير مفعّل لهذا المتجر. يرجى اختيار طريقة دفع مختلفة.",
+            "store_credit_not_enabled": "رصيد المتجر غير مفعّل لهذا المتجر.",
+            "store_credit_account_not_found": "حساب رصيد المتجر غير موجود.",
+            "store_credit_account_mismatch": "حساب رصيد المتجر لا يتطابق مع هوية المشتري.",
+            "store_credit_mismatched_currency": "عملة حساب رصيد المتجر لا تتطابق مع عملة الدفع.",
+            "store_credit_insufficient_funds": "لا توجد أموال كافية في حساب رصيد المتجر.",
+            "store_credit_buying_gift_card": "لا يمكنك استخدام رصيد المتجر لشراء بطاقة هدايا.",
+            "gift_cards_not_allowed_for_b2b": "بطاقات الهدايا غير مسموح بها في متاجر الشركات (B2B)."
           },
           "buyer_identity": {
             "lost_access_to_company": "فقد العميل الوصول إلى أي شركة.",
-            "checkout_completion_target_is_invalid_proc": "هدف إكمال عملية الدفع غير صالح."
+            "checkout_completion_target_is_invalid_proc": "هدف إكمال عملية الدفع غير صالح.",
+            "business_customer_does_not_match_company": "جهة اتصال الشركة ليس لديها صلاحية الوصول إلى الشركة.",
+            "customer_account_required": "يجب عليك تسجيل الدخول للمتابعة.",
+            "company_location_required": "يجب على العميل اختيار موقع الشركة للمتابعة.",
+            "company_purchase_permission_required": "العميل ليس لديه إذن لتقديم طلبات الشركة.",
+            "personal_order_not_allowed": "الطلبات الشخصية غير مسموح بها لهذا المتجر.",
+            "contact_info_does_not_match_customer_account": "يجب أن تتطابق معلومات الاتصال مع الحساب الذي سجلت الدخول إليه.",
+            "phone_number_does_not_match_expected_pattern": "رقم الهاتف المحدد لا يتطابق مع النمط المتوقع.",
+            "email_required": "مطلوب بريد إلكتروني عند شراء البضاعة باستخدام اشتراك.",
+            "email_domain_is_invalid": "لا يمكن حل النطاق المحدد.",
+            "missing_contact_method": "طريقة التواصل غير صالحة.",
+            "checkout_completion_target_is_missing": "هدف إكمال عملية الدفع مفقود.",
+            "invalid_customer_profile": "تم توفير ملف تعريف عميل غير صالح.",
+            "customer_profile_access_restricted": "ليس لدى \"عملية الدفع\" إذن بالوصول إلى ملف تعريف العميل.",
+            "buyer_identity_presentment_currency_does_not_match": "حدثت مشكلة أثناء معالجة طلبك. يُرجى إعادة المحاولة بعد بضع دقائق."
           },
           "tax": {
-            "merchandise_terms_must_be_defined": "يجب تحديد شروط البضائع."
+            "merchandise_terms_must_be_defined": "يجب تحديد شروط البضائع.",
+            "new_tax_must_be_accepted": "لقد تغيرت الضرائب المرتبطة بطلبك. قم بالمراجعة وحاول مرة أخرى.",
+            "unresolvable_tax_terms": "الشروط المقترحة غير قابلة للحل في سياق المفاوضات الحالي.",
+            "delivery_price_is_abstract": "سعر التسليم المتعلق بذلك غير محدد.",
+            "tax_inclusivity_mismatch": "أعد التفاوض مع قيمة محددة لـ totalTaxAndDutyAmount أو totalAmountIncludedInTarget.",
+            "tax_exemption_not_supported": "لا يتم دعم الإعفاءات الضريبية لجلسة المفاوضات الحالية.",
+            "delivery_tax_exemption_not_supported": "لا يتم حاليًا دعم الإعفاءات الضريبية لخطوط التسليم.",
+            "proposed_allocations_required": "حقل \"التخصيصات المقترحة\" مفقود.",
+            "delivery_terms_must_be_defined": "يجب تحديد شروط التسليم.",
+            "merchandise_discount_terms_must_be_defined": "يجب تحديد شروط خصم البضائع.",
+            "delivery_discount_terms_must_be_defined": "يجب تحديد شروط خصم التسليم.",
+            "allocated_required": "حقل \"مخصص\" مفقود.",
+            "value_required": "حقل \"القيمة\" مفقود.",
+            "line_splits_not_supported": "يجب تقسيم حقل \"بنود البضائع\" بحيث يكون لكل منها مكون سطر واحد في عرض البائع."
           },
           "tip": {
-            "tips_not_allowed_for_b2b": "لا يُسمح بالإكراميات في متاجر الشركات (B2B)."
+            "tips_not_allowed_for_b2b": "لا يُسمح بالإكراميات في متاجر الشركات (B2B).",
+            "not_accepted_by_shop": "المحل لا يقبل الإكراميات.",
+            "only_one_tip_line_allowed": "لا يتم دعم أسطر التلميحات المتعددة.",
+            "currency_change_reset": "تمت إعادة ضبط الإكرامية بسبب تغيير العملة.",
+            "tips_not_allowed_for_deferred_purchase_options": "لا يتم دعم الإكراميات بعد لخيارات الشراء المؤجل."
+          },
+          "only_empty_terms_accepted": "تسمح هذه السياسة بالمصطلحات الفارغة فقط.",
+          "session_identifier_not_unique_error": "حدث خطأ ما بطلبك، حاول إتمام الشراء مرة أخرى.",
+          "line_item_limit_reached": "تم الوصول إلى العدد الأقصى لبنود السطر.",
+          "session_is_already_finished": "لقد تم الانتهاء من عملية الدفع هذه بالفعل.",
+          "discount": {
+            "discounts_not_allowed_for_b2b": "لا يسمح بوجود خصومات في متاجر B2B.",
+            "mixed_destination_countries": "الخصومات غير متوفرة لأن خطوط التسليم تمتد عبر بلدان متعددة.",
+            "custom_discount_not_honoured": "لم يتم تطبيق الخصم المخصص المُقدم.",
+            "unsupported_expectation": "احتوى سطر الخصم المرفق على توقع تعذر على السياسة تفسيره.",
+            "additional_requested_discount_code_discarded": "{{code}} صالح ولكنه غير قابل للتطبيق. يرجى التحقق من شروط الخصم.",
+            "additional_requested_discount_discarded": "الخصم ساري المفعول ولكنه غير قابل للتطبيق. يرجى التحقق من شروط الخصم.",
+            "allocations_mismatch": "لقد تغير رمز الخصم الخاص بك. يرجى مراجعة سلة التسوق والمحاولة مرة أخرى.",
+            "discount_title_too_long": "لا يمكن أن يكون عنوان الخصم أطول من 255 حرفًا."
+          },
+          "sale_attribution": {
+            "draft_order_not_exist": "أمر المسودة هذا غير موجود في المتجر الحالي.",
+            "staff_member_not_exist": "هذا الموظف غير موجود في المتجر الحالي.",
+            "location_not_exist": "هذا الموقع غير موجود في المتجر الحالي.",
+            "point_of_sale_device_not_exist": "جهاز نقطة البيع هذا غير موجود في المتجر الحالي.",
+            "unresolvable_target_merchandise_lines": "إسنادات البيع المقترحة غير قابلة للحل في سياق المفاوضات الحالي."
+          },
+          "non_negotiable": {
+            "missing_non_negotiable_terms": "يجب أن يتضمن عرض المشتري شروطًا غير قابلة للتفاوض.",
+            "invalid_signature": "التوقيع لـ {{target_terms}} غير صالح."
+          },
+          "inventory": {
+            "missing_quantity_value": "حقل الكمية مفقود في بنود مخزون المشتري.",
+            "changing_behavior_not_allowed": "ليس لهذا العميل إذن بتغيير سلوك المخزون.",
+            "only_one_inventory_behavior_allowed": "حاليًا، يسمح بسلوك مخزون واحد فقط لكل عملية دفع."
+          },
+          "optional_duties": {
+            "optional_duties_not_permitted": "لا يُسمح برفض المهام لهذا الحساب."
+          },
+          "attribution": {
+            "retail_attribution_not_allowed": "لا يُسمح بتحديد مصدر الشراء بالتجزئة لعملية الدفع هذه.",
+            "retail_attribution_required": "مطلوب تحديد مصدر البيع بالتجزئة لعملية الدفع هذه."
+          },
+          "captcha": {
+            "metadata_missing": "يتطلب إكمال اختبار الكابتشا للمتابعة في عملية الدفع هذه.",
+            "metadata_mismatch": "لا يتطابق مزود ونوع اختبار الكابتشا المقدَم مع القيم المتوقعة.",
+            "token_missing": "يجب تقديم رمز التحقق لإتمام عملية الشراء هذه.",
+            "job_enqueue_failed": "فشلت مهمة التحقق من الكابتشا في وضعها في قائمة الانتظار.",
+            "job_already_queued": "تم بالفعل وضع التحقق من Captcha في قائمة الانتظار لرمز Captcha هذا.",
+            "token_expired": "لقد انتهت صلاحية رمز التحقق (captcha) المقدم. يُرجى إكمال رمز تحقق جديد للمتابعة في عملية الدفع.",
+            "token_invalid": "رمز التحقق (captcha) المقدم غير صالح. أكمل رمز تحقق جديد للمتابعة إلى الدفع.",
+            "token_not_valid_for_session": "لا يمكن استخدام رمز التحقق المقدم مع عملية الدفع هذه."
+          },
+          "fx_reconciliation_override": {
+            "shop_currency_mismatch": "يجب أن يكون المبلغ المستلَم بعملة المتجر."
+          },
+          "checkout_source": {
+            "revoked": "عملية الدفع هذه لم تعد متوفرة."
           }
         },
         "all_rights_reserved": "جميع الحقوق محفوظة %{shop_name}",
@@ -75,14 +244,72 @@
         "choose_delivery_strategy": "اختر طريقة التسليم",
         "autocomplete_powered_by_google": "مدعوم بواسطة {{brandName}}",
         "datepicker": {
-          "show_next_month": "عرض الشهر التالي، {{month}} {{year}}"
+          "show_next_month": "عرض الشهر التالي، {{month}} {{year}}",
+          "show_previous_month": "إظهار الشهر السابق، {{month}} {{year}}",
+          "range_start": "بداية المدى",
+          "in_range": "ضمن النطاق",
+          "range_end": "نهاية النطاق"
         },
         "back_to_payment_method": "العودة إلى الدفع",
         "autocomplete_close": "إغلاق الاقتراحات",
         "submit_for_review_button_label": "إرسال للمراجعة",
         "stepper": {
           "increase": "زيادة {{type}}",
-          "decrease": "خفض {{type}}"
+          "decrease": "خفض {{type}}",
+          "minimum_reached": "تم بلوغ الحد الأدنى وهو {{value}}",
+          "maximum_reached": "تم الوصول للحد الأقصى وهو {{value}}"
+        },
+        "page_title": "الدفع",
+        "skip_to_content": "تجاوز إلى المحتوى",
+        "breadcrumb": "مسار التنقل",
+        "continue_button_label": "استمر/استمروا",
+        "complete_purchase_button_label": "اكتمل الطلب",
+        "pay_now_button_label": "ادفع الآن",
+        "finalize_order_accessibility_label": "تأكيد الطلب",
+        "authenticate_purchase_button_label": "توثيق الدفع",
+        "expand_notice_label": "عرض المزيد",
+        "continue_to_shipping_method": "متابعة الشحن",
+        "continue_to_payment_method": "متابعة الدفع",
+        "continue_to_review": "مراجعة الطلب",
+        "back_to_cart": "العودة إلى عربة التسوق",
+        "back_to_contact_information": "العودة إلى المعلومات",
+        "back_to_shipping_method": "العودة للشحن",
+        "choose_payment_method": "اختر طريقة دفع",
+        "contact_us_html": "للمزيد من المعلومات، يرجى الاتصال بنا.",
+        "autocomplete_title": "اقتراحات",
+        "autocomplete_single_item": "يتوفر عنصر واحد",
+        "autocomplete_multi_item": "{{number}} عناصر متوفرة",
+        "forwarding_indicator": {
+          "new_window": "يفتح في نافذة جديدة.",
+          "external": "يفتح موقعاً إلكترونياً خارجياً.",
+          "external_and_new_window": "يفتح موقعًا خارجيًا في نافذة جديدة."
+        },
+        "checkout_context": {
+          "step_one": "%{shop_name} - إتمام الدفع"
+        },
+        "tooltip_accessibility_label": "مزيد من المعلومات",
+        "qr_code": "رمز الاستجابة السريعة",
+        "full_price": "السعر الكامل:",
+        "title": "الدفع - {{shopName}}",
+        "full_title": "{{pageTitle}} - {{shopName}} - الدفع",
+        "loading": "جارٍ التحميل…",
+        "loading_title": "الدفع - {{shopName}}",
+        "google_map_title": "خرائط جوجل",
+        "confirm_order_button_label": "تأكيد الطلب",
+        "submit_order_button_label": "إرسال الطلب",
+        "submit_for_review_notice_label": "لن يحين موعد الدفع حتى تتم مراجعة طلبك",
+        "back_button_label": "عودة",
+        "autocomplete_zero_item": "لا توجد عناصر متاحة",
+        "submit": "إرسال",
+        "processing": "جارٍ المعالجة…",
+        "remove_chip": "إزالة العنصر",
+        "remove_item": "إزالة %{label}",
+        "remove_tag": "إزالة الوسم",
+        "map": {
+          "cluster_title": {
+            "one": "مجموعة من {{number}} علامة",
+            "other": "مجموعة من {{number}} علامات"
+          }
         }
       },
       "contact": {
