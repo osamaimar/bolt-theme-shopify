@@ -1453,7 +1453,10 @@
       "spec_bluetooth_val": "الإصدار 5.2",
       "warranty_included": "ضمان سنتين مشمول",
       "price": {
-        "from_price_html": "من {{ price }}"
+        "from_price_html": "من {{ price }}",
+        "regular_price": "السعر الاعتيادي",
+        "sale_price": "سعر البيع",
+        "unit_price": "سعر الوحدة"
       },
       "pickup_availability": "توفر الاستلام",
       "pickup_available": "متوفر للاستلام",
@@ -1462,13 +1465,87 @@
       "pickup_view_store_info": "عرض معلومات المتجر",
       "pickup_loading": "جاري التحقق من التوفر...",
       "pickup_error": "تعذر تحميل توفر الاستلام.",
-      "pickup_no_stores": "لا توجد متاجر مهيأة للاستلام."
+      "pickup_no_stores": "لا توجد متاجر مهيأة للاستلام.",
+      "unavailable": "غير متاح",
+      "quick_view": "نظرة سريعة",
+      "select_options": "تحديد الخيارات",
+      "view_details": "عرض التفاصيل",
+      "view_grid": "عرض شبكي",
+      "view_list": "عرض القائمة",
+      "vendor": "البائع",
+      "media": {
+        "image_available": "الصورة {{ index }} متاحة"
+      },
+      "value_unavailable": "{{ option_value }} غير متوفر حاليًا",
+      "in_stock": "متوفر في المخزون",
+      "free_express_shipping": "شحن سريع مجاني",
+      "easy_returns": "إرجاع سهل خلال 30 يومًا",
+      "view_all_products": "عرض جميع المنتجات",
+      "no_products_available": "لا توجد منتجات متوفرة حالياً",
+      "no_products_found": "لم يتم العثور على منتجات في هذه المجموعة.",
+      "no_products_found_short": "لا توجد منتجات.",
+      "reviews": "التقييمات",
+      "stars": "نجوم",
+      "based_on_reviews_html": "بناءً على {{ count }} مراجعة",
+      "review_app_placeholder": "سيتم عرض محتوى المراجعة هنا. الرجاء لصق مقتطف تطبيق المراجعة الخاص بك في إعدادات الكتلة.",
+      "category": "فئة",
+      "product_name_placeholder": "اسم المنتج",
+      "description_placeholder": "وصف المنتج هنا.",
+      "shipping_note": "شحن سريع مجاني · ضمان لمدة سنتين",
+      "tab_description": "الوصف",
+      "tab_specifications": "المواصفات",
+      "tab_custom_content": "محتوى مخصص",
+      "spec_driver_size": "حجم المشغل",
+      "spec_driver_size_val": "40 ملم ديناميكي",
+      "spec_frequency_resp": "الاستجابة الترددية",
+      "spec_frequency_resp_val": "20 هرتز - 40 كيلو هرتز (صوت عالي الدقة)",
+      "spec_battery_life": "عمر البطارية",
+      "spec_battery_life_val": "ما يصل إلى 40 ساعة",
+      "spec_charging_port": "منفذ الشحن",
+      "spec_charging_port_val": "يو إس بي-سي",
+      "spec_bluetooth": "البلوتوث",
+      "spec_warranty": "الضمان",
+      "spec_warranty_val": "ضمان المصنع لمدة سنتين",
+      "variant_label": "متغير",
+      "quantity_label": "الكمية",
+      "verified_review": "تم التحقق",
+      "sample_product": "عينة المنتج",
+      "title_placeholder": "عنوان المنتج",
+      "pairs_well_with": "يناسب جيدًا مع",
+      "complementary_products_heading": "أكمل [المظهر]",
+      "no_complementary_products": "لم يتم تعيين منتجات تكميلية.",
+      "complementary_badge": "يناسب جيدًا مع"
     }
   },
   "cart": {
     "tax": "ضريبة",
     "quantity_for": "الكمية لـ {{ title }}",
-    "related_services": "خدمات ذات صلة"
+    "related_services": "خدمات ذات صلة",
+    "title": "عربة التسوق الخاصة بك",
+    "remove": "إزالة",
+    "update": "تحديث سلة التسوق",
+    "clear": "إفراغ سلة التسوق",
+    "checkout": "المتابعة لإتمام الشراء",
+    "subtotal": "المجموع الفرعي",
+    "total": "الإجمالي",
+    "shipping": "الشحن",
+    "calculated_at_checkout": "يُحسب عند الدفع",
+    "included": "مضمّن",
+    "free_shipping_remaining_html": "ما زلت بحاجة إلى <strong>{{ amount }}</strong> لتفعيل الشحن المجاني!",
+    "free_shipping_unlocked": "لقد حصلت على شحن مجاني!",
+    "tax_shipping_note": "سيتم احتساب الضرائب وتكاليف الشحن عند الدفع",
+    "secondary_text_trans": "سيتم احتساب الضرائب وتكاليف الشحن عند الدفع",
+    "taxes_included_and_shipping_policy_from_api_html": "الضرائب متضمنة. يتم <a href=\"&lt;span%20class='notranslate'&gt;{{%20link%20}}&lt;/span&gt;\">حساب الشحن</a> عند الدفع.",
+    "taxes_included_but_shipping_at_checkout": "شامل الضرائب. تحسب رسوم الشحن عند إتمام عملية الشراء.",
+    "taxes_and_shipping_policy_from_api_html": "الضرائب و<a href=\"&lt;span%20class='notranslate'&gt;{{%20link%20}}&lt;/span&gt;\">الشحن</a> تحسب عند الدفع.",
+    "taxes_and_shipping_at_checkout": "تُحسب الضرائب وتكاليف الشحن عند الدفع.",
+    "empty_title": "سلة التسوق فارغة",
+    "empty": "سلة التسوق فارغة",
+    "empty_desc": "يبدو أنك لم تضف أي شيء إلى سلة التسوق الخاصة بك بعد.",
+    "empty_message": "يبدو أنك لم تضف أي شيء إلى سلة التسوق بعد.",
+    "continue_shopping": "متابعة التسوق",
+    "view_cart": "عرض سلة التسوق كاملة",
+    "table_product": "المنتج"
   },
   "collections": {
     "filter_all": "الكل",
@@ -1505,7 +1582,26 @@
   "blog": {
     "comment_form_name": "الاسم",
     "no_categories": "لا فئات متاحة",
-    "previous_article": "المقالة السابقة"
+    "previous_article": "المقالة السابقة",
+    "article_metadata_html": "بواسطة {{ author }} في {{ date }}",
+    "article_comments": "{{ count }} تعليقات",
+    "comment_form_title": "اترك تعليقًا",
+    "comment_form_email": "بريد إلكتروني",
+    "comment_form_body": "رسالة",
+    "comment_form_submit": "انشر تعليقًا",
+    "no_tags": "لا توجد علامات متاحة",
+    "no_blogs": "لا توجد مدونات متاحة",
+    "all_articles": "كل المقالات",
+    "read_more": "اقرأ المزيد",
+    "read_full": "اقرأ المقال كاملاً",
+    "filter_all": "جميع المواضيع",
+    "no_articles": "لم يتم العثور على مقالات.",
+    "showing_articles": "عرض {{ count }} مقالاً",
+    "next_article": "المقال التالي",
+    "written_by": "بقلم",
+    "share_this_article": "شارك هذا المقال:",
+    "no_comments_yet": "لا توجد تعليقات بعد",
+    "featured_products": "المنتجات المميزة"
   },
   "sections": {
     "footer": {
@@ -1578,5 +1674,17 @@
     "best_practices_title": "أفضل الممارسات",
     "best_practices_desc": "لتحسين تجربة تطوير القوالب لديك، وضعت Shopify مجموعة من أفضل الممارسات التي يمكنك الرجوع إليها عند تطوير القالب الخاص بك وإعداد سلاسل الأدوات والعمليات الخاصة بك.",
     "best_practices_link": "اتبع أفضل الممارسات"
+  },
+  "blogs": {
+    "article": {
+      "read_more": "اقرأ المزيد",
+      "read_more_title": "اقرأ المزيد عن {{ title }}",
+      "read_time": "{{ count }} دقيقة قراءة"
+    },
+    "comments": {
+      "success": "تم نشر تعليقك بنجاح! شكرا لك.",
+      "success_moderated": "تم نشر تعليقك بنجاح. سنقوم بنشره بعد المراجعة.",
+      "author": "المؤلف"
+    }
   }
 }
