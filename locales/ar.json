@@ -1908,31 +1908,80 @@
         "edit": "تعديل",
         "save": "حفظ",
         "errors": {
-          "name_cannot_contain_url": "لا يمكن أن يحتوي {{fieldName}} على عنوان URL"
-        }
+          "name_cannot_contain_url": "لا يمكن أن يحتوي {{fieldName}} على عنوان URL",
+          "name_too_long": "{{fieldName}} طويل جدًا (الحد الأقصى هو 255 حرفًا)",
+          "name_cannot_contain_html_tags": "{{fieldName}} لا يمكن أن يحتوي على علامات HTML",
+          "email_cant_be_blank": "البريد الإلكتروني لا يمكن أن يكون فارغًا",
+          "invalid_email_format": "أدخل بريدًا إلكترونيًا صحيحًا"
+        },
+        "cancel": "إلغاء",
+        "cancel_accessibility_label": "إلغاء تحرير الملف الشخصي",
+        "edit_accessibility_label": "تعديل الملف الشخصي",
+        "email_help_text": "لا يمكن تعديل البريد الإلكتروني",
+        "editable_email_help_text": "يُستخدم هذا البريد الإلكتروني لتسجيل الدخول وتحديثات الطلبات.",
+        "first_name": "الاسم الأول",
+        "last_name": "اسم العائلة",
+        "email": "بريد إلكتروني",
+        "no_name_provided_accessibility_label": "لم يتم إضافة اسم",
+        "phone_number_help_text": "لا يمكن تعديل رقم الهاتف",
+        "save_accessibility_label": "حفظ الملف الشخصي",
+        "title": "الملف الشخصي"
       },
       "verify_current_email_modal": {
         "verify_button": "التالي",
         "email_resend_button_accessibility_label": "إعادة إرسال رمز التحقق",
-        "title": "تأكيد هويتك"
+        "title": "تأكيد هويتك",
+        "cancel_button": "إلغاء",
+        "cancel_button_accessibility_label": "إلغاء تحرير الملف الشخصي",
+        "description": "أدخل الرمز المكون من 6 أرقام الذي أُرسل إلى بريدك الإلكتروني الأصلي:",
+        "verify_button_accessibility_label": "التحقق من بريدك الإلكتروني الحالي"
       },
       "loading_accessibility_message": "جارٍ تحميل معلومات الحساب",
       "email_update_confirmation_message": "تم تحديث البريد الإلكتروني إلى {{email}}",
       "verify_new_email_modal": {
         "email_resend_button_failure_banner_message": "تعذّر إرسال رمز التحقق",
         "email_resend_button_accessibility_label": "إعادة إرسال رمز التحقق",
-        "verify_button_accessibility_label": "التحقق من كلمة المرور لمرة واحدة"
+        "verify_button_accessibility_label": "التحقق من كلمة المرور لمرة واحدة",
+        "title": "تحقق من بريدك الإلكتروني الجديد",
+        "description": "الآن، أدخل الرمز المكون من 6 أرقام والذي أُرسِل إلى بريدك الإلكتروني الجديد:",
+        "one_time_password_label": "رمز مكون من 6 أرقام",
+        "email_resend_button": "إعادة إرسال الرمز",
+        "verify_button": "تحقق",
+        "cancel_button": "إلغاء",
+        "cancel_button_accessibility_label": "إلغاء تحرير الملف الشخصي",
+        "email_resend_button_success_toast_message": "تم إرسال رمز التحقق"
       },
       "marketing_preferences": {
         "unsubscribe_confirmation": {
-          "title": "إلغاء الاشتراك من رسائل البريد الإلكتروني؟"
-        }
+          "title": "إلغاء الاشتراك من رسائل البريد الإلكتروني؟",
+          "cancel": "إلغاء",
+          "description": "لن تتلقى بعد الآن رسائل تسويقية عبر البريد الإلكتروني من {{shopName}}",
+          "unsubscribe": "إلغاء الاشتراك"
+        },
+        "email_label": "بريد إلكتروني",
+        "pending_confirmation": "انقر على الرابط في بريدك الإلكتروني للتأكيد.",
+        "resend_email": "أعد إرسال البريد الإلكتروني",
+        "resend_email_success": "تم إرسال الرابط",
+        "title": "تفضيلات التسويق",
+        "update_error": {
+          "description": "حدثت مشكلة أثناء تحديث تفضيلاتك التسويقية. حاول تحديث هذه الصفحة أو تحقق من اتصالك بالإنترنت."
+        },
+        "update_success": "تم تحديث تفضيلات التسويق"
       },
       "people": {
         "pagination": {
-          "load_more_accessibility_label": "أظهر المزيد من الأشخاص"
+          "load_more_accessibility_label": "أظهر المزيد من الأشخاص",
+          "load_more": "أظهر المزيد",
+          "loading_accessibility_label": "جارٍ تحميل الأشخاص"
         }
-      }
+      },
+      "loading_finished_accessibility_message": "تم تحميل معلومات الحساب",
+      "email_update_success_modal": {
+        "title": "التحقق من البريد الإلكتروني",
+        "description": "تم تحديث البريد الإلكتروني بنجاح. يتم إعادة التوجيه إلى صفحة تسجيل الدخول."
+      },
+      "profile_update_confirmation_message": "تم تحديث الملف الشخصي",
+      "title": "الملف الشخصي"
     },
     "orders": {
       "order_list": {
@@ -1973,7 +2022,19 @@
         "view_order_accessibility_label": "عرض الطلب {{orderName}}",
         "location_filter_picker": {
           "current_location": "الموقع الحالي"
-        }
+        },
+        "column_headers": {
+          "order": "أمر",
+          "total": "الإجمالي",
+          "actions_accessibility_label": "إجراءات",
+          "products_accessibility_label": "المنتجات"
+        },
+        "delivered": "تم التسليم {{date}}",
+        "empty_state_order_source_description": "الطلبات التي قدمها {{email}} فقط هي التي ستظهر هنا.",
+        "empty_state_redesign_cta": "تسوق الآن",
+        "empty_state_redesign_subtitle": "هل أنت مستعد للتسوق؟",
+        "empty_state_redesign_welcome": "أهلاً وسهلاً",
+        "empty_state_redesign_welcome_with_name": "أهلاً بك يا {{firstName}}"
       },
       "order_status": {
         "delivered_description_gift_card_text": {
@@ -2123,7 +2184,14 @@
       "buy_again": "اشترِ مرة أخرى",
       "manage": "إدارة",
       "group_title_label": "جزء من: {{groupTitle}}",
-      "group_title_label_with_parent": "لـ: {{groupTitle}}"
+      "group_title_label_with_parent": "لـ: {{groupTitle}}",
+      "list_layout_accessibility_label": "خيارات التخطيط",
+      "list_title": "الطلبات",
+      "list_title_with_pending_orders": "الطلبات:",
+      "list_title_confirmed_orders_accessibility_label": "الطلبات: مؤكدة",
+      "list_title_pending_orders_accessibility_label": "الطلبات: معلقة",
+      "switch_order_type_pending_orders_accessibility_label": "تبديل نوع الطلب، أنت تعرض حالياً الطلبات المعلّقة",
+      "switch_order_type_confirmed_orders_accessibility_label": "تغيير نوع الطلب، أنت تعرض الطلبات المؤكدة حالياً"
     },
     "order_details": {
       "not_applicable": "غير متوفر",
@@ -2852,12 +2920,49 @@
       "back_button_accessibility_label": "الظهر",
       "account_menu": {
         "loading_message": "جارٍ تحميل التنقل بين الحسابات",
-        "close_menu_accessibility_label": "إغلاق تصفح الحساب"
+        "close_menu_accessibility_label": "إغلاق تصفح الحساب",
+        "hide_accessibility_label": "إخفاء قائمة الحساب",
+        "show_accessibility_label": "إظهار قائمة الحساب",
+        "nav_accessibility_label": "التنقل في الحساب",
+        "open_menu_accessibility_label": "فتح تنقل الحساب",
+        "label": "حساب"
       },
       "navigation_accessibility_message": "لقد انتقلت إلى {{sectionName}}",
       "country_switcher_toast_message": "تم التبديل إلى {{countryName}}",
       "try_new_search": "جرّب بحثًا جديدًا",
-      "company_location": "موقع الشركة"
+      "company_location": "موقع الشركة",
+      "action_menu_accessibility_label": "إجراءات أخرى",
+      "go_to_store_link": "اذهب إلى المتجر",
+      "orders_link_label": "الطلبات",
+      "subscriptions_link_label": "الاشتراكات",
+      "close_menu_accessibility_label": "إغلاق التنقل الرئيسي",
+      "contact_email_subject": "جهة اتصال من المتجر الإلكتروني {{shopName}}",
+      "contact_link": "معلومات الاتصال",
+      "delete_confirmation": {
+        "cancel": "إلغاء",
+        "delete": "حذف"
+      },
+      "dismiss_toast": "رفض",
+      "document_title": "{{sectionName}} - {{shopName}} - الحساب",
+      "loading_message": "جاري التحميل",
+      "loading_policy_content_accessibility_label": "تحميل محتوى السياسة",
+      "loading_section_accessibility_label": "جار التحميل {{sectionName}}",
+      "policy_load_error": "تعذر تحميل {{policyName}}",
+      "policy_try_again": "حاول مرة أخرى",
+      "log_out_link": "تسجيل الخروج",
+      "logout_overlay_label": "تسجيل الخروج...",
+      "nav_label_accessibility_label": "الملاحة الرئيسية",
+      "open_menu_accessibility_label": "فتح التنقل الرئيسي",
+      "shop_logo_accessibility_label": "شعار {{shopName}}",
+      "settings_link": "الإعدادات",
+      "switch_country": "تغيير البلد",
+      "no_countries_found": "لا توجد بلدان مطابقة",
+      "location_switcher_toast_message": "تم تغيير الموقع إلى {{locationName}}",
+      "switch_location": "تغيير الموقع",
+      "no_locations_found": "لم يتم العثور على مواقع",
+      "view_details": "عرض التفاصيل",
+      "search": "بحث",
+      "skip_to_content": "تجاوز إلى المحتوى"
     },
     "address_form": {
       "save": "حفظ",
@@ -3026,7 +3131,12 @@
         "tomorrow": "غدًا الساعة {{time}}"
       }
     },
-    "enable_javascript": "لعرض حسابك، قم بتمكين JavaScript في إعدادات متصفحك أو قم بتسجيل الدخول باستخدام متصفح آخر."
+    "enable_javascript": "لعرض حسابك، قم بتمكين JavaScript في إعدادات متصفحك أو قم بتسجيل الدخول باستخدام متصفح آخر.",
+    "announcement_bar": {
+      "expand_label": "توسيع شريط الإعلانات",
+      "collapse_label": "طي شريط الإعلان",
+      "close_label": "إغلاق شريط الإعلانات"
+    }
   },
   "accessibility": {
     "unit_price_separator": "لكل",
