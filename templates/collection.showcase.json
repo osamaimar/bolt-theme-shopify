@@ -15,43 +15,153 @@
         "badge_1": {
           "type": "badge",
           "settings": {
-            "badge": "New Arrival"
+            "badge": "New Arrival",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 20,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 20,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "uppercase",
+            "letter_spacing": 1.2,
+            "line_height": 120,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": ""
           }
         },
         "heading_1": {
           "type": "heading",
           "settings": {
             "title": "Quantum [X15 Laptop]",
+            "heading_tag": "h1",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 18,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 18,
             "font_size": "large",
             "font_weight": "bold",
-            "highlight_color": ""
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 115,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "highlight_color": "",
+            "highlight_gradient": ""
           }
         },
         "desc_1": {
           "type": "description",
           "settings": {
-            "description": "Breakthrough performance with the latest M3-powered chip, stunning 15\" Retina display, and 20+ hours of battery life. Built for professionals who demand excellence."
+            "description": "Breakthrough performance with the latest M3-powered chip, stunning 15\" Retina display, and 20+ hours of battery life. Built for professionals who demand excellence.",
+            "heading_tag": "p",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 28,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 28,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 170,
+            "text_color": "",
+            "bg_color": "",
+            "bg_gradient": ""
           }
         },
         "list_1": {
           "type": "list",
           "settings": {
             "text": "Free shipping on all orders over $50",
-            "icon": "check"
+            "icon": "check",
+            "custom_svg": "",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 8,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 8,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 150,
+            "text_color": "",
+            "highlight_color": "",
+            "icon_color": "",
+            "icon_bg_color": "",
+            "icon_bg_gradient": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": ""
           }
         },
         "list_2": {
           "type": "list",
           "settings": {
             "text": "2-year warranty included",
-            "icon": "check"
+            "icon": "check",
+            "custom_svg": "",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 8,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 8,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 150,
+            "text_color": "",
+            "highlight_color": "",
+            "icon_color": "",
+            "icon_bg_color": "",
+            "icon_bg_gradient": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": ""
           }
         },
         "list_3": {
           "type": "list",
           "settings": {
             "text": "30-day money-back guarantee",
-            "icon": "check"
+            "icon": "check",
+            "custom_svg": "",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "margin_top": 0,
+            "margin_bottom": 8,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 8,
+            "font_size": "medium",
+            "font_weight": "normal",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 150,
+            "text_color": "",
+            "highlight_color": "",
+            "icon_color": "",
+            "icon_bg_color": "",
+            "icon_bg_gradient": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": ""
           }
         },
         "btns_1": {
@@ -92,6 +202,7 @@
         "btns_1"
       ],
       "settings": {
+        "product": "",
         "show_section": true,
         "show_on_desktop": true,
         "show_on_mobile": true,
@@ -120,6 +231,7 @@
             "show_on_desktop": true,
             "show_on_mobile": true,
             "show_link": true,
+            "show_link_mobile": false,
             "margin_top": 0,
             "margin_bottom": 24,
             "margin_top_mobile": 0,
@@ -151,6 +263,14 @@
         "carousel_1": {
           "type": "product_carousel",
           "settings": {
+            "products": [
+              "1pc-2pcs-2-4ghz-wireless-gamepad-no-delay-plug-and-play-ergonomic-gaming-controller-for-m8-gd10-x2-game-stick-pc-android-tv",
+              "fast-response-27-inch-qhd-2k-144hz-gaming-lcd-monitor-pc-computer-high-resolution-1k-4k-21-5-24-optional",
+              "lcd-monitors-display-37-5-4k-144hz-ultra-wide-curved-gaming-monitor-desktop-computer-display",
+              "40-inch-wide-curved-5k-qled-va-panel-gaming-monitor-144hz-refresh-rate-21-9-aspect-ratio-with-hd-dp-interface-for-laptop-pc",
+              "49-inch-curved-screen-165hz-gaming-4k-monitor-wide-screen-computer-monitor-with-dp-interface-for-desktop-application",
+              "49-144hz-gaming-monitor-4k-resolution-curved-ips-monitor-for-pc-curve-144hz-32-9-gaming-monitor"
+            ],
             "limit": 8,
             "view_details_label": "View Details",
             "show_on_desktop": true,
@@ -203,6 +323,7 @@
           "type": "stat",
           "settings": {
             "icon": "gadgets",
+            "custom_svg": "",
             "value": "500+",
             "label": "Smart Gadgets"
           }
@@ -211,6 +332,7 @@
           "type": "stat",
           "settings": {
             "icon": "customers",
+            "custom_svg": "",
             "value": "12K+",
             "label": "Happy Customers"
           }
@@ -219,6 +341,7 @@
           "type": "stat",
           "settings": {
             "icon": "rating",
+            "custom_svg": "",
             "value": "4.9",
             "label": "Average Rating"
           }
@@ -227,6 +350,7 @@
           "type": "stat",
           "settings": {
             "icon": "guarantee",
+            "custom_svg": "",
             "value": "100%",
             "label": "Money-Back Guarantee"
           }
@@ -358,6 +482,7 @@
         "pagination_1"
       ],
       "settings": {
+        "collection": "",
         "show_section": true,
         "show_on_desktop": true,
         "show_on_mobile": true,
