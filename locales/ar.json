@@ -1470,7 +1470,9 @@
             "other": "{{count}} منتجات إضافية"
           }
         },
-        "choose_from_list": "اختر من القائمة"
+        "choose_from_list": "اختر من القائمة",
+        "subscription_contracts_updated": "تم تحديث {{succeeded}} من {{total}} الاشتراكات",
+        "invalid_wallet_type_error": "نوع المحفظة غير صالح."
       },
       "back_button": "الظهر",
       "generic_card": "بطاقة",
@@ -1522,6 +1524,10 @@
         "tooltip": {
           "tooltip_accessibility_label": "مزيد من المعلومات"
         }
+      },
+      "three_d_secure": {
+        "title": "التحقق الثلاثي الأبعاد",
+        "verification_failed": "تعذر التحقق من دفعتك. يرجى إعادة المحاولة أو استخدام طريقة دفع أخرى."
       }
     },
     "payment_method_brands": {
@@ -1529,7 +1535,30 @@
       "elo": "إيلو",
       "visa": "تأشيرة",
       "blik": "بليك",
-      "americanexpress": "أمريكان إكسبريس"
+      "americanexpress": "أمريكان إكسبريس",
+      "mastercard": "ماستركارد",
+      "discover": "اكتشف",
+      "dinersclub": "داينرز كلوب",
+      "visaelectron": "فيزا إلكترون",
+      "maestro": "المايسترو",
+      "dankort": "دانكورت",
+      "hipercard": "هايبركارد",
+      "unionpay": "يونيون باي",
+      "laser": "ليزر",
+      "shoppay": "شوب باي",
+      "paypal": "باي بال",
+      "storecredit": "رصيد المتجر",
+      "bogus": "زائف",
+      "klarna_pay_now": "كلارنا",
+      "klarna_pay_later": "كلارنا",
+      "klarna_slice_it": "كلارنا",
+      "ideal": "آيديال",
+      "klarna": "كلارنا",
+      "mobilepay": "الدفع عبر الهاتف المحمول",
+      "przelewy24": "برزيليوي 24",
+      "swish": "سويش",
+      "twint": "توينت",
+      "usdc": "العملات الرقمية: USDC"
     },
     "ui_components": {
       "may": "مايو/أيار",
@@ -1544,12 +1573,63 @@
       "july": "يوليو",
       "moneyLinesHeaderItem": "بند",
       "autocompleteOptionsAvailable": {
-        "one": "{{count}} سلعة متاحة"
+        "one": "{{count}} سلعة متاحة",
+        "other": "{{count}} عناصر متوفرة"
       },
       "dropzoneInvalidFileType": "نوع الملف غير مدعوم",
       "external": "يفتح موقعاً إلكترونياً خارجياً.",
       "showNextMonth": "عرض الشهر التالي، {{month}} {{year}}",
-      "removeItem": "إزالة {{label}}"
+      "removeItem": "إزالة {{label}}",
+      "clear": "واضح",
+      "clipboardCopied": "تم النسخ",
+      "clipboardFailedToCopy": "فشل النسخ",
+      "closeNotification": "إغلاق",
+      "expandNotification": "عرض المزيد",
+      "closeModal": "إغلاق",
+      "submit": "إرسال",
+      "processing": "جارٍ المعالجة…",
+      "increase": "زيادة {{type}}",
+      "decrease": "خفض {{type}}",
+      "minimumReached": "تم بلوغ الحد الأدنى وهو {{value}}",
+      "maximumReached": "تم الوصول للحد الأقصى وهو {{value}}",
+      "january": "يناير",
+      "february": "فبراير",
+      "march": "مارس",
+      "april": "أبريل",
+      "august": "أغسطس",
+      "september": "سبتمبر",
+      "october": "أكتوبر",
+      "november": "نوفمبر",
+      "december": "ديسمبر",
+      "monday": "الاثنين",
+      "tuesday": "الثلاثاء",
+      "wednesday": "الأربعاء",
+      "thursday": "الخميس",
+      "friday": "الجمعة",
+      "saturday": "السبت",
+      "sunday": "الأحد",
+      "showPreviousMonth": "إظهار الشهر السابق، {{month}} {{year}}",
+      "rangeStart": "بداية المدى",
+      "inRange": "ضمن النطاق",
+      "rangeEnd": "نهاية النطاق",
+      "removeTag": "إزالة الوسم",
+      "mapClusterTitle": {
+        "one": "مجموعة من {{number}} علامة",
+        "other": "مجموعة من {{number}} علامات"
+      },
+      "expandSheet": "توسيع",
+      "qrCode": "رمز الاستجابة السريعة",
+      "addFile": "إضافة ملف",
+      "dropzoneDraggedOver": "اسحب الملف للتحميل",
+      "externalNewWindow": "يفتح موقعًا خارجيًا في نافذة جديدة.",
+      "loading": "جارٍ التحميل…",
+      "moneyLinesHeaderValue": "قيمة",
+      "newWindow": "يفتح في نافذة جديدة.",
+      "productThumbnailQuantityLabel": "الكمية",
+      "removeChip": "إزالة العنصر",
+      "reviewItemHeaderChangeValue": "تغيير القيمة",
+      "reviewItemHeaderSection": "قسم",
+      "reviewItemHeaderValue": "قيمة"
     },
     "sign_in": {
       "step_one": {
@@ -1571,7 +1651,14 @@
       "rollout_label": "طرح",
       "edit": "تعديل",
       "saved_at": "حفظ في {{date}} الساعة {{time}}",
-      "not_available": "بيانات الملف الشخصي غير متوفرة"
+      "not_available": "بيانات الملف الشخصي غير متوفرة",
+      "customize_button": "تخصيص",
+      "hide_bar": "إخفاء الشريط",
+      "navigate_to_admin": "الانتقال إلى المسؤول",
+      "close_preview": "إغلاق المعاينة",
+      "previewing": "أنت تُعاين:",
+      "viewing": "أنت تشاهد حاليًا:",
+      "actions_button": "إجراءات"
     },
     "navigation_and_structure": {
       "back_button_accessibility_label": "الظهر",
@@ -1596,7 +1683,8 @@
     },
     "shop_ads": {
       "next_button": "التالي",
-      "title": "منتجات أخرى قد تعجبك"
+      "title": "منتجات أخرى قد تعجبك",
+      "subtitle": "متاح لفترة محدودة"
     },
     "subscriptions": {
       "update_payment_instrument": {
@@ -1634,14 +1722,31 @@
     },
     "settings": {
       "log_out_everywhere": {
-        "button": "تسجيل الخروج من جميع الأجهزة"
-      }
+        "button": "تسجيل الخروج من جميع الأجهزة",
+        "title": "تسجيل الخروج من كل مكان",
+        "description": "إذا فقدت جهازًا أو لديك مخاوف أمنية، سجّل الخروج من جميع الأجهزة لضمان أمان حسابك.",
+        "warning_message": "سيتم تسجيل خروجك أيضًا على هذا الجهاز."
+      },
+      "title": "الإعدادات",
+      "loading_accessibility_message": "جارٍ تحميل صفحة الإعدادات"
     },
     "active_inspector": {
       "extension": {
         "move_down": "انقل الإضافة إلى الموضع التالي",
-        "remove": "إزالة امتداد"
+        "remove": "إزالة امتداد",
+        "select": "حدد الملحق المسمى {{extensionName}}",
+        "unselect": "إلغاء تحديد الملحق المسمى {{extensionName}}",
+        "move_up": "نقل الملحق إلى الموضع السابق",
+        "move_down_tooltip": "الانتقال إلى الموضع التالي",
+        "move_up_tooltip": "الانتقال إلى الموضع السابق",
+        "remove_tooltip": "إزالة"
       }
+    },
+    "privacy_banner": {
+      "cookie_preferences_link": "تفضيلات الكوكيز"
+    },
+    "editor": {
+      "link_new_tab_confirmation": "لا يمكن فتح هذا الرابط داخل المحرر. سيتم فتحه في نافذة جديدة ({{resolved_to_link}}). انقر فوق موافق للمتابعة."
     }
   },
   "accessibility": {
