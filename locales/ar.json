@@ -693,16 +693,21 @@
           "try_different_location": "جرب موقعًا مختلفًا",
           "there_are_no_stores": "لا توجد متاجر بالقرب من عنوانك، أو أن منتجاتك غير متاحة للاستلام.",
           "search_elsewhere": "ابحث في مكان آخر",
-          "search_elsewhere_standalone": "ابحث في مكان آخر"
+          "search_elsewhere_standalone": "ابحث في مكان آخر",
+          "ship_to_address": "الشحن إلى العنوان",
+          "ship_items": "اشحن أغراضك",
+          "ship_items_or_search_elsewhere": "%{ship_items} أو %{search_elsewhere}"
         },
         "geolocation": {
           "permission_not_allowed": "اسمح بمشاركة الموقع أو ابحث بدلاً من ذلك."
         },
         "reveal_more_label": {
-          "one": "عرض %{count} موقع آخر"
+          "one": "عرض %{count} موقع آخر",
+          "other": "عرض %{count} مواقع إضافية"
         },
         "pickup_unavailable_banner_title": {
-          "one": "لا توجد مواقع يتوفر فيها العنصر الذي تبحث عنه"
+          "one": "لا توجد مواقع يتوفر فيها العنصر الذي تبحث عنه",
+          "other": "لا توجد مواقع تحتوي على أغراضك."
         },
         "location_closest_other_items": "أقرب موقع يحتوي على أغراضك",
         "location_far_away": {
@@ -717,7 +722,25 @@
           "one": "%{count} موقع يحتوي على أغراضك",
           "other": "%{count} مواقع تحتوي على عناصرك"
         },
-        "toggle_multiple_locations": "%{count}+ مواقع أخرى"
+        "toggle_multiple_locations": "%{count}+ مواقع أخرى",
+        "selected_pickup_option_no_longer_available": {
+          "title": "موقعك الذي حددته سابقًا لم يعد متوفرًا",
+          "description": "لقد اخترنا أقرب موقع تتوفر فيه منتجاتك"
+        },
+        "could_not_resolve_address": "تعذر تحديد موقع عنوانك. حاول مرة أخرى أو استخدم عنوانًا مختلفًا.",
+        "paginator": {
+          "accessibility_label": "ترقيم صفحات الاستلام المحلي",
+          "previous": "الصفحة السابقة",
+          "next": "الصفحة التالية",
+          "label": {
+            "one": "%{first} - %{last} من %{count} متجر",
+            "other": "%{first} - %{last} من %{count} متجر"
+          }
+        },
+        "pickup_unavailable_banner_title_with_country": {
+          "one": "لا توجد مواقع في %{country} تحتوي على هذا المنتج.",
+          "other": "لا توجد مواقع في %{country} تتضمن العناصر الخاصة بك"
+        }
       },
       "units": {
         "milligram": "ملغم",
@@ -1228,7 +1251,9 @@
       "split_delivery": {
         "accessibility": {
           "status": {
-            "remove_items": "%{items} أُزيلت من عربة التسوق."
+            "remove_items": "%{items} أُزيلت من عربة التسوق.",
+            "ship_separately": "سيتم شحن %{items} بشكل منفصل.",
+            "pickup_in_store": "سيتم استلام %{items} من المتجر."
           }
         },
         "delivery_method_menu": "قائمة طرق التسليم المقسم",
@@ -1237,19 +1262,62 @@
             "cannot_be_picked_up": {
               "one": "لا يمكن التقاط %{count} من الأصناف",
               "other": "لا يمكن التقاط %{count} من العناصر"
+            },
+            "cannot_be_shipped": {
+              "one": "لا يمكن شحن %{count} قطعة",
+              "other": "لا يمكن شحن %{count} صنفاً"
             }
-          }
+          },
+          "remove_item": {
+            "one": "إزالة العنصر",
+            "other": "إزالة العناصر"
+          },
+          "remove_item_only": {
+            "one": "إزالة العنصر",
+            "other": "إزالة العناصر"
+          },
+          "ship_separately": {
+            "one": "اشحنه على حدة",
+            "other": "اشحنهم بشكل منفصل"
+          },
+          "pick_them_up_in_store": {
+            "one": "استلمها من المتجر",
+            "other": "استلمها من المتجر"
+          },
+          "remove_items_or_ship": "%{ship_separately_link} أو %{remove_items_link}",
+          "remove_items_or_pickup": "%{pickup_in_store_link} أو %{remove_items_link}"
         },
         "cross_border": {
-          "banner": "تم تحديث طريقة التوصيل الخاصة بك"
+          "banner": "تم تحديث طريقة التوصيل الخاصة بك",
+          "modal": {
+            "heading": "تغيير البلد؟",
+            "content": "يجب أن يكون موقعا الاستلام والشحن في نفس البلد. سيؤدي تغيير البلد إلى إعادة تعيين كافة العناصر إلى الشحن.",
+            "country_changed_heading": "تم تغيير البلد",
+            "change_country": "تغيير الدولة"
+          }
         },
-        "items_for_pickup": "عناصر للاستلام"
+        "items_for_pickup": "عناصر للاستلام",
+        "pickup_all_items": "التقط جميع العناصر",
+        "items_for_shipping": "مواد الشحن",
+        "items_moved_to_shipping_toast": "العناصر التي لا يمكن التقاطها نُقلت إلى الشحن",
+        "delivery_method": "طريقة التسليم المجزأ"
       },
       "wallets": {
         "errors": {
           "invalid": {
             "phone": "أدخل رقم هاتف صحيحًا",
-            "billing_must_match_shipping": "يجب أن يطابق عنوان الشحن"
+            "billing_must_match_shipping": "يجب أن يطابق عنوان الشحن",
+            "shipping_address": "أدخل عنوان شحن صحيحًا",
+            "billing_address": "أدخل عنوان فوترة صالحًا",
+            "shipping_option": "اختر خيار شحن صالحًا",
+            "email": "أدخل بريدًا إلكترونيًا صحيحًا",
+            "zone": "أدخل ولاية / مقاطعة صالحة",
+            "billing_zone": "أدخل ولاية/مقاطعة عنوان الفوترة الصالحة",
+            "emirate": "أدخل إمارة صالحة",
+            "postal_code": "أدخل رمزًا بريديًا صالحًا",
+            "billing_phone": "أدخل رقم هاتف صالحًا لعنوان الفوترة",
+            "reduction_code": "أدخل رمز خصم صالح أو بطاقة هدية",
+            "billing_zip": "أدخل رمزًا بريديًا صالحًا لعنوان الفاتورة"
           },
           "formatting": {
             "name_contains_emojis": "احذف الإيموجي من اسمك",
@@ -1260,12 +1328,61 @@
           "missing": {
             "address2": "أدخل شقة، جناح، إلخ.",
             "billing_first_name": "أدخل الاسم الأول لعنوان الفواتير",
-            "address1": "أدخل عنوانًا"
+            "address1": "أدخل عنوانًا",
+            "first_name": "أدخل الاسم الأول",
+            "last_name": "أدخل اسم العائلة",
+            "billing_address1": "أدخل عنوان الفوترة",
+            "billing_address2": "أدخل رقم الشقة في عنوان الفاتورة، أو الجناح، وما إلى ذلك.",
+            "city": "ادخل المدينة",
+            "billing_city": "أدخل مدينة عنوان الفاتورة",
+            "province": "اختر ولاية / مقاطعة",
+            "billing_province": "حدد ولاية/مقاطعة عنوان الفاتورة",
+            "country": "اختر الدولة/المنطقة",
+            "zip": "أدخل الرمز البريدي"
+          },
+          "unavailable": {
+            "title": "{{walletName}} غير متاح",
+            "description": "{{walletName}} غير متاح. استخدم طريقة دفع مختلفة أو أعد المحاولة لاحقًا.",
+            "instructions": "حدثت مشكلة في {{walletName}}. الرجاء العودة إلى المتجر للمحاولة مرة أخرى أو الدفع بطريقة مختلفة.",
+            "unavailable_for_country": "{{walletName}} غير متوفر في {{countryName}}. الرجاء اختيار طريقة دفع أخرى لإتمام عملية الشراء"
+          },
+          "unavailable_terminal": {
+            "instructions": "{{walletName}} غير متاح حاليًا لطلبك. لمتابعة عملية الشراء، يرجى اختيار طريقة دفع أخرى."
+          },
+          "subscription_review_required": "يتضمن طلبك اشتراكاً. يجب عليك مراجعة الشروط أدناه قبل إتمام طلبك.",
+          "generic": "حدثت مشكلة مع {{walletName}}. حاول مرة أخرى أو استخدم طريقة دفع مختلفة.",
+          "discount_code": "لا يمكن تطبيق رمز الخصم هذا. يُرجى مراجعة الرمز والمحاولة مرة أخرى.",
+          "terminal": "حدثت مشكلة في {{walletName}}. الرجاء استخدام طريقة دفع أخرى.",
+          "detour": {
+            "stock_problems": "بعض العناصر لم تعد متاحة. أغلق {{walletName}} وحاول مرة أخرى.",
+            "price_change": "<span dir=\"rtl\">تغيرت بعض أسعار العناصر. أغلق {{walletName}} لمراجعة طلبك والمحاولة مرة أخرى.</span>",
+            "queue": "<p dir=\"rtl\">لقد تم وضعك في قائمة الانتظار للمغادرة. أغلق {{walletName}} للمتابعة.</p>",
+            "currency_change": "لا يمكنك استخدام عنوان مختلف مع {{walletName}}. استخدم العنوان الأصلي، أو جرب طريقة دفع مختلفة."
+          },
+          "unsupported": {
+            "address": "لا يمكن للتاجر التوصيل إلى هذا العنوان",
+            "wallet_is_unavailable": "{{walletName}} لا يمكن استخدامه مع هذا العنوان. حدد عنوانًا مختلفًا أو أغلق {{walletName}} لإتمام عملية الشراء",
+            "postal_code": "هذا الموقع غير مدعوم"
+          },
+          "outdated": {
+            "shipping_method": "لقد تغيرت خيارات الشحن لطلبك. يرجى مراجعة اختيارك.",
+            "payment_terms": "لقد تغيرت شروط الدفع. راجع طلبك"
           }
         },
         "deceleration": {
           "one_more_step": "خطوة أخرى..."
-        }
+        },
+        "return_to_store": "العودة إلى المتجر",
+        "return_to_checkout": "العودة إلى صفحة الدفع",
+        "redirect_hint": "سيُطلب منك تسجيل الدخول باستخدام {{walletName}}.",
+        "logged_in": "متصل بـ {{email}}",
+        "shipping_line_label": "الشحن",
+        "payment_in_progress_title": "الدفع قيد المعالجة",
+        "payment_in_progress_body": "جارٍ معالجة دفعتك. سيكتمل طلبك قريبًا.",
+        "call_to_action": "ادفع باستخدام {{walletName}}",
+        "place_order": "تقديم طلب",
+        "redirection_notice": "سيتم تحويلك إلى {{walletName}} لإتمام عملية الشراء",
+        "recovery_notice": "توجد مشكلة في تفاصيل طلبك. حدّث معلوماتك لإتمام عملية الدفع."
       },
       "tooltip": {
         "additional_payment_methods": "طرق دفع إضافية",
@@ -1362,8 +1479,13 @@
       },
       "shop_pay_external": {
         "errors": {
-          "problem_loading": "حدثت مشكلة في تحميل Shop Pay"
-        }
+          "problem_loading": "حدثت مشكلة في تحميل Shop Pay",
+          "try_again_later": "تحقق من اتصالك، أو أغلق هذه النافذة وحاول مرة أخرى بعد لحظات.",
+          "checkout_has_expired": "انتهت صلاحية عملية الدفع الخاصة بك. أغلق هذه النافذة وحاول إتمام الدفع مرة أخرى من {{shopName}}."
+        },
+        "title": "الدفع بـ Shop Pay",
+        "return_to_store": "العودة إلى {{shopName}}",
+        "return_to_store_simple": "العودة إلى المتجر"
       },
       "marketing": {
         "disclaimer": {
@@ -1422,6 +1544,19 @@
         "unavailable_address_country": "الشحن غير متوفر في البلد الذي اخترته. استخدم عنوانًا مختلفًا للمتابعة",
         "unavailable_selected_address": "الشحن غير متاح للعنوان المحدد",
         "unavailable_selected_address_for_region": "الشحن غير متاح لـ {{region}}. يرجى اختيار عنوان مختلف للمتابعة"
+      },
+      "clipboard": {
+        "copied": "تم النسخ",
+        "failed_to_copy": "فشل النسخ"
+      },
+      "discount_errors": {
+        "generic_error": "لم نتمكن من معالجة طلبك لأن رمز الخصم الخاص بك غير متاح حاليًا. يرجى مراجعة إجمالي طلبك والمحاولة مرة أخرى."
+      },
+      "b2b_errors": {
+        "lost_b2b_purchasing_permissions": "لم يعد لديك إذن لتقديم طلبات B2B. %{logout_url} لتقديم طلب شخصي بدلاً من ذلك.",
+        "log_out_link_text": "تسجيل الخروج",
+        "lost_permissions_subtitle": "لم يعد لديك إذن لتقديم طلبات B2B. سجّل الخروج لتقديم طلب شخصي.",
+        "lost_permissions_title": "لا توجد أذونات للموقع"
       }
     },
     "filters": {
