@@ -204,7 +204,6 @@
         "stat-3"
       ],
       "settings": {
-        "image": "shopify://shop_images/hero-tech-bg.webp",
         "show_section": true,
         "show_stats_bar": true,
         "show_on_desktop": true,
@@ -699,7 +698,6 @@
           "type": "product_card",
           "settings": {
             "product": "baseus-bass-ep10-nc-43db-noise-cancelling-anc-true-wireless-earbuds-bluetooth-6-0-in-ear-wireless-earphones-4-mics-enc-ear-buds",
-            "image": "shopify://shop_images/an_airpods_with_two_headsets_attached_to_it.jpg",
             "category": "Gaming Gear",
             "title": "",
             "price": "",
@@ -740,6 +738,7 @@
           "type": "product_card",
           "settings": {
             "product": "ultra-wide-49-inch-curved-led-monitor-5k-60hz-144hz-hdr-gaming-ips-ultrawide-curvado-lcd-for-desktop-replacement",
+            "image": "shopify://shop_images/dark_blue_monitor_1784642175724_1.png",
             "category": "Wearables",
             "title": "",
             "price": "",
@@ -1014,7 +1013,6 @@
         "review-0": {
           "type": "review",
           "settings": {
-            "avatar": "shopify://shop_images/bolt-reviewer-emily_6df86fd6-cdc1-462d-8614-34da69fea5f6.jpg",
             "author_name": "Sarah J.",
             "review_text": "Absolutely love this product! The quality is outstanding and it exceeded my expectations in every way.",
             "date": "",
@@ -1059,7 +1057,6 @@
         "review-1": {
           "type": "review",
           "settings": {
-            "avatar": "shopify://shop_images/bolt-reviewer-michael_783dedd8-f015-4e26-98ae-be9e1ef7fcf6.jpg",
             "author_name": "Michael R.",
             "review_text": "Great value for the price. The customer service was also very helpful with my questions.",
             "date": "",
@@ -1104,7 +1101,6 @@
         "review-2": {
           "type": "review",
           "settings": {
-            "avatar": "shopify://shop_images/bolt-reviewer-sarah_e9d51845-3f0c-497b-8f38-55b319e7fd0b.jpg",
             "author_name": "Emily D.",
             "review_text": "One of the best purchases I've made this year. I've already recommended it to all my friends!",
             "date": "",
