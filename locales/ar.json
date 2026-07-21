@@ -1633,10 +1633,32 @@
     },
     "sign_in": {
       "step_one": {
-        "or": "أو"
+        "or": "أو",
+        "page_title": "تسجيل الدخول - %{shop_name}",
+        "heading": "تسجيل الدخول",
+        "subheading": "أدخل بريدك الإلكتروني وسنرسل لك رمز التحقق",
+        "subheading_with_sign_in_options": "تسجيل الدخول أو إنشاء حساب",
+        "input_field_label": "بريد إلكتروني",
+        "button": "استمر/استمروا",
+        "consent_agreement": "باستمرارك، فإنك توافق على %{terms}",
+        "last_used_pill": "آخر استخدام"
       },
       "step_two": {
-        "subheading": "أُرسلت إلى %{email}"
+        "subheading": "أُرسلت إلى %{email}",
+        "page_title": "أدخل الرمز - %{shop_name}",
+        "heading": "أدخل الرمز",
+        "change_email": "تغيير",
+        "restart_link": "تسجيل الدخول باستخدام بريد إلكتروني مختلف",
+        "input_field_label": "رمز مكون من 6 أرقام",
+        "button": "إرسال"
+      },
+      "brand_logo_alt_text": "شعار %{shop_name}",
+      "processing": "جارٍ المعالجة…",
+      "error": {
+        "invalid": {
+          "invalid_email": "أدخل عنوان بريد إلكتروني صالحًا",
+          "invalid_code": "أدخل الرمز الصحيح المكون من 6 أرقام"
+        }
       }
     },
     "profile_preview_bar": {
@@ -1684,18 +1706,37 @@
     "shop_ads": {
       "next_button": "التالي",
       "title": "منتجات أخرى قد تعجبك",
-      "subtitle": "متاح لفترة محدودة"
+      "subtitle": "متاح لفترة محدودة",
+      "button": "استكشاف على المتجر",
+      "previous_button": "السابق"
     },
     "subscriptions": {
       "update_payment_instrument": {
         "save": "حفظ",
         "loading": "جارٍ تحميل طرق الدفع",
-        "use_new_payment_method": "+ استخدام طريقة دفع جديدة"
+        "use_new_payment_method": "+ استخدام طريقة دفع جديدة",
+        "title": "استبدال طريقة الدفع",
+        "no_payment_methods_available": "لا توجد طرق دفع متاحة",
+        "select_new_payment_method": "اختر طريقة دفع جديدة",
+        "current_method": "الحالي",
+        "cancel": "إلغاء",
+        "success": "تم تحديث طريقة الدفع"
       }
     },
     "intents": {
       "subscription_replace_payment_method": {
-        "save_button": "حفظ"
+        "save_button": "حفظ",
+        "card_number": "رقم البطاقة",
+        "title": "استبدال طريقة الدفع",
+        "replace_with": "استبدال بـ",
+        "add_new_payment_method": "إضافة جديد",
+        "close_button": "إغلاق",
+        "loading": "جارٍ تحميل نافذة استبدال طريقة الدفع المنبثقة",
+        "success": "تم تحديث طريقة الدفع",
+        "invalid_subscription_contract": "تعذر العثور على الاشتراك",
+        "expiry_date": "تاريخ الانتهاء: {{expiryDate}}",
+        "edit_current_payment_method": "تعديل طريقة الدفع الحالية",
+        "edit_selected_payment_method": "تعديل طريقة الدفع المحددة"
       }
     },
     "errors": {
@@ -1747,10 +1788,28 @@
     },
     "editor": {
       "link_new_tab_confirmation": "لا يمكن فتح هذا الرابط داخل المحرر. سيتم فتحه في نافذة جديدة ({{resolved_to_link}}). انقر فوق موافق للمتابعة."
+    },
+    "knowledge_base": {
+      "self_serve_returns": {
+        "enabled": "يمكن للعملاء طلب المرتجعات وإدارتها بأنفسهم.",
+        "disabled": "يجب على العملاء التواصل مع التاجر لطلب الإرجاع."
+      }
     }
   },
   "accessibility": {
-    "unit_price_separator": "لكل"
+    "unit_price_separator": "لكل",
+    "skip_to_content": "تجاوز إلى المحتوى",
+    "close_menu": "إغلاق القائمة",
+    "open_menu": "فتح القائمة",
+    "toggle_submenu": "تبديل القائمة الفرعية",
+    "refresh_page": "تم تحديث الصفحة",
+    "back_to_top": "العودة للأعلى",
+    "account": "حساب",
+    "close_cart": "إغلاق العربة",
+    "out_of_5_stars": "{{ rating }} من أصل 5 نجوم",
+    "link_messages": {
+      "new_window": "يفتح في نافذة جديدة"
+    }
   },
   "general": {
     "search": {
@@ -1760,20 +1819,56 @@
       "no_results": "لم يتم العثور على نتائج لـ \"{{ terms }}\"",
       "predictive_loading": "جاري البحث...",
       "predictive_empty": "لم يتم العثور على اقتراحات",
-      "predictive_view_all": "عرض جميع النتائج لـ \"{{ terms }}\""
+      "predictive_view_all": "عرض جميع النتائج لـ \"{{ terms }}\"",
+      "all": "كل المنتجات",
+      "submit": "بحث",
+      "title": "بحث",
+      "placeholder": "البحث في متجرنا...",
+      "recent": "عمليات البحث الأخيرة",
+      "clear_all": "مسح الكل",
+      "to_search": "للبحث",
+      "to_close": "لإغلاق",
+      "to_toggle": "للتبديل",
+      "results_for_html": "{{ count }} نتائج لـ \"{{ terms }}\"",
+      "results_with_count": "{{ count }} نتائج عُثر عليها لـ \"{{ terms }}\"",
+      "results_count": "العثور على نتائج",
+      "page": "صفحة",
+      "no_results_help": "جرب مصطلح بحث مختلف أو تصفح فئاتنا.",
+      "start_searching_text": "اكتب كلماتك الرئيسية أعلاه لتصفح مجموعتنا المميزة من الإلكترونيات."
     },
     "breadcrumb": {
-      "home": "الرئيسية"
+      "home": "الرئيسية",
+      "products": "المنتجات"
     },
     "home": "الرئيسية",
     "countdown": {
-      "days": "أيام"
+      "days": "أيام",
+      "years": "سنوات",
+      "months": "شهور",
+      "weeks": "أسابيع",
+      "hours": "ساعات العمل",
+      "minutes": "محضر الاجتماع",
+      "seconds": "ثوانٍ"
     },
     "share": {
       "copy_to_clipboard_confirmation": "تم نسخ الرابط إلى الحافظة"
     },
     "newsletter_form": {
-      "confirmation": "شكراً لاشتراكك!"
+      "confirmation": "شكراً لاشتراكك!",
+      "email_placeholder": "بريدك الإلكتروني",
+      "submit": "اشترك"
+    },
+    "share_link_copied": "تم نسخ الرابط إلى الحافظة!",
+    "pagination": {
+      "label": "ترقيم الصفحات",
+      "previous": "الصفحة السابقة",
+      "next": "الصفحة التالية"
+    },
+    "coming_soon": {
+      "show_subscribe": "إظهار نموذج الاشتراك"
+    },
+    "faq": {
+      "no_results_html": "لا توجد أسئلة تطابق بحثك. جرب كلمة رئيسية مختلفة أو <span class=\"highlight-text\">تصفح جميع الفئات</span>."
     }
   },
   "products": {
@@ -1846,7 +1941,9 @@
       "pairs_well_with": "يناسب جيدًا مع",
       "complementary_products_heading": "أكمل [المظهر]",
       "no_complementary_products": "لم يتم تعيين منتجات تكميلية.",
-      "complementary_badge": "يناسب جيدًا مع"
+      "complementary_badge": "يناسب جيدًا مع",
+      "add_to_cart": "أضف إلى عربة التسوق",
+      "sold_out": "نفد المخزون"
     }
   },
   "cart": {
@@ -2023,18 +2120,47 @@
   "sections": {
     "footer": {
       "newsletter": {
-        "success": "شكراً لاشتراكك!"
-      }
+        "success": "شكراً لاشتراكك!",
+        "placeholder": "عنوان بريدك الإلكتروني",
+        "submit": "اشترك"
+      },
+      "all_rights_reserved": "جميع الحقوق محفوظة.",
+      "payment_methods": "طرق الدفع"
     },
     "header": {
-      "popular_searches": "عمليات البحث الشائعة"
+      "popular_searches": "عمليات البحث الشائعة",
+      "navigation": "الملاحة الرئيسية",
+      "announcement": "إعلان",
+      "cart_count": "العناصر"
+    },
+    "cart": {
+      "cart_error": "حدث خطأ أثناء تحديث سلة التسوق الخاصة بك.",
+      "cart_quantity_error_html": "لا يمكنك إضافة أكثر من {{ quantity }} من هذا العنصر إلى سلة التسوق.",
+      "buttons": {
+        "clear": "واضح"
+      }
+    },
+    "collection_list": {
+      "items_count": "{{ count }} عنصر",
+      "explore": "استكشف"
+    },
+    "slideshow": {
+      "pause_slideshow": "إيقاف عرض الشرائح مؤقتًا",
+      "play_slideshow": "تشغيل عرض الشرائح"
+    },
+    "featured_collection": {
+      "view_all": "عرض الكل"
     }
   },
   "newsletter": {
     "success": "شكراً لاشتراكك!"
   },
   "search": {
-    "no_results_html": "لم يتم العثور على نتائج لـ \"{{ terms }}\""
+    "no_results_html": "لم يتم العثور على نتائج لـ \"{{ terms }}\"",
+    "placeholder": "البحث في متجرنا...",
+    "submit": "بحث",
+    "title": "بحث",
+    "results_for_html": "{{ count }} نتائج لـ \"{{ terms }}\""
   },
   "404": {
     "back_to_shopping": "العودة للتسوق",
