@@ -424,7 +424,7 @@
           "type": "product_grid",
           "settings": {
             "products_to_show": 4,
-            "fallback_collection": "",
+            "fallback_collection": "phones",
             "rating_value": "4.9",
             "show_on_desktop": true,
             "show_on_mobile": true,
