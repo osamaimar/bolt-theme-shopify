@@ -1418,17 +1418,33 @@
           },
           "canceled": {
             "title": "تم إلغاء الدفع"
-          }
+          },
+          "pay_now": "ادفع الآن",
+          "title": "حالة الدفع"
         },
         "order_timeline": {
           "expand_events_accessibility_label": "عرض تفاصيل أمر المسودة",
-          "hide_events_accessibility_label": "إخفاء تفاصيل طلب المسودة"
-        }
+          "hide_events_accessibility_label": "إخفاء تفاصيل طلب المسودة",
+          "expand_events_label": "عرض التفاصيل",
+          "hide_events_label": "إخفاء التفاصيل"
+        },
+        "subtitle": "أُرسلت {{date}}",
+        "title": "اطلب {{name}}"
       },
       "purchase_order_number": {
         "save": "حفظ",
         "discard_changes_modal_title": "تجاهل التغييرات؟",
-        "title": "أمر الشراء رقم {{poNumber}}"
+        "title": "أمر الشراء رقم {{poNumber}}",
+        "add_accessibility_label": "أضف رقم أمر الشراء",
+        "add_modal_title": "أضف رقم أمر الشراء",
+        "cancel": "إلغاء",
+        "close_modal_accessibility_label": "إغلاق نافذة الرقم التعريفي لأمر الشراء",
+        "discard": "تجاهل",
+        "edit_accessibility_label": "تعديل رقم أمر الشراء",
+        "edit_modal_title": "تعديل رقم أمر الشراء",
+        "empty_state": "لا يوجد رقم أمر شراء",
+        "modal_po_number_input_label": "رقم أمر الشراء",
+        "modal_po_number_input_max_length_error": "أرقام أوامر الشراء يجب ألا تتعدى {{maxLength}} حرفًا."
       },
       "location_selection": {
         "description_switch_later": "يمكنك التبديل لاحقًا في أي وقت",
@@ -1454,6 +1470,15 @@
       "addresses": {
         "no_billing_address_banner": "لم تتم إضافة عنوان فوترة",
         "shipping_address_card_title": "عنوان الشحن"
+      },
+      "payment_methods": {
+        "payment_delete": {
+          "description_without_replacement": "طريقة الدفع هذه لن تكون متاحة بعد الآن للمشتريات المستقبلية من هذا الموقع.",
+          "description_with_replacement": "سيؤثر حذف طريقة الدفع هذه على الدفعات المُفوّتة مسبقًا لهذا الموقع. استبدلها بطريقة دفع بديلة لمواصلة استلام الطلبات القادمة."
+        },
+        "payment_details": {
+          "order_label": "اطلب {{name}}"
+        }
       }
     },
     "payment_methods": {
@@ -1481,14 +1506,32 @@
           "date_label": "تاريخ",
           "expirable_amounts_button": "عرض",
           "pagination": {
-            "load_more_accessibility_label": "إظهار المزيد من المبالغ القابلة للانتهاء"
+            "load_more_accessibility_label": "إظهار المزيد من المبالغ القابلة للانتهاء",
+            "load_more_label": "أظهر المزيد"
           },
           "events": {
             "payment_returned": "تم إرجاع الدفعة",
-            "tax_finalization": "تسوية ضريبية"
-          }
+            "tax_finalization": "تسوية ضريبية",
+            "adjustment": "تعديل",
+            "order_payment": "الدفع مقابل الطلب",
+            "order_refund": "استرداد طلب",
+            "payment_failure": "فشل الدفع",
+            "order_cancellation": "إلغاء الطلب"
+          },
+          "title": "رصيد متجر ينتهي مفعوله",
+          "balance_label": "الرصيد",
+          "expiration_date_label": "تاريخ انتهاء الصلاحية",
+          "amount_label": "المبلغ",
+          "event_label": "حدث",
+          "expirable_balance_info": "جزء من رصيدك سينتهي في تاريخ لاحق",
+          "expirable_amount_label": "إجمالي المبلغ القابل للانتهاء",
+          "expirable_amounts_info": "المبالغ التي تنتهي صلاحيتها في وقت أقرب يتم تطبيقها أولاً عند الدفع",
+          "expired_amounts_button": "عرض المبالغ المنتهية الصلاحية"
         },
-        "accesibility_label": "رصيد المتجر - {{formattedBalance}}"
+        "accesibility_label": "رصيد المتجر - {{formattedBalance}}",
+        "label": "رصيد المتجر",
+        "expirable_amounts_button": "عرض المبالغ القابلة للانتهاء",
+        "expirable_amounts_label": "المبالغ التي توشك على الانتهاء"
       },
       "payment_details": {
         "edit_payment_method_button": "تعديل",
@@ -1498,7 +1541,10 @@
         "close_payment_modal_accessibility_label": "إغلاق نافذة تفاصيل طريقة الدفع المنبثقة",
         "default_checkbox_accessibility_label": "تعيين طريقة الدفع هذه كخيار افتراضي",
         "card_info_title": "معلومات البطاقة",
-        "loading_shop_pay": "جارٍ تحميل Shop Pay"
+        "loading_shop_pay": "جارٍ تحميل Shop Pay",
+        "title": "تفاصيل طريقة الدفع",
+        "billing_title": "عنوان الفواتير",
+        "payment_method_expired_on": "انتهت صلاحيته في {{expiryDate}}"
       },
       "edit_payment_method": {
         "save_payment_method_button": "حفظ",
@@ -1528,6 +1574,55 @@
       "three_d_secure": {
         "title": "التحقق الثلاثي الأبعاد",
         "verification_failed": "تعذر التحقق من دفعتك. يرجى إعادة المحاولة أو استخدام طريقة دفع أخرى."
+      },
+      "title": "طرق الدفع",
+      "add_payment_method_button": "إضافة طريقة دفع",
+      "add_payment_method_dropdown": {
+        "bank_account_consent": "بإضافة طريقة دفع، فإنك تفوض بخصم المبلغ من بطاقتك أو حسابك البنكي للمشتريات المستقبلية التي توافق عليها، وذلك إلى أن تقوم بالإلغاء."
+      },
+      "bank_account": {
+        "loading_accessibility_message": "زر الحساب البنكي قيد التحميل",
+        "iframe_title_accessibility_label": "إعداد الحساب المصرفي",
+        "display_name": "الحساب المصرفي",
+        "generic_error": "تعذرت إضافة الحساب البنكي. حاول مرة أخرى لاحقًا."
+      },
+      "add_payment_method_banner": "أضف طريقة دفع لإتمام عملية الشراء بشكل أسرع أو للخدمات المفوضة مسبقًا",
+      "edit_payment_method_button_accessibility_label": "تعديل {{paymentMethodName}} التي تنتهي بـ {{lastDigits}}",
+      "delete_payment_method_button": "حذف",
+      "delete_payment_method_button_accessibility_label": "حذف {{paymentMethodName}}",
+      "default": "افتراضي",
+      "expiration_warning_button_accessibility_label": "عرض تحذير انتهاء الصلاحية لـ {{paymentMethodName}} وينتهي بـ {{lastDigits}}",
+      "expired": "هذه البطاقة منتهية الصلاحية",
+      "expired_badge_label": "انتهت صلاحيته",
+      "expiring_badge_label": "ينتهي قريبًا",
+      "card_update_consent": "سيتم حفظ طريقة الدفع هذه للمشتريات المستقبلية.",
+      "card_update_consent_subscriptions": "سيتم حفظ طريقة الدفع هذه للمشتريات المستقبلية، وقد تُستخدم لأي عملية شراء متكررة أو مؤجلة.",
+      "digital_wallet_title": "المحفظة الرقمية",
+      "credit_or_debit_card_title": "بطاقة ائتمان أو خصم",
+      "credit_card_title": "بطاقة ائتمان",
+      "google_pay": {
+        "iframe_title_accessibility_label": "أضف طريقة دفع Google Pay",
+        "loading_accessibility_message": "جارٍ تحميل Google Pay",
+        "loading": "جارٍ تحميل Google Pay",
+        "errors": {
+          "generic": "حدثت مشكلة في Google Pay. يُرجى إعادة المحاولة أو استخدام طريقة دفع مختلفة.",
+          "missing_billing_address": "يتطلب Google Pay عنوان إرسال فواتير. يرجى إضافة واحد إلى حسابك."
+        }
+      },
+      "pay_pal": {
+        "iframe_title_accessibility_label": "أضف طريقة دفع PayPal",
+        "loading_accessibility_message": "جارٍ تحميل PayPal",
+        "errors": {
+          "generic": "حدثت مشكلة في PayPal. الرجاء المحاولة مرة أخرى أو استخدام طريقة دفع مختلفة."
+        }
+      },
+      "apple_pay": {
+        "loading": "جارٍ تحميل Apple Pay",
+        "errors": {
+          "generic": "حدثت مشكلة في Apple Pay. يُرجى إعادة المحاولة أو استخدام طريقة دفع مختلفة.",
+          "not_available": "Apple Pay غير متوفر على هذا الجهاز.",
+          "missing_billing_address": "يتطلب Apple Pay عنوان فوترة. يرجى إضافته إلى حسابك."
+        }
       }
     },
     "payment_method_brands": {
@@ -1746,19 +1841,69 @@
       },
       "load_address_form_error": {
         "title": "تعذر تحميل نموذج العنوان",
-        "description": "تعذر تحميل نموذج العنوان."
+        "description": "تعذر تحميل نموذج العنوان.",
+        "refresh_button": "تحديث الصفحة"
       },
       "not_found": {
-        "title": "حدثت مشكلة أثناء تحميل هذه الصفحة"
+        "title": "حدثت مشكلة أثناء تحميل هذه الصفحة",
+        "description": "تحقق من عنوان URL أو حاول مرة أخرى خلال بضع دقائق."
       },
       "resend_link": {
-        "too_many_requests": "العديد من الطلبات. حاول مرة أخرى لاحقًا."
+        "too_many_requests": "العديد من الطلبات. حاول مرة أخرى لاحقًا.",
+        "generic": "طلب فاشل"
       },
-      "not_upgraded": "لم تتم ترقية حسابات العملاء."
+      "not_upgraded": "لم تتم ترقية حسابات العملاء.",
+      "address_deletion_error": {
+        "description": "حدثت مشكلة أثناء حذف هذا العنوان. حاول مرة أخرى أو قم بتحديث الصفحة."
+      },
+      "addresses_loading_issue": {
+        "description": "خطأ في الاتصال. تحقق من اتصالك بالإنترنت وحاول مرة أخرى."
+      },
+      "failed_address_creation": {
+        "description": "حدثت مشكلة أثناء إنشاء عنوانك. حاول تحديث هذه الصفحة أو تحقق من اتصالك بالإنترنت."
+      },
+      "failed_address_update": {
+        "description": "حدثت مشكلة أثناء تحديث عنوانك. حاول تحديث هذه الصفحة أو تحقق من اتصالك بالإنترنت."
+      },
+      "load_orders_error": {
+        "title": "تعذر تحميل الطلبات",
+        "description": "أعد المحاولة أو عُد لاحقاً.",
+        "retry_button": "إعادة المحاولة"
+      },
+      "load_paypal_error": {
+        "description": "حدثت مشكلة في تحميل PayPal. يرجى إعادة المحاولة."
+      },
+      "logout_everywhere": {
+        "description": "حدث خطأ أثناء تسجيل الخروج. يُرجى المحاولة مرة أخرى."
+      },
+      "no_access_to_locations": {
+        "description": "لا تملك صلاحية الوصول إلى أي مواقع."
+      },
+      "order_not_found": {
+        "description": "هذا الطلب غير موجود أو ليس لديك صلاحية لعرضه.",
+        "title": "الطلب غير موجود"
+      },
+      "profile_update_error": {
+        "description": "حدثت مشكلة أثناء تحديث ملفك الشخصي. حاول تحديث هذه الصفحة أو تحقق من اتصالك بالإنترنت."
+      },
+      "profile_name_update_error": {
+        "description": "حدثت مشكلة أثناء تحديث اسمك. حاول تحديث هذه الصفحة أو تحقق من اتصالك بالإنترنت."
+      },
+      "retry_action_label": "حاول مرة أخرى",
+      "load_extension_error": {
+        "title": "خطأ",
+        "description": "حدث هذه الصفحة أو حاول مرة أخرى خلال بضع دقائق.",
+        "refresh_button": "تحديث الصفحة"
+      },
+      "already_upgraded": "تمت ترقية حسابات العملاء بالفعل.",
+      "failed_to_upgrade": "فشل تحديث إعدادات حساب العميل.",
+      "failed_to_revert": "فشل في استعادة إعدادات حساب العميل.",
+      "revert_window_expired": "انتهت صلاحية فترة التراجع."
     },
     "throttle": {
       "too_many_attempts": {
-        "description": "الرجاء المحاولة مرة أخرى في غضون بضع دقائق"
+        "description": "الرجاء المحاولة مرة أخرى في غضون بضع دقائق",
+        "message": "محاولات كثيرة جداً"
       }
     },
     "settings": {
