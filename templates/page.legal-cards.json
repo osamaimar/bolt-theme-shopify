@@ -40,7 +40,7 @@
         "subheading-1": {
           "type": "subheading",
           "settings": {
-            "subheading": "Effective date: March 2026 | Last updated: March 2026",
+            "subheading": "Effective date: {{ page.metafields.custom.effective_date | metafield_tag }} | Last updated: {{ page.metafields.custom.last_updated | metafield_tag }}",
             "subheading_tag": "p",
             "show_on_desktop": true,
             "show_on_mobile": true,
