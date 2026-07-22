@@ -17,7 +17,7 @@
         "logo_block": {
           "type": "logo",
           "settings": {
-            "logo_size": 160,
+            "logo_size": 170,
             "show_on_desktop": true,
             "show_on_mobile": true,
             "margin_top": 0,
