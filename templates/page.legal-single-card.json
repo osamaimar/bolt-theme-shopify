@@ -1,20 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "legal-single-card",
-      "settings": {
-        "show_section": true,
-        "show_on_desktop": true,
-        "show_on_mobile": true,
-        "container_width": "narrow",
-        "max_width": 900,
-        "blocks_position": "center",
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 30,
-        "color_scheme": "background-1"
-      },
       "blocks": {
         "header-1": {
           "type": "header",
@@ -23,7 +19,6 @@
             "heading_tag": "h1",
             "show_on_desktop": true,
             "show_on_mobile": true,
-            "alignment": "",
             "max_width": 800,
             "margin_top": 0,
             "margin_bottom": 20,
@@ -49,7 +44,6 @@
             "subheading_tag": "p",
             "show_on_desktop": true,
             "show_on_mobile": true,
-            "alignment": "",
             "max_width": 800,
             "margin_top": 0,
             "margin_bottom": 28,
@@ -66,35 +60,6 @@
             "bg_gradient": ""
           }
         },
-        "button-1": {
-          "type": "button",
-          "settings": {
-            "download_text": "Download PDF Version",
-            "download_link": "",
-            "download_icon": "",
-            "style": "outline",
-            "show_on_desktop": true,
-            "show_on_mobile": true,
-            "show_icon": true,
-            "icon_type": "download",
-            "alignment": "center",
-            "margin_top": 20,
-            "margin_bottom": 20,
-            "margin_top_mobile": 16,
-            "margin_bottom_mobile": 16,
-            "font_size": "medium",
-            "font_weight": "bold",
-            "font_style": "normal",
-            "text_transform": "none",
-            "letter_spacing": 0,
-            "line_height": 115,
-            "text_color": "",
-            "icon_color": "",
-            "bg_color": "",
-            "bg_gradient": "",
-            "border_color": ""
-          }
-        },
         "card-1": {
           "type": "card",
           "settings": {
@@ -106,8 +71,6 @@
             "show_heading": true,
             "show_content": true,
             "show_paragraph_dividers": true,
-            "paragraph_divider_color": "",
-            "alignment": "left",
             "width": 100,
             "margin_top": 0,
             "margin_bottom": 24,
@@ -123,7 +86,8 @@
             "bg_color": "",
             "bg_gradient": "",
             "heading_color": "",
-            "heading_gradient": ""
+            "heading_gradient": "",
+            "paragraph_divider_color": ""
           }
         },
         "divider-1": {
@@ -140,6 +104,34 @@
             "divider_style": "solid",
             "divider_color": ""
           }
+        },
+        "button-1": {
+          "type": "button",
+          "settings": {
+            "download_text": "Download PDF Version",
+            "download_link": "{{ page.metafields.custom.pdf_url.value }}",
+            "icon_type": "download",
+            "download_icon": "",
+            "style": "outline",
+            "show_on_desktop": true,
+            "show_on_mobile": true,
+            "show_icon": true,
+            "margin_top": 20,
+            "margin_bottom": 20,
+            "margin_top_mobile": 16,
+            "margin_bottom_mobile": 16,
+            "font_size": "medium",
+            "font_weight": "bold",
+            "font_style": "normal",
+            "text_transform": "none",
+            "letter_spacing": 0,
+            "line_height": 115,
+            "text_color": "",
+            "icon_color": "",
+            "bg_color": "",
+            "bg_gradient": "",
+            "border_color": ""
+          }
         }
       },
       "block_order": [
@@ -148,7 +140,20 @@
         "card-1",
         "divider-1",
         "button-1"
-      ]
+      ],
+      "settings": {
+        "show_section": true,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "container_width": "narrow",
+        "max_width": 900,
+        "blocks_position": "center",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 30
+      }
     }
   },
   "order": [
