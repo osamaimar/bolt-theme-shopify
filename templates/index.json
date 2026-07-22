@@ -1285,6 +1285,7 @@
         "padding_top_mobile": 40,
         "padding_bottom_mobile": 40,
         "color_scheme": "background-1",
+        "background_image": "shopify://shop_images/RVQBYRC_800x800_1.png",
         "enable_overlay": true
       }
     }
