@@ -1015,6 +1015,7 @@
         "review-0": {
           "type": "review",
           "settings": {
+            "avatar": "shopify://shop_images/emily_avatar.jpg",
             "author_name": "Sarah J.",
             "review_text": "Absolutely love this product! The quality is outstanding and it exceeded my expectations in every way.",
             "date": "",
@@ -1059,6 +1060,7 @@
         "review-1": {
           "type": "review",
           "settings": {
+            "avatar": "shopify://shop_images/michael_avatar.jpg",
             "author_name": "Michael R.",
             "review_text": "Great value for the price. The customer service was also very helpful with my questions.",
             "date": "",
@@ -1103,6 +1105,7 @@
         "review-2": {
           "type": "review",
           "settings": {
+            "avatar": "shopify://shop_images/sarah_avatar.jpg",
             "author_name": "Emily D.",
             "review_text": "One of the best purchases I've made this year. I've already recommended it to all my friends!",
             "date": "",
