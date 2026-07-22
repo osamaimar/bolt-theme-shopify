@@ -105,7 +105,7 @@
           "type": "button",
           "settings": {
             "download_text": "Download PDF Version",
-            "download_link": "{{ page.url }}",
+            "download_link": "{{ page.metafields.custom.pdf_url.value }}",
             "icon_type": "download",
             "download_icon": "",
             "style": "outline",
